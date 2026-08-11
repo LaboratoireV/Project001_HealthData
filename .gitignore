@@ -8,6 +8,3 @@
 code/
 data/
 code_examples/output/
-
-# Local rendered reports may contain internal metadata
-Project_001_Memo_*.html
