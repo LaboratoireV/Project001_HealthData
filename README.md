@@ -1,5 +1,9 @@
 # Project 001: Synthetic Health Data Consulting Project
 
+## Live project site
+
+Visit the [Project 001 portfolio site](https://laboratoirev.github.io/Project001_HealthData/) to browse the two rendered reports.
+
 ## Project overview
 
 Project 001 is a **fictional health data consulting engagement** created to demonstrate a reproducible R and R Markdown reporting workflow. The project shows how a consultant might organize, summarize, and present descriptive analyses for emergency/ambulatory and inpatient health datasets.
@@ -50,4 +54,4 @@ For a full local demonstration, place only synthetic workbooks in `code_examples
 
 ## Repository privacy
 
-The original working code, local datasets, and rendered internal reports remain local and are excluded from Git. Only the sanitized examples in `code_examples/` are intended for public display.
+The original working code and local datasets remain local and are excluded from Git. Only the sanitized examples in `code_examples/` and the two synthetic-data portfolio reports are published for public display.
