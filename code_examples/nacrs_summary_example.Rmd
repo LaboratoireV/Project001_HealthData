@@ -1,0 +1,771 @@
+---
+title: "`r params$report_title`"
+subtitle: "`r params$subtitle`"
+author: "`r paste('Prepared by', paste(c(params$author, params$organization)[nzchar(c(params$author, params$organization))], collapse = ' · '))`"
+date: "`r format(as.Date(params$report_date), '%B %d, %Y')`"
+params:
+  report_title: "Synthetic Health Data Summary"
+  subtitle: ""
+  memo: "NACRS-DEMO"
+  author: "Miss V"
+  organization: "The V Lab"
+  client: "Dr. ABC"
+  client_organization: "ABC Department"
+  report_date: "2025-01-01"
+  version: "1.0"
+  status: "Public example"
+  confidentiality: "Synthetic data only"
+  note: "Demonstration report using synthetic data only."
+  data_dir: "code_examples/example_data"
+  data_file: "synthetic_nacrs.xlsx"
+  include_summary: true
+  include_data_overview: true
+  include_appendix: false
+  show_code: false
+output:
+  html_document:
+    number_sections: true
+    toc: true
+    toc_depth: 4
+    toc_float:
+      collapsed: true
+      smooth_scroll: true
+    theme: flatly
+    highlight: tango
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = isTRUE(params$show_code),
+  warning = FALSE,
+  message = FALSE,
+  fig.align = "center",
+  fig.width = 8,
+  fig.height = 5,
+  out.width = "100%"
+)
+
+# Small helpers shared by the whole report.
+is_filled <- function(x) {
+  length(x) == 1L && !is.na(x) && nzchar(trimws(as.character(x)))
+}
+
+as_flag <- function(x) {
+  isTRUE(x) || (is.character(x) && tolower(x) %in% c("true", "yes", "1"))
+}
+
+report_datasets <- list()
+data_sources <- character()
+data_aliases <- character()
+data_notes <- character()
+
+find_project_dir <- function(start_dir) {
+  current_dir <- normalizePath(start_dir, winslash = "/", mustWork = TRUE)
+
+  repeat {
+    r_projects <- list.files(
+      current_dir,
+      pattern = "\\.[Rr]proj$",
+      full.names = TRUE
+    )
+
+    if (length(r_projects) > 0L || dir.exists(file.path(current_dir, ".git"))) {
+      return(current_dir)
+    }
+
+    parent_dir <- dirname(current_dir)
+    if (identical(parent_dir, current_dir)) {
+      stop("Could not locate the project root.", call. = FALSE)
+    }
+
+    current_dir <- parent_dir
+  }
+}
+
+input_file <- knitr::current_input(dir = TRUE)
+input_dir <- if (nzchar(input_file)) {
+  dirname(normalizePath(input_file, winslash = "/", mustWork = TRUE))
+} else {
+  getwd()
+}
+project_dir <- find_project_dir(input_dir)
+data_dir_display <- params$data_dir
+source(
+  file.path(project_dir, "code_examples", "example_helpers.R"),
+  local = TRUE
+)
+
+if (!requireNamespace("readxl", quietly = TRUE)) {
+  data_notes <- paste(
+    "Loading the example workbook requires the 'readxl' package.",
+    "Run 'Rscript code_examples/setup_dependencies.R' first."
+  )
+} else if (is_filled(params$data_dir)) {
+  expanded_data_dir <- path.expand(params$data_dir)
+  is_absolute_data_dir <- grepl(
+    "^(?:/|[A-Za-z]:[/\\\\]|\\\\\\\\)",
+    expanded_data_dir
+  )
+  resolved_data_dir <- if (is_absolute_data_dir) {
+    expanded_data_dir
+  } else {
+    file.path(project_dir, expanded_data_dir)
+  }
+  data_dir <- normalizePath(
+    resolved_data_dir,
+    winslash = "/",
+    mustWork = FALSE
+  )
+  project_prefix <- paste0(project_dir, "/")
+  data_dir_display <- if (startsWith(data_dir, project_prefix)) {
+    substring(data_dir, nchar(project_prefix) + 1L)
+  } else {
+    "[external data directory]"
+  }
+
+  if (dir.exists(data_dir)) {
+    data_files <- file.path(data_dir, params$data_file)
+
+    if (!file.exists(data_files)) {
+      data_notes <- paste(
+        "The NACRS data file was not found:",
+        file.path(data_dir_display, params$data_file)
+      )
+    } else {
+      # This memo is NACRS-only. Load the selected workbook and expose it as
+      # both imported_data_001 and the source-based alias nacrs.
+      report_datasets <- tryCatch(
+        stats::setNames(
+          list(
+            read_example_xlsx(data_files)
+          ),
+          "imported_data_001"
+        ),
+        error = function(error) {
+          data_notes <<- paste(
+            "The NACRS example workbook could not be loaded.",
+            "Check that it is a valid XLSX file."
+          )
+          list()
+        }
+      )
+
+      if (length(report_datasets) == 1L) {
+        list2env(report_datasets, envir = knitr::knit_global())
+        data_sources <- stats::setNames(data_files, names(report_datasets))
+
+        # Create the source-based alias: synthetic_nacrs.xlsx -> nacrs.
+        data_aliases <- local({
+          alias_names <- tolower(
+            tools::file_path_sans_ext(basename(data_files))
+          )
+          alias_names <- sub("^(pseudo|synthetic)[._ -]*", "", alias_names)
+          alias_names <- make.names(alias_names, unique = TRUE)
+
+          alias_datasets <- stats::setNames(
+            unname(report_datasets),
+            alias_names
+          )
+          list2env(alias_datasets, envir = knitr::knit_global())
+
+          stats::setNames(alias_names, names(report_datasets))
+        })
+      }
+    }
+  } else {
+    data_notes <- paste("Data directory not found:", data_dir_display)
+  }
+}
+
+```
+
+<style>
+.report-meta {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(125px, 1fr);
+  gap: 0.45rem;
+  align-items: stretch;
+  margin: 1.25rem 0 1.5rem;
+  padding-bottom: 0.25rem;
+  overflow-x: auto;
+}
+.meta-item {
+  min-width: 0;
+  padding: 0.7rem 0.9rem;
+  border-left: 4px solid #2c7fb8;
+  background: #f5f8fa;
+  border-radius: 3px;
+}
+.meta-label {
+  display: block;
+  color: #657786;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.meta-value {
+  display: block;
+  overflow-wrap: anywhere;
+  font-weight: 600;
+}
+.report-note {
+  margin: 1rem 0 1.5rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid #f0c36d;
+  border-radius: 4px;
+  background: #fff8e5;
+}
+.placeholder {
+  color: #6c757d;
+  font-style: italic;
+}
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 1.25rem;
+}
+.summary-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.94rem;
+}
+.summary-table th,
+.summary-table td {
+  padding: 0.55rem 0.75rem !important;
+  border-bottom: 1px solid #e4e9ed;
+  vertical-align: top;
+  white-space: nowrap;
+}
+.summary-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  color: #29465b;
+  background: #eef4f7;
+  border-top: 1px solid #d6e0e5;
+  border-bottom: 2px solid #9fb8c5;
+}
+.summary-table tbody tr:nth-child(even) {
+  background: #f8fafb;
+}
+.summary-table tbody tr:hover {
+  background: #eef6fa;
+}
+.continuous-summary-table {
+  width: max-content;
+  min-width: 100%;
+}
+.category-table-card {
+  max-width: 680px;
+  margin: 0.5rem 0 1.75rem;
+  overflow: hidden;
+  border: 1px solid #d6e0e5;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(33, 55, 72, 0.06);
+}
+.category-table-card.long-table {
+  max-height: 32rem;
+  overflow-y: auto;
+}
+.category-table-card .summary-table tbody tr:last-child {
+  font-weight: 700;
+  background: #eaf2f6;
+}
+.category-table-card .summary-table tbody tr:has(.missing-category) {
+  background: #fff8e5 !important;
+  box-shadow: inset 4px 0 #e0a12b;
+}
+.missing-category {
+  color: #7a5300;
+  font-weight: 700;
+}
+.missing-na-badge {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.08rem 0.35rem;
+  border: 1px solid #e2b75e;
+  border-radius: 3px;
+  background: #ffedbd;
+  color: #6c4800;
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
+.variable-code {
+  margin: -0.35rem 0 0.65rem;
+  color: #71818d;
+  font-size: 0.86rem;
+}
+.data-variable-heading {
+  margin: 1.25rem 0 0.65rem;
+  color: #29465b;
+}
+.data-disclaimer {
+  margin: 0.5rem 0 1.25rem;
+  padding: 0.8rem 1rem;
+  border-left: 4px solid #2c7fb8;
+  border-radius: 4px;
+  background: #eef6fa;
+  color: #29465b;
+}
+.data-variable-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.45rem 0.75rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  counter-reset: data-variable;
+  list-style: none;
+}
+.data-variable-list li {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 0.45rem 0.6rem;
+  counter-increment: data-variable;
+  border: 1px solid #e0e7eb;
+  border-radius: 5px;
+  background: #f8fafb;
+}
+.data-variable-list li::before {
+  content: counter(data-variable);
+  flex: 0 0 1.8rem;
+  color: #7b8b96;
+  font-size: 0.78rem;
+}
+.data-variable-list code {
+  overflow-wrap: anywhere;
+  color: #29465b;
+  background: transparent;
+}
+.summary-table caption {
+  padding: 0 0 0.65rem;
+  color: #71818d;
+  text-align: left;
+}
+</style>
+
+```{r report-metadata, echo=FALSE, results='asis'}
+metadata <- c(
+  Memo = params$memo,
+  Client = params$client,
+  `Client Organization` = params$client_organization,
+  Version = params$version,
+  Status = params$status,
+  Classification = params$confidentiality
+)
+metadata <- metadata[vapply(metadata, is_filled, logical(1))]
+
+if (length(metadata)) {
+  items <- paste0(
+    '<div class="meta-item"><span class="meta-label">',
+    htmltools::htmlEscape(names(metadata)),
+    '</span><span class="meta-value">',
+    htmltools::htmlEscape(unname(metadata)),
+    '</span></div>',
+    collapse = "\n"
+  )
+  cat('<div class="report-meta">', items, '</div>')
+}
+
+if (is_filled(params$note)) {
+  cat(
+    '<div class="report-note"><strong>Note:</strong> ',
+    htmltools::htmlEscape(params$note),
+    '</div>'
+  )
+}
+```
+
+```{r executive-summary-heading, echo=FALSE, results='asis'}
+if (as_flag(params$include_summary)) cat("# Overview\n\n")
+```
+
+```{r executive-summary-content, echo=FALSE, results='asis'}
+if (as_flag(params$include_summary)) {
+  cat("## Introduction\n\n")
+  cat(
+    paste0(
+      '<p>The purpose of this memo is to summarize selected variables from ',
+      'the <strong>NACRS</strong> data. It provides a concise description of ',
+      'the data source and presents descriptive statistics for the selected ',
+      'continuous and categorical variables.</p>',
+      '<p>The memo is organized as follows:</p>',
+      '<ul>',
+      '<li><strong>Data</strong> identifies the source file and data directory, ',
+      'reports the number of records and variables, lists all available ',
+      'variables, and provides a preview of the data.</li>',
+      '<li><strong>Main Analysis</strong> summarizes the selected continuous ',
+      'variables using measures of central tendency, variability, percentiles, ',
+      'and missingness. Selected categorical variables are summarized using ',
+      'counts and percentages for each category.</li>',
+      if (as_flag(params$include_appendix)) {
+        paste0(
+          '<li><strong>Appendix</strong> contains supporting information and ',
+          'basic reproducibility details.</li>'
+        )
+      } else {
+        ""
+      },
+      '</ul>'
+    )
+  )
+}
+```
+
+```{r data-overview, echo=FALSE, results='asis'}
+if (as_flag(params$include_data_overview)) {
+  cat("## Data\n\n")
+  cat(
+    paste0(
+      '<div class="data-disclaimer"><strong>Training data notice:</strong> ',
+      'The NACRS data used in this memo are randomly generated synthetic data ',
+      'intended solely for training and demonstration purposes. They do not ',
+      'represent real patients or actual operational records.</div>'
+    )
+  )
+
+  if (length(report_datasets) > 0L) {
+    overview <- do.call(
+      rbind,
+      lapply(names(report_datasets), function(dataset_name) {
+        dataset <- report_datasets[[dataset_name]]
+        is_tabular <- is.data.frame(dataset) || is.matrix(dataset)
+
+        data.frame(
+          Dataset = dataset_name,
+          Alias = data_aliases[[dataset_name]],
+          File = basename(data_sources[[dataset_name]]),
+          Rows = if (is_tabular) nrow(dataset) else NA_integer_,
+          Columns = if (is_tabular) ncol(dataset) else NA_integer_,
+          Class = paste(class(dataset), collapse = ", "),
+          check.names = FALSE
+        )
+      })
+    )
+
+    cat("**Data directory:** `", data_dir_display, "`\n\n", sep = "")
+    print(knitr::kable(overview, caption = "Loaded NACRS data set"))
+    cat("\n")
+
+    data_variable_names <- names(report_datasets[[1L]])
+    variable_items <- paste0(
+      '<li><code>',
+      htmltools::htmlEscape(data_variable_names),
+      '</code></li>',
+      collapse = ""
+    )
+    cat(
+      '<div class="data-variable-heading"><strong>Variables (',
+      length(data_variable_names),
+      ')</strong></div>',
+      '<ol class="data-variable-list">',
+      variable_items,
+      '</ol>',
+      sep = ""
+    )
+    cat("\n")
+
+  } else {
+    cat(
+      '<p class="placeholder">No data sets were loaded from <code>',
+      htmltools::htmlEscape(data_dir_display),
+      '</code>.</p>',
+      sep = ""
+    )
+  }
+
+  if (length(data_notes) > 0L) {
+    cat("### Data-loading notes\n\n")
+    cat(
+      paste0(
+        "- ",
+        htmltools::htmlEscape(data_notes),
+        collapse = "\n"
+      ),
+      "\n"
+    )
+  }
+}
+```
+
+# Analysis
+
+## NACRS Selected Variables
+
+```{r nacrs-selected-variable-summaries, include=FALSE}
+nacrs_continuous <- c(
+  "age",
+  "pain_score",
+  "triage_wait_min",
+  "physician_wait_min",
+  "los_min"
+)
+
+nacrs_categorical <- c(
+  "health_zone",
+  "sex",
+  "postal_fsa",
+  "arrival_mode",
+  "ctas_level",
+  "chief_complaint",
+  "main_diagnosis_icd10",
+  "secondary_diagnosis_1",
+  "secondary_diagnosis_2",
+  "intervention_1",
+  "intervention_2",
+  "consult_service",
+  "ambulance_flag",
+  "injury_flag",
+  "mental_health_flag",
+  "disposition",
+  "admitted_flag",
+  "lwbs_flag",
+  "revisit_72h_flag"
+)
+
+nacrs_continuous_summary <- data.frame()
+nacrs_categorical_summary <- data.frame()
+nacrs_summary_notes <- character()
+
+nacrs_variable_check <- data.frame(
+  Variable = c(nacrs_continuous, nacrs_categorical),
+  Type = c(
+    rep("Continuous", length(nacrs_continuous)),
+    rep("Categorical", length(nacrs_categorical))
+  ),
+  Available = FALSE,
+  check.names = FALSE
+)
+
+if (!exists("nacrs", inherits = TRUE) || !is.data.frame(nacrs)) {
+  nacrs_summary_notes <- paste(
+    "The NACRS summary was not generated because the `nacrs` data set",
+    "was not loaded as a data frame."
+  )
+} else {
+  nacrs_variable_check$Available <-
+    nacrs_variable_check$Variable %in% names(nacrs)
+
+  available_continuous <- intersect(nacrs_continuous, names(nacrs))
+  available_categorical <- intersect(nacrs_categorical, names(nacrs))
+  missing_variables <- nacrs_variable_check$Variable[
+    !nacrs_variable_check$Available
+  ]
+
+  if (length(missing_variables) > 0L) {
+    nacrs_summary_notes <- c(
+      nacrs_summary_notes,
+      paste(
+        "Variables not found in NACRS:",
+        paste(missing_variables, collapse = ", ")
+      )
+    )
+  }
+
+  continuous_rows <- lapply(available_continuous, function(variable) {
+    tryCatch(
+      summarize_continuous(
+        dataset = nacrs,
+        var_name = variable,
+        display_name = variable
+      ),
+      error = function(error) {
+        nacrs_summary_notes <<- c(
+          nacrs_summary_notes,
+          paste0(
+            "Continuous variable `", variable,
+            "` could not be summarized: ", conditionMessage(error)
+          )
+        )
+        NULL
+      }
+    )
+  })
+  continuous_rows <- Filter(Negate(is.null), continuous_rows)
+
+  if (length(continuous_rows) > 0L) {
+    nacrs_continuous_summary <- do.call(rbind, continuous_rows)
+    rownames(nacrs_continuous_summary) <- NULL
+  }
+
+  categorical_rows <- lapply(available_categorical, function(variable) {
+    tryCatch(
+      {
+        wide_summary <- summarize_categorical(
+          dataset = nacrs,
+          var_name = variable,
+          display_name = variable,
+          include_missing = TRUE,
+          sort_levels = "desc"
+        )
+
+        data.frame(
+          Variable = variable,
+          Category = names(wide_summary)[-1L],
+          `Count n (%)` = as.character(unlist(
+            wide_summary[1L, -1L, drop = FALSE],
+            use.names = FALSE
+          )),
+          check.names = FALSE
+        )
+      },
+      error = function(error) {
+        nacrs_summary_notes <<- c(
+          nacrs_summary_notes,
+          paste0(
+            "Categorical variable `", variable,
+            "` could not be summarized: ", conditionMessage(error)
+          )
+        )
+        NULL
+      }
+    )
+  })
+  categorical_rows <- Filter(Negate(is.null), categorical_rows)
+
+  if (length(categorical_rows) > 0L) {
+    nacrs_categorical_summary <- do.call(rbind, categorical_rows)
+    rownames(nacrs_categorical_summary) <- NULL
+  }
+}
+```
+
+```{r nacrs-selected-variable-tables, echo=FALSE, results='asis'}
+if (exists("nacrs", inherits = TRUE) && is.data.frame(nacrs)) {
+  cat(
+    "Selected ", length(nacrs_continuous), " continuous and ",
+    length(nacrs_categorical), " categorical variables from **nacrs** ",
+    "(`", nrow(nacrs), "` records).\n\n",
+    sep = ""
+  )
+}
+
+if (nrow(nacrs_continuous_summary) > 0L) {
+  cat("### Continuous-Variable \n\n")
+  cat('<div class="table-scroll">')
+  print(
+    local({
+      display_summary <- nacrs_continuous_summary[
+        ,
+        setdiff(
+          names(nacrs_continuous_summary),
+          c("NonFinite", "Analyzed")
+        ),
+        drop = FALSE
+      ]
+      column_labels <- names(display_summary)
+      column_labels[column_labels == "Mean_SD"] <- "Mean (SD)"
+      column_labels[column_labels == "Min_Max"] <- "Min–Max"
+      column_labels[column_labels == "NonMissing"] <- "Non-missing"
+      column_labels[column_labels == "MissingPct"] <- "Missing %"
+
+      knitr::kable(
+        display_summary,
+        format = "html",
+        col.names = column_labels,
+        align = c(
+          "l",
+          rep("r", ncol(display_summary) - 1L)
+        ),
+        table.attr = 'class="summary-table continuous-summary-table"',
+        caption = "Selected NACRS continuous variables"
+      )
+    })
+  )
+  cat("</div>\n\n")
+}
+
+if (nrow(nacrs_categorical_summary) > 0L) {
+  cat("### Categorical-Variable \n\n")
+  cat(
+    paste0(
+      "Each selected variable is shown in its own subsection. Tables with ",
+      "many categories are vertically scrollable. Rows labelled ",
+      "**Missing** represent original `NA` values; their counts and ",
+      "percentages are highlighted in yellow for visibility.\n\n"
+    )
+  )
+
+  for (variable in nacrs_categorical) {
+    variable_summary <- nacrs_categorical_summary[
+      nacrs_categorical_summary$Variable == variable,
+      c("Category", "Count n (%)"),
+      drop = FALSE
+    ]
+    rownames(variable_summary) <- NULL
+
+    missing_row <- !is.na(variable_summary$Category) &
+      variable_summary$Category == "Missing"
+    variable_summary$Category <- as.character(
+      htmltools::htmlEscape(variable_summary$Category)
+    )
+    variable_summary[["Count n (%)"]] <- as.character(
+      htmltools::htmlEscape(variable_summary[["Count n (%)"]])
+    )
+    variable_summary$Category[missing_row] <- paste0(
+      '<span class="missing-category">Missing</span>',
+      '<span class="missing-na-badge">NA</span>'
+    )
+
+    if (nrow(variable_summary) > 0L) {
+      variable_title <- toupper(gsub("_", " ", variable))
+      card_class <- if (nrow(variable_summary) > 20L) {
+        "category-table-card long-table"
+      } else {
+        "category-table-card"
+      }
+
+      cat("#### ", variable_title, "\n\n", sep = "")
+      cat(
+        '<div class="variable-code"><code>',
+        htmltools::htmlEscape(variable),
+        '</code></div>'
+      )
+      cat('<div class="', card_class, '">', sep = "")
+      print(
+        knitr::kable(
+          variable_summary,
+          format = "html",
+          escape = FALSE,
+          row.names = FALSE,
+          align = c("l", "r"),
+          table.attr = 'class="summary-table categorical-summary-table"'
+        )
+      )
+      cat("</div>\n\n")
+    }
+  }
+}
+
+if (length(nacrs_summary_notes) > 0L) {
+  cat("### Summary notes\n\n")
+  cat(
+    paste0(
+      "- ",
+      htmltools::htmlEscape(nacrs_summary_notes),
+      collapse = "\n"
+    ),
+    "\n"
+  )
+}
+```
+
+```{r appendix, echo=FALSE, results='asis'}
+if (as_flag(params$include_appendix)) {
+  cat("# Appendix\n\n")
+  cat("Add supporting details, methods, definitions, or supplementary results here.\n")
+}
+```
+
+```{r session-info, echo=FALSE, results='asis'}
+if (as_flag(params$include_appendix)) {
+  cat("## Reproducibility\n\n")
+  cat("Generated with R ", getRversion(), ".\n", sep = "")
+}
+```
