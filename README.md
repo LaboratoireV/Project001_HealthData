@@ -1,16 +1,27 @@
-# Project 001: Synthetic Health Data Consulting Project
+# The V Lab Health Data Portfolio
 
 ## Live project site
 
-Visit the [Project 001 portfolio site](https://laboratoirev.github.io/Project001_HealthData/) to browse the two rendered reports.
+Visit the [health data portfolio site](https://laboratoirev.github.io/Project001_HealthData/) to explore both projects and browse the rendered reports.
 
-## Project overview
+## Alberta Health Data Atlas
+
+An independent Chinese–English learning site covering nine Alberta administrative health datasets and clinical information systems. It explains record grain, field families, linkage, cohort design, access, and responsible interpretation.
+
+- [Portfolio overview](https://laboratoirev.github.io/Project001_HealthData/ahs-datasets/)
+- [Interactive bilingual atlas](https://alberta-health-data-atlas.tigerdogai.chatgpt.site)
+
+The atlas contains original educational commentary and links to official public sources. It contains no patient-level data and does not copy the official UCalgary workbooks into this repository.
+
+## Project 001: Synthetic Health Data Consulting
+
+### Project overview
 
 Project 001 is a **fictional health data consulting engagement** created to demonstrate a reproducible R and R Markdown reporting workflow. The project shows how a consultant might organize, summarize, and present descriptive analyses for emergency/ambulatory and inpatient health datasets.
 
 This repository is a portfolio and training example. It does not represent a real consulting contract, health organization, patient population, or operational analysis.
 
-## Project team and client
+### Project team and client
 
 - **Project lead:** Miss V
 - **Consulting organization:** The V Lab
@@ -19,7 +30,7 @@ This repository is a portfolio and training example. It does not represent a rea
 
 All names and organizations above are fictional public-facing labels. They do not identify real people, clients, employers, or institutions.
 
-## Synthetic data
+### Synthetic data
 
 The project uses two fictional health-data workbooks:
 
@@ -30,7 +41,7 @@ The project uses two fictional health-data workbooks:
 
 The data are intended only for software demonstration, education, and portfolio presentation. They must not be used for clinical, policy, financial, or operational decision-making.
 
-## Public code examples
+### Public code examples
 
 The GitHub-safe examples are available in [`code_examples/`](code_examples/README.md):
 
@@ -41,7 +52,7 @@ The GitHub-safe examples are available in [`code_examples/`](code_examples/READM
 
 The public examples use project-relative paths and do not contain private package references, machine-specific user paths, or real data.
 
-## Run the examples locally
+### Run the examples locally
 
 From the repository root:
 
@@ -54,4 +65,6 @@ For a full local demonstration, place only synthetic workbooks in `code_examples
 
 ## Repository privacy
 
-The original working code and local datasets remain local and are excluded from Git. Only the sanitized examples in `code_examples/` and the two synthetic-data portfolio reports are published for public display.
+The original Project 001 working code and local datasets remain local and are excluded from Git. Only the sanitized examples in `code_examples/` and the two synthetic-data portfolio reports are published for public display.
+
+The Alberta Health Data Atlas integration includes a public project overview and preview image. Its large dependency folders, build caches, hosting metadata, and third-party workbooks are not copied here; the interactive application remains on its existing deployment.

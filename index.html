@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Project 001 is a fictional health data consulting project using entirely randomized synthetic data.">
+  <meta name="description" content="The V Lab health data portfolio: synthetic consulting reports and the bilingual Alberta Health Data Atlas.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Project 001 | Synthetic Health Data Consulting">
-  <meta property="og:description" content="A fictional health data consulting portfolio project using entirely randomized synthetic data.">
+  <meta property="og:title" content="The V Lab | Health Data Portfolio">
+  <meta property="og:description" content="Synthetic consulting reports and an independent bilingual guide to Alberta health datasets.">
   <meta property="og:url" content="https://laboratoirev.github.io/Project001_HealthData/">
   <meta property="og:image" content="https://laboratoirev.github.io/Project001_HealthData/og.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Project 001 | Synthetic Health Data Consulting">
-  <meta name="twitter:description" content="A fictional health data consulting portfolio project using entirely randomized synthetic data.">
+  <meta name="twitter:title" content="The V Lab | Health Data Portfolio">
+  <meta name="twitter:description" content="Synthetic consulting reports and an independent bilingual guide to Alberta health datasets.">
   <meta name="twitter:image" content="https://laboratoirev.github.io/Project001_HealthData/og.png">
-  <title>Project 001 | Synthetic Health Data Consulting</title>
+  <title>The V Lab | Health Data Portfolio</title>
   <style>
     :root {
       --ink: #132d33;
@@ -248,6 +248,97 @@
       border-top: 1px solid var(--line);
     }
 
+    .featured-project {
+      padding-block: 100px;
+      border-top: 1px solid var(--line);
+    }
+
+    .atlas-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+      overflow: hidden;
+      border: 1px solid rgba(184, 222, 217, 0.34);
+      border-radius: 30px;
+      color: #eff9f7;
+      background: #073b3f;
+      box-shadow: var(--shadow);
+    }
+
+    .atlas-visual {
+      min-height: 460px;
+      background: #04363a;
+    }
+
+    .atlas-visual img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .atlas-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(34px, 5vw, 64px);
+    }
+
+    .atlas-content .eyebrow {
+      color: #9ad8d2;
+    }
+
+    .atlas-content h2 {
+      margin-bottom: 20px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.4rem, 4.5vw, 4.5rem);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 0.98;
+    }
+
+    .atlas-content p {
+      color: #c5dbd8;
+    }
+
+    .atlas-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 30px;
+    }
+
+    .atlas-stats span {
+      padding-top: 12px;
+      border-top: 1px solid rgba(197, 219, 216, 0.25);
+      color: #dcebea;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .atlas-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .secondary-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 50px;
+      padding: 12px 18px;
+      border: 1px solid rgba(239, 249, 247, 0.42);
+      border-radius: 999px;
+      color: #eff9f7;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .secondary-link:hover {
+      border-color: #eff9f7;
+      background: rgba(239, 249, 247, 0.08);
+    }
+
     .section-heading {
       display: grid;
       grid-template-columns: 0.8fr 1.2fr;
@@ -374,7 +465,8 @@
     @media (max-width: 800px) {
       .hero,
       .section-heading,
-      .data-note {
+      .data-note,
+      .atlas-card {
         grid-template-columns: 1fr;
       }
 
@@ -389,6 +481,11 @@
 
       .report-grid {
         grid-template-columns: 1fr;
+      }
+
+      .atlas-visual {
+        min-height: auto;
+        aspect-ratio: 1.91 / 1;
       }
 
       .report-card {
@@ -432,7 +529,7 @@
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header shell">
-    <a class="brand" href="./" aria-label="Project 001 home">
+    <a class="brand" href="./" aria-label="The V Lab portfolio home">
       <span class="brand-mark" aria-hidden="true">V</span>
       <span>The V Lab</span>
     </a>
@@ -445,13 +542,13 @@
         <p class="eyebrow">Portfolio demonstration</p>
         <h1 id="page-title">Health data, clearly presented.</h1>
         <p class="hero-copy">
-          Project 001 is a fictional consulting engagement demonstrating how reproducible R and R Markdown workflows can turn synthetic health data into clear, executive-ready summaries.
+          A public portfolio bringing together reproducible synthetic-data reporting and an independent bilingual learning resource for Alberta health datasets.
         </p>
-        <a class="primary-link" href="#reports">Explore the reports</a>
+        <a class="primary-link" href="#featured-project">Explore the projects</a>
       </div>
 
       <aside class="project-card" aria-labelledby="project-details-title">
-        <h2 id="project-details-title">Project brief</h2>
+        <h2 id="project-details-title">Portfolio at a glance</h2>
         <dl class="facts">
           <div>
             <dt>Project lead</dt>
@@ -462,22 +559,46 @@
             <dd>The V Lab</dd>
           </div>
           <div>
-            <dt>Client</dt>
-            <dd>Dr. ABC</dd>
+            <dt>Published projects</dt>
+            <dd>2</dd>
           </div>
           <div>
-            <dt>Client organization</dt>
-            <dd>ABC Department</dd>
+            <dt>Focus</dt>
+            <dd>Health data learning &amp; reporting</dd>
           </div>
         </dl>
       </aside>
     </section>
 
+    <section class="featured-project shell" id="featured-project" aria-labelledby="atlas-title">
+      <article class="atlas-card">
+        <div class="atlas-visual">
+          <img src="ahs-datasets/atlas-preview.png" alt="Alberta Health Data Atlas project cover showing a connected map of dataset concepts">
+        </div>
+        <div class="atlas-content">
+          <p class="eyebrow">Bilingual learning resource</p>
+          <h2 id="atlas-title">Alberta Health Data Atlas</h2>
+          <p>
+            An independent Chinese–English guide to nine Alberta administrative health datasets and clinical information systems, with practical notes on record grain, linkage, cohort design, access, and responsible use.
+          </p>
+          <div class="atlas-stats" aria-label="Project highlights">
+            <span>9 dataset guides</span>
+            <span>3 deep dives</span>
+            <span>中文 / English</span>
+          </div>
+          <div class="atlas-actions">
+            <a class="primary-link" href="ahs-datasets/">Explore this project</a>
+            <a class="secondary-link" href="https://alberta-health-data-atlas.tigerdogai.chatgpt.site">Open interactive atlas</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
     <section class="reports shell" id="reports" aria-labelledby="reports-title">
       <div class="section-heading">
-        <h2 id="reports-title">Two reporting examples</h2>
+        <h2 id="reports-title">Project 001 reports</h2>
         <p>
-          The reports illustrate descriptive analysis for emergency and ambulatory care and for inpatient care. Both are presented as draft public portfolio examples.
+          A fictional consulting engagement prepared by Miss V of The V Lab for the fictional client Dr. ABC and ABC Department. Both reports use randomly generated synthetic records.
         </p>
       </div>
 
@@ -502,16 +623,16 @@
       </div>
     </section>
 
-    <section class="data-note shell" aria-labelledby="synthetic-data-title">
-      <h2 id="synthetic-data-title">Entirely synthetic by design.</h2>
+    <section class="data-note shell" aria-labelledby="responsible-data-title">
+      <h2 id="responsible-data-title">Responsible by design.</h2>
       <p>
-        All data used in Project 001 were randomly generated for demonstration, education, and portfolio presentation. The project contains no real patient records, personal health information, client data, or operational information. All named people and organizations are fictional public-facing labels.
+        Project 001 uses entirely randomized synthetic records and fictional client labels. The Alberta Health Data Atlas contains original educational commentary and links to official public sources; it does not host patient-level data or reproduce the official data workbooks. Neither project contains personal health information.
       </p>
     </section>
   </main>
 
   <footer class="site-footer shell">
-    <span>Project 001 · Synthetic Health Data Consulting</span>
+    <span>The V Lab · Health Data Portfolio</span>
     <span>Prepared by Miss V · The V Lab</span>
   </footer>
 </body>
