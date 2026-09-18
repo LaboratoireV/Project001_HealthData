@@ -8,7 +8,8 @@ The original source files and workbooks are not included. `Miss V`, `The V Lab`,
 
 - `nacrs_summary_example.Rmd` — emergency/ambulatory data summary example.
 - `dad_summary_example.Rmd` — inpatient data summary example.
-- `example_helpers.R` — workbook import and summary-table helpers.
+- `example_helpers.R` — workbook import, schema validation, and standardized summary helpers.
+- `../config/variable_dictionary.csv` — shared NACRS and DAD variable definitions, labels, units, privacy classes, and reporting rules.
 - `render_report.R` — render one example.
 - `render_all_rmd.R` — render all examples.
 - `render_utils.R` — portable project-path and Pandoc discovery helpers.
@@ -21,7 +22,7 @@ Never place real patient, client, or operational data in this directory. For loc
 - `synthetic_nacrs.xlsx`
 - `synthetic_dad.xlsx`
 
-The first worksheet should contain the variables listed in the corresponding R Markdown file's `*_continuous` and `*_categorical` vectors. Files inside `example_data/` are ignored by Git and will not be uploaded.
+The first worksheet must match the corresponding NACRS or DAD entries in `config/variable_dictionary.csv`. The report stops when a required variable is missing, an unregistered variable appears, or a binary flag contains values other than `0`, `1`, and missing. Files inside `example_data/` are ignored by Git and will not be uploaded.
 
 ## Run locally
 

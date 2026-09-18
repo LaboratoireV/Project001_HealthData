@@ -34,7 +34,7 @@ All names and organizations above are fictional public-facing labels. They do no
 
 The project uses two fictional health-data workbooks:
 
-- **NACRS-style dataset:** 2,000 randomly generated records and 30 variables, representing an emergency/ambulatory care example.
+- **NACRS-style dataset:** 2,000 randomly generated records and 34 variables, representing an emergency/ambulatory care example.
 - **DAD-style dataset:** 5,000 randomly generated records and 50 variables, representing an inpatient care example.
 
 **All data are randomly generated and entirely synthetic.** They contain no real patient records, personal health information, client data, or operational information. Any resemblance to real people, organizations, facilities, events, or results is coincidental.
@@ -48,6 +48,7 @@ The GitHub-safe examples are available in [`code_examples/`](code_examples/READM
 - `nacrs_summary_example.Rmd`
 - `dad_summary_example.Rmd`
 - standalone data-import and summary helpers
+- a shared, data-free variable dictionary in `config/variable_dictionary.csv`
 - portable single-report and batch-rendering scripts
 
 The public examples use project-relative paths and do not contain private package references, machine-specific user paths, or real data.

@@ -393,17 +393,16 @@ if (as_flag(params$include_summary)) {
     paste0(
       '<p>The purpose of this memo is to summarize selected variables from ',
       'the <strong>DAD</strong> data. It provides a concise description of ',
-      'the data source and presents descriptive statistics for the selected ',
-      'continuous and categorical variables.</p>',
+      'the data source and presents coverage, standardized descriptive ',
+      'statistics, and data-quality results.</p>',
       '<p>The memo is organized as follows:</p>',
       '<ul>',
       '<li><strong>Data</strong> identifies the source file and data directory, ',
       'reports the number of records and variables, lists all available ',
-      'variables, and provides a preview of the data.</li>',
-      '<li><strong>Main Analysis</strong> summarizes the selected continuous ',
-      'variables using measures of central tendency, variability, percentiles, ',
-      'and missingness. Selected categorical variables are summarized using ',
-      'counts and percentages for each category.</li>',
+      'variables, without displaying row-level records.</li>',
+      '<li><strong>Analysis</strong> reports date and fiscal-year coverage, ',
+      'summarizes registered measures using type-appropriate methods, and ',
+      'presents quality-status distributions and consistency checks.</li>',
       if (as_flag(params$include_appendix)) {
         paste0(
           '<li><strong>Appendix</strong> contains supporting information and ',
@@ -496,265 +495,34 @@ if (as_flag(params$include_data_overview)) {
 
 # Analysis
 
-## DAD Selected Variables
+## DAD standardized profile
 
-```{r dad-selected-variable-summaries, include=FALSE}
-dad_continuous <- c(
-  "age_at_admission",
-  "cci_score",
-  "resource_intensity_weight",
-  "acute_los_days",
-  "alc_days",
-  "icu_hours"
-)
-
-dad_categorical <- c(
-  "health_zone",
-  "sex",
-  "postal_fsa",
-  "admission_category",
-  "admission_source",
-  "most_responsible_diagnosis",
-  "comorbidity_1",
-  "comorbidity_2",
-  "comorbidity_3",
-  "comorbidity_4",
-  "comorbidity_5",
-  "intervention_1",
-  "intervention_2",
-  "intervention_3",
-  "intervention_4",
-  "case_mix_group",
-  "mcc_flag",
-  "icu_flag",
-  "surgery_flag",
-  "transfusion_flag",
-  "readmission_30d_flag",
-  "discharge_disposition",
-  "discharge_destination",
-  "attending_service",
-  "entry_code",
-  "newborn_flag",
-  "palliative_flag",
-  "death_flag"
-)
-
-dad_continuous_summary <- data.frame()
-dad_categorical_summary <- data.frame()
+```{r dad-standardized-profile, include=FALSE}
+dad_specification <- load_variable_dictionary(project_dir, "DAD")
+dad_profile <- NULL
 dad_summary_notes <- character()
-
-dad_variable_check <- data.frame(
-  Variable = c(dad_continuous, dad_categorical),
-  Type = c(
-    rep("Continuous", length(dad_continuous)),
-    rep("Categorical", length(dad_categorical))
-  ),
-  Available = FALSE,
-  check.names = FALSE
-)
 
 if (!exists("dad", inherits = TRUE) || !is.data.frame(dad)) {
   dad_summary_notes <- paste(
-    "The DAD summary was not generated because the `dad` data set",
+    "The DAD profile was not generated because the `dad` data set",
     "was not loaded as a data frame."
   )
 } else {
-  dad_variable_check$Available <-
-    dad_variable_check$Variable %in% names(dad)
-
-  available_continuous <- intersect(dad_continuous, names(dad))
-  available_categorical <- intersect(dad_categorical, names(dad))
-  missing_variables <- dad_variable_check$Variable[
-    !dad_variable_check$Available
-  ]
-
-  if (length(missing_variables) > 0L) {
-    dad_summary_notes <- c(
-      dad_summary_notes,
-      paste(
-        "Variables not found in DAD:",
-        paste(missing_variables, collapse = ", ")
-      )
-    )
-  }
-
-  continuous_rows <- lapply(available_continuous, function(variable) {
-    tryCatch(
-      summarize_continuous(
-        dataset = dad,
-        var_name = variable,
-        display_name = variable
-      ),
-      error = function(error) {
-        dad_summary_notes <<- c(
-          dad_summary_notes,
-          paste0(
-            "Continuous variable `", variable,
-            "` could not be summarized: ", conditionMessage(error)
-          )
-        )
-        NULL
-      }
-    )
-  })
-  continuous_rows <- Filter(Negate(is.null), continuous_rows)
-
-  if (length(continuous_rows) > 0L) {
-    dad_continuous_summary <- do.call(rbind, continuous_rows)
-    rownames(dad_continuous_summary) <- NULL
-  }
-
-  categorical_rows <- lapply(available_categorical, function(variable) {
-    tryCatch(
-      {
-        wide_summary <- summarize_categorical(
-          dataset = dad,
-          var_name = variable,
-          display_name = variable,
-          include_missing = TRUE,
-          sort_levels = "desc"
-        )
-
-        data.frame(
-          Variable = variable,
-          Category = names(wide_summary)[-1L],
-          `Count n (%)` = as.character(unlist(
-            wide_summary[1L, -1L, drop = FALSE],
-            use.names = FALSE
-          )),
-          check.names = FALSE
-        )
-      },
-      error = function(error) {
-        dad_summary_notes <<- c(
-          dad_summary_notes,
-          paste0(
-            "Categorical variable `", variable,
-            "` could not be summarized: ", conditionMessage(error)
-          )
-        )
-        NULL
-      }
-    )
-  })
-  categorical_rows <- Filter(Negate(is.null), categorical_rows)
-
-  if (length(categorical_rows) > 0L) {
-    dad_categorical_summary <- do.call(rbind, categorical_rows)
-    rownames(dad_categorical_summary) <- NULL
-  }
+  dad_profile <- build_dataset_profile(
+    dad,
+    dad_specification,
+    "DAD"
+  )
 }
 ```
 
-```{r dad-selected-variable-tables, echo=FALSE, results='asis'}
-if (exists("dad", inherits = TRUE) && is.data.frame(dad)) {
-  cat(
-    "Selected ", length(dad_continuous), " continuous and ",
-    length(dad_categorical), " categorical variables from **dad** ",
-    "(`", nrow(dad), "` records).\n\n",
-    sep = ""
-  )
-}
-
-if (nrow(dad_continuous_summary) > 0L) {
-  cat("### Continuous-Variable \n\n")
-  cat('<div class="table-scroll">')
-  print(
-    local({
-      display_summary <- dad_continuous_summary[
-        ,
-        setdiff(
-          names(dad_continuous_summary),
-          c("NonFinite", "Analyzed")
-        ),
-        drop = FALSE
-      ]
-      column_labels <- names(display_summary)
-      column_labels[column_labels == "Mean_SD"] <- "Mean (SD)"
-      column_labels[column_labels == "Min_Max"] <- "Min–Max"
-      column_labels[column_labels == "NonMissing"] <- "Non-missing"
-      column_labels[column_labels == "MissingPct"] <- "Missing %"
-
-      knitr::kable(
-        display_summary,
-        format = "html",
-        col.names = column_labels,
-        align = c(
-          "l",
-          rep("r", ncol(display_summary) - 1L)
-        ),
-        table.attr = 'class="summary-table continuous-summary-table"',
-        caption = "Selected DAD continuous variables"
-      )
-    })
-  )
-  cat("</div>\n\n")
-}
-
-if (nrow(dad_categorical_summary) > 0L) {
-  cat("### Categorical-Variable \n\n")
-  cat(
-    paste0(
-      "Each selected variable is shown in its own subsection. Tables with ",
-      "many categories are vertically scrollable. Rows labelled ",
-      "**Missing** represent original `NA` values; their counts and ",
-      "percentages are highlighted in yellow for visibility.\n\n"
-    )
-  )
-
-  for (variable in dad_categorical) {
-    variable_summary <- dad_categorical_summary[
-      dad_categorical_summary$Variable == variable,
-      c("Category", "Count n (%)"),
-      drop = FALSE
-    ]
-    rownames(variable_summary) <- NULL
-
-    missing_row <- !is.na(variable_summary$Category) &
-      variable_summary$Category == "Missing"
-    variable_summary$Category <- as.character(
-      htmltools::htmlEscape(variable_summary$Category)
-    )
-    variable_summary[["Count n (%)"]] <- as.character(
-      htmltools::htmlEscape(variable_summary[["Count n (%)"]])
-    )
-    variable_summary$Category[missing_row] <- paste0(
-      '<span class="missing-category">Missing</span>',
-      '<span class="missing-na-badge">NA</span>'
-    )
-
-    if (nrow(variable_summary) > 0L) {
-      variable_title <- toupper(gsub("_", " ", variable))
-      card_class <- if (nrow(variable_summary) > 20L) {
-        "category-table-card long-table"
-      } else {
-        "category-table-card"
-      }
-
-      cat("#### ", variable_title, "\n\n", sep = "")
-      cat(
-        '<div class="variable-code"><code>',
-        htmltools::htmlEscape(variable),
-        '</code></div>'
-      )
-      cat('<div class="', card_class, '">', sep = "")
-      print(
-        knitr::kable(
-          variable_summary,
-          format = "html",
-          escape = FALSE,
-          row.names = FALSE,
-          align = c("l", "r"),
-          table.attr = 'class="summary-table categorical-summary-table"'
-        )
-      )
-      cat("</div>\n\n")
-    }
-  }
+```{r dad-standardized-profile-tables, echo=FALSE, results='asis'}
+if (!is.null(dad_profile)) {
+  render_dataset_profile(dad_profile, "DAD")
 }
 
 if (length(dad_summary_notes) > 0L) {
-  cat("### Summary notes\n\n")
+  cat("## Summary notes\n\n")
   cat(
     paste0(
       "- ",

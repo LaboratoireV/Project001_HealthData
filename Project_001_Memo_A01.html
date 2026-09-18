@@ -11,7 +11,7 @@
 
 <meta name="author" content="Prepared by Miss V · The V Lab" />
 
-<meta name="date" content="2026-08-10" />
+<meta name="date" content="2026-09-17" />
 
 <title>Project 001 Memo</title>
 
@@ -2741,7 +2741,7 @@ border-radius: 0px;
 
 <h1 class="title toc-ignore">Project 001 Memo</h1>
 <h4 class="author">Prepared by Miss V · The V Lab</h4>
-<h4 class="date">August 10, 2026</h4>
+<h4 class="date">September 17, 2026</h4>
 
 </div>
 
@@ -2945,8 +2945,8 @@ text-align: left;
 <p>
 The purpose of this memo is to summarize selected variables from the
 <strong>NACRS</strong> data. It provides a concise description of the
-data source and presents descriptive statistics for the selected
-continuous and categorical variables.
+data source and presents coverage, standardized descriptive statistics,
+and data-quality results.
 </p>
 <p>
 The memo is organized as follows:
@@ -2955,13 +2955,12 @@ The memo is organized as follows:
 <li>
 <strong>Data</strong> identifies the source file and data directory,
 reports the number of records and variables, lists all available
-variables, and provides a preview of the data.
+variables, without displaying row-level records.
 </li>
 <li>
-<strong>Main Analysis</strong> summarizes the selected continuous
-variables using measures of central tendency, variability, percentiles,
-and missingness. Selected categorical variables are summarized using
-counts and percentages for each category.
+<strong>Analysis</strong> reports date and fiscal-year coverage,
+summarizes registered measures using type-appropriate methods, and
+presents quality-status distributions and consistency checks.
 </li>
 </ul>
 </div>
@@ -3000,13 +2999,13 @@ operational records.
 <td align="left">nacrs</td>
 <td align="left">pseudo_NACRS.xlsx</td>
 <td align="right">2000</td>
-<td align="right">30</td>
+<td align="right">34</td>
 <td align="left">tbl_df, tbl, data.frame</td>
 </tr>
 </tbody>
 </table>
 <div class="data-variable-heading">
-<strong>Variables (30)</strong>
+<strong>Variables (34)</strong>
 </div>
 <ol class="data-variable-list">
 <li>
@@ -3099,23 +3098,36 @@ operational records.
 <li>
 <code>fiscal_year</code>
 </li>
+<li>
+<code>disposition_decision_datetime</code>
+</li>
+<li>
+<code>pre_disposition_los_min</code>
+</li>
+<li>
+<code>post_disposition_los_min</code>
+</li>
+<li>
+<code>timing_quality_flag</code>
+</li>
 </ol>
 </div>
 </div>
 <div id="analysis" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Analysis</h1>
-<div id="nacrs-selected-variables" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> NACRS Selected
-Variables</h2>
-<p>Selected 5 continuous and 19 categorical variables from
-<strong>nacrs</strong> (<code>2000</code> records).</p>
-<div id="continuous-variable" class="section level3" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span>
-Continuous-Variable</h3>
+<div id="nacrs-standardized-profile" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> NACRS standardized
+profile</h2>
+<p>The variable registry maps <strong>34 of 34</strong> registered NACRS
+variables. The loaded data contain <strong>2000</strong> records.</p>
+</div>
+<div id="coverage" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Coverage</h2>
+<p>Datetime ranges are displayed in UTC.</p>
 <div class="table-scroll">
-<table class="summary-table continuous-summary-table">
+<table class="summary-table">
 <caption>
-Selected NACRS continuous variables — Moose_1_cont()
+NACRS datetime coverage
 </caption>
 <thead>
 <tr>
@@ -3123,39 +3135,153 @@ Selected NACRS continuous variables — Moose_1_cont()
 Variable
 </th>
 <th style="text-align:right;">
+Non-missing
+</th>
+<th style="text-align:right;">
+Missing
+</th>
+<th style="text-align:left;">
+Earliest
+</th>
+<th style="text-align:left;">
+Latest
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Arrival datetime
+</td>
+<td style="text-align:right;">
+2000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+2025-04-01 01:29
+</td>
+<td style="text-align:left;">
+2026-03-31 20:57
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Discharge datetime
+</td>
+<td style="text-align:right;">
+2000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+2025-04-01 06:29
+</td>
+<td style="text-align:left;">
+2026-04-01 00:13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Disposition decision datetime
+</td>
+<td style="text-align:right;">
+2000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+2025-04-01 05:32
+</td>
+<td style="text-align:left;">
+2026-03-31 23:30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+NACRS reporting-period coverage
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+Coverage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Fiscal year
+</td>
+<td style="text-align:left;">
+2025-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="main-measures" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Main measures</h2>
+<p>The registry selects <strong>5</strong> continuous measures and
+<strong>19</strong> categorical measures for the main profile.</p>
+<div id="continuous-measures" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Continuous
+measures</h3>
+<div class="table-scroll">
+<table class="summary-table continuous-summary-table">
+<caption>
+Selected NACRS continuous measures
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
 Mean (SD)
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 Median
 </th>
-<th style="text-align:right;">
-Min–Max
+<th style="text-align:left;">
+Min-Max
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 P1
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 P5
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 P10
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 Q1
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 Q2
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 Q3
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 P90
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 P95
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 P99
 </th>
 <th style="text-align:right;">
@@ -3175,42 +3301,42 @@ Missing %
 <tbody>
 <tr>
 <td style="text-align:left;">
-age
+Age (years)
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 48.64 (26.96)
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 49.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 0.00 - 100.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 0.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 5.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 10.90
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 28.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 49.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 72.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 85.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 91.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 99.00
 </td>
 <td style="text-align:right;">
@@ -3228,42 +3354,42 @@ age
 </tr>
 <tr>
 <td style="text-align:left;">
-pain_score
+Pain score (points)
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 5.47 (2.99)
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 6.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 0.00 - 10.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 0.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 0.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 1.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 3.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 6.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 8.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 9.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 10.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 10.00
 </td>
 <td style="text-align:right;">
@@ -3281,42 +3407,42 @@ pain_score
 </tr>
 <tr>
 <td style="text-align:left;">
-triage_wait_min
+Triage wait (min)
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 13.97 (9.50)
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 12.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 0.00 - 57.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 0.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 1.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 3.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 6.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 12.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 19.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 27.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 33.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 41.00
 </td>
 <td style="text-align:right;">
@@ -3334,42 +3460,42 @@ triage_wait_min
 </tr>
 <tr>
 <td style="text-align:left;">
-physician_wait_min
+Physician wait (min)
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 59.79 (52.51)
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 48.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 0.00 - 300.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 0.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 0.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 3.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 19.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 48.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 86.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 135.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 161.05
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 227.03
 </td>
 <td style="text-align:right;">
@@ -3387,42 +3513,42 @@ physician_wait_min
 </tr>
 <tr>
 <td style="text-align:left;">
-los_min
+Length of stay (min)
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 268.92 (179.68)
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 230.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 10.00 - 1121.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 20.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 52.95
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 83.90
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 142.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 230.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 350.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 519.00
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 637.05
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 852.21
 </td>
 <td style="text-align:right;">
@@ -3442,18 +3568,193 @@ los_min
 </table>
 </div>
 </div>
-<div id="categorical-variable" class="section level3" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span>
-Categorical-Variable</h3>
-<p>Each selected variable is shown in its own subsection. Tables with
-many categories are vertically scrollable. Rows labelled
-<strong>Missing</strong> represent original <code>NA</code> values;
-their counts and percentages are highlighted in yellow for
-visibility.</p>
-<div id="health-zone" class="section level4" number="2.1.2.1">
-<h4><span class="header-section-number">2.1.2.1</span> HEALTH ZONE</h4>
+<div id="timing-measures" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Timing
+measures</h3>
+<p>Timing summaries use <strong>1503</strong> quality-eligible records
+and exclude <strong>497</strong> records. Excluded records remain
+visible in the Data quality section.</p>
+<div class="table-scroll">
+<table class="summary-table continuous-summary-table">
+<caption>
+Quality-eligible NACRS timing measures
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+Mean (SD)
+</th>
+<th style="text-align:left;">
+Median
+</th>
+<th style="text-align:left;">
+Min-Max
+</th>
+<th style="text-align:left;">
+P1
+</th>
+<th style="text-align:left;">
+P5
+</th>
+<th style="text-align:left;">
+P10
+</th>
+<th style="text-align:left;">
+Q1
+</th>
+<th style="text-align:left;">
+Q2
+</th>
+<th style="text-align:left;">
+Q3
+</th>
+<th style="text-align:left;">
+P90
+</th>
+<th style="text-align:left;">
+P95
+</th>
+<th style="text-align:left;">
+P99
+</th>
+<th style="text-align:right;">
+Missing
+</th>
+<th style="text-align:right;">
+N
+</th>
+<th style="text-align:right;">
+Non-missing
+</th>
+<th style="text-align:right;">
+Missing %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Pre-disposition length of stay (min)
+</td>
+<td style="text-align:left;">
+232.46 (126.01)
+</td>
+<td style="text-align:left;">
+205.00
+</td>
+<td style="text-align:left;">
+10.00 - 835.00
+</td>
+<td style="text-align:left;">
+48.04
+</td>
+<td style="text-align:left;">
+83.00
+</td>
+<td style="text-align:left;">
+104.00
+</td>
+<td style="text-align:left;">
+145.00
+</td>
+<td style="text-align:left;">
+205.00
+</td>
+<td style="text-align:left;">
+289.00
+</td>
+<td style="text-align:left;">
+406.80
+</td>
+<td style="text-align:left;">
+489.00
+</td>
+<td style="text-align:left;">
+634.88
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1503
+</td>
+<td style="text-align:right;">
+1503
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Post-disposition length of stay (min)
+</td>
+<td style="text-align:left;">
+56.39 (54.43)
+</td>
+<td style="text-align:left;">
+42.00
+</td>
+<td style="text-align:left;">
+0.00 - 380.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+1.00
+</td>
+<td style="text-align:left;">
+5.00
+</td>
+<td style="text-align:left;">
+17.00
+</td>
+<td style="text-align:left;">
+42.00
+</td>
+<td style="text-align:left;">
+78.00
+</td>
+<td style="text-align:left;">
+127.80
+</td>
+<td style="text-align:left;">
+164.90
+</td>
+<td style="text-align:left;">
+250.94
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1503
+</td>
+<td style="text-align:right;">
+1503
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="categorical-measures" class="section level3" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Categorical
+measures</h3>
+<p>Each variable is displayed separately. Coded variables show up to the
+20 most frequent codes, followed by Other and Missing where
+applicable.</p>
+<div id="health-zone" class="section level4" number="2.3.3.1">
+<h4><span class="header-section-number">2.3.3.1</span> Health zone</h4>
 <div class="variable-code">
-<code> health_zone </code>
+<code>health_zone</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -3508,22 +3809,14 @@ South
 173 (8.7%)
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
-</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="sex" class="section level4" number="2.1.2.2">
-<h4><span class="header-section-number">2.1.2.2</span> SEX</h4>
+<div id="sex" class="section level4" number="2.3.3.2">
+<h4><span class="header-section-number">2.3.3.2</span> Sex</h4>
 <div class="variable-code">
-<code> sex </code>
+<code>sex</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -3570,22 +3863,14 @@ X
 10 (0.5%)
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
-</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="postal-fsa" class="section level4" number="2.1.2.3">
-<h4><span class="header-section-number">2.1.2.3</span> POSTAL FSA</h4>
+<div id="postal-fsa" class="section level4" number="2.3.3.3">
+<h4><span class="header-section-number">2.3.3.3</span> Postal FSA</h4>
 <div class="variable-code">
-<code> postal_fsa </code>
+<code>postal_fsa</code>
 </div>
 <div class="category-table-card long-table">
 <table class="summary-table categorical-summary-table">
@@ -3880,22 +4165,14 @@ T1H
 35 (1.8%)
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
-</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="arrival-mode" class="section level4" number="2.1.2.4">
-<h4><span class="header-section-number">2.1.2.4</span> ARRIVAL MODE</h4>
+<div id="arrival-mode" class="section level4" number="2.3.3.4">
+<h4><span class="header-section-number">2.3.3.4</span> Arrival mode</h4>
 <div class="variable-code">
-<code> arrival_mode </code>
+<code>arrival_mode</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -3950,22 +4227,14 @@ Police
 35 (1.8%)
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
-</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="ctas-level" class="section level4" number="2.1.2.5">
-<h4><span class="header-section-number">2.1.2.5</span> CTAS LEVEL</h4>
+<div id="ctas-level" class="section level4" number="2.3.3.5">
+<h4><span class="header-section-number">2.3.3.5</span> CTAS level</h4>
 <div class="variable-code">
-<code> ctas_level </code>
+<code>ctas_level</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -3980,6 +4249,22 @@ Count n (%)
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+49 (2.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+310 (15.5%)
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 3
@@ -3998,45 +4283,21 @@ Count n (%)
 </tr>
 <tr>
 <td style="text-align:left;">
-2
-</td>
-<td style="text-align:right;">
-310 (15.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 5
 </td>
 <td style="text-align:right;">
 124 (6.2%)
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:right;">
-49 (2.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
-</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="chief-complaint" class="section level4" number="2.1.2.6">
-<h4><span class="header-section-number">2.1.2.6</span> CHIEF
-COMPLAINT</h4>
+<div id="chief-complaint" class="section level4" number="2.3.3.6">
+<h4><span class="header-section-number">2.3.3.6</span> Chief
+complaint</h4>
 <div class="variable-code">
-<code> chief_complaint </code>
+<code>chief_complaint</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -4171,23 +4432,15 @@ Weakness
 111 (5.5%)
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
-</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="main-diagnosis-icd10" class="section level4" number="2.1.2.7">
-<h4><span class="header-section-number">2.1.2.7</span> MAIN DIAGNOSIS
-ICD10</h4>
+<div id="main-diagnosis-icd-10" class="section level4" number="2.3.3.7">
+<h4><span class="header-section-number">2.3.3.7</span> Main diagnosis
+ICD-10</h4>
 <div class="variable-code">
-<code> main_diagnosis_icd10 </code>
+<code>main_diagnosis_icd10</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -4322,23 +4575,15 @@ R53
 111 (5.5%)
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
-</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="secondary-diagnosis-1" class="section level4" number="2.1.2.8">
-<h4><span class="header-section-number">2.1.2.8</span> SECONDARY
-DIAGNOSIS 1</h4>
+<div id="secondary-diagnosis-1" class="section level4" number="2.3.3.8">
+<h4><span class="header-section-number">2.3.3.8</span> Secondary
+diagnosis 1</h4>
 <div class="variable-code">
-<code> secondary_diagnosis_1 </code>
+<code>secondary_diagnosis_1</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -4353,14 +4598,6 @@ Count n (%)
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-<span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
-</td>
-<td style="text-align:right;">
-471 (23.6%)
-</td>
-</tr>
 <tr>
 <td style="text-align:left;">
 K21.9
@@ -4443,21 +4680,21 @@ J45.9
 </tr>
 <tr>
 <td style="text-align:left;">
-Total
+<span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
 </td>
 <td style="text-align:right;">
-2000 (100.0%)
+471 (23.6%)
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="secondary-diagnosis-2" class="section level4" number="2.1.2.9">
-<h4><span class="header-section-number">2.1.2.9</span> SECONDARY
-DIAGNOSIS 2</h4>
+<div id="secondary-diagnosis-2" class="section level4" number="2.3.3.9">
+<h4><span class="header-section-number">2.3.3.9</span> Secondary
+diagnosis 2</h4>
 <div class="variable-code">
-<code> secondary_diagnosis_2 </code>
+<code>secondary_diagnosis_2</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -4472,14 +4709,6 @@ Count n (%)
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-<span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
-</td>
-<td style="text-align:right;">
-604 (30.2%)
-</td>
-</tr>
 <tr>
 <td style="text-align:left;">
 F32.9
@@ -4562,21 +4791,21 @@ F41.9
 </tr>
 <tr>
 <td style="text-align:left;">
-Total
+<span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
 </td>
 <td style="text-align:right;">
-2000 (100.0%)
+604 (30.2%)
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="intervention-1" class="section level4" number="2.1.2.10">
-<h4><span class="header-section-number">2.1.2.10</span> INTERVENTION
+<div id="intervention-1" class="section level4" number="2.3.3.10">
+<h4><span class="header-section-number">2.3.3.10</span> Intervention
 1</h4>
 <div class="variable-code">
-<code> intervention_1 </code>
+<code>intervention_1</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -4687,23 +4916,15 @@ Electrolytes
 118 (5.9%)
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
-</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="intervention-2" class="section level4" number="2.1.2.11">
-<h4><span class="header-section-number">2.1.2.11</span> INTERVENTION
+<div id="intervention-2" class="section level4" number="2.3.3.11">
+<h4><span class="header-section-number">2.3.3.11</span> Intervention
 2</h4>
 <div class="variable-code">
-<code> intervention_2 </code>
+<code>intervention_2</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -4814,23 +5035,15 @@ ECG
 102 (5.1%)
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
-</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="consult-service" class="section level4" number="2.1.2.12">
-<h4><span class="header-section-number">2.1.2.12</span> CONSULT
-SERVICE</h4>
+<div id="consult-service" class="section level4" number="2.3.3.12">
+<h4><span class="header-section-number">2.3.3.12</span> Consult
+service</h4>
 <div class="variable-code">
-<code> consult_service </code>
+<code>consult_service</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -4909,23 +5122,15 @@ Psychiatry
 112 (5.6%)
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
-</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="ambulance-flag" class="section level4" number="2.1.2.13">
-<h4><span class="header-section-number">2.1.2.13</span> AMBULANCE
-FLAG</h4>
+<div id="ambulance-arrival" class="section level4" number="2.3.3.13">
+<h4><span class="header-section-number">2.3.3.13</span> Ambulance
+arrival</h4>
 <div class="variable-code">
-<code> ambulance_flag </code>
+<code>ambulance_flag</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -4942,7 +5147,7 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-0
+No
 </td>
 <td style="text-align:right;">
 1510 (75.5%)
@@ -4950,28 +5155,21 @@ Count n (%)
 </tr>
 <tr>
 <td style="text-align:left;">
-1
+Yes
 </td>
 <td style="text-align:right;">
 490 (24.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="injury-flag" class="section level4" number="2.1.2.14">
-<h4><span class="header-section-number">2.1.2.14</span> INJURY FLAG</h4>
+<div id="injury-indicator" class="section level4" number="2.3.3.14">
+<h4><span class="header-section-number">2.3.3.14</span> Injury
+indicator</h4>
 <div class="variable-code">
-<code> injury_flag </code>
+<code>injury_flag</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -4988,7 +5186,7 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-0
+No
 </td>
 <td style="text-align:right;">
 1585 (79.2%)
@@ -4996,29 +5194,21 @@ Count n (%)
 </tr>
 <tr>
 <td style="text-align:left;">
-1
+Yes
 </td>
 <td style="text-align:right;">
 415 (20.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="mental-health-flag" class="section level4" number="2.1.2.15">
-<h4><span class="header-section-number">2.1.2.15</span> MENTAL HEALTH
-FLAG</h4>
+<div id="mental-health-indicator" class="section level4" number="2.3.3.15">
+<h4><span class="header-section-number">2.3.3.15</span> Mental health
+indicator</h4>
 <div class="variable-code">
-<code> mental_health_flag </code>
+<code>mental_health_flag</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -5035,7 +5225,7 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-0
+No
 </td>
 <td style="text-align:right;">
 1781 (89.0%)
@@ -5043,28 +5233,20 @@ Count n (%)
 </tr>
 <tr>
 <td style="text-align:left;">
-1
+Yes
 </td>
 <td style="text-align:right;">
 219 (10.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="disposition" class="section level4" number="2.1.2.16">
-<h4><span class="header-section-number">2.1.2.16</span> DISPOSITION</h4>
+<div id="disposition" class="section level4" number="2.3.3.16">
+<h4><span class="header-section-number">2.3.3.16</span> Disposition</h4>
 <div class="variable-code">
-<code> disposition </code>
+<code>disposition</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -5127,23 +5309,14 @@ Died
 10 (0.5%)
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
-</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="admitted-flag" class="section level4" number="2.1.2.17">
-<h4><span class="header-section-number">2.1.2.17</span> ADMITTED
-FLAG</h4>
+<div id="admitted" class="section level4" number="2.3.3.17">
+<h4><span class="header-section-number">2.3.3.17</span> Admitted</h4>
 <div class="variable-code">
-<code> admitted_flag </code>
+<code>admitted_flag</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -5160,7 +5333,7 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-0
+No
 </td>
 <td style="text-align:right;">
 1648 (82.4%)
@@ -5168,28 +5341,21 @@ Count n (%)
 </tr>
 <tr>
 <td style="text-align:left;">
-1
+Yes
 </td>
 <td style="text-align:right;">
 352 (17.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="lwbs-flag" class="section level4" number="2.1.2.18">
-<h4><span class="header-section-number">2.1.2.18</span> LWBS FLAG</h4>
+<div id="left-without-being-seen" class="section level4" number="2.3.3.18">
+<h4><span class="header-section-number">2.3.3.18</span> Left without
+being seen</h4>
 <div class="variable-code">
-<code> lwbs_flag </code>
+<code>lwbs_flag</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -5206,7 +5372,7 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-0
+No
 </td>
 <td style="text-align:right;">
 1931 (96.5%)
@@ -5214,29 +5380,21 @@ Count n (%)
 </tr>
 <tr>
 <td style="text-align:left;">
-1
+Yes
 </td>
 <td style="text-align:right;">
 69 (3.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="revisit-72h-flag" class="section level4" number="2.1.2.19">
-<h4><span class="header-section-number">2.1.2.19</span> REVISIT 72H
-FLAG</h4>
+<div id="hour-revisit" class="section level4" number="2.3.3.19">
+<h4><span class="header-section-number">2.3.3.19</span> 72-hour
+revisit</h4>
 <div class="variable-code">
-<code> revisit_72h_flag </code>
+<code>revisit_72h_flag</code>
 </div>
 <div class="category-table-card">
 <table class="summary-table categorical-summary-table">
@@ -5253,7 +5411,7 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-0
+No
 </td>
 <td style="text-align:right;">
 1842 (92.1%)
@@ -5261,24 +5419,176 @@ Count n (%)
 </tr>
 <tr>
 <td style="text-align:left;">
-1
+Yes
 </td>
 <td style="text-align:right;">
 158 (7.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Total
-</td>
-<td style="text-align:right;">
-2000 (100.0%)
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+</div>
+</div>
+<div id="data-quality" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Data quality</h2>
+<div class="table-scroll">
+<table class="summary-table categorical-summary-table">
+<caption>
+NACRS quality-status distribution
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+Status
+</th>
+<th style="text-align:left;">
+Count n (%)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Timing quality status
+</td>
+<td style="text-align:left;">
+Pass
+</td>
+<td style="text-align:left;">
+1503 (75.2%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Timing quality status
+</td>
+<td style="text-align:left;">
+Triage wait &gt; physician wait
+</td>
+<td style="text-align:left;">
+278 (13.9%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Timing quality status
+</td>
+<td style="text-align:left;">
+Physician wait &gt; ED LOS
+</td>
+<td style="text-align:left;">
+219 (10.9%)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+NACRS timing consistency checks
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Check
+</th>
+<th style="text-align:right;">
+Evaluated
+</th>
+<th style="text-align:right;">
+Violations
+</th>
+<th style="text-align:left;">
+Status
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Arrival &lt;= decision &lt;= discharge
+</td>
+<td style="text-align:right;">
+2000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pre-disposition LOS matches timestamps
+</td>
+<td style="text-align:right;">
+2000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Post-disposition LOS matches timestamps
+</td>
+<td style="text-align:right;">
+2000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pre + post LOS equals total LOS
+</td>
+<td style="text-align:right;">
+2000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Timing durations are non-negative
+</td>
+<td style="text-align:right;">
+2000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+Pass
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="variable-handling" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Variable
+handling</h3>
+<p>Identifiers and internal provenance fields are registered for schema
+validation but are excluded from public summary tables. Missing values
+remain distinct from valid zero values.</p>
 </div>
 </div>
 </div>

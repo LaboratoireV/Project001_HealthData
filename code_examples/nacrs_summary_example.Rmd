@@ -393,17 +393,16 @@ if (as_flag(params$include_summary)) {
     paste0(
       '<p>The purpose of this memo is to summarize selected variables from ',
       'the <strong>NACRS</strong> data. It provides a concise description of ',
-      'the data source and presents descriptive statistics for the selected ',
-      'continuous and categorical variables.</p>',
+      'the data source and presents coverage, standardized descriptive ',
+      'statistics, and data-quality results.</p>',
       '<p>The memo is organized as follows:</p>',
       '<ul>',
       '<li><strong>Data</strong> identifies the source file and data directory, ',
       'reports the number of records and variables, lists all available ',
-      'variables, and provides a preview of the data.</li>',
-      '<li><strong>Main Analysis</strong> summarizes the selected continuous ',
-      'variables using measures of central tendency, variability, percentiles, ',
-      'and missingness. Selected categorical variables are summarized using ',
-      'counts and percentages for each category.</li>',
+      'variables, without displaying row-level records.</li>',
+      '<li><strong>Analysis</strong> reports date and fiscal-year coverage, ',
+      'summarizes registered measures using type-appropriate methods, and ',
+      'presents quality-status distributions and consistency checks.</li>',
       if (as_flag(params$include_appendix)) {
         paste0(
           '<li><strong>Appendix</strong> contains supporting information and ',
@@ -496,255 +495,34 @@ if (as_flag(params$include_data_overview)) {
 
 # Analysis
 
-## NACRS Selected Variables
+## NACRS standardized profile
 
-```{r nacrs-selected-variable-summaries, include=FALSE}
-nacrs_continuous <- c(
-  "age",
-  "pain_score",
-  "triage_wait_min",
-  "physician_wait_min",
-  "los_min"
-)
-
-nacrs_categorical <- c(
-  "health_zone",
-  "sex",
-  "postal_fsa",
-  "arrival_mode",
-  "ctas_level",
-  "chief_complaint",
-  "main_diagnosis_icd10",
-  "secondary_diagnosis_1",
-  "secondary_diagnosis_2",
-  "intervention_1",
-  "intervention_2",
-  "consult_service",
-  "ambulance_flag",
-  "injury_flag",
-  "mental_health_flag",
-  "disposition",
-  "admitted_flag",
-  "lwbs_flag",
-  "revisit_72h_flag"
-)
-
-nacrs_continuous_summary <- data.frame()
-nacrs_categorical_summary <- data.frame()
+```{r nacrs-standardized-profile, include=FALSE}
+nacrs_specification <- load_variable_dictionary(project_dir, "NACRS")
+nacrs_profile <- NULL
 nacrs_summary_notes <- character()
-
-nacrs_variable_check <- data.frame(
-  Variable = c(nacrs_continuous, nacrs_categorical),
-  Type = c(
-    rep("Continuous", length(nacrs_continuous)),
-    rep("Categorical", length(nacrs_categorical))
-  ),
-  Available = FALSE,
-  check.names = FALSE
-)
 
 if (!exists("nacrs", inherits = TRUE) || !is.data.frame(nacrs)) {
   nacrs_summary_notes <- paste(
-    "The NACRS summary was not generated because the `nacrs` data set",
+    "The NACRS profile was not generated because the `nacrs` data set",
     "was not loaded as a data frame."
   )
 } else {
-  nacrs_variable_check$Available <-
-    nacrs_variable_check$Variable %in% names(nacrs)
-
-  available_continuous <- intersect(nacrs_continuous, names(nacrs))
-  available_categorical <- intersect(nacrs_categorical, names(nacrs))
-  missing_variables <- nacrs_variable_check$Variable[
-    !nacrs_variable_check$Available
-  ]
-
-  if (length(missing_variables) > 0L) {
-    nacrs_summary_notes <- c(
-      nacrs_summary_notes,
-      paste(
-        "Variables not found in NACRS:",
-        paste(missing_variables, collapse = ", ")
-      )
-    )
-  }
-
-  continuous_rows <- lapply(available_continuous, function(variable) {
-    tryCatch(
-      summarize_continuous(
-        dataset = nacrs,
-        var_name = variable,
-        display_name = variable
-      ),
-      error = function(error) {
-        nacrs_summary_notes <<- c(
-          nacrs_summary_notes,
-          paste0(
-            "Continuous variable `", variable,
-            "` could not be summarized: ", conditionMessage(error)
-          )
-        )
-        NULL
-      }
-    )
-  })
-  continuous_rows <- Filter(Negate(is.null), continuous_rows)
-
-  if (length(continuous_rows) > 0L) {
-    nacrs_continuous_summary <- do.call(rbind, continuous_rows)
-    rownames(nacrs_continuous_summary) <- NULL
-  }
-
-  categorical_rows <- lapply(available_categorical, function(variable) {
-    tryCatch(
-      {
-        wide_summary <- summarize_categorical(
-          dataset = nacrs,
-          var_name = variable,
-          display_name = variable,
-          include_missing = TRUE,
-          sort_levels = "desc"
-        )
-
-        data.frame(
-          Variable = variable,
-          Category = names(wide_summary)[-1L],
-          `Count n (%)` = as.character(unlist(
-            wide_summary[1L, -1L, drop = FALSE],
-            use.names = FALSE
-          )),
-          check.names = FALSE
-        )
-      },
-      error = function(error) {
-        nacrs_summary_notes <<- c(
-          nacrs_summary_notes,
-          paste0(
-            "Categorical variable `", variable,
-            "` could not be summarized: ", conditionMessage(error)
-          )
-        )
-        NULL
-      }
-    )
-  })
-  categorical_rows <- Filter(Negate(is.null), categorical_rows)
-
-  if (length(categorical_rows) > 0L) {
-    nacrs_categorical_summary <- do.call(rbind, categorical_rows)
-    rownames(nacrs_categorical_summary) <- NULL
-  }
+  nacrs_profile <- build_dataset_profile(
+    nacrs,
+    nacrs_specification,
+    "NACRS"
+  )
 }
 ```
 
-```{r nacrs-selected-variable-tables, echo=FALSE, results='asis'}
-if (exists("nacrs", inherits = TRUE) && is.data.frame(nacrs)) {
-  cat(
-    "Selected ", length(nacrs_continuous), " continuous and ",
-    length(nacrs_categorical), " categorical variables from **nacrs** ",
-    "(`", nrow(nacrs), "` records).\n\n",
-    sep = ""
-  )
-}
-
-if (nrow(nacrs_continuous_summary) > 0L) {
-  cat("### Continuous-Variable \n\n")
-  cat('<div class="table-scroll">')
-  print(
-    local({
-      display_summary <- nacrs_continuous_summary[
-        ,
-        setdiff(
-          names(nacrs_continuous_summary),
-          c("NonFinite", "Analyzed")
-        ),
-        drop = FALSE
-      ]
-      column_labels <- names(display_summary)
-      column_labels[column_labels == "Mean_SD"] <- "Mean (SD)"
-      column_labels[column_labels == "Min_Max"] <- "Min–Max"
-      column_labels[column_labels == "NonMissing"] <- "Non-missing"
-      column_labels[column_labels == "MissingPct"] <- "Missing %"
-
-      knitr::kable(
-        display_summary,
-        format = "html",
-        col.names = column_labels,
-        align = c(
-          "l",
-          rep("r", ncol(display_summary) - 1L)
-        ),
-        table.attr = 'class="summary-table continuous-summary-table"',
-        caption = "Selected NACRS continuous variables"
-      )
-    })
-  )
-  cat("</div>\n\n")
-}
-
-if (nrow(nacrs_categorical_summary) > 0L) {
-  cat("### Categorical-Variable \n\n")
-  cat(
-    paste0(
-      "Each selected variable is shown in its own subsection. Tables with ",
-      "many categories are vertically scrollable. Rows labelled ",
-      "**Missing** represent original `NA` values; their counts and ",
-      "percentages are highlighted in yellow for visibility.\n\n"
-    )
-  )
-
-  for (variable in nacrs_categorical) {
-    variable_summary <- nacrs_categorical_summary[
-      nacrs_categorical_summary$Variable == variable,
-      c("Category", "Count n (%)"),
-      drop = FALSE
-    ]
-    rownames(variable_summary) <- NULL
-
-    missing_row <- !is.na(variable_summary$Category) &
-      variable_summary$Category == "Missing"
-    variable_summary$Category <- as.character(
-      htmltools::htmlEscape(variable_summary$Category)
-    )
-    variable_summary[["Count n (%)"]] <- as.character(
-      htmltools::htmlEscape(variable_summary[["Count n (%)"]])
-    )
-    variable_summary$Category[missing_row] <- paste0(
-      '<span class="missing-category">Missing</span>',
-      '<span class="missing-na-badge">NA</span>'
-    )
-
-    if (nrow(variable_summary) > 0L) {
-      variable_title <- toupper(gsub("_", " ", variable))
-      card_class <- if (nrow(variable_summary) > 20L) {
-        "category-table-card long-table"
-      } else {
-        "category-table-card"
-      }
-
-      cat("#### ", variable_title, "\n\n", sep = "")
-      cat(
-        '<div class="variable-code"><code>',
-        htmltools::htmlEscape(variable),
-        '</code></div>'
-      )
-      cat('<div class="', card_class, '">', sep = "")
-      print(
-        knitr::kable(
-          variable_summary,
-          format = "html",
-          escape = FALSE,
-          row.names = FALSE,
-          align = c("l", "r"),
-          table.attr = 'class="summary-table categorical-summary-table"'
-        )
-      )
-      cat("</div>\n\n")
-    }
-  }
+```{r nacrs-standardized-profile-tables, echo=FALSE, results='asis'}
+if (!is.null(nacrs_profile)) {
+  render_dataset_profile(nacrs_profile, "NACRS")
 }
 
 if (length(nacrs_summary_notes) > 0L) {
-  cat("### Summary notes\n\n")
+  cat("## Summary notes\n\n")
   cat(
     paste0(
       "- ",
