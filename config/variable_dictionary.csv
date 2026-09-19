@@ -1,85 +1,86 @@
-dataset,source_name,canonical_name,display_label,domain,storage_type,analytic_type,unit,summary_method,include_profile,privacy_class,display_order,required,allowed_values,quality_rule
-NACRS,patient_id,patient_id,Patient ID,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,1,TRUE,,not_public
-NACRS,visit_id,visit_id,Visit ID,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,2,TRUE,,not_public
-NACRS,facility_id,facility_id,Facility ID,Identifiers,character,identifier,none,exclude,exclude,quasi_identifier,3,TRUE,,not_public
-NACRS,health_zone,health_zone,Health zone,Demographics and geography,character,nominal,none,categorical,main,public,4,TRUE,,
-NACRS,sex,sex,Sex,Demographics and geography,character,nominal,none,categorical,main,public,5,TRUE,,
-NACRS,age,age,Age,Demographics and geography,numeric,numeric_measure,years,continuous,main,public,6,TRUE,,non_negative
-NACRS,postal_fsa,postal_fsa,Postal FSA,Demographics and geography,character,nominal,none,categorical,main,quasi_identifier,7,TRUE,,synthetic_only
-NACRS,arrival_datetime,arrival_datetime,Arrival datetime,Encounter or admission context,datetime,datetime,datetime,datetime,coverage,public,8,TRUE,,
-NACRS,arrival_mode,arrival_mode,Arrival mode,Encounter or admission context,character,nominal,none,categorical,main,public,9,TRUE,,
-NACRS,ctas_level,ctas_level,CTAS level,Acuity and clinical presentation,numeric,ordinal_score,level,categorical,main,public,10,TRUE,1|2|3|4|5,
-NACRS,chief_complaint,chief_complaint,Chief complaint,Acuity and clinical presentation,character,coded_category,none,categorical,main,public,11,TRUE,,
-NACRS,main_diagnosis_icd10,main_diagnosis_icd10,Main diagnosis ICD-10,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,12,TRUE,,
-NACRS,secondary_diagnosis_1,secondary_diagnosis_1,Secondary diagnosis 1,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,13,TRUE,,
-NACRS,secondary_diagnosis_2,secondary_diagnosis_2,Secondary diagnosis 2,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,14,TRUE,,
-NACRS,intervention_1,intervention_1,Intervention 1,Interventions and services,character,coded_category,none,categorical,main,public,15,TRUE,,
-NACRS,intervention_2,intervention_2,Intervention 2,Interventions and services,character,coded_category,none,categorical,main,public,16,TRUE,,
-NACRS,consult_service,consult_service,Consult service,Interventions and services,character,nominal,none,categorical,main,public,17,TRUE,,
-NACRS,ambulance_flag,ambulance_flag,Ambulance arrival,Encounter or admission context,numeric,binary_flag,none,categorical,main,public,18,TRUE,0|1|NA,binary_or_missing
-NACRS,injury_flag,injury_flag,Injury indicator,Acuity and clinical presentation,numeric,binary_flag,none,categorical,main,public,19,TRUE,0|1|NA,binary_or_missing
-NACRS,mental_health_flag,mental_health_flag,Mental health indicator,Acuity and clinical presentation,numeric,binary_flag,none,categorical,main,public,20,TRUE,0|1|NA,binary_or_missing
-NACRS,pain_score,pain_score,Pain score,Acuity and clinical presentation,numeric,ordinal_score,points,continuous,main,public,21,TRUE,,non_negative
-NACRS,triage_wait_min,triage_wait_min,Triage wait,Flow and length of stay,numeric,duration,min,continuous,main,public,22,TRUE,,non_negative
-NACRS,physician_wait_min,physician_wait_min,Physician wait,Flow and length of stay,numeric,duration,min,continuous,main,public,23,TRUE,,non_negative
-NACRS,los_min,los_min,Length of stay,Flow and length of stay,numeric,duration,min,continuous,main,public,24,TRUE,,non_negative
-NACRS,disposition,disposition,Disposition,Disposition and outcomes,character,nominal,none,categorical,main,public,25,TRUE,,
-NACRS,admitted_flag,admitted_flag,Admitted,Disposition and outcomes,numeric,binary_flag,none,categorical,main,public,26,TRUE,0|1|NA,binary_or_missing
-NACRS,lwbs_flag,lwbs_flag,Left without being seen,Disposition and outcomes,numeric,binary_flag,none,categorical,main,public,27,TRUE,0|1|NA,binary_or_missing
-NACRS,revisit_72h_flag,revisit_72h_flag,72-hour revisit,Disposition and outcomes,numeric,binary_flag,none,categorical,main,public,28,TRUE,0|1|NA,binary_or_missing
-NACRS,discharge_datetime,discharge_datetime,Discharge datetime,Flow and length of stay,datetime,datetime,datetime,datetime,coverage,public,29,TRUE,,
-NACRS,fiscal_year,fiscal_year,Fiscal year,Data quality and provenance,character,provenance,none,coverage,coverage,public,30,TRUE,,
-NACRS,disposition_decision_datetime,disposition_decision_datetime,Disposition decision datetime,Flow and length of stay,datetime,datetime,datetime,datetime,coverage,public,31,TRUE,,arrival_le_decision_le_discharge
-NACRS,pre_disposition_los_min,pre_disposition_los_min,Pre-disposition length of stay,Flow and length of stay,numeric,duration,min,continuous,timing,public,32,TRUE,,non_negative
-NACRS,post_disposition_los_min,post_disposition_los_min,Post-disposition length of stay,Flow and length of stay,numeric,duration,min,continuous,timing,public,33,TRUE,,non_negative
-NACRS,timing_quality_flag,timing_quality_status,Timing quality status,Data quality and provenance,character,quality_status,none,quality,quality,public,34,TRUE,,timing_consistency
-DAD,dad_record_id,dad_record_id,DAD record ID,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,1,TRUE,,not_public
-DAD,patient_id,patient_id,Patient ID,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,2,TRUE,,not_public
-DAD,chart_number,chart_number,Chart number,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,3,TRUE,,not_public
-DAD,facility_id,facility_id,Facility ID,Identifiers,character,identifier,none,exclude,exclude,quasi_identifier,4,TRUE,,not_public
-DAD,health_zone,health_zone,Health zone,Demographics and geography,character,nominal,none,categorical,main,public,5,TRUE,,
-DAD,sex,sex,Sex,Demographics and geography,character,nominal,none,categorical,main,public,6,TRUE,,
-DAD,age_at_admission,age_at_admission,Age at admission,Demographics and geography,numeric,numeric_measure,years,continuous,main,public,7,TRUE,,non_negative
-DAD,postal_fsa,postal_fsa,Postal FSA,Demographics and geography,character,nominal,none,categorical,main,quasi_identifier,8,TRUE,,synthetic_only
-DAD,admission_datetime,admission_datetime,Admission datetime,Encounter or admission context,datetime,datetime,datetime,datetime,coverage,public,9,TRUE,,
-DAD,discharge_datetime,discharge_datetime,Discharge datetime,Flow and length of stay,datetime,datetime,datetime,datetime,coverage,public,10,TRUE,,admission_le_discharge
-DAD,admission_category,admission_category,Admission category,Encounter or admission context,character,nominal,none,categorical,main,public,11,TRUE,,
-DAD,admission_source,admission_source,Admission source,Encounter or admission context,character,nominal,none,categorical,main,public,12,TRUE,,
-DAD,most_responsible_diagnosis,most_responsible_diagnosis,Most responsible diagnosis,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,13,TRUE,,
-DAD,comorbidity_1,comorbidity_1,Comorbidity 1,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,14,TRUE,,
-DAD,comorbidity_2,comorbidity_2,Comorbidity 2,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,15,TRUE,,
-DAD,comorbidity_3,comorbidity_3,Comorbidity 3,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,16,TRUE,,
-DAD,comorbidity_4,comorbidity_4,Comorbidity 4,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,17,TRUE,,
-DAD,comorbidity_5,comorbidity_5,Comorbidity 5,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,18,TRUE,,
-DAD,intervention_1,intervention_1,Intervention 1,Interventions and services,character,coded_category,none,categorical,main,public,19,TRUE,,
-DAD,intervention_2,intervention_2,Intervention 2,Interventions and services,character,coded_category,none,categorical,main,public,20,TRUE,,
-DAD,intervention_3,intervention_3,Intervention 3,Interventions and services,character,coded_category,none,categorical,main,public,21,TRUE,,
-DAD,intervention_4,intervention_4,Intervention 4,Interventions and services,character,coded_category,none,categorical,main,public,22,TRUE,,
-DAD,case_mix_group,case_mix_group,Case mix group,Interventions and services,character,coded_category,none,categorical,main,public,23,TRUE,,
-DAD,mcc_flag,mcc_flag,MCC indicator,Diagnoses and comorbidities,numeric,binary_flag,none,categorical,main,public,24,TRUE,0|1|NA,binary_or_missing
-DAD,cci_score,cci_score,CCI score,Diagnoses and comorbidities,numeric,ordinal_score,points,continuous,main,public,25,TRUE,,non_negative
-DAD,resource_intensity_weight,resource_intensity_weight,Resource intensity weight,Interventions and services,numeric,numeric_measure,dimensionless,continuous,main,public,26,TRUE,,non_negative
-DAD,acute_los_days,acute_los_days,Acute length of stay,Flow and length of stay,numeric,duration,days,continuous,main,public,27,TRUE,,non_negative
-DAD,alc_days,alc_days,Alternate level of care days,Flow and length of stay,numeric,duration,days,continuous,main,public,28,TRUE,,non_negative
-DAD,icu_flag,icu_flag,ICU indicator,Interventions and services,numeric,binary_flag,none,categorical,main,public,29,TRUE,0|1|NA,binary_or_missing
-DAD,icu_hours,icu_hours,ICU hours,Interventions and services,numeric,duration,hours,continuous,main,public,30,TRUE,,non_negative
-DAD,surgery_flag,surgery_flag,Surgery indicator,Interventions and services,numeric,binary_flag,none,categorical,main,public,31,TRUE,0|1|NA,binary_or_missing
-DAD,transfusion_flag,transfusion_flag,Transfusion indicator,Interventions and services,numeric,binary_flag,none,categorical,main,public,32,TRUE,0|1|NA,binary_or_missing
-DAD,readmission_30d_flag,readmission_30d_flag,30-day readmission,Disposition and outcomes,numeric,binary_flag,none,categorical,main,public,33,TRUE,0|1|NA,binary_or_missing
-DAD,discharge_disposition,discharge_disposition,Discharge disposition,Disposition and outcomes,character,nominal,none,categorical,main,public,34,TRUE,,
-DAD,discharge_destination,discharge_destination,Discharge destination,Disposition and outcomes,character,nominal,none,categorical,main,public,35,TRUE,,
-DAD,attending_service,attending_service,Attending service,Encounter or admission context,character,nominal,none,categorical,main,public,36,TRUE,,
-DAD,most_responsible_provider,most_responsible_provider,Most responsible provider,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,37,TRUE,,not_public
-DAD,entry_code,entry_code,Entry code,Encounter or admission context,character,coded_category,none,categorical,main,public,38,TRUE,,
-DAD,transfer_from_facility,transfer_from_facility,Transfer from facility,Identifiers,character,identifier,none,exclude,exclude,quasi_identifier,39,TRUE,,not_public
-DAD,transfer_to_facility,transfer_to_facility,Transfer to facility,Identifiers,character,identifier,none,exclude,exclude,quasi_identifier,40,TRUE,,not_public
-DAD,newborn_flag,newborn_flag,Newborn indicator,Disposition and outcomes,numeric,binary_flag,none,categorical,main,public,41,TRUE,0|1|NA,binary_or_missing
-DAD,palliative_flag,palliative_flag,Palliative care indicator,Disposition and outcomes,numeric,binary_flag,none,categorical,main,public,42,TRUE,0|1|NA,binary_or_missing
-DAD,death_flag,death_flag,In-hospital death,Disposition and outcomes,numeric,binary_flag,none,categorical,main,public,43,TRUE,0|1|NA,binary_or_missing
-DAD,fiscal_year,fiscal_year,Fiscal year,Data quality and provenance,character,provenance,none,coverage,coverage,public,44,TRUE,,
-DAD,abstract_status,abstract_status,Abstract status,Data quality and provenance,character,quality_status,none,quality,quality,public,45,TRUE,,
-DAD,data_quality_flag,data_quality_status,Data quality status,Data quality and provenance,character,quality_status,none,quality,quality,public,46,TRUE,,
-DAD,source_system,source_system,Source system,Data quality and provenance,character,provenance,none,exclude,appendix,internal,47,TRUE,,not_public
-DAD,link_patient_id_quality,link_patient_id_quality,Patient linkage quality,Data quality and provenance,character,quality_status,none,quality,quality,public,48,TRUE,,
-DAD,admission_date_quality,admission_date_quality,Admission date quality,Data quality and provenance,character,quality_status,none,quality,quality,public,49,TRUE,,
-DAD,created_datetime,created_datetime,Record created datetime,Data quality and provenance,datetime,provenance,datetime,exclude,appendix,internal,50,TRUE,,not_public
+dataset,source_name,canonical_name,display_label,domain,storage_type,analytic_type,unit,summary_method,include_profile,privacy_class,display_order,required,allowed_values,quality_rule,origin
+NACRS,patient_id,patient_id,Patient ID,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,1,TRUE,,not_public,source
+NACRS,visit_id,visit_id,Visit ID,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,2,TRUE,,not_public,source
+NACRS,facility_id,facility_id,Facility ID,Identifiers,character,identifier,none,exclude,exclude,quasi_identifier,3,TRUE,,not_public,source
+NACRS,health_zone,health_zone,Health zone,Demographics and geography,character,nominal,none,categorical,main,public,4,TRUE,,,source
+NACRS,sex,sex,Sex,Demographics and geography,character,nominal,none,categorical,main,public,5,TRUE,,,source
+NACRS,age,age,Age,Demographics and geography,numeric,numeric_measure,years,continuous,main,public,6,TRUE,,non_negative,source
+NACRS,postal_fsa,postal_fsa,Postal FSA,Demographics and geography,character,nominal,none,categorical,main,quasi_identifier,7,TRUE,,synthetic_only,source
+NACRS,arrival_datetime,arrival_datetime,Arrival datetime,Encounter or admission context,datetime,datetime,datetime,datetime,coverage,public,8,TRUE,,,source
+NACRS,arrival_mode,arrival_mode,Arrival mode,Encounter or admission context,character,nominal,none,categorical,main,public,9,TRUE,,,source
+NACRS,ctas_level,ctas_level,CTAS level,Acuity and clinical presentation,numeric,ordinal_score,level,categorical,main,public,10,TRUE,1|2|3|4|5,,source
+NACRS,chief_complaint,chief_complaint,Chief complaint,Acuity and clinical presentation,character,coded_category,none,categorical,main,public,11,TRUE,,,source
+NACRS,main_diagnosis_icd10,main_diagnosis_icd10,Main diagnosis ICD-10,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,12,TRUE,,,source
+NACRS,secondary_diagnosis_1,secondary_diagnosis_1,Secondary diagnosis 1,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,13,TRUE,,,source
+NACRS,secondary_diagnosis_2,secondary_diagnosis_2,Secondary diagnosis 2,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,14,TRUE,,,source
+NACRS,intervention_1,intervention_1,Intervention 1,Interventions and services,character,coded_category,none,categorical,main,public,15,TRUE,,,source
+NACRS,intervention_2,intervention_2,Intervention 2,Interventions and services,character,coded_category,none,categorical,main,public,16,TRUE,,,source
+NACRS,consult_service,consult_service,Consult service,Interventions and services,character,nominal,none,categorical,main,public,17,TRUE,,,source
+NACRS,ambulance_flag,ambulance_flag,Ambulance arrival,Encounter or admission context,numeric,binary_flag,none,categorical,main,public,18,FALSE,0|1|NA,binary_or_missing,derived
+NACRS,injury_flag,injury_flag,Injury indicator,Acuity and clinical presentation,numeric,binary_flag,none,categorical,main,public,19,TRUE,0|1|NA,binary_or_missing,source
+NACRS,mental_health_flag,mental_health_flag,Mental health indicator,Acuity and clinical presentation,numeric,binary_flag,none,categorical,main,public,20,TRUE,0|1|NA,binary_or_missing,source
+NACRS,pain_score,pain_score,Pain score,Acuity and clinical presentation,numeric,ordinal_score,points,continuous,main,public,21,TRUE,,non_negative,source
+NACRS,triage_wait_min,triage_wait_min,Triage wait,Flow and length of stay,numeric,duration,min,continuous,main,public,22,TRUE,,non_negative,source
+NACRS,physician_wait_min,physician_wait_min,Physician wait,Flow and length of stay,numeric,duration,min,continuous,main,public,23,TRUE,,non_negative,source
+NACRS,los_min,los_min,Length of stay,Flow and length of stay,numeric,duration,min,continuous,main,public,24,FALSE,,non_negative,derived
+NACRS,disposition,disposition,Disposition,Disposition and outcomes,character,nominal,none,categorical,main,public,25,TRUE,,,source
+NACRS,admitted_flag,admitted_flag,Admitted,Disposition and outcomes,numeric,binary_flag,none,categorical,main,public,26,FALSE,0|1|NA,binary_or_missing,derived
+NACRS,lwbs_flag,lwbs_flag,Left without being seen,Disposition and outcomes,numeric,binary_flag,none,categorical,main,public,27,FALSE,0|1|NA,binary_or_missing,derived
+NACRS,revisit_72h_flag,revisit_72h_flag,72-hour revisit,Disposition and outcomes,numeric,binary_flag,none,categorical,main,public,28,TRUE,0|1|NA,binary_or_missing,source
+NACRS,discharge_datetime,discharge_datetime,Discharge datetime,Flow and length of stay,datetime,datetime,datetime,datetime,coverage,public,29,TRUE,,,source
+NACRS,fiscal_year,fiscal_year,Fiscal year,Data quality and provenance,character,provenance,none,coverage,coverage,public,30,FALSE,,,derived
+NACRS,disposition_decision_datetime,disposition_decision_datetime,Disposition decision datetime,Flow and length of stay,datetime,datetime,datetime,datetime,coverage,public,31,TRUE,,arrival_le_decision_le_discharge,source
+NACRS,pre_disposition_los_min,pre_disposition_los_min,Pre-disposition length of stay,Flow and length of stay,numeric,duration,min,continuous,timing,public,32,FALSE,,non_negative,derived
+NACRS,post_disposition_los_min,post_disposition_los_min,Post-disposition length of stay,Flow and length of stay,numeric,duration,min,continuous,timing,public,33,FALSE,,non_negative,derived
+NACRS,timing_quality_flag,timing_quality_status,Timing quality status,Data quality and provenance,character,quality_status,none,quality,quality,public,34,FALSE,,timing_consistency,derived
+DAD,dad_record_id,dad_record_id,DAD record ID,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,1,TRUE,,not_public,source
+DAD,patient_id,patient_id,Patient ID,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,2,TRUE,,not_public,source
+DAD,chart_number,chart_number,Chart number,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,3,TRUE,,not_public,source
+DAD,facility_id,facility_id,Facility ID,Identifiers,character,identifier,none,exclude,exclude,quasi_identifier,4,TRUE,,not_public,source
+DAD,health_zone,health_zone,Health zone,Demographics and geography,character,nominal,none,categorical,main,public,5,TRUE,,,source
+DAD,sex,sex,Sex,Demographics and geography,character,nominal,none,categorical,main,public,6,TRUE,,,source
+DAD,age_at_admission,age_at_admission,Age at admission,Demographics and geography,numeric,numeric_measure,years,continuous,main,public,7,TRUE,,non_negative,source
+DAD,postal_fsa,postal_fsa,Postal FSA,Demographics and geography,character,nominal,none,categorical,main,quasi_identifier,8,TRUE,,synthetic_only,source
+DAD,admission_datetime,admission_datetime,Admission datetime,Encounter or admission context,datetime,datetime,datetime,datetime,coverage,public,9,TRUE,,,source
+DAD,discharge_datetime,discharge_datetime,Discharge datetime,Flow and length of stay,datetime,datetime,datetime,datetime,coverage,public,10,TRUE,,admission_le_discharge,source
+DAD,admission_category,admission_category,Admission category,Encounter or admission context,character,nominal,none,categorical,main,public,11,TRUE,,,source
+DAD,admission_source,admission_source,Admission source,Encounter or admission context,character,nominal,none,categorical,main,public,12,TRUE,,,source
+DAD,most_responsible_diagnosis,most_responsible_diagnosis,Most responsible diagnosis,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,13,TRUE,,,source
+DAD,comorbidity_1,comorbidity_1,Comorbidity 1,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,14,TRUE,,,source
+DAD,comorbidity_2,comorbidity_2,Comorbidity 2,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,15,TRUE,,,source
+DAD,comorbidity_3,comorbidity_3,Comorbidity 3,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,16,TRUE,,,source
+DAD,comorbidity_4,comorbidity_4,Comorbidity 4,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,17,TRUE,,,source
+DAD,comorbidity_5,comorbidity_5,Comorbidity 5,Diagnoses and comorbidities,character,coded_category,none,categorical,main,public,18,TRUE,,,source
+DAD,intervention_1,intervention_1,Intervention 1,Interventions and services,character,coded_category,none,categorical,main,public,19,TRUE,,,source
+DAD,intervention_2,intervention_2,Intervention 2,Interventions and services,character,coded_category,none,categorical,main,public,20,TRUE,,,source
+DAD,intervention_3,intervention_3,Intervention 3,Interventions and services,character,coded_category,none,categorical,main,public,21,TRUE,,,source
+DAD,intervention_4,intervention_4,Intervention 4,Interventions and services,character,coded_category,none,categorical,main,public,22,TRUE,,,source
+DAD,case_mix_group,case_mix_group,Case mix group,Interventions and services,character,coded_category,none,categorical,main,public,23,TRUE,,,source
+DAD,mcc_flag,mcc_flag,MCC indicator,Diagnoses and comorbidities,numeric,binary_flag,none,categorical,main,public,24,TRUE,0|1|NA,binary_or_missing,source
+DAD,cci_score,cci_score,CCI score,Diagnoses and comorbidities,numeric,ordinal_score,points,continuous,main,public,25,TRUE,,non_negative,source
+DAD,resource_intensity_weight,resource_intensity_weight,Resource intensity weight,Interventions and services,numeric,numeric_measure,dimensionless,continuous,main,public,26,TRUE,,non_negative,source
+DAD,acute_los_days,acute_los_days,Acute length of stay,Flow and length of stay,numeric,duration,days,continuous,main,public,27,FALSE,,non_negative,derived
+DAD,alc_days,alc_days,Alternate level of care days,Flow and length of stay,numeric,duration,days,continuous,main,public,28,TRUE,,non_negative,source
+DAD,icu_flag,icu_flag,ICU indicator,Interventions and services,numeric,binary_flag,none,categorical,main,public,29,TRUE,0|1|NA,binary_or_missing,source
+DAD,icu_hours,icu_hours,ICU hours,Interventions and services,numeric,duration,hours,continuous,main,public,30,TRUE,,non_negative,source
+DAD,surgery_flag,surgery_flag,Surgery indicator,Interventions and services,numeric,binary_flag,none,categorical,main,public,31,TRUE,0|1|NA,binary_or_missing,source
+DAD,transfusion_flag,transfusion_flag,Transfusion indicator,Interventions and services,numeric,binary_flag,none,categorical,main,public,32,TRUE,0|1|NA,binary_or_missing,source
+DAD,readmission_30d_flag,readmission_30d_flag,30-day readmission,Disposition and outcomes,numeric,binary_flag,none,categorical,main,public,33,TRUE,0|1|NA,binary_or_missing,source
+DAD,discharge_disposition,discharge_disposition,Discharge disposition,Disposition and outcomes,character,nominal,none,categorical,main,public,34,TRUE,,,source
+DAD,discharge_destination,discharge_destination,Discharge destination,Disposition and outcomes,character,nominal,none,categorical,main,public,35,TRUE,,,source
+DAD,attending_service,attending_service,Attending service,Encounter or admission context,character,nominal,none,categorical,main,public,36,TRUE,,,source
+DAD,most_responsible_provider,most_responsible_provider,Most responsible provider,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,37,TRUE,,not_public,source
+DAD,entry_code,entry_code,Entry code,Encounter or admission context,character,coded_category,none,categorical,main,public,38,TRUE,,,source
+DAD,transfer_from_facility,transfer_from_facility,Transfer from facility,Identifiers,character,identifier,none,exclude,exclude,quasi_identifier,39,TRUE,,not_public,source
+DAD,transfer_to_facility,transfer_to_facility,Transfer to facility,Identifiers,character,identifier,none,exclude,exclude,quasi_identifier,40,TRUE,,not_public,source
+DAD,newborn_flag,newborn_flag,Newborn indicator,Disposition and outcomes,numeric,binary_flag,none,categorical,main,public,41,TRUE,0|1|NA,binary_or_missing,source
+DAD,palliative_flag,palliative_flag,Palliative care indicator,Disposition and outcomes,numeric,binary_flag,none,categorical,main,public,42,TRUE,0|1|NA,binary_or_missing,source
+DAD,death_flag,death_flag,In-hospital death,Disposition and outcomes,numeric,binary_flag,none,categorical,main,public,43,FALSE,0|1|NA,binary_or_missing,derived
+DAD,fiscal_year,fiscal_year,Fiscal year,Data quality and provenance,character,provenance,none,coverage,coverage,public,44,FALSE,,,derived
+DAD,abstract_status,abstract_status,Abstract status,Data quality and provenance,character,quality_status,none,quality,quality,public,45,TRUE,,,source
+DAD,data_quality_flag,data_quality_status,Data quality status,Data quality and provenance,character,quality_status,none,quality,quality,public,46,TRUE,,,source
+DAD,source_system,source_system,Source system,Data quality and provenance,character,provenance,none,exclude,appendix,internal,47,TRUE,,not_public,source
+DAD,link_patient_id_quality,link_patient_id_quality,Patient linkage quality,Data quality and provenance,character,quality_status,none,quality,quality,public,48,TRUE,,,source
+DAD,admission_date_quality,admission_date_quality,Admission date quality,Data quality and provenance,character,quality_status,none,quality,quality,public,49,TRUE,,,source
+DAD,created_datetime,created_datetime,Record created datetime,Data quality and provenance,datetime,provenance,datetime,exclude,appendix,internal,50,TRUE,,not_public,source
+DAD,los_days,los_days,Length of stay,Flow and length of stay,numeric,duration,days,continuous,main,public,51,FALSE,,non_negative,derived

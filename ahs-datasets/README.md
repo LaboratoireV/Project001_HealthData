@@ -1,6 +1,8 @@
 # Alberta Health Data Atlas
 
-The Alberta Health Data Atlas is an independent bilingual learning resource covering nine commonly used Alberta administrative health datasets and clinical information systems.
+Supporting reference for [Project 001](../README.md). Project 001 is the consulting demonstration; this atlas is the Chinese–English source used to design its synthetic NACRS-style and DAD-style records. It is not a second project and it does not contain the generated workbooks.
+
+The atlas covers nine commonly used Alberta administrative health datasets and clinical information systems.
 
 ## Interactive site
 
@@ -28,4 +30,4 @@ Official data-dictionary workbooks are not copied into this repository. The inte
 
 ## Integration note
 
-The interactive React application remains on its existing deployment so its bilingual filtering and learning interactions continue to work. This repository provides the public portfolio entry and project overview without copying dependencies, caches, proprietary workbooks, or patient data.
+The interactive React application remains on its existing deployment. This repository keeps only the overview used as Project 001’s data-design reference, without copying dependencies, caches, proprietary workbooks, or patient data.

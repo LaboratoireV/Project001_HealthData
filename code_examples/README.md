@@ -22,7 +22,7 @@ Never place real patient, client, or operational data in this directory. For loc
 - `synthetic_nacrs.xlsx`
 - `synthetic_dad.xlsx`
 
-The first worksheet must match the corresponding NACRS or DAD entries in `config/variable_dictionary.csv`. The report stops when a required variable is missing, an unregistered variable appears, or a binary flag contains values other than `0`, `1`, and missing. Files inside `example_data/` are ignored by Git and will not be uploaded.
+The first worksheet must match the corresponding NACRS or DAD entries in `config/variable_dictionary.csv`. Derived fields in that dictionary, including `los_min`, `admitted_flag`, `pre_disposition_los_min`, and `los_days`, are not required in the raw workbooks. Memo A00 creates them locally. These examples do not create them, and they do not rerun Memos A00–A06. The published HTML for those memos cannot be regenerated from this directory, because the working R Markdown and analytic files are excluded from Git. The report stops when a required variable is missing, an unregistered variable appears, or a binary flag contains values other than `0`, `1`, and missing. Files inside `example_data/` are ignored by Git and will not be uploaded.
 
 ## Run locally
 

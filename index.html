@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="The V Lab health data portfolio: synthetic consulting reports and the bilingual Alberta Health Data Atlas.">
+  <meta name="description" content="Project 001 generates synthetic Alberta NACRS and DAD records. Hospitalization is studied with CTAS and pre-disposition stay. Inpatient length of stay, in the linked subset, is studied with CTAS and emergency stay.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="The V Lab | Health Data Portfolio">
-  <meta property="og:description" content="Synthetic consulting reports and an independent bilingual guide to Alberta health datasets.">
+  <meta property="og:title" content="Project 001 | The V Lab">
+  <meta property="og:description" content="Synthetic Alberta NACRS and DAD records. CTAS and pre-disposition stay versus hospitalization, then CTAS and emergency stay versus inpatient length of stay.">
   <meta property="og:url" content="https://laboratoirev.github.io/Project001_HealthData/">
   <meta property="og:image" content="https://laboratoirev.github.io/Project001_HealthData/og.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="The V Lab | Health Data Portfolio">
-  <meta name="twitter:description" content="Synthetic consulting reports and an independent bilingual guide to Alberta health datasets.">
+  <meta name="twitter:title" content="Project 001 | The V Lab">
+  <meta name="twitter:description" content="Synthetic Alberta NACRS and DAD records. CTAS and pre-disposition stay versus hospitalization, then CTAS and emergency stay versus inpatient length of stay.">
   <meta name="twitter:image" content="https://laboratoirev.github.io/Project001_HealthData/og.png">
-  <title>The V Lab | Health Data Portfolio</title>
+  <title>Project 001 | The V Lab</title>
   <style>
     :root {
       --ink: #132d33;
@@ -529,7 +529,7 @@
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header shell">
-    <a class="brand" href="./" aria-label="The V Lab portfolio home">
+    <a class="brand" href="./" aria-label="Project 001 home">
       <span class="brand-mark" aria-hidden="true">V</span>
       <span>The V Lab</span>
     </a>
@@ -539,16 +539,16 @@
   <main id="main-content">
     <section class="hero shell" aria-labelledby="page-title">
       <div>
-        <p class="eyebrow">Portfolio demonstration</p>
-        <h1 id="page-title">Health data, clearly presented.</h1>
+        <p class="eyebrow">Project 001</p>
+        <h1 id="page-title">Synthetic Alberta emergency and inpatient data.</h1>
         <p class="hero-copy">
-          A public portfolio bringing together reproducible synthetic-data reporting and an independent bilingual learning resource for Alberta health datasets.
+          Project 001 generates fictional NACRS and DAD records for two questions: whether CTAS and the time before the disposition decision are associated with hospitalization, and, among linked admissions, whether CTAS and emergency stay minutes are associated with inpatient length of stay in days.
         </p>
-        <a class="primary-link" href="#featured-project">Explore the projects</a>
+        <a class="primary-link" href="#reports">Read the reports</a>
       </div>
 
       <aside class="project-card" aria-labelledby="project-details-title">
-        <h2 id="project-details-title">Portfolio at a glance</h2>
+        <h2 id="project-details-title">Project at a glance</h2>
         <dl class="facts">
           <div>
             <dt>Project lead</dt>
@@ -559,54 +559,39 @@
             <dd>The V Lab</dd>
           </div>
           <div>
-            <dt>Published projects</dt>
-            <dd>2</dd>
+            <dt>Client</dt>
+            <dd>Dr. ABC</dd>
           </div>
           <div>
-            <dt>Focus</dt>
-            <dd>Health data learning &amp; reporting</dd>
+            <dt>Deliverables</dt>
+            <dd>2 synthetic-data reports</dd>
           </div>
         </dl>
       </aside>
     </section>
 
-    <section class="featured-project shell" id="featured-project" aria-labelledby="atlas-title">
-      <article class="atlas-card">
-        <div class="atlas-visual">
-          <img src="ahs-datasets/atlas-preview.png" alt="Alberta Health Data Atlas project cover showing a connected map of dataset concepts">
-        </div>
-        <div class="atlas-content">
-          <p class="eyebrow">Bilingual learning resource</p>
-          <h2 id="atlas-title">Alberta Health Data Atlas</h2>
-          <p>
-            An independent Chinese–English guide to nine Alberta administrative health datasets and clinical information systems, with practical notes on record grain, linkage, cohort design, access, and responsible use.
-          </p>
-          <div class="atlas-stats" aria-label="Project highlights">
-            <span>9 dataset guides</span>
-            <span>3 deep dives</span>
-            <span>中文 / English</span>
-          </div>
-          <div class="atlas-actions">
-            <a class="primary-link" href="ahs-datasets/">Explore this project</a>
-            <a class="secondary-link" href="https://alberta-health-data-atlas.tigerdogai.chatgpt.site">Open interactive atlas</a>
-          </div>
-        </div>
-      </article>
-    </section>
-
     <section class="reports shell" id="reports" aria-labelledby="reports-title">
       <div class="section-heading">
-        <h2 id="reports-title">Project 001 reports</h2>
+        <h2 id="reports-title">Consulting reports</h2>
         <p>
-          A fictional consulting engagement prepared by Miss V of The V Lab for the fictional client Dr. ABC and ABC Department. Both reports use randomly generated synthetic records.
+          Memo A00 builds the research variables. A01 and A02 describe the analytic files. A03 estimates whether pre-disposition stay and CTAS are associated with hospitalization. A04 links hospitalized emergency visits to inpatient abstracts and compares linked with unlinked visits. A05 estimates whether emergency stay and CTAS are associated with inpatient length of stay in the linked subset. A06 summarizes the design, methods, findings, and limitations.
         </p>
       </div>
 
       <div class="report-grid">
         <article class="report-card">
+          <span class="report-number">REPORT A00</span>
+          <h3>Research variable construction</h3>
+          <p>Builds emergency stay, hospitalization, and inpatient length of stay from source fields</p>
+          <a class="report-link" href="Project_001_Memo_A00.html">
+            View memo <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="report-card">
           <span class="report-number">REPORT A01</span>
           <h3>Emergency &amp; ambulatory care summary</h3>
-          <p>NACRS-style example · 2,000 randomly generated records · 34 variables</p>
+          <p>Analytic NACRS file from Memo A00 · 30,000 records · 34 variables</p>
           <a class="report-link" href="Project_001_Memo_A01.html">
             View report <span aria-hidden="true">→</span>
           </a>
@@ -615,24 +600,84 @@
         <article class="report-card">
           <span class="report-number">REPORT A02</span>
           <h3>Inpatient care summary</h3>
-          <p>DAD-style example · 5,000 randomly generated records · 50 variables</p>
+          <p>Analytic DAD file from Memo A00 · 60,000 records · 51 variables</p>
           <a class="report-link" href="Project_001_Memo_A02.html">
             View report <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="report-card">
+          <span class="report-number">REPORT A03</span>
+          <h3>Hospitalization models</h3>
+          <p>Logistic regression of hospitalization on pre-disposition stay and CTAS. Total stay is an appendix comparison</p>
+          <a class="report-link" href="Project_001_Memo_A03.html">
+            View memo <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="report-card">
+          <span class="report-number">REPORT A04</span>
+          <h3>Emergency to inpatient linkage</h3>
+          <p>Links hospitalized NACRS visits to DAD abstracts by PHN and a six-hour window, then compares linked and unlinked visits</p>
+          <a class="report-link" href="Project_001_Memo_A04.html">
+            View memo <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="report-card">
+          <span class="report-number">REPORT A05</span>
+          <h3>Inpatient length of stay</h3>
+          <p>Linear regression of DAD stay in days on emergency stay and CTAS, using the A04 linked visits. Acute stay is a sensitivity analysis</p>
+          <a class="report-link" href="Project_001_Memo_A05.html">
+            View memo <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="report-card">
+          <span class="report-number">REPORT A06</span>
+          <h3>Research summary</h3>
+          <p>Study design, data, methods, key findings, and limitations for Memos A00 through A05</p>
+          <a class="report-link" href="Project_001_Memo_A06.html">
+            View memo <span aria-hidden="true">→</span>
           </a>
         </article>
       </div>
     </section>
 
+    <section class="featured-project shell" id="data-reference" aria-labelledby="atlas-title">
+      <article class="atlas-card">
+        <div class="atlas-visual">
+          <img src="ahs-datasets/atlas-preview.png" alt="Alberta Health Data Atlas cover showing a connected map of dataset concepts">
+        </div>
+        <div class="atlas-content">
+          <p class="eyebrow">Supporting reference</p>
+          <h2 id="atlas-title">Alberta Health Data Atlas</h2>
+          <p>
+            A Chinese–English guide to nine Alberta administrative datasets. Project 001 uses it to decide record grain, field families, and linkage before generating the synthetic NACRS and DAD examples. It holds no patient-level values.
+          </p>
+          <div class="atlas-stats" aria-label="Reference highlights">
+            <span>9 dataset guides</span>
+            <span>3 deep dives</span>
+            <span>中文 / English</span>
+          </div>
+          <div class="atlas-actions">
+            <a class="primary-link" href="ahs-datasets/">Open the data reference</a>
+            <a class="secondary-link" href="https://alberta-health-data-atlas.tigerdogai.chatgpt.site">Open interactive atlas</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
     <section class="data-note shell" aria-labelledby="responsible-data-title">
       <h2 id="responsible-data-title">Responsible by design.</h2>
       <p>
-        Project 001 uses entirely randomized synthetic records and fictional client labels. The Alberta Health Data Atlas contains original educational commentary and links to official public sources; it does not host patient-level data or reproduce the official data workbooks. Neither project contains personal health information.
+        Project 001 uses entirely randomized synthetic records and fictional client labels. The atlas supplies structure and interpretation notes only. It does not host patient-level data or reproduce the official data workbooks.
       </p>
     </section>
   </main>
 
   <footer class="site-footer shell">
-    <span>The V Lab · Health Data Portfolio</span>
+    <span>Project 001 · The V Lab</span>
     <span>Prepared by Miss V · The V Lab</span>
   </footer>
 </body>

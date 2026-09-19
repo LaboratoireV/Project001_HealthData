@@ -2784,15 +2784,8 @@ border: 1px solid #f0c36d;
 border-radius: 4px;
 background: #fff8e5;
 }
-.placeholder {
-color: #6c757d;
-font-style: italic;
-}
-.table-scroll {
-width: 100%;
-overflow-x: auto;
-margin-bottom: 1.25rem;
-}
+.placeholder { color: #6c757d; font-style: italic; }
+.table-scroll { width: 100%; overflow-x: auto; margin-bottom: 1.25rem; }
 .summary-table {
 width: 100%;
 margin: 0;
@@ -2805,7 +2798,6 @@ font-size: 0.94rem;
 padding: 0.55rem 0.75rem !important;
 border-bottom: 1px solid #e4e9ed;
 vertical-align: top;
-white-space: nowrap;
 }
 .summary-table thead th {
 position: sticky;
@@ -2816,60 +2808,28 @@ background: #eef4f7;
 border-top: 1px solid #d6e0e5;
 border-bottom: 2px solid #9fb8c5;
 }
-.summary-table tbody tr:nth-child(even) {
-background: #f8fafb;
+.summary-table tbody tr:nth-child(even) { background: #f8fafb; }
+.summary-table tbody tr.significant-row td,
+.summary-table tbody tr.significant-row:nth-child(even) td,
+.summary-table tbody tr.significant-row:hover td {
+background: #ffe566;
 }
-.summary-table tbody tr:hover {
-background: #eef6fa;
+.significant-text {
+margin: 0.4rem 0 1rem;
+padding: 0.75rem 0.9rem;
+background: #ffe566;
 }
-.continuous-summary-table {
-width: max-content;
-min-width: 100%;
+.formula {
+margin: 0.85rem 0 1.15rem;
+padding: 0.15rem 0.2rem 0.15rem 0.85rem;
+background: #f5f8fa;
+border-left: 4px solid #2c7fb8;
+overflow-x: auto;
 }
-.category-table-card {
-max-width: 680px;
-margin: 0.5rem 0 1.75rem;
-overflow: hidden;
-border: 1px solid #d6e0e5;
-border-radius: 8px;
-background: #fff;
-box-shadow: 0 2px 8px rgba(33, 55, 72, 0.06);
-}
-.category-table-card.long-table {
-max-height: 32rem;
-overflow-y: auto;
-}
-.category-table-card .summary-table tbody tr:last-child {
-font-weight: 700;
-background: #eaf2f6;
-}
-.category-table-card .summary-table tbody tr:has(.missing-category) {
-background: #fff8e5 !important;
-box-shadow: inset 4px 0 #e0a12b;
-}
-.missing-category {
-color: #7a5300;
-font-weight: 700;
-}
-.missing-na-badge {
-display: inline-block;
-margin-left: 0.4rem;
-padding: 0.08rem 0.35rem;
-border: 1px solid #e2b75e;
-border-radius: 3px;
-background: #ffedbd;
-color: #6c4800;
-font-size: 0.72rem;
-line-height: 1.2;
-}
-.variable-code {
-margin: -0.35rem 0 0.65rem;
-color: #71818d;
-font-size: 0.86rem;
-}
-.data-variable-heading {
-margin: 1.25rem 0 0.65rem;
-color: #29465b;
+.formula .MathJax_Display,
+.formula mjx-container[display="true"] {
+margin: 0.45rem 0 !important;
+text-align: left !important;
 }
 .data-disclaimer {
 margin: 0.5rem 0 1.25rem;
@@ -2879,36 +2839,6 @@ border-radius: 4px;
 background: #eef6fa;
 color: #29465b;
 }
-.data-variable-list {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-gap: 0.45rem 0.75rem;
-margin: 0 0 1.5rem;
-padding: 0;
-counter-reset: data-variable;
-list-style: none;
-}
-.data-variable-list li {
-display: flex;
-align-items: center;
-min-width: 0;
-padding: 0.45rem 0.6rem;
-counter-increment: data-variable;
-border: 1px solid #e0e7eb;
-border-radius: 5px;
-background: #f8fafb;
-}
-.data-variable-list li::before {
-content: counter(data-variable);
-flex: 0 0 1.8rem;
-color: #7b8b96;
-font-size: 0.78rem;
-}
-.data-variable-list code {
-overflow-wrap: anywhere;
-color: #29465b;
-background: transparent;
-}
 .summary-table caption {
 padding: 0 0 0.65rem;
 color: #71818d;
@@ -2917,7 +2847,7 @@ text-align: left;
 </style>
 <div class="report-meta">
 <div class="meta-item">
-<span class="meta-label">Memo</span><span class="meta-value">A01</span>
+<span class="meta-label">Memo</span><span class="meta-value">A03</span>
 </div>
 <div class="meta-item">
 <span class="meta-label">Client</span><span class="meta-value">Dr. ABC</span>
@@ -2936,2505 +2866,89 @@ text-align: left;
 </div>
 </div>
 <div class="report-note">
-<strong>Note:</strong> Data preparation is completed in Memo A00. This
-memo summarizes the analytic NACRS file.
+<strong>Note:</strong> The primary exposure is pre-disposition stay.
+Total emergency stay is reported in the appendix.
 </div>
 <div id="overview" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Overview</h1>
 <div id="introduction" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Introduction</h2>
 <p>
-The purpose of this memo is to summarize selected variables from the
-analytic <strong>NACRS</strong> file. It provides a concise description
-of the data source and presents coverage, standardized descriptive
-statistics, and data-quality results.
+The purpose of this memo is to estimate whether pre-disposition stay and
+CTAS are associated with hospitalization. Pre-disposition stay is the
+primary stay measure. It ends when the disposition decision is made.
+Total emergency stay is reported in the appendix, because it also
+includes time after that decision, and that later time can be a
+consequence of deciding to hospitalize. Other usable covariates, and a
+model that enters them together, are also in the appendix.
 </p>
 <p>
-Data preparation is completed in <strong>Memo A00</strong>. That memo
-reads the source workbook, constructs the research variables, and writes
-<code>analytic_nacrs.rds</code>. This memo does not rebuild those fields
-and does not repeat their definitions. CTAS stays a source field.
-Emergency stay (<code>los_min</code>), hospitalization
-(<code>admitted_flag</code>), and the related indicators are already
-present in the analytic file.
+Data preparation is completed in <strong>Memo A00</strong>. This memo
+reads <code>analytic_nacrs.rds</code> and does not rebuild derived
+fields. <code>ambulance_flag</code> is omitted because it is a recode of
+<code>arrival_mode</code>. Consult service is not modeled. Every
+hospitalized visit has a consult, and no visit coded <code>None</code>
+is hospitalized, so a logistic odds ratio for that variable is not
+estimable.
 </p>
 <p>
-The memo is organized as follows:
+The outcome is hospitalization. A visit is coded hospitalized when
+<code>disposition</code> is <code>Admitted inpatient</code>. Memo A00
+stores that indicator as <code>admitted_flag</code>.
 </p>
-<ul>
-<li>
-<strong>Data</strong> identifies the analytic file written by Memo A00,
-reports the number of records and variables, and lists all available
-variables, without displaying row-level records.
-</li>
-<li>
-<strong>Analysis</strong> reports date and fiscal-year coverage,
-summarizes registered measures using type-appropriate methods, and
-presents quality-status distributions and consistency checks.
-</li>
-</ul>
+<p>
+A result is treated as statistically significant when its Wald p value
+is below 0.05. Significant odds-ratio rows and their interpretations are
+shown on a yellow background. These are associations in synthetic
+records, not causal effects.
+</p>
 </div>
 <div id="data" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Data</h2>
 <div class="data-disclaimer">
-<strong>Training data notice:</strong> The NACRS data used in this memo
-are randomly generated synthetic data intended solely for training and
-demonstration purposes. They do not represent real patients or actual
-operational records. Preprocessing, including construction of the
-derived research variables, is completed in Memo A00. This memo reads
-that analytic file only.
-</div>
-<p><strong>Data directory:</strong> <code>data</code></p>
-<table style="width:100%;">
-<caption>Loaded NACRS analytic data set</caption>
-<colgroup>
-<col width="22%" />
-<col width="7%" />
-<col width="23%" />
-<col width="7%" />
-<col width="9%" />
-<col width="29%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Dataset</th>
-<th align="left">Alias</th>
-<th align="left">File</th>
-<th align="right">Rows</th>
-<th align="right">Columns</th>
-<th align="left">Class</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">imported_data_001</td>
-<td align="left">nacrs</td>
-<td align="left">analytic_nacrs.rds</td>
-<td align="right">30000</td>
-<td align="right">34</td>
-<td align="left">tbl_df, tbl, data.frame</td>
-</tr>
-</tbody>
-</table>
-<div class="data-variable-heading">
-<strong>Variables (34)</strong>
-</div>
-<ol class="data-variable-list">
-<li>
-<code>patient_id</code>
-</li>
-<li>
-<code>visit_id</code>
-</li>
-<li>
-<code>facility_id</code>
-</li>
-<li>
-<code>health_zone</code>
-</li>
-<li>
-<code>sex</code>
-</li>
-<li>
-<code>age</code>
-</li>
-<li>
-<code>postal_fsa</code>
-</li>
-<li>
-<code>arrival_datetime</code>
-</li>
-<li>
-<code>arrival_mode</code>
-</li>
-<li>
-<code>ctas_level</code>
-</li>
-<li>
-<code>chief_complaint</code>
-</li>
-<li>
-<code>main_diagnosis_icd10</code>
-</li>
-<li>
-<code>secondary_diagnosis_1</code>
-</li>
-<li>
-<code>secondary_diagnosis_2</code>
-</li>
-<li>
-<code>intervention_1</code>
-</li>
-<li>
-<code>intervention_2</code>
-</li>
-<li>
-<code>consult_service</code>
-</li>
-<li>
-<code>injury_flag</code>
-</li>
-<li>
-<code>mental_health_flag</code>
-</li>
-<li>
-<code>pain_score</code>
-</li>
-<li>
-<code>triage_wait_min</code>
-</li>
-<li>
-<code>physician_wait_min</code>
-</li>
-<li>
-<code>disposition</code>
-</li>
-<li>
-<code>revisit_72h_flag</code>
-</li>
-<li>
-<code>discharge_datetime</code>
-</li>
-<li>
-<code>disposition_decision_datetime</code>
-</li>
-<li>
-<code>pre_disposition_los_min</code>
-</li>
-<li>
-<code>post_disposition_los_min</code>
-</li>
-<li>
-<code>los_min</code>
-</li>
-<li>
-<code>admitted_flag</code>
-</li>
-<li>
-<code>lwbs_flag</code>
-</li>
-<li>
-<code>ambulance_flag</code>
-</li>
-<li>
-<code>fiscal_year</code>
-</li>
-<li>
-<code>timing_quality_flag</code>
-</li>
-</ol>
-</div>
-</div>
-<div id="analysis" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Analysis</h1>
-<div id="nacrs-standardized-profile" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> NACRS standardized
-profile</h2>
-<p>The variable registry maps <strong>34 of 34</strong> registered NACRS
-variables. The loaded data contain <strong>30000</strong> records.</p>
-</div>
-<div id="coverage" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Coverage</h2>
-<p>Datetime ranges are displayed in UTC.</p>
-<div class="table-scroll">
-<table class="summary-table">
-<caption>
-NACRS datetime coverage
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-Variable
-</th>
-<th style="text-align:right;">
-Non-missing
-</th>
-<th style="text-align:right;">
-Missing
-</th>
-<th style="text-align:left;">
-Earliest
-</th>
-<th style="text-align:left;">
-Latest
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Arrival datetime
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-2025-04-01 01:29
-</td>
-<td style="text-align:left;">
-2027-05-05 20:57
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Discharge datetime
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-2025-04-01 06:29
-</td>
-<td style="text-align:left;">
-2027-05-06 00:13
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Disposition decision datetime
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-2025-04-01 05:32
-</td>
-<td style="text-align:left;">
-2027-05-05 23:30
-</td>
-</tr>
-</tbody>
-</table>
+<strong>Training data notice:</strong> The visits are randomly generated
+synthetic records. Preprocessing is completed in Memo A00.
 </div>
 <div class="table-scroll">
 <table class="summary-table">
 <caption>
-NACRS reporting-period coverage
+Analytic NACRS file used for the logistic models
 </caption>
 <thead>
 <tr>
 <th style="text-align:left;">
-Variable
+File
 </th>
-<th style="text-align:left;">
-Coverage
+<th style="text-align:right;">
+Visits
+</th>
+<th style="text-align:right;">
+Hospitalized
+</th>
+<th style="text-align:right;">
+Not hospitalized
+</th>
+<th style="text-align:right;">
+Covariates
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-Fiscal year
-</td>
-<td style="text-align:left;">
-2025-26, 2026-27, 2027-28
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="main-measures" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Main measures</h2>
-<p>The registry selects <strong>5</strong> continuous measures and
-<strong>19</strong> categorical measures for the main profile.</p>
-<div id="continuous-measures" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Continuous
-measures</h3>
-<div class="table-scroll">
-<table class="summary-table continuous-summary-table">
-<caption>
-Selected NACRS continuous measures
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-Variable
-</th>
-<th style="text-align:left;">
-Mean (SD)
-</th>
-<th style="text-align:left;">
-Median
-</th>
-<th style="text-align:left;">
-Min-Max
-</th>
-<th style="text-align:left;">
-P1
-</th>
-<th style="text-align:left;">
-P5
-</th>
-<th style="text-align:left;">
-P10
-</th>
-<th style="text-align:left;">
-Q1
-</th>
-<th style="text-align:left;">
-Q2
-</th>
-<th style="text-align:left;">
-Q3
-</th>
-<th style="text-align:left;">
-P90
-</th>
-<th style="text-align:left;">
-P95
-</th>
-<th style="text-align:left;">
-P99
-</th>
-<th style="text-align:right;">
-Missing
-</th>
-<th style="text-align:right;">
-N
-</th>
-<th style="text-align:right;">
-Non-missing
-</th>
-<th style="text-align:right;">
-Missing %
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Age (years)
-</td>
-<td style="text-align:left;">
-48.49 (27.02)
-</td>
-<td style="text-align:left;">
-49.00
-</td>
-<td style="text-align:left;">
-0.00 - 100.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-4.00
-</td>
-<td style="text-align:left;">
-10.00
-</td>
-<td style="text-align:left;">
-27.00
-</td>
-<td style="text-align:left;">
-49.00
-</td>
-<td style="text-align:left;">
-72.00
-</td>
-<td style="text-align:left;">
-84.00
-</td>
-<td style="text-align:left;">
-91.00
-</td>
-<td style="text-align:left;">
-99.00
-</td>
-<td style="text-align:right;">
-0
+analytic_nacrs.rds
 </td>
 <td style="text-align:right;">
 30000
 </td>
 <td style="text-align:right;">
-30000
+5380
 </td>
 <td style="text-align:right;">
-0
+24620
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pain score (points)
-</td>
-<td style="text-align:left;">
-5.50 (3.01)
-</td>
-<td style="text-align:left;">
-6.00
-</td>
-<td style="text-align:left;">
-0.00 - 10.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-1.00
-</td>
-<td style="text-align:left;">
-3.00
-</td>
-<td style="text-align:left;">
-6.00
-</td>
-<td style="text-align:left;">
-8.00
-</td>
-<td style="text-align:left;">
-9.00
-</td>
-<td style="text-align:left;">
-10.00
-</td>
-<td style="text-align:left;">
-10.00
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Triage wait (min)
-</td>
-<td style="text-align:left;">
-13.97 (9.47)
-</td>
-<td style="text-align:left;">
-12.00
-</td>
-<td style="text-align:left;">
-0.00 - 57.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-1.00
-</td>
-<td style="text-align:left;">
-3.00
-</td>
-<td style="text-align:left;">
-6.00
-</td>
-<td style="text-align:left;">
-12.00
-</td>
-<td style="text-align:left;">
-19.00
-</td>
-<td style="text-align:left;">
-27.00
-</td>
-<td style="text-align:left;">
-33.00
-</td>
-<td style="text-align:left;">
-41.00
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Physician wait (min)
-</td>
-<td style="text-align:left;">
-59.85 (52.29)
-</td>
-<td style="text-align:left;">
-49.00
-</td>
-<td style="text-align:left;">
-0.00 - 300.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-3.00
-</td>
-<td style="text-align:left;">
-19.00
-</td>
-<td style="text-align:left;">
-49.00
-</td>
-<td style="text-align:left;">
-86.00
-</td>
-<td style="text-align:left;">
-134.00
-</td>
-<td style="text-align:left;">
-161.00
-</td>
-<td style="text-align:left;">
-227.00
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Length of stay (min)
-</td>
-<td style="text-align:left;">
-270.14 (180.40)
-</td>
-<td style="text-align:left;">
-231.00
-</td>
-<td style="text-align:left;">
-10.00 - 1121.00
-</td>
-<td style="text-align:left;">
-20.00
-</td>
-<td style="text-align:left;">
-55.00
-</td>
-<td style="text-align:left;">
-84.00
-</td>
-<td style="text-align:left;">
-143.00
-</td>
-<td style="text-align:left;">
-231.00
-</td>
-<td style="text-align:left;">
-351.00
-</td>
-<td style="text-align:left;">
-520.00
-</td>
-<td style="text-align:left;">
-642.00
-</td>
-<td style="text-align:left;">
-873.00
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="timing-measures" class="section level3" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> Timing
-measures</h3>
-<p>Timing summaries use <strong>22634</strong> quality-eligible records
-and exclude <strong>7366</strong> records. Excluded records remain
-visible in the Data quality section.</p>
-<div class="table-scroll">
-<table class="summary-table continuous-summary-table">
-<caption>
-Quality-eligible NACRS timing measures
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-Variable
-</th>
-<th style="text-align:left;">
-Mean (SD)
-</th>
-<th style="text-align:left;">
-Median
-</th>
-<th style="text-align:left;">
-Min-Max
-</th>
-<th style="text-align:left;">
-P1
-</th>
-<th style="text-align:left;">
-P5
-</th>
-<th style="text-align:left;">
-P10
-</th>
-<th style="text-align:left;">
-Q1
-</th>
-<th style="text-align:left;">
-Q2
-</th>
-<th style="text-align:left;">
-Q3
-</th>
-<th style="text-align:left;">
-P90
-</th>
-<th style="text-align:left;">
-P95
-</th>
-<th style="text-align:left;">
-P99
-</th>
-<th style="text-align:right;">
-Missing
-</th>
-<th style="text-align:right;">
-N
-</th>
-<th style="text-align:right;">
-Non-missing
-</th>
-<th style="text-align:right;">
-Missing %
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Pre-disposition length of stay (min)
-</td>
-<td style="text-align:left;">
-233.21 (126.94)
-</td>
-<td style="text-align:left;">
-205.00
-</td>
-<td style="text-align:left;">
-10.00 - 835.00
-</td>
-<td style="text-align:left;">
-48.00
-</td>
-<td style="text-align:left;">
-83.00
-</td>
-<td style="text-align:left;">
-105.00
-</td>
-<td style="text-align:left;">
-145.00
-</td>
-<td style="text-align:left;">
-205.00
-</td>
-<td style="text-align:left;">
-291.00
-</td>
-<td style="text-align:left;">
-407.00
-</td>
-<td style="text-align:left;">
-495.00
-</td>
-<td style="text-align:left;">
-647.00
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-22634
-</td>
-<td style="text-align:right;">
-22634
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Post-disposition length of stay (min)
-</td>
-<td style="text-align:left;">
-56.39 (54.58)
-</td>
-<td style="text-align:left;">
-42.00
-</td>
-<td style="text-align:left;">
-0.00 - 380.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-1.00
-</td>
-<td style="text-align:left;">
-5.00
-</td>
-<td style="text-align:left;">
-17.00
-</td>
-<td style="text-align:left;">
-42.00
-</td>
-<td style="text-align:left;">
-78.00
-</td>
-<td style="text-align:left;">
-129.00
-</td>
-<td style="text-align:left;">
-165.00
-</td>
-<td style="text-align:left;">
-255.00
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-22634
-</td>
-<td style="text-align:right;">
-22634
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="categorical-measures" class="section level3" number="2.3.3">
-<h3><span class="header-section-number">2.3.3</span> Categorical
-measures</h3>
-<p>Each variable is displayed separately. Coded variables show up to the
-20 most frequent codes, followed by Other and Missing where
-applicable.</p>
-<div id="health-zone" class="section level4" number="2.3.3.1">
-<h4><span class="header-section-number">2.3.3.1</span> Health zone</h4>
-<div class="variable-code">
-<code>health_zone</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Edmonton
-</td>
-<td style="text-align:right;">
-10276 (34.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Calgary
-</td>
-<td style="text-align:right;">
-9685 (32.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Central
-</td>
-<td style="text-align:right;">
-3793 (12.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-North
-</td>
-<td style="text-align:right;">
-3686 (12.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:right;">
-2560 (8.5%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="sex" class="section level4" number="2.3.3.2">
-<h4><span class="header-section-number">2.3.3.2</span> Sex</h4>
-<div class="variable-code">
-<code>sex</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-F
-</td>
-<td style="text-align:right;">
-15051 (50.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:right;">
-14252 (47.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-U
-</td>
-<td style="text-align:right;">
-552 (1.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-X
-</td>
-<td style="text-align:right;">
-145 (0.5%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="postal-fsa" class="section level4" number="2.3.3.3">
-<h4><span class="header-section-number">2.3.3.3</span> Postal FSA</h4>
-<div class="variable-code">
-<code>postal_fsa</code>
-</div>
-<div class="category-table-card long-table">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-T9H
-</td>
-<td style="text-align:right;">
-1067 (3.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2A
-</td>
-<td style="text-align:right;">
-1062 (3.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5M
-</td>
-<td style="text-align:right;">
-1034 (3.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T4N
-</td>
-<td style="text-align:right;">
-1019 (3.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T4R
-</td>
-<td style="text-align:right;">
-997 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T8V
-</td>
-<td style="text-align:right;">
-997 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2H
-</td>
-<td style="text-align:right;">
-996 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5K
-</td>
-<td style="text-align:right;">
-991 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5E
-</td>
-<td style="text-align:right;">
-983 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5L
-</td>
-<td style="text-align:right;">
-979 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T4S
-</td>
-<td style="text-align:right;">
-967 (3.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5G
-</td>
-<td style="text-align:right;">
-954 (3.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5C
-</td>
-<td style="text-align:right;">
-939 (3.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5A
-</td>
-<td style="text-align:right;">
-929 (3.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5N
-</td>
-<td style="text-align:right;">
-922 (3.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2G
-</td>
-<td style="text-align:right;">
-920 (3.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5J
-</td>
-<td style="text-align:right;">
-911 (3.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2J
-</td>
-<td style="text-align:right;">
-867 (2.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T9K
-</td>
-<td style="text-align:right;">
-856 (2.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2E
-</td>
-<td style="text-align:right;">
-844 (2.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2L
-</td>
-<td style="text-align:right;">
-837 (2.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5H
-</td>
-<td style="text-align:right;">
-819 (2.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5B
-</td>
-<td style="text-align:right;">
-815 (2.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T4P
-</td>
-<td style="text-align:right;">
-810 (2.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2C
-</td>
-<td style="text-align:right;">
-770 (2.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T8W
-</td>
-<td style="text-align:right;">
-766 (2.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T1G
-</td>
-<td style="text-align:right;">
-764 (2.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2P
-</td>
-<td style="text-align:right;">
-740 (2.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2B
-</td>
-<td style="text-align:right;">
-726 (2.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2K
-</td>
-<td style="text-align:right;">
-670 (2.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T1J
-</td>
-<td style="text-align:right;">
-668 (2.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2M
-</td>
-<td style="text-align:right;">
-654 (2.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T1K
-</td>
-<td style="text-align:right;">
-638 (2.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2N
-</td>
-<td style="text-align:right;">
-599 (2.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T1H
-</td>
-<td style="text-align:right;">
-490 (1.6%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="arrival-mode" class="section level4" number="2.3.3.4">
-<h4><span class="header-section-number">2.3.3.4</span> Arrival mode</h4>
-<div class="variable-code">
-<code>arrival_mode</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Walk-in
-</td>
-<td style="text-align:right;">
-14415 (48.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ground ambulance
-</td>
-<td style="text-align:right;">
-7394 (24.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Private vehicle
-</td>
-<td style="text-align:right;">
-6310 (21.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Transfer
-</td>
-<td style="text-align:right;">
-1356 (4.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Police
-</td>
-<td style="text-align:right;">
-525 (1.8%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="ctas-level" class="section level4" number="2.3.3.5">
-<h4><span class="header-section-number">2.3.3.5</span> CTAS level</h4>
-<div class="variable-code">
-<code>ctas_level</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:right;">
-737 (2.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:right;">
-4622 (15.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:right;">
-13852 (46.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-4
-</td>
-<td style="text-align:right;">
-8945 (29.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-5
-</td>
-<td style="text-align:right;">
-1844 (6.1%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="chief-complaint" class="section level4" number="2.3.3.6">
-<h4><span class="header-section-number">2.3.3.6</span> Chief
-complaint</h4>
-<div class="variable-code">
-<code>chief_complaint</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Urinary symptoms
-</td>
-<td style="text-align:right;">
-2442 (8.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mental health concern
-</td>
-<td style="text-align:right;">
-2277 (7.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Shortness of breath
-</td>
-<td style="text-align:right;">
-2233 (7.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Back pain
-</td>
-<td style="text-align:right;">
-2152 (7.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Headache
-</td>
-<td style="text-align:right;">
-2109 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Minor trauma
-</td>
-<td style="text-align:right;">
-2094 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Chest pain
-</td>
-<td style="text-align:right;">
-2059 (6.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Syncope
-</td>
-<td style="text-align:right;">
-2047 (6.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Abdominal pain
-</td>
-<td style="text-align:right;">
-2030 (6.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Dizziness
-</td>
-<td style="text-align:right;">
-1845 (6.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Nausea/vomiting
-</td>
-<td style="text-align:right;">
-1766 (5.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Laceration
-</td>
-<td style="text-align:right;">
-1757 (5.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Fever
-</td>
-<td style="text-align:right;">
-1755 (5.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Allergic reaction
-</td>
-<td style="text-align:right;">
-1751 (5.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Weakness
-</td>
-<td style="text-align:right;">
-1683 (5.6%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="main-diagnosis-icd-10" class="section level4" number="2.3.3.7">
-<h4><span class="header-section-number">2.3.3.7</span> Main diagnosis
-ICD-10</h4>
-<div class="variable-code">
-<code>main_diagnosis_icd10</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-N39.0
-</td>
-<td style="text-align:right;">
-2442 (8.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F41.9
-</td>
-<td style="text-align:right;">
-2277 (7.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R06.0
-</td>
-<td style="text-align:right;">
-2233 (7.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-M54.5
-</td>
-<td style="text-align:right;">
-2152 (7.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R51.9
-</td>
-<td style="text-align:right;">
-2109 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-S09.9
-</td>
-<td style="text-align:right;">
-2094 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R07.4
-</td>
-<td style="text-align:right;">
-2059 (6.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R55
-</td>
-<td style="text-align:right;">
-2047 (6.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R10.9
-</td>
-<td style="text-align:right;">
-2030 (6.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R42
-</td>
-<td style="text-align:right;">
-1845 (6.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R11
-</td>
-<td style="text-align:right;">
-1766 (5.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-S01.9
-</td>
-<td style="text-align:right;">
-1757 (5.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R50.9
-</td>
-<td style="text-align:right;">
-1755 (5.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T78.4
-</td>
-<td style="text-align:right;">
-1751 (5.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R53
-</td>
-<td style="text-align:right;">
-1683 (5.6%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="secondary-diagnosis-1" class="section level4" number="2.3.3.8">
-<h4><span class="header-section-number">2.3.3.8</span> Secondary
-diagnosis 1</h4>
-<div class="variable-code">
-<code>secondary_diagnosis_1</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-K21.9
-</td>
-<td style="text-align:right;">
-2577 (8.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I25.1
-</td>
-<td style="text-align:right;">
-2488 (8.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-E78.5
-</td>
-<td style="text-align:right;">
-2433 (8.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Z79.899
-</td>
-<td style="text-align:right;">
-2407 (8.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I10
-</td>
-<td style="text-align:right;">
-2338 (7.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F32.9
-</td>
-<td style="text-align:right;">
-2266 (7.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F41.9
-</td>
-<td style="text-align:right;">
-2238 (7.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-E11.9
-</td>
-<td style="text-align:right;">
-2117 (7.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N18.9
-</td>
-<td style="text-align:right;">
-2105 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J45.9
-</td>
-<td style="text-align:right;">
-1958 (6.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
-</td>
-<td style="text-align:right;">
-7073 (23.6%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="secondary-diagnosis-2" class="section level4" number="2.3.3.9">
-<h4><span class="header-section-number">2.3.3.9</span> Secondary
-diagnosis 2</h4>
-<div class="variable-code">
-<code>secondary_diagnosis_2</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-F32.9
-</td>
-<td style="text-align:right;">
-2334 (7.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-E78.5
-</td>
-<td style="text-align:right;">
-2320 (7.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N18.9
-</td>
-<td style="text-align:right;">
-2179 (7.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J45.9
-</td>
-<td style="text-align:right;">
-2149 (7.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I10
-</td>
-<td style="text-align:right;">
-2102 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K21.9
-</td>
-<td style="text-align:right;">
-2066 (6.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-E11.9
-</td>
-<td style="text-align:right;">
-2055 (6.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Z79.899
-</td>
-<td style="text-align:right;">
-2024 (6.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I25.1
-</td>
-<td style="text-align:right;">
-2001 (6.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F41.9
-</td>
-<td style="text-align:right;">
-1665 (5.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
-</td>
-<td style="text-align:right;">
-9105 (30.4%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="intervention-1" class="section level4" number="2.3.3.10">
-<h4><span class="header-section-number">2.3.3.10</span> Intervention
-1</h4>
-<div class="variable-code">
-<code>intervention_1</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-ECG
-</td>
-<td style="text-align:right;">
-3345 (11.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Troponin
-</td>
-<td style="text-align:right;">
-3124 (10.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-IV fluids
-</td>
-<td style="text-align:right;">
-3068 (10.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CBC
-</td>
-<td style="text-align:right;">
-2896 (9.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-X-ray
-</td>
-<td style="text-align:right;">
-2882 (9.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CT
-</td>
-<td style="text-align:right;">
-2880 (9.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Wound care
-</td>
-<td style="text-align:right;">
-2098 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-None
-</td>
-<td style="text-align:right;">
-2021 (6.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Nebulizer
-</td>
-<td style="text-align:right;">
-1981 (6.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Urinalysis
-</td>
-<td style="text-align:right;">
-1973 (6.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Analgesia
-</td>
-<td style="text-align:right;">
-1960 (6.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Electrolytes
-</td>
-<td style="text-align:right;">
-1772 (5.9%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="intervention-2" class="section level4" number="2.3.3.11">
-<h4><span class="header-section-number">2.3.3.11</span> Intervention
-2</h4>
-<div class="variable-code">
-<code>intervention_2</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-None
-</td>
-<td style="text-align:right;">
-4032 (13.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-IV fluids
-</td>
-<td style="text-align:right;">
-3126 (10.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Analgesia
-</td>
-<td style="text-align:right;">
-3039 (10.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CBC
-</td>
-<td style="text-align:right;">
-2726 (9.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Electrolytes
-</td>
-<td style="text-align:right;">
-2679 (8.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CT
-</td>
-<td style="text-align:right;">
-2493 (8.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Troponin
-</td>
-<td style="text-align:right;">
-2356 (7.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-X-ray
-</td>
-<td style="text-align:right;">
-2141 (7.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Wound care
-</td>
-<td style="text-align:right;">
-2138 (7.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Urinalysis
-</td>
-<td style="text-align:right;">
-1884 (6.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Nebulizer
-</td>
-<td style="text-align:right;">
-1826 (6.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ECG
-</td>
-<td style="text-align:right;">
-1560 (5.2%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="consult-service" class="section level4" number="2.3.3.12">
-<h4><span class="header-section-number">2.3.3.12</span> Consult
-service</h4>
-<div class="variable-code">
-<code>consult_service</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-None
-</td>
-<td style="text-align:right;">
-15151 (50.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Internal Medicine
-</td>
-<td style="text-align:right;">
-3029 (10.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pediatrics
-</td>
-<td style="text-align:right;">
-2286 (7.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Orthopedics
-</td>
-<td style="text-align:right;">
-2061 (6.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-General Surgery
-</td>
-<td style="text-align:right;">
-1912 (6.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Neurology
-</td>
-<td style="text-align:right;">
-1912 (6.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Cardiology
-</td>
-<td style="text-align:right;">
-1908 (6.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Psychiatry
-</td>
-<td style="text-align:right;">
-1741 (5.8%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="ambulance-arrival" class="section level4" number="2.3.3.13">
-<h4><span class="header-section-number">2.3.3.13</span> Ambulance
-arrival</h4>
-<div class="variable-code">
-<code>ambulance_flag</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:right;">
-22606 (75.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-7394 (24.6%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="injury-indicator" class="section level4" number="2.3.3.14">
-<h4><span class="header-section-number">2.3.3.14</span> Injury
-indicator</h4>
-<div class="variable-code">
-<code>injury_flag</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:right;">
-23870 (79.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-6130 (20.4%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="mental-health-indicator" class="section level4" number="2.3.3.15">
-<h4><span class="header-section-number">2.3.3.15</span> Mental health
-indicator</h4>
-<div class="variable-code">
-<code>mental_health_flag</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:right;">
-26714 (89.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-3286 (11.0%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="disposition" class="section level4" number="2.3.3.16">
-<h4><span class="header-section-number">2.3.3.16</span> Disposition</h4>
-<div class="variable-code">
-<code>disposition</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Discharged home
-</td>
-<td style="text-align:right;">
-21491 (71.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Admitted inpatient
-</td>
-<td style="text-align:right;">
-5380 (17.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Transferred
-</td>
-<td style="text-align:right;">
-1153 (3.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Left without being seen
-</td>
-<td style="text-align:right;">
-1038 (3.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Left against medical advice
-</td>
-<td style="text-align:right;">
-801 (2.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Died
-</td>
-<td style="text-align:right;">
-137 (0.5%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="admitted" class="section level4" number="2.3.3.17">
-<h4><span class="header-section-number">2.3.3.17</span> Admitted</h4>
-<div class="variable-code">
-<code>admitted_flag</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:right;">
-24620 (82.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-5380 (17.9%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="left-without-being-seen" class="section level4" number="2.3.3.18">
-<h4><span class="header-section-number">2.3.3.18</span> Left without
-being seen</h4>
-<div class="variable-code">
-<code>lwbs_flag</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:right;">
-28962 (96.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-1038 (3.5%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="hour-revisit" class="section level4" number="2.3.3.19">
-<h4><span class="header-section-number">2.3.3.19</span> 72-hour
-revisit</h4>
-<div class="variable-code">
-<code>revisit_72h_flag</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:right;">
-27581 (91.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
 <td style="text-align:right;">
-2419 (8.1%)
+11
 </td>
 </tr>
 </tbody>
@@ -5442,166 +2956,1808 @@ Yes
 </div>
 </div>
 </div>
-</div>
-<div id="data-quality" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Data quality</h2>
-<div class="table-scroll">
-<table class="summary-table categorical-summary-table">
-<caption>
-NACRS quality-status distribution
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-Variable
-</th>
-<th style="text-align:left;">
-Status
-</th>
-<th style="text-align:left;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Timing quality status
-</td>
-<td style="text-align:left;">
-Pass
-</td>
-<td style="text-align:left;">
-22634 (75.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Timing quality status
-</td>
-<td style="text-align:left;">
-Triage wait &gt; physician wait
-</td>
-<td style="text-align:left;">
-4169 (13.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Timing quality status
-</td>
-<td style="text-align:left;">
-Physician wait &gt; ED LOS
-</td>
-<td style="text-align:left;">
-3197 (10.7%)
-</td>
-</tr>
-</tbody>
-</table>
+<div id="primary-model" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Primary model</h1>
+<p>The primary model enters pre-disposition stay and CTAS together. CTAS
+uses level 1, the most urgent level, as the reference. Duration models
+are fit in minutes. The table also shows that coefficient scaled to 60
+minutes. The p value is the same test.</p>
+<p>Let <span class="math inline">\(Y_i = 1\)</span> if visit <span class="math inline">\(i\)</span> is hospitalized and <span class="math inline">\(Y_i = 0\)</span> otherwise. Then</p>
+<p><span class="math display">\[\operatorname{logit}\bigl(\Pr(Y_i =
+1)\bigr) = \log\left(\frac{\Pr(Y_i = 1)}{1 - \Pr(Y_i =
+1)}\right).\]</span></p>
+<p><span class="math inline">\(\mathbf{1}(\cdot)\)</span> is an
+indicator function. A category that does not appear in an equation is
+the reference level.</p>
+<div id="pre-disposition-stay" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Pre-disposition
+stay</h2>
+<div class="formula">
+<p><span class="math display">\[
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) = \beta_0 +
+\beta_{\mathrm{PreLOS}}\,\mathrm{PreLOS}_i
+\]</span></p>
 </div>
 <div class="table-scroll">
 <table class="summary-table">
 <caption>
-NACRS timing consistency checks
+Pre-disposition stay alone
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;">
-Check
+<th>
+Term
 </th>
-<th style="text-align:right;">
-Evaluated
+<th>
+Odds ratio
 </th>
-<th style="text-align:right;">
-Violations
+<th>
+95% CI
 </th>
-<th style="text-align:left;">
-Status
+<th>
+P value
 </th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Arrival &lt;= decision &lt;= discharge
+<tr class="significant-row">
+<td>
+Pre-disposition stay
 </td>
-<td style="text-align:right;">
-30000
+<td>
+1.014
 </td>
-<td style="text-align:right;">
-0
+<td>
+1.013 to 1.014
 </td>
-<td style="text-align:left;">
-Pass
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pre-disposition LOS matches timestamps
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-Pass
+<td>
+&lt;0.001
 </td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Post-disposition LOS matches timestamps
+<tr class="significant-row">
+<td>
+Pre-disposition stay, per 60 minutes
 </td>
-<td style="text-align:right;">
-30000
+<td>
+2.258
 </td>
-<td style="text-align:right;">
-0
+<td>
+2.211 to 2.306
 </td>
-<td style="text-align:left;">
-Pass
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pre + post LOS equals total LOS
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-Pass
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Timing durations are non-negative
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-Pass
+<td>
+&lt;0.001
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="variable-handling" class="section level3" number="2.4.1">
-<h3><span class="header-section-number">2.4.1</span> Variable
-handling</h3>
-<p>Identifiers and internal provenance fields are registered for schema
-validation but are excluded from public summary tables. Missing values
-remain distinct from valid zero values.</p>
+<p class="significant-text">
+In this single-covariate model, each additional minute before the
+disposition decision is associated with higher odds of hospitalization
+(OR 1.014, 95% CI 1.013 to 1.014, p &lt;0.001). The same coefficient
+scaled to 60 minutes has OR 2.258 (95% CI 2.211 to 2.306). This
+association is statistically significant.
+</p>
 </div>
+<div id="ctas-level" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> CTAS level</h2>
+<div class="formula">
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) &amp;= \beta_0 +
+\beta_{2}\,\mathbf{1}(\mathrm{CTAS}_i = 2) +
+\beta_{3}\,\mathbf{1}(\mathrm{CTAS}_i = 3) \\
+&amp;\quad {}+ \beta_{4}\,\mathbf{1}(\mathrm{CTAS}_i = 4) +
+\beta_{5}\,\mathbf{1}(\mathrm{CTAS}_i = 5)
+\end{aligned}
+\]</span></p>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+CTAS level alone
+</caption>
+<thead>
+<tr>
+<th>
+Term
+</th>
+<th>
+Odds ratio
+</th>
+<th>
+95% CI
+</th>
+<th>
+P value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="significant-row">
+<td>
+CTAS level: 2 vs 1
+</td>
+<td>
+0.311
+</td>
+<td>
+0.264 to 0.367
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+CTAS level: 3 vs 1
+</td>
+<td>
+0.101
+</td>
+<td>
+0.086 to 0.119
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+CTAS level: 4 vs 1
+</td>
+<td>
+0.035
+</td>
+<td>
+0.030 to 0.042
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+CTAS level: 5 vs 1
+</td>
+<td>
+0.017
+</td>
+<td>
+0.013 to 0.023
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="significant-text">
+In this single-covariate model, compared with CTAS 1, CTAS 2 is
+associated with lower odds of hospitalization (OR 0.311, 95% CI 0.264 to
+0.367, p &lt;0.001). This association is statistically significant.
+</p>
+<p class="significant-text">
+In this single-covariate model, compared with CTAS 1, CTAS 3 is
+associated with lower odds of hospitalization (OR 0.101, 95% CI 0.086 to
+0.119, p &lt;0.001). This association is statistically significant.
+</p>
+<p class="significant-text">
+In this single-covariate model, compared with CTAS 1, CTAS 4 is
+associated with lower odds of hospitalization (OR 0.035, 95% CI 0.030 to
+0.042, p &lt;0.001). This association is statistically significant.
+</p>
+<p class="significant-text">
+In this single-covariate model, compared with CTAS 1, CTAS 5 is
+associated with lower odds of hospitalization (OR 0.017, 95% CI 0.013 to
+0.023, p &lt;0.001). This association is statistically significant.
+</p>
+<p>
+This is the primary model. It enters pre-disposition stay and CTAS
+together. CTAS level 1 remains the reference. Each odds ratio is
+adjusted for the other covariate.
+</p>
+<div class="formula">
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) &amp;= \beta_0 +
+\beta_{2}\,\mathbf{1}(\mathrm{CTAS}_i = 2) +
+\beta_{3}\,\mathbf{1}(\mathrm{CTAS}_i = 3) \\
+&amp;\quad {}+ \beta_{4}\,\mathbf{1}(\mathrm{CTAS}_i = 4) +
+\beta_{5}\,\mathbf{1}(\mathrm{CTAS}_i = 5) \\
+&amp;\quad {}+ \beta_{\mathrm{PreLOS}}\,\mathrm{PreLOS}_i
+\end{aligned}
+\]</span></p>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Hospitalization on pre-disposition stay and CTAS
+</caption>
+<thead>
+<tr>
+<th>
+Term
+</th>
+<th>
+Odds ratio
+</th>
+<th>
+95% CI
+</th>
+<th>
+P value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="significant-row">
+<td>
+Pre-disposition stay
+</td>
+<td>
+1.013
+</td>
+<td>
+1.013 to 1.013
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Pre-disposition stay, per 60 minutes
+</td>
+<td>
+2.159
+</td>
+<td>
+2.111 to 2.208
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+CTAS level: 2 vs 1
+</td>
+<td>
+0.424
+</td>
+<td>
+0.345 to 0.522
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+CTAS level: 3 vs 1
+</td>
+<td>
+0.188
+</td>
+<td>
+0.154 to 0.229
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+CTAS level: 4 vs 1
+</td>
+<td>
+0.190
+</td>
+<td>
+0.154 to 0.236
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+CTAS level: 5 vs 1
+</td>
+<td>
+0.236
+</td>
+<td>
+0.170 to 0.325
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>
+Interpretation
+</h2>
+<p class="significant-text">
+After adjustment for the other covariates in this model, each additional
+minute before the disposition decision is associated with higher odds of
+hospitalization (OR 1.013, 95% CI 1.013 to 1.013, p &lt;0.001). The same
+coefficient scaled to 60 minutes has OR 2.159 (95% CI 2.111 to 2.208).
+This association is statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+CTAS 1, CTAS 2 is associated with lower odds of hospitalization (OR
+0.424, 95% CI 0.345 to 0.522, p &lt;0.001). This association is
+statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+CTAS 1, CTAS 3 is associated with lower odds of hospitalization (OR
+0.188, 95% CI 0.154 to 0.229, p &lt;0.001). This association is
+statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+CTAS 1, CTAS 4 is associated with lower odds of hospitalization (OR
+0.190, 95% CI 0.154 to 0.236, p &lt;0.001). This association is
+statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+CTAS 1, CTAS 5 is associated with lower odds of hospitalization (OR
+0.236, 95% CI 0.170 to 0.325, p &lt;0.001). This association is
+statistically significant.
+</p>
+</div>
+</div>
+<div id="appendix" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Appendix</h1>
+<p>The appendix is not the primary analysis. Total emergency stay
+includes time after the disposition decision. The other covariates, and
+the model that enters them together with pre-disposition stay and CTAS,
+are exploratory. Reference levels elsewhere are sex <code>F</code>,
+health zone <code>Edmonton</code>, and arrival mode
+<code>Walk-in</code>.</p>
+<div id="emergency-department-length-of-stay" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Emergency department
+length of stay</h2>
+<p>
+Total emergency stay includes minutes after the disposition decision.
+Those minutes can be a consequence of deciding to hospitalize, so this
+is not the primary model.
+</p>
+<div class="formula">
+<p><span class="math display">\[
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) = \beta_0 +
+\beta_{\mathrm{LOS}}\,\mathrm{LOS}_i
+\]</span></p>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Emergency department length of stay alone
+</caption>
+<thead>
+<tr>
+<th>
+Term
+</th>
+<th>
+Odds ratio
+</th>
+<th>
+95% CI
+</th>
+<th>
+P value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="significant-row">
+<td>
+Emergency department length of stay
+</td>
+<td>
+1.010
+</td>
+<td>
+1.010 to 1.011
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Emergency department length of stay, per 60 minutes
+</td>
+<td>
+1.847
+</td>
+<td>
+1.818 to 1.877
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="significant-text">
+In this single-covariate model, each additional minute of emergency
+department length of stay is associated with higher odds of
+hospitalization (OR 1.010, 95% CI 1.010 to 1.011, p &lt;0.001). The same
+coefficient scaled to 60 minutes has OR 1.847 (95% CI 1.818 to 1.877).
+This association is statistically significant.
+</p>
+</div>
+<div id="age" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Age</h2>
+<div class="formula">
+<p><span class="math display">\[
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) = \beta_0 +
+\beta_{\mathrm{Age}}\,\mathrm{Age}_i
+\]</span></p>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Age alone
+</caption>
+<thead>
+<tr>
+<th>
+Term
+</th>
+<th>
+Odds ratio
+</th>
+<th>
+95% CI
+</th>
+<th>
+P value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="significant-row">
+<td>
+Age
+</td>
+<td>
+1.002
+</td>
+<td>
+1.001 to 1.003
+</td>
+<td>
+0.001
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="significant-text">
+In this single-covariate model, each additional year of age is
+associated with higher odds of hospitalization (OR 1.002, 95% CI 1.001
+to 1.003, p 0.001). This association is statistically significant.
+</p>
+</div>
+<div id="sex" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Sex</h2>
+<div class="formula">
+<p><span class="math display">\[
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) = \beta_0 +
+\beta_{\text{M}}\,\mathbf{1}(\mathrm{Sex}_i = \text{M}) +
+\beta_{\text{U}}\,\mathbf{1}(\mathrm{Sex}_i = \text{U}) +
+\beta_{\text{X}}\,\mathbf{1}(\mathrm{Sex}_i = \text{X})
+\]</span></p>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Sex alone
+</caption>
+<thead>
+<tr>
+<th>
+Term
+</th>
+<th>
+Odds ratio
+</th>
+<th>
+95% CI
+</th>
+<th>
+P value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="significant-row">
+<td>
+Sex: M vs F
+</td>
+<td>
+0.844
+</td>
+<td>
+0.794 to 0.896
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Sex: U vs F
+</td>
+<td>
+2.476
+</td>
+<td>
+2.072 to 2.959
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td>
+Sex: X vs F
+</td>
+<td>
+0.901
+</td>
+<td>
+0.584 to 1.389
+</td>
+<td>
+0.636
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="significant-text">
+In this single-covariate model, compared with F, M is associated with
+lower odds of hospitalization (OR 0.844, 95% CI 0.794 to 0.896, p
+&lt;0.001). This association is statistically significant.
+</p>
+<p class="significant-text">
+In this single-covariate model, compared with F, U is associated with
+higher odds of hospitalization (OR 2.476, 95% CI 2.072 to 2.959, p
+&lt;0.001). This association is statistically significant.
+</p>
+<p>
+In this single-covariate model, compared with F, X is associated with
+lower odds of hospitalization (OR 0.901, 95% CI 0.584 to 1.389, p
+0.636). This association is not statistically significant.
+</p>
+</div>
+<div id="health-zone" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Health zone</h2>
+<div class="formula">
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) &amp;= \beta_0 +
+\beta_{\text{Calgary}}\,\mathbf{1}(\mathrm{Zone}_i = \text{Calgary}) +
+\beta_{\text{Central}}\,\mathbf{1}(\mathrm{Zone}_i = \text{Central}) \\
+&amp;\quad {}+ \beta_{\text{North}}\,\mathbf{1}(\mathrm{Zone}_i =
+\text{North}) + \beta_{\text{South}}\,\mathbf{1}(\mathrm{Zone}_i =
+\text{South})
+\end{aligned}
+\]</span></p>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Health zone alone
+</caption>
+<thead>
+<tr>
+<th>
+Term
+</th>
+<th>
+Odds ratio
+</th>
+<th>
+95% CI
+</th>
+<th>
+P value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Health zone: Calgary vs Edmonton
+</td>
+<td>
+1.028
+</td>
+<td>
+0.955 to 1.107
+</td>
+<td>
+0.460
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Health zone: Central vs Edmonton
+</td>
+<td>
+1.409
+</td>
+<td>
+1.284 to 1.545
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Health zone: North vs Edmonton
+</td>
+<td>
+1.355
+</td>
+<td>
+1.233 to 1.489
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Health zone: South vs Edmonton
+</td>
+<td>
+0.837
+</td>
+<td>
+0.741 to 0.945
+</td>
+<td>
+0.004
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+In this single-covariate model, compared with Edmonton, Calgary is
+associated with higher odds of hospitalization (OR 1.028, 95% CI 0.955
+to 1.107, p 0.460). This association is not statistically significant.
+</p>
+<p class="significant-text">
+In this single-covariate model, compared with Edmonton, Central is
+associated with higher odds of hospitalization (OR 1.409, 95% CI 1.284
+to 1.545, p &lt;0.001). This association is statistically significant.
+</p>
+<p class="significant-text">
+In this single-covariate model, compared with Edmonton, North is
+associated with higher odds of hospitalization (OR 1.355, 95% CI 1.233
+to 1.489, p &lt;0.001). This association is statistically significant.
+</p>
+<p class="significant-text">
+In this single-covariate model, compared with Edmonton, South is
+associated with lower odds of hospitalization (OR 0.837, 95% CI 0.741 to
+0.945, p 0.004). This association is statistically significant.
+</p>
+</div>
+<div id="arrival-mode" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Arrival mode</h2>
+<div class="formula">
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) &amp;= \beta_0 +
+\beta_{\text{Ground ambulance}}\,\mathbf{1}(\mathrm{Arrival}_i =
+\text{Ground ambulance}) +
+\beta_{\text{Police}}\,\mathbf{1}(\mathrm{Arrival}_i = \text{Police}) \\
+&amp;\quad {}+ \beta_{\text{Private
+vehicle}}\,\mathbf{1}(\mathrm{Arrival}_i = \text{Private vehicle}) +
+\beta_{\text{Transfer}}\,\mathbf{1}(\mathrm{Arrival}_i =
+\text{Transfer})
+\end{aligned}
+\]</span></p>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Arrival mode alone
+</caption>
+<thead>
+<tr>
+<th>
+Term
+</th>
+<th>
+Odds ratio
+</th>
+<th>
+95% CI
+</th>
+<th>
+P value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="significant-row">
+<td>
+Arrival mode: Ground ambulance vs Walk-in
+</td>
+<td>
+0.904
+</td>
+<td>
+0.841 to 0.972
+</td>
+<td>
+0.006
+</td>
+</tr>
+<tr>
+<td>
+Arrival mode: Police vs Walk-in
+</td>
+<td>
+1.190
+</td>
+<td>
+0.965 to 1.467
+</td>
+<td>
+0.105
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Arrival mode: Private vehicle vs Walk-in
+</td>
+<td>
+0.785
+</td>
+<td>
+0.725 to 0.850
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Arrival mode: Transfer vs Walk-in
+</td>
+<td>
+0.462
+</td>
+<td>
+0.386 to 0.555
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="significant-text">
+In this single-covariate model, compared with Walk-in, Ground ambulance
+is associated with lower odds of hospitalization (OR 0.904, 95% CI 0.841
+to 0.972, p 0.006). This association is statistically significant.
+</p>
+<p>
+In this single-covariate model, compared with Walk-in, Police is
+associated with higher odds of hospitalization (OR 1.190, 95% CI 0.965
+to 1.467, p 0.105). This association is not statistically significant.
+</p>
+<p class="significant-text">
+In this single-covariate model, compared with Walk-in, Private vehicle
+is associated with lower odds of hospitalization (OR 0.785, 95% CI 0.725
+to 0.850, p &lt;0.001). This association is statistically significant.
+</p>
+<p class="significant-text">
+In this single-covariate model, compared with Walk-in, Transfer is
+associated with lower odds of hospitalization (OR 0.462, 95% CI 0.386 to
+0.555, p &lt;0.001). This association is statistically significant.
+</p>
+</div>
+<div id="injury-indicator" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Injury indicator</h2>
+<div class="formula">
+<p><span class="math display">\[
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) = \beta_0 +
+\beta_{\mathrm{Injury}}\,\mathrm{Injury}_i
+\]</span></p>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Injury indicator alone
+</caption>
+<thead>
+<tr>
+<th>
+Term
+</th>
+<th>
+Odds ratio
+</th>
+<th>
+95% CI
+</th>
+<th>
+P value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="significant-row">
+<td>
+Injury indicator
+</td>
+<td>
+1.082
+</td>
+<td>
+1.007 to 1.163
+</td>
+<td>
+0.031
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="significant-text">
+In this single-covariate model, a value of 1 on Injury indicator,
+compared with 0, is associated with higher odds of hospitalization (OR
+1.082, 95% CI 1.007 to 1.163, p 0.031). This association is
+statistically significant.
+</p>
+</div>
+<div id="mental-health-indicator" class="section level2" number="3.7">
+<h2><span class="header-section-number">3.7</span> Mental health
+indicator</h2>
+<div class="formula">
+<p><span class="math display">\[
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) = \beta_0 +
+\beta_{\mathrm{MH}}\,\mathrm{MH}_i
+\]</span></p>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Mental health indicator alone
+</caption>
+<thead>
+<tr>
+<th>
+Term
+</th>
+<th>
+Odds ratio
+</th>
+<th>
+95% CI
+</th>
+<th>
+P value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="significant-row">
+<td>
+Mental health indicator
+</td>
+<td>
+0.633
+</td>
+<td>
+0.569 to 0.705
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="significant-text">
+In this single-covariate model, a value of 1 on Mental health indicator,
+compared with 0, is associated with lower odds of hospitalization (OR
+0.633, 95% CI 0.569 to 0.705, p &lt;0.001). This association is
+statistically significant.
+</p>
+</div>
+<div id="pain-score" class="section level2" number="3.8">
+<h2><span class="header-section-number">3.8</span> Pain score</h2>
+<div class="formula">
+<p><span class="math display">\[
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) = \beta_0 +
+\beta_{\mathrm{Pain}}\,\mathrm{Pain}_i
+\]</span></p>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Pain score alone
+</caption>
+<thead>
+<tr>
+<th>
+Term
+</th>
+<th>
+Odds ratio
+</th>
+<th>
+95% CI
+</th>
+<th>
+P value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="significant-row">
+<td>
+Pain score
+</td>
+<td>
+0.976
+</td>
+<td>
+0.966 to 0.985
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="significant-text">
+In this single-covariate model, each additional point on the pain score
+is associated with lower odds of hospitalization (OR 0.976, 95% CI 0.966
+to 0.985, p &lt;0.001). This association is statistically significant.
+</p>
+</div>
+<div id="triage-wait" class="section level2" number="3.9">
+<h2><span class="header-section-number">3.9</span> Triage wait</h2>
+<div class="formula">
+<p><span class="math display">\[
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) = \beta_0 +
+\beta_{\mathrm{TriageWait}}\,\mathrm{TriageWait}_i
+\]</span></p>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Triage wait alone
+</caption>
+<thead>
+<tr>
+<th>
+Term
+</th>
+<th>
+Odds ratio
+</th>
+<th>
+95% CI
+</th>
+<th>
+P value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="significant-row">
+<td>
+Triage wait
+</td>
+<td>
+0.937
+</td>
+<td>
+0.933 to 0.941
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Triage wait, per 60 minutes
+</td>
+<td>
+0.020
+</td>
+<td>
+0.016 to 0.026
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="significant-text">
+In this single-covariate model, each additional minute of triage wait is
+associated with lower odds of hospitalization (OR 0.937, 95% CI 0.933 to
+0.941, p &lt;0.001). The same coefficient scaled to 60 minutes has OR
+0.020 (95% CI 0.016 to 0.026). This association is statistically
+significant.
+</p>
+</div>
+<div id="physician-wait" class="section level2" number="3.10">
+<h2><span class="header-section-number">3.10</span> Physician wait</h2>
+<div class="formula">
+<p><span class="math display">\[
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) = \beta_0 +
+\beta_{\mathrm{PhysWait}}\,\mathrm{PhysWait}_i
+\]</span></p>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Physician wait alone
+</caption>
+<thead>
+<tr>
+<th>
+Term
+</th>
+<th>
+Odds ratio
+</th>
+<th>
+95% CI
+</th>
+<th>
+P value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="significant-row">
+<td>
+Physician wait
+</td>
+<td>
+0.985
+</td>
+<td>
+0.984 to 0.986
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Physician wait, per 60 minutes
+</td>
+<td>
+0.407
+</td>
+<td>
+0.388 to 0.428
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="significant-text">
+In this single-covariate model, each additional minute of physician wait
+is associated with lower odds of hospitalization (OR 0.985, 95% CI 0.984
+to 0.986, p &lt;0.001). The same coefficient scaled to 60 minutes has OR
+0.407 (95% CI 0.388 to 0.428). This association is statistically
+significant.
+</p>
+</div>
+<div id="total-emergency-stay-and-ctas" class="section level2" number="3.11">
+<h2><span class="header-section-number">3.11</span> Total emergency stay
+and CTAS</h2>
+<p>
+This model replaces pre-disposition stay with total emergency stay. It
+is shown so the two stay measures can be compared. It is not the primary
+result.
+</p>
+<div class="formula">
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) &amp;= \beta_0 +
+\beta_{\mathrm{LOS}}\,\mathrm{LOS}_i +
+\beta_{2}\,\mathbf{1}(\mathrm{CTAS}_i = 2) \\
+&amp;\quad {}+ \beta_{3}\,\mathbf{1}(\mathrm{CTAS}_i = 3) +
+\beta_{4}\,\mathbf{1}(\mathrm{CTAS}_i = 4) \\
+&amp;\quad {}+ \beta_{5}\,\mathbf{1}(\mathrm{CTAS}_i = 5)
+\end{aligned}
+\]</span></p>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Hospitalization on total emergency stay and CTAS
+</caption>
+<thead>
+<tr>
+<th>
+Term
+</th>
+<th>
+Odds ratio
+</th>
+<th>
+95% CI
+</th>
+<th>
+P value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="significant-row">
+<td>
+Emergency department length of stay
+</td>
+<td>
+1.010
+</td>
+<td>
+1.010 to 1.010
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Emergency department length of stay, per 60 minutes
+</td>
+<td>
+1.827
+</td>
+<td>
+1.795 to 1.860
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+CTAS level: 2 vs 1
+</td>
+<td>
+0.614
+</td>
+<td>
+0.496 to 0.761
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+CTAS level: 3 vs 1
+</td>
+<td>
+0.380
+</td>
+<td>
+0.309 to 0.467
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+CTAS level: 4 vs 1
+</td>
+<td>
+0.504
+</td>
+<td>
+0.402 to 0.632
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+CTAS level: 5 vs 1
+</td>
+<td>
+0.607
+</td>
+<td>
+0.434 to 0.847
+</td>
+<td>
+0.003
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="significant-text">
+After adjustment for the other covariates in this model, each additional
+minute of emergency department length of stay is associated with higher
+odds of hospitalization (OR 1.010, 95% CI 1.010 to 1.010, p &lt;0.001).
+The same coefficient scaled to 60 minutes has OR 1.827 (95% CI 1.795 to
+1.860). This association is statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+CTAS 1, CTAS 2 is associated with lower odds of hospitalization (OR
+0.614, 95% CI 0.496 to 0.761, p &lt;0.001). This association is
+statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+CTAS 1, CTAS 3 is associated with lower odds of hospitalization (OR
+0.380, 95% CI 0.309 to 0.467, p &lt;0.001). This association is
+statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+CTAS 1, CTAS 4 is associated with lower odds of hospitalization (OR
+0.504, 95% CI 0.402 to 0.632, p &lt;0.001). This association is
+statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+CTAS 1, CTAS 5 is associated with lower odds of hospitalization (OR
+0.607, 95% CI 0.434 to 0.847, p 0.003). This association is
+statistically significant.
+</p>
+</div>
+<div id="all-selected-covariates" class="section level2" number="3.12">
+<h2><span class="header-section-number">3.12</span> All selected
+covariates</h2>
+<p>
+This exploratory model enters pre-disposition stay, CTAS, and the other
+selected covariates. It does not include total emergency stay. Each odds
+ratio is adjusted for the other covariates. With 5,380 hospitalized
+visits, this model has many parameters, so the adjusted estimates are
+less stable than the primary model.
+</p>
+<div class="formula">
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{logit}\bigl(\Pr(Y_i = 1)\bigr) &amp;= \beta_0 +
+\beta_{2}\,\mathbf{1}(\mathrm{CTAS}_i = 2) +
+\beta_{3}\,\mathbf{1}(\mathrm{CTAS}_i = 3) \\
+&amp;\quad {}+ \beta_{4}\,\mathbf{1}(\mathrm{CTAS}_i = 4) +
+\beta_{5}\,\mathbf{1}(\mathrm{CTAS}_i = 5) \\
+&amp;\quad {}+ \beta_{\mathrm{Age}}\,\mathrm{Age}_i +
+\beta_{\text{M}}\,\mathbf{1}(\mathrm{Sex}_i = \text{M}) \\
+&amp;\quad {}+ \beta_{\text{U}}\,\mathbf{1}(\mathrm{Sex}_i = \text{U}) +
+\beta_{\text{X}}\,\mathbf{1}(\mathrm{Sex}_i = \text{X}) \\
+&amp;\quad {}+ \beta_{\text{Calgary}}\,\mathbf{1}(\mathrm{Zone}_i =
+\text{Calgary}) + \beta_{\text{Central}}\,\mathbf{1}(\mathrm{Zone}_i =
+\text{Central}) \\
+&amp;\quad {}+ \beta_{\text{North}}\,\mathbf{1}(\mathrm{Zone}_i =
+\text{North}) + \beta_{\text{South}}\,\mathbf{1}(\mathrm{Zone}_i =
+\text{South}) \\
+&amp;\quad {}+ \beta_{\text{Ground
+ambulance}}\,\mathbf{1}(\mathrm{Arrival}_i = \text{Ground ambulance}) +
+\beta_{\text{Police}}\,\mathbf{1}(\mathrm{Arrival}_i = \text{Police}) \\
+&amp;\quad {}+ \beta_{\text{Private
+vehicle}}\,\mathbf{1}(\mathrm{Arrival}_i = \text{Private vehicle}) +
+\beta_{\text{Transfer}}\,\mathbf{1}(\mathrm{Arrival}_i =
+\text{Transfer}) \\
+&amp;\quad {}+ \beta_{\mathrm{Injury}}\,\mathrm{Injury}_i +
+\beta_{\mathrm{MH}}\,\mathrm{MH}_i \\
+&amp;\quad {}+ \beta_{\mathrm{Pain}}\,\mathrm{Pain}_i +
+\beta_{\mathrm{TriageWait}}\,\mathrm{TriageWait}_i \\
+&amp;\quad {}+ \beta_{\mathrm{PhysWait}}\,\mathrm{PhysWait}_i +
+\beta_{\mathrm{PreLOS}}\,\mathrm{PreLOS}_i
+\end{aligned}
+\]</span></p>
+</div>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Hospitalization on pre-disposition stay, CTAS, and the other covariates
+</caption>
+<thead>
+<tr>
+<th>
+Term
+</th>
+<th>
+Odds ratio
+</th>
+<th>
+95% CI
+</th>
+<th>
+P value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="significant-row">
+<td>
+CTAS level: 2 vs 1
+</td>
+<td>
+0.457
+</td>
+<td>
+0.369 to 0.565
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+CTAS level: 3 vs 1
+</td>
+<td>
+0.221
+</td>
+<td>
+0.177 to 0.275
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+CTAS level: 4 vs 1
+</td>
+<td>
+0.253
+</td>
+<td>
+0.193 to 0.332
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+CTAS level: 5 vs 1
+</td>
+<td>
+0.286
+</td>
+<td>
+0.194 to 0.422
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td>
+Age
+</td>
+<td>
+1.001
+</td>
+<td>
+1.000 to 1.003
+</td>
+<td>
+0.128
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Sex: M vs F
+</td>
+<td>
+0.864
+</td>
+<td>
+0.797 to 0.936
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Sex: U vs F
+</td>
+<td>
+2.947
+</td>
+<td>
+2.292 to 3.789
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td>
+Sex: X vs F
+</td>
+<td>
+0.838
+</td>
+<td>
+0.507 to 1.386
+</td>
+<td>
+0.491
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Health zone: Calgary vs Edmonton
+</td>
+<td>
+1.125
+</td>
+<td>
+1.019 to 1.243
+</td>
+<td>
+0.020
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Health zone: Central vs Edmonton
+</td>
+<td>
+1.355
+</td>
+<td>
+1.197 to 1.532
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td>
+Health zone: North vs Edmonton
+</td>
+<td>
+1.067
+</td>
+<td>
+0.938 to 1.213
+</td>
+<td>
+0.323
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Health zone: South vs Edmonton
+</td>
+<td>
+0.822
+</td>
+<td>
+0.703 to 0.963
+</td>
+<td>
+0.015
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Arrival mode: Ground ambulance vs Walk-in
+</td>
+<td>
+0.861
+</td>
+<td>
+0.782 to 0.949
+</td>
+<td>
+0.002
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Arrival mode: Police vs Walk-in
+</td>
+<td>
+1.449
+</td>
+<td>
+1.094 to 1.920
+</td>
+<td>
+0.010
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Arrival mode: Private vehicle vs Walk-in
+</td>
+<td>
+0.851
+</td>
+<td>
+0.767 to 0.945
+</td>
+<td>
+0.002
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Arrival mode: Transfer vs Walk-in
+</td>
+<td>
+0.250
+</td>
+<td>
+0.192 to 0.326
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td>
+Injury indicator
+</td>
+<td>
+0.915
+</td>
+<td>
+0.830 to 1.008
+</td>
+<td>
+0.071
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Mental health indicator
+</td>
+<td>
+0.563
+</td>
+<td>
+0.487 to 0.651
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td>
+Pain score
+</td>
+<td>
+0.998
+</td>
+<td>
+0.985 to 1.011
+</td>
+<td>
+0.743
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Triage wait
+</td>
+<td>
+1.014
+</td>
+<td>
+1.007 to 1.021
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Physician wait
+</td>
+<td>
+0.995
+</td>
+<td>
+0.994 to 0.996
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+<tr class="significant-row">
+<td>
+Pre-disposition stay
+</td>
+<td>
+1.013
+</td>
+<td>
+1.013 to 1.014
+</td>
+<td>
+&lt;0.001
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>
+Interpretation
+</h2>
+<p>
+The sentences below describe the adjusted associations. A yellow
+sentence is statistically significant. A sentence without yellow is not.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+CTAS 1, CTAS 2 is associated with lower odds of hospitalization (OR
+0.457, 95% CI 0.369 to 0.565, p &lt;0.001). This association is
+statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+CTAS 1, CTAS 3 is associated with lower odds of hospitalization (OR
+0.221, 95% CI 0.177 to 0.275, p &lt;0.001). This association is
+statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+CTAS 1, CTAS 4 is associated with lower odds of hospitalization (OR
+0.253, 95% CI 0.193 to 0.332, p &lt;0.001). This association is
+statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+CTAS 1, CTAS 5 is associated with lower odds of hospitalization (OR
+0.286, 95% CI 0.194 to 0.422, p &lt;0.001). This association is
+statistically significant.
+</p>
+<p>
+After adjustment for the other covariates in this model, each additional
+year of age is associated with higher odds of hospitalization (OR 1.001,
+95% CI 1.000 to 1.003, p 0.128). This association is not statistically
+significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+F, M is associated with lower odds of hospitalization (OR 0.864, 95% CI
+0.797 to 0.936, p &lt;0.001). This association is statistically
+significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+F, U is associated with higher odds of hospitalization (OR 2.947, 95% CI
+2.292 to 3.789, p &lt;0.001). This association is statistically
+significant.
+</p>
+<p>
+After adjustment for the other covariates in this model, compared with
+F, X is associated with lower odds of hospitalization (OR 0.838, 95% CI
+0.507 to 1.386, p 0.491). This association is not statistically
+significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+Edmonton, Calgary is associated with higher odds of hospitalization (OR
+1.125, 95% CI 1.019 to 1.243, p 0.020). This association is
+statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+Edmonton, Central is associated with higher odds of hospitalization (OR
+1.355, 95% CI 1.197 to 1.532, p &lt;0.001). This association is
+statistically significant.
+</p>
+<p>
+After adjustment for the other covariates in this model, compared with
+Edmonton, North is associated with higher odds of hospitalization (OR
+1.067, 95% CI 0.938 to 1.213, p 0.323). This association is not
+statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+Edmonton, South is associated with lower odds of hospitalization (OR
+0.822, 95% CI 0.703 to 0.963, p 0.015). This association is
+statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+Walk-in, Ground ambulance is associated with lower odds of
+hospitalization (OR 0.861, 95% CI 0.782 to 0.949, p 0.002). This
+association is statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+Walk-in, Police is associated with higher odds of hospitalization (OR
+1.449, 95% CI 1.094 to 1.920, p 0.010). This association is
+statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+Walk-in, Private vehicle is associated with lower odds of
+hospitalization (OR 0.851, 95% CI 0.767 to 0.945, p 0.002). This
+association is statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, compared with
+Walk-in, Transfer is associated with lower odds of hospitalization (OR
+0.250, 95% CI 0.192 to 0.326, p &lt;0.001). This association is
+statistically significant.
+</p>
+<p>
+After adjustment for the other covariates in this model, a value of 1 on
+Injury indicator, compared with 0, is associated with lower odds of
+hospitalization (OR 0.915, 95% CI 0.830 to 1.008, p 0.071). This
+association is not statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, a value of 1 on
+Mental health indicator, compared with 0, is associated with lower odds
+of hospitalization (OR 0.563, 95% CI 0.487 to 0.651, p &lt;0.001). This
+association is statistically significant.
+</p>
+<p>
+After adjustment for the other covariates in this model, each additional
+point on the pain score is associated with lower odds of hospitalization
+(OR 0.998, 95% CI 0.985 to 1.011, p 0.743). This association is not
+statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, each additional
+minute of triage wait is associated with higher odds of hospitalization
+(OR 1.014, 95% CI 1.007 to 1.021, p &lt;0.001). The same coefficient
+scaled to 60 minutes has OR 2.297 (95% CI 1.542 to 3.422). This
+association is statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, each additional
+minute of physician wait is associated with lower odds of
+hospitalization (OR 0.995, 95% CI 0.994 to 0.996, p &lt;0.001). The same
+coefficient scaled to 60 minutes has OR 0.745 (95% CI 0.695 to 0.799).
+This association is statistically significant.
+</p>
+<p class="significant-text">
+After adjustment for the other covariates in this model, each additional
+minute before the disposition decision is associated with higher odds of
+hospitalization (OR 1.013, 95% CI 1.013 to 1.014, p &lt;0.001). The same
+coefficient scaled to 60 minutes has OR 2.200 (95% CI 2.150 to 2.252).
+This association is statistically significant.
+</p>
 </div>
 </div>
 

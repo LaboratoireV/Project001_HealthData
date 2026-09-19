@@ -2784,15 +2784,8 @@ border: 1px solid #f0c36d;
 border-radius: 4px;
 background: #fff8e5;
 }
-.placeholder {
-color: #6c757d;
-font-style: italic;
-}
-.table-scroll {
-width: 100%;
-overflow-x: auto;
-margin-bottom: 1.25rem;
-}
+.placeholder { color: #6c757d; font-style: italic; }
+.table-scroll { width: 100%; overflow-x: auto; margin-bottom: 1.25rem; }
 .summary-table {
 width: 100%;
 margin: 0;
@@ -2805,7 +2798,6 @@ font-size: 0.94rem;
 padding: 0.55rem 0.75rem !important;
 border-bottom: 1px solid #e4e9ed;
 vertical-align: top;
-white-space: nowrap;
 }
 .summary-table thead th {
 position: sticky;
@@ -2816,60 +2808,18 @@ background: #eef4f7;
 border-top: 1px solid #d6e0e5;
 border-bottom: 2px solid #9fb8c5;
 }
-.summary-table tbody tr:nth-child(even) {
-background: #f8fafb;
+.summary-table tbody tr:nth-child(even) { background: #f8fafb; }
+.formula {
+margin: 0.85rem 0 1.15rem;
+padding: 0.15rem 0.2rem 0.15rem 0.85rem;
+background: #f5f8fa;
+border-left: 4px solid #2c7fb8;
+overflow-x: auto;
 }
-.summary-table tbody tr:hover {
-background: #eef6fa;
-}
-.continuous-summary-table {
-width: max-content;
-min-width: 100%;
-}
-.category-table-card {
-max-width: 680px;
-margin: 0.5rem 0 1.75rem;
-overflow: hidden;
-border: 1px solid #d6e0e5;
-border-radius: 8px;
-background: #fff;
-box-shadow: 0 2px 8px rgba(33, 55, 72, 0.06);
-}
-.category-table-card.long-table {
-max-height: 32rem;
-overflow-y: auto;
-}
-.category-table-card .summary-table tbody tr:last-child {
-font-weight: 700;
-background: #eaf2f6;
-}
-.category-table-card .summary-table tbody tr:has(.missing-category) {
-background: #fff8e5 !important;
-box-shadow: inset 4px 0 #e0a12b;
-}
-.missing-category {
-color: #7a5300;
-font-weight: 700;
-}
-.missing-na-badge {
-display: inline-block;
-margin-left: 0.4rem;
-padding: 0.08rem 0.35rem;
-border: 1px solid #e2b75e;
-border-radius: 3px;
-background: #ffedbd;
-color: #6c4800;
-font-size: 0.72rem;
-line-height: 1.2;
-}
-.variable-code {
-margin: -0.35rem 0 0.65rem;
-color: #71818d;
-font-size: 0.86rem;
-}
-.data-variable-heading {
-margin: 1.25rem 0 0.65rem;
-color: #29465b;
+.formula .MathJax_Display,
+.formula mjx-container[display="true"] {
+margin: 0.45rem 0 !important;
+text-align: left !important;
 }
 .data-disclaimer {
 margin: 0.5rem 0 1.25rem;
@@ -2879,36 +2829,6 @@ border-radius: 4px;
 background: #eef6fa;
 color: #29465b;
 }
-.data-variable-list {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-gap: 0.45rem 0.75rem;
-margin: 0 0 1.5rem;
-padding: 0;
-counter-reset: data-variable;
-list-style: none;
-}
-.data-variable-list li {
-display: flex;
-align-items: center;
-min-width: 0;
-padding: 0.45rem 0.6rem;
-counter-increment: data-variable;
-border: 1px solid #e0e7eb;
-border-radius: 5px;
-background: #f8fafb;
-}
-.data-variable-list li::before {
-content: counter(data-variable);
-flex: 0 0 1.8rem;
-color: #7b8b96;
-font-size: 0.78rem;
-}
-.data-variable-list code {
-overflow-wrap: anywhere;
-color: #29465b;
-background: transparent;
-}
 .summary-table caption {
 padding: 0 0 0.65rem;
 color: #71818d;
@@ -2917,7 +2837,7 @@ text-align: left;
 </style>
 <div class="report-meta">
 <div class="meta-item">
-<span class="meta-label">Memo</span><span class="meta-value">A01</span>
+<span class="meta-label">Memo</span><span class="meta-value">A04</span>
 </div>
 <div class="meta-item">
 <span class="meta-label">Client</span><span class="meta-value">Dr. ABC</span>
@@ -2937,2671 +2857,512 @@ text-align: left;
 </div>
 <div class="report-note">
 <strong>Note:</strong> Data preparation is completed in Memo A00. This
-memo summarizes the analytic NACRS file.
+memo links hospitalized emergency visits to inpatient abstracts.
 </div>
 <div id="overview" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Overview</h1>
 <div id="introduction" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Introduction</h2>
 <p>
-The purpose of this memo is to summarize selected variables from the
-analytic <strong>NACRS</strong> file. It provides a concise description
-of the data source and presents coverage, standardized descriptive
-statistics, and data-quality results.
+The purpose of this memo is to link hospitalized emergency visits to the
+inpatient abstract for the same stay. The cohort is every NACRS visit
+with <code>admitted_flag</code> equal to 1. Memo A00 sets that flag when
+<code>disposition</code> is <code>Admitted inpatient</code>.
 </p>
 <p>
-Data preparation is completed in <strong>Memo A00</strong>. That memo
-reads the source workbook, constructs the research variables, and writes
-<code>analytic_nacrs.rds</code>. This memo does not rebuild those fields
-and does not repeat their definitions. CTAS stays a source field.
-Emergency stay (<code>los_min</code>), hospitalization
-(<code>admitted_flag</code>), and the related indicators are already
-present in the analytic file.
+Linkage is visit-level, not person-level. A person with two admitted
+emergency visits can match two different DAD abstracts. The personal
+health number is applied first. The clock is applied only to abstracts
+that already share that number. A DAD abstract with a different personal
+health number is never accepted, even if the times are close.
 </p>
 <p>
-The memo is organized as follows:
+Data preparation is completed in <strong>Memo A00</strong>. This memo
+reads <code>analytic_nacrs.rds</code> and <code>analytic_dad.rds</code>.
 </p>
-<ul>
-<li>
-<strong>Data</strong> identifies the analytic file written by Memo A00,
-reports the number of records and variables, and lists all available
-variables, without displaying row-level records.
-</li>
-<li>
-<strong>Analysis</strong> reports date and fiscal-year coverage,
-summarizes registered measures using type-appropriate methods, and
-presents quality-status distributions and consistency checks.
-</li>
-</ul>
 </div>
-<div id="data" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Data</h2>
+</div>
+<div id="linkage-rule" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Linkage rule</h1>
+<p>In these files the personal health number is stored as
+<code>patient_id</code>. There is no separate PHN column. Let visit
+<span class="math inline">\(i\)</span> be a hospitalized NACRS visit and
+abstract <span class="math inline">\(j\)</span> a DAD record. The visit
+links to the abstract only when both conditions hold:</p>
+<p><span class="math display">\[\mathrm{PHN}_i =
+\mathrm{PHN}_j\]</span></p>
+<p><span class="math display">\[\left| t_i^{\mathrm{discharge}} -
+t_j^{\mathrm{admission}} \right| \le 6 \text{ hours}\]</span></p>
+<p><span class="math inline">\(t_i^{\mathrm{discharge}}\)</span> is the
+NACRS <code>discharge_datetime</code>. <span class="math inline">\(t_j^{\mathrm{admission}}\)</span> is the DAD
+<code>admission_datetime</code>. The comparison uses the absolute
+difference, so an admission up to 6 hours before or after the emergency
+discharge is eligible. A difference of exactly 6 hours is included.</p>
+<p>If more than one abstract passes both tests, the abstract with the
+smallest absolute difference is kept. If two abstracts share that same
+smallest difference, the visit is left unlinked and counted as
+ambiguous. DAD rows with a missing <code>patient_id</code> cannot pass
+the first test.</p>
+<div id="data" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Data</h2>
 <div class="data-disclaimer">
-<strong>Training data notice:</strong> The NACRS data used in this memo
-are randomly generated synthetic data intended solely for training and
-demonstration purposes. They do not represent real patients or actual
-operational records. Preprocessing, including construction of the
-derived research variables, is completed in Memo A00. This memo reads
-that analytic file only.
-</div>
-<p><strong>Data directory:</strong> <code>data</code></p>
-<table style="width:100%;">
-<caption>Loaded NACRS analytic data set</caption>
-<colgroup>
-<col width="22%" />
-<col width="7%" />
-<col width="23%" />
-<col width="7%" />
-<col width="9%" />
-<col width="29%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Dataset</th>
-<th align="left">Alias</th>
-<th align="left">File</th>
-<th align="right">Rows</th>
-<th align="right">Columns</th>
-<th align="left">Class</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">imported_data_001</td>
-<td align="left">nacrs</td>
-<td align="left">analytic_nacrs.rds</td>
-<td align="right">30000</td>
-<td align="right">34</td>
-<td align="left">tbl_df, tbl, data.frame</td>
-</tr>
-</tbody>
-</table>
-<div class="data-variable-heading">
-<strong>Variables (34)</strong>
-</div>
-<ol class="data-variable-list">
-<li>
-<code>patient_id</code>
-</li>
-<li>
-<code>visit_id</code>
-</li>
-<li>
-<code>facility_id</code>
-</li>
-<li>
-<code>health_zone</code>
-</li>
-<li>
-<code>sex</code>
-</li>
-<li>
-<code>age</code>
-</li>
-<li>
-<code>postal_fsa</code>
-</li>
-<li>
-<code>arrival_datetime</code>
-</li>
-<li>
-<code>arrival_mode</code>
-</li>
-<li>
-<code>ctas_level</code>
-</li>
-<li>
-<code>chief_complaint</code>
-</li>
-<li>
-<code>main_diagnosis_icd10</code>
-</li>
-<li>
-<code>secondary_diagnosis_1</code>
-</li>
-<li>
-<code>secondary_diagnosis_2</code>
-</li>
-<li>
-<code>intervention_1</code>
-</li>
-<li>
-<code>intervention_2</code>
-</li>
-<li>
-<code>consult_service</code>
-</li>
-<li>
-<code>injury_flag</code>
-</li>
-<li>
-<code>mental_health_flag</code>
-</li>
-<li>
-<code>pain_score</code>
-</li>
-<li>
-<code>triage_wait_min</code>
-</li>
-<li>
-<code>physician_wait_min</code>
-</li>
-<li>
-<code>disposition</code>
-</li>
-<li>
-<code>revisit_72h_flag</code>
-</li>
-<li>
-<code>discharge_datetime</code>
-</li>
-<li>
-<code>disposition_decision_datetime</code>
-</li>
-<li>
-<code>pre_disposition_los_min</code>
-</li>
-<li>
-<code>post_disposition_los_min</code>
-</li>
-<li>
-<code>los_min</code>
-</li>
-<li>
-<code>admitted_flag</code>
-</li>
-<li>
-<code>lwbs_flag</code>
-</li>
-<li>
-<code>ambulance_flag</code>
-</li>
-<li>
-<code>fiscal_year</code>
-</li>
-<li>
-<code>timing_quality_flag</code>
-</li>
-</ol>
-</div>
-</div>
-<div id="analysis" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Analysis</h1>
-<div id="nacrs-standardized-profile" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> NACRS standardized
-profile</h2>
-<p>The variable registry maps <strong>34 of 34</strong> registered NACRS
-variables. The loaded data contain <strong>30000</strong> records.</p>
-</div>
-<div id="coverage" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Coverage</h2>
-<p>Datetime ranges are displayed in UTC.</p>
-<div class="table-scroll">
-<table class="summary-table">
-<caption>
-NACRS datetime coverage
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-Variable
-</th>
-<th style="text-align:right;">
-Non-missing
-</th>
-<th style="text-align:right;">
-Missing
-</th>
-<th style="text-align:left;">
-Earliest
-</th>
-<th style="text-align:left;">
-Latest
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Arrival datetime
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-2025-04-01 01:29
-</td>
-<td style="text-align:left;">
-2027-05-05 20:57
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Discharge datetime
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-2025-04-01 06:29
-</td>
-<td style="text-align:left;">
-2027-05-06 00:13
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Disposition decision datetime
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-2025-04-01 05:32
-</td>
-<td style="text-align:left;">
-2027-05-05 23:30
-</td>
-</tr>
-</tbody>
-</table>
+<strong>Training data notice:</strong> The visits and abstracts are
+randomly generated synthetic records. Preprocessing is completed in Memo
+A00.
 </div>
 <div class="table-scroll">
 <table class="summary-table">
 <caption>
-NACRS reporting-period coverage
+Analytic files used for linkage
 </caption>
 <thead>
 <tr>
 <th style="text-align:left;">
-Variable
+File
+</th>
+<th style="text-align:right;">
+Records
 </th>
 <th style="text-align:left;">
-Coverage
+Used in linkage
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-Fiscal year
+analytic_nacrs.rds
+</td>
+<td style="text-align:right;">
+30000
 </td>
 <td style="text-align:left;">
-2025-26, 2026-27, 2027-28
+5,380 hospitalized visits
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+analytic_dad.rds
+</td>
+<td style="text-align:right;">
+60000
+</td>
+<td style="text-align:left;">
+59,141 abstracts with a PHN
 </td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>
+One row per hospitalized visit is written to
+<code>data/analytic_linkage.rds</code>. Unlinked visits are kept, with a
+missing DAD record id.
+</p>
 </div>
-<div id="main-measures" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Main measures</h2>
-<p>The registry selects <strong>5</strong> continuous measures and
-<strong>19</strong> categorical measures for the main profile.</p>
-<div id="continuous-measures" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Continuous
-measures</h3>
+</div>
+<div id="linkage-results" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Linkage results</h1>
+<div id="funnel" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Funnel</h2>
+<p>
+The counts below are hospitalized emergency visits. Each step keeps only
+the visits that passed the previous step.
+</p>
 <div class="table-scroll">
-<table class="summary-table continuous-summary-table">
+<table class="summary-table">
 <caption>
-Selected NACRS continuous measures
+Linkage funnel for hospitalized emergency visits
 </caption>
 <thead>
 <tr>
 <th style="text-align:left;">
-Variable
-</th>
-<th style="text-align:left;">
-Mean (SD)
-</th>
-<th style="text-align:left;">
-Median
-</th>
-<th style="text-align:left;">
-Min-Max
-</th>
-<th style="text-align:left;">
-P1
-</th>
-<th style="text-align:left;">
-P5
-</th>
-<th style="text-align:left;">
-P10
-</th>
-<th style="text-align:left;">
-Q1
-</th>
-<th style="text-align:left;">
-Q2
-</th>
-<th style="text-align:left;">
-Q3
-</th>
-<th style="text-align:left;">
-P90
-</th>
-<th style="text-align:left;">
-P95
-</th>
-<th style="text-align:left;">
-P99
+Step
 </th>
 <th style="text-align:right;">
-Missing
+Visits
 </th>
-<th style="text-align:right;">
-N
-</th>
-<th style="text-align:right;">
-Non-missing
-</th>
-<th style="text-align:right;">
-Missing %
+<th style="text-align:left;">
+Share of hospitalized visits
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-Age (years)
-</td>
-<td style="text-align:left;">
-48.49 (27.02)
-</td>
-<td style="text-align:left;">
-49.00
-</td>
-<td style="text-align:left;">
-0.00 - 100.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-4.00
-</td>
-<td style="text-align:left;">
-10.00
-</td>
-<td style="text-align:left;">
-27.00
-</td>
-<td style="text-align:left;">
-49.00
-</td>
-<td style="text-align:left;">
-72.00
-</td>
-<td style="text-align:left;">
-84.00
-</td>
-<td style="text-align:left;">
-91.00
-</td>
-<td style="text-align:left;">
-99.00
+Hospitalized NACRS visits
 </td>
 <td style="text-align:right;">
-0
+5380
 </td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
+<td style="text-align:left;">
+100.0%
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Pain score (points)
-</td>
-<td style="text-align:left;">
-5.50 (3.01)
-</td>
-<td style="text-align:left;">
-6.00
-</td>
-<td style="text-align:left;">
-0.00 - 10.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-1.00
-</td>
-<td style="text-align:left;">
-3.00
-</td>
-<td style="text-align:left;">
-6.00
-</td>
-<td style="text-align:left;">
-8.00
-</td>
-<td style="text-align:left;">
-9.00
-</td>
-<td style="text-align:left;">
-10.00
-</td>
-<td style="text-align:left;">
-10.00
+Same PHN on at least one DAD abstract
 </td>
 <td style="text-align:right;">
-0
+3821
 </td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
+<td style="text-align:left;">
+71.0%
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Triage wait (min)
-</td>
-<td style="text-align:left;">
-13.97 (9.47)
-</td>
-<td style="text-align:left;">
-12.00
-</td>
-<td style="text-align:left;">
-0.00 - 57.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-1.00
-</td>
-<td style="text-align:left;">
-3.00
-</td>
-<td style="text-align:left;">
-6.00
-</td>
-<td style="text-align:left;">
-12.00
-</td>
-<td style="text-align:left;">
-19.00
-</td>
-<td style="text-align:left;">
-27.00
-</td>
-<td style="text-align:left;">
-33.00
-</td>
-<td style="text-align:left;">
-41.00
+Discharge within 6 hours of that admission
 </td>
 <td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Physician wait (min)
+3672
 </td>
 <td style="text-align:left;">
-59.85 (52.29)
-</td>
-<td style="text-align:left;">
-49.00
-</td>
-<td style="text-align:left;">
-0.00 - 300.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-3.00
-</td>
-<td style="text-align:left;">
-19.00
-</td>
-<td style="text-align:left;">
-49.00
-</td>
-<td style="text-align:left;">
-86.00
-</td>
-<td style="text-align:left;">
-134.00
-</td>
-<td style="text-align:left;">
-161.00
-</td>
-<td style="text-align:left;">
-227.00
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Length of stay (min)
-</td>
-<td style="text-align:left;">
-270.14 (180.40)
-</td>
-<td style="text-align:left;">
-231.00
-</td>
-<td style="text-align:left;">
-10.00 - 1121.00
-</td>
-<td style="text-align:left;">
-20.00
-</td>
-<td style="text-align:left;">
-55.00
-</td>
-<td style="text-align:left;">
-84.00
-</td>
-<td style="text-align:left;">
-143.00
-</td>
-<td style="text-align:left;">
-231.00
-</td>
-<td style="text-align:left;">
-351.00
-</td>
-<td style="text-align:left;">
-520.00
-</td>
-<td style="text-align:left;">
-642.00
-</td>
-<td style="text-align:left;">
-873.00
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
+68.3%
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="timing-measures" class="section level3" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> Timing
-measures</h3>
-<p>Timing summaries use <strong>22634</strong> quality-eligible records
-and exclude <strong>7366</strong> records. Excluded records remain
-visible in the Data quality section.</p>
+<div id="link-status" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Link status</h2>
 <div class="table-scroll">
-<table class="summary-table continuous-summary-table">
+<table class="summary-table">
 <caption>
-Quality-eligible NACRS timing measures
+Final link status of each hospitalized visit
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;">
-Variable
-</th>
-<th style="text-align:left;">
-Mean (SD)
-</th>
-<th style="text-align:left;">
-Median
-</th>
-<th style="text-align:left;">
-Min-Max
-</th>
-<th style="text-align:left;">
-P1
-</th>
-<th style="text-align:left;">
-P5
-</th>
-<th style="text-align:left;">
-P10
-</th>
-<th style="text-align:left;">
-Q1
-</th>
-<th style="text-align:left;">
-Q2
-</th>
-<th style="text-align:left;">
-Q3
-</th>
-<th style="text-align:left;">
-P90
-</th>
-<th style="text-align:left;">
-P95
-</th>
-<th style="text-align:left;">
-P99
-</th>
-<th style="text-align:right;">
-Missing
-</th>
-<th style="text-align:right;">
-N
-</th>
-<th style="text-align:right;">
-Non-missing
-</th>
-<th style="text-align:right;">
-Missing %
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Pre-disposition length of stay (min)
-</td>
-<td style="text-align:left;">
-233.21 (126.94)
-</td>
-<td style="text-align:left;">
-205.00
-</td>
-<td style="text-align:left;">
-10.00 - 835.00
-</td>
-<td style="text-align:left;">
-48.00
-</td>
-<td style="text-align:left;">
-83.00
-</td>
-<td style="text-align:left;">
-105.00
-</td>
-<td style="text-align:left;">
-145.00
-</td>
-<td style="text-align:left;">
-205.00
-</td>
-<td style="text-align:left;">
-291.00
-</td>
-<td style="text-align:left;">
-407.00
-</td>
-<td style="text-align:left;">
-495.00
-</td>
-<td style="text-align:left;">
-647.00
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-22634
-</td>
-<td style="text-align:right;">
-22634
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Post-disposition length of stay (min)
-</td>
-<td style="text-align:left;">
-56.39 (54.58)
-</td>
-<td style="text-align:left;">
-42.00
-</td>
-<td style="text-align:left;">
-0.00 - 380.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-1.00
-</td>
-<td style="text-align:left;">
-5.00
-</td>
-<td style="text-align:left;">
-17.00
-</td>
-<td style="text-align:left;">
-42.00
-</td>
-<td style="text-align:left;">
-78.00
-</td>
-<td style="text-align:left;">
-129.00
-</td>
-<td style="text-align:left;">
-165.00
-</td>
-<td style="text-align:left;">
-255.00
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-22634
-</td>
-<td style="text-align:right;">
-22634
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="categorical-measures" class="section level3" number="2.3.3">
-<h3><span class="header-section-number">2.3.3</span> Categorical
-measures</h3>
-<p>Each variable is displayed separately. Coded variables show up to the
-20 most frequent codes, followed by Other and Missing where
-applicable.</p>
-<div id="health-zone" class="section level4" number="2.3.3.1">
-<h4><span class="header-section-number">2.3.3.1</span> Health zone</h4>
-<div class="variable-code">
-<code>health_zone</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Edmonton
-</td>
-<td style="text-align:right;">
-10276 (34.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Calgary
-</td>
-<td style="text-align:right;">
-9685 (32.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Central
-</td>
-<td style="text-align:right;">
-3793 (12.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-North
-</td>
-<td style="text-align:right;">
-3686 (12.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:right;">
-2560 (8.5%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="sex" class="section level4" number="2.3.3.2">
-<h4><span class="header-section-number">2.3.3.2</span> Sex</h4>
-<div class="variable-code">
-<code>sex</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-F
-</td>
-<td style="text-align:right;">
-15051 (50.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:right;">
-14252 (47.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-U
-</td>
-<td style="text-align:right;">
-552 (1.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-X
-</td>
-<td style="text-align:right;">
-145 (0.5%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="postal-fsa" class="section level4" number="2.3.3.3">
-<h4><span class="header-section-number">2.3.3.3</span> Postal FSA</h4>
-<div class="variable-code">
-<code>postal_fsa</code>
-</div>
-<div class="category-table-card long-table">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-T9H
-</td>
-<td style="text-align:right;">
-1067 (3.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2A
-</td>
-<td style="text-align:right;">
-1062 (3.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5M
-</td>
-<td style="text-align:right;">
-1034 (3.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T4N
-</td>
-<td style="text-align:right;">
-1019 (3.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T4R
-</td>
-<td style="text-align:right;">
-997 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T8V
-</td>
-<td style="text-align:right;">
-997 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2H
-</td>
-<td style="text-align:right;">
-996 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5K
-</td>
-<td style="text-align:right;">
-991 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5E
-</td>
-<td style="text-align:right;">
-983 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5L
-</td>
-<td style="text-align:right;">
-979 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T4S
-</td>
-<td style="text-align:right;">
-967 (3.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5G
-</td>
-<td style="text-align:right;">
-954 (3.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5C
-</td>
-<td style="text-align:right;">
-939 (3.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5A
-</td>
-<td style="text-align:right;">
-929 (3.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5N
-</td>
-<td style="text-align:right;">
-922 (3.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2G
-</td>
-<td style="text-align:right;">
-920 (3.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5J
-</td>
-<td style="text-align:right;">
-911 (3.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2J
-</td>
-<td style="text-align:right;">
-867 (2.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T9K
-</td>
-<td style="text-align:right;">
-856 (2.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2E
-</td>
-<td style="text-align:right;">
-844 (2.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2L
-</td>
-<td style="text-align:right;">
-837 (2.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5H
-</td>
-<td style="text-align:right;">
-819 (2.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5B
-</td>
-<td style="text-align:right;">
-815 (2.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T4P
-</td>
-<td style="text-align:right;">
-810 (2.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2C
-</td>
-<td style="text-align:right;">
-770 (2.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T8W
-</td>
-<td style="text-align:right;">
-766 (2.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T1G
-</td>
-<td style="text-align:right;">
-764 (2.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2P
-</td>
-<td style="text-align:right;">
-740 (2.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2B
-</td>
-<td style="text-align:right;">
-726 (2.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2K
-</td>
-<td style="text-align:right;">
-670 (2.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T1J
-</td>
-<td style="text-align:right;">
-668 (2.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2M
-</td>
-<td style="text-align:right;">
-654 (2.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T1K
-</td>
-<td style="text-align:right;">
-638 (2.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2N
-</td>
-<td style="text-align:right;">
-599 (2.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T1H
-</td>
-<td style="text-align:right;">
-490 (1.6%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="arrival-mode" class="section level4" number="2.3.3.4">
-<h4><span class="header-section-number">2.3.3.4</span> Arrival mode</h4>
-<div class="variable-code">
-<code>arrival_mode</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Walk-in
-</td>
-<td style="text-align:right;">
-14415 (48.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ground ambulance
-</td>
-<td style="text-align:right;">
-7394 (24.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Private vehicle
-</td>
-<td style="text-align:right;">
-6310 (21.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Transfer
-</td>
-<td style="text-align:right;">
-1356 (4.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Police
-</td>
-<td style="text-align:right;">
-525 (1.8%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="ctas-level" class="section level4" number="2.3.3.5">
-<h4><span class="header-section-number">2.3.3.5</span> CTAS level</h4>
-<div class="variable-code">
-<code>ctas_level</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:right;">
-737 (2.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:right;">
-4622 (15.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:right;">
-13852 (46.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-4
-</td>
-<td style="text-align:right;">
-8945 (29.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-5
-</td>
-<td style="text-align:right;">
-1844 (6.1%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="chief-complaint" class="section level4" number="2.3.3.6">
-<h4><span class="header-section-number">2.3.3.6</span> Chief
-complaint</h4>
-<div class="variable-code">
-<code>chief_complaint</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Urinary symptoms
-</td>
-<td style="text-align:right;">
-2442 (8.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mental health concern
-</td>
-<td style="text-align:right;">
-2277 (7.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Shortness of breath
-</td>
-<td style="text-align:right;">
-2233 (7.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Back pain
-</td>
-<td style="text-align:right;">
-2152 (7.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Headache
-</td>
-<td style="text-align:right;">
-2109 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Minor trauma
-</td>
-<td style="text-align:right;">
-2094 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Chest pain
-</td>
-<td style="text-align:right;">
-2059 (6.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Syncope
-</td>
-<td style="text-align:right;">
-2047 (6.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Abdominal pain
-</td>
-<td style="text-align:right;">
-2030 (6.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Dizziness
-</td>
-<td style="text-align:right;">
-1845 (6.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Nausea/vomiting
-</td>
-<td style="text-align:right;">
-1766 (5.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Laceration
-</td>
-<td style="text-align:right;">
-1757 (5.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Fever
-</td>
-<td style="text-align:right;">
-1755 (5.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Allergic reaction
-</td>
-<td style="text-align:right;">
-1751 (5.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Weakness
-</td>
-<td style="text-align:right;">
-1683 (5.6%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="main-diagnosis-icd-10" class="section level4" number="2.3.3.7">
-<h4><span class="header-section-number">2.3.3.7</span> Main diagnosis
-ICD-10</h4>
-<div class="variable-code">
-<code>main_diagnosis_icd10</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-N39.0
-</td>
-<td style="text-align:right;">
-2442 (8.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F41.9
-</td>
-<td style="text-align:right;">
-2277 (7.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R06.0
-</td>
-<td style="text-align:right;">
-2233 (7.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-M54.5
-</td>
-<td style="text-align:right;">
-2152 (7.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R51.9
-</td>
-<td style="text-align:right;">
-2109 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-S09.9
-</td>
-<td style="text-align:right;">
-2094 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R07.4
-</td>
-<td style="text-align:right;">
-2059 (6.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R55
-</td>
-<td style="text-align:right;">
-2047 (6.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R10.9
-</td>
-<td style="text-align:right;">
-2030 (6.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R42
-</td>
-<td style="text-align:right;">
-1845 (6.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R11
-</td>
-<td style="text-align:right;">
-1766 (5.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-S01.9
-</td>
-<td style="text-align:right;">
-1757 (5.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R50.9
-</td>
-<td style="text-align:right;">
-1755 (5.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T78.4
-</td>
-<td style="text-align:right;">
-1751 (5.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R53
-</td>
-<td style="text-align:right;">
-1683 (5.6%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="secondary-diagnosis-1" class="section level4" number="2.3.3.8">
-<h4><span class="header-section-number">2.3.3.8</span> Secondary
-diagnosis 1</h4>
-<div class="variable-code">
-<code>secondary_diagnosis_1</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-K21.9
-</td>
-<td style="text-align:right;">
-2577 (8.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I25.1
-</td>
-<td style="text-align:right;">
-2488 (8.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-E78.5
-</td>
-<td style="text-align:right;">
-2433 (8.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Z79.899
-</td>
-<td style="text-align:right;">
-2407 (8.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I10
-</td>
-<td style="text-align:right;">
-2338 (7.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F32.9
-</td>
-<td style="text-align:right;">
-2266 (7.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F41.9
-</td>
-<td style="text-align:right;">
-2238 (7.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-E11.9
-</td>
-<td style="text-align:right;">
-2117 (7.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N18.9
-</td>
-<td style="text-align:right;">
-2105 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J45.9
-</td>
-<td style="text-align:right;">
-1958 (6.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
-</td>
-<td style="text-align:right;">
-7073 (23.6%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="secondary-diagnosis-2" class="section level4" number="2.3.3.9">
-<h4><span class="header-section-number">2.3.3.9</span> Secondary
-diagnosis 2</h4>
-<div class="variable-code">
-<code>secondary_diagnosis_2</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-F32.9
-</td>
-<td style="text-align:right;">
-2334 (7.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-E78.5
-</td>
-<td style="text-align:right;">
-2320 (7.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N18.9
-</td>
-<td style="text-align:right;">
-2179 (7.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J45.9
-</td>
-<td style="text-align:right;">
-2149 (7.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I10
-</td>
-<td style="text-align:right;">
-2102 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K21.9
-</td>
-<td style="text-align:right;">
-2066 (6.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-E11.9
-</td>
-<td style="text-align:right;">
-2055 (6.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Z79.899
-</td>
-<td style="text-align:right;">
-2024 (6.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I25.1
-</td>
-<td style="text-align:right;">
-2001 (6.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F41.9
-</td>
-<td style="text-align:right;">
-1665 (5.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
-</td>
-<td style="text-align:right;">
-9105 (30.4%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="intervention-1" class="section level4" number="2.3.3.10">
-<h4><span class="header-section-number">2.3.3.10</span> Intervention
-1</h4>
-<div class="variable-code">
-<code>intervention_1</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-ECG
-</td>
-<td style="text-align:right;">
-3345 (11.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Troponin
-</td>
-<td style="text-align:right;">
-3124 (10.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-IV fluids
-</td>
-<td style="text-align:right;">
-3068 (10.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CBC
-</td>
-<td style="text-align:right;">
-2896 (9.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-X-ray
-</td>
-<td style="text-align:right;">
-2882 (9.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CT
-</td>
-<td style="text-align:right;">
-2880 (9.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Wound care
-</td>
-<td style="text-align:right;">
-2098 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-None
-</td>
-<td style="text-align:right;">
-2021 (6.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Nebulizer
-</td>
-<td style="text-align:right;">
-1981 (6.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Urinalysis
-</td>
-<td style="text-align:right;">
-1973 (6.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Analgesia
-</td>
-<td style="text-align:right;">
-1960 (6.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Electrolytes
-</td>
-<td style="text-align:right;">
-1772 (5.9%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="intervention-2" class="section level4" number="2.3.3.11">
-<h4><span class="header-section-number">2.3.3.11</span> Intervention
-2</h4>
-<div class="variable-code">
-<code>intervention_2</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-None
-</td>
-<td style="text-align:right;">
-4032 (13.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-IV fluids
-</td>
-<td style="text-align:right;">
-3126 (10.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Analgesia
-</td>
-<td style="text-align:right;">
-3039 (10.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CBC
-</td>
-<td style="text-align:right;">
-2726 (9.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Electrolytes
-</td>
-<td style="text-align:right;">
-2679 (8.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CT
-</td>
-<td style="text-align:right;">
-2493 (8.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Troponin
-</td>
-<td style="text-align:right;">
-2356 (7.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-X-ray
-</td>
-<td style="text-align:right;">
-2141 (7.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Wound care
-</td>
-<td style="text-align:right;">
-2138 (7.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Urinalysis
-</td>
-<td style="text-align:right;">
-1884 (6.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Nebulizer
-</td>
-<td style="text-align:right;">
-1826 (6.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ECG
-</td>
-<td style="text-align:right;">
-1560 (5.2%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="consult-service" class="section level4" number="2.3.3.12">
-<h4><span class="header-section-number">2.3.3.12</span> Consult
-service</h4>
-<div class="variable-code">
-<code>consult_service</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-None
-</td>
-<td style="text-align:right;">
-15151 (50.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Internal Medicine
-</td>
-<td style="text-align:right;">
-3029 (10.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pediatrics
-</td>
-<td style="text-align:right;">
-2286 (7.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Orthopedics
-</td>
-<td style="text-align:right;">
-2061 (6.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-General Surgery
-</td>
-<td style="text-align:right;">
-1912 (6.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Neurology
-</td>
-<td style="text-align:right;">
-1912 (6.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Cardiology
-</td>
-<td style="text-align:right;">
-1908 (6.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Psychiatry
-</td>
-<td style="text-align:right;">
-1741 (5.8%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="ambulance-arrival" class="section level4" number="2.3.3.13">
-<h4><span class="header-section-number">2.3.3.13</span> Ambulance
-arrival</h4>
-<div class="variable-code">
-<code>ambulance_flag</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:right;">
-22606 (75.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-7394 (24.6%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="injury-indicator" class="section level4" number="2.3.3.14">
-<h4><span class="header-section-number">2.3.3.14</span> Injury
-indicator</h4>
-<div class="variable-code">
-<code>injury_flag</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:right;">
-23870 (79.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-6130 (20.4%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="mental-health-indicator" class="section level4" number="2.3.3.15">
-<h4><span class="header-section-number">2.3.3.15</span> Mental health
-indicator</h4>
-<div class="variable-code">
-<code>mental_health_flag</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:right;">
-26714 (89.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-3286 (11.0%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="disposition" class="section level4" number="2.3.3.16">
-<h4><span class="header-section-number">2.3.3.16</span> Disposition</h4>
-<div class="variable-code">
-<code>disposition</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Discharged home
-</td>
-<td style="text-align:right;">
-21491 (71.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Admitted inpatient
-</td>
-<td style="text-align:right;">
-5380 (17.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Transferred
-</td>
-<td style="text-align:right;">
-1153 (3.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Left without being seen
-</td>
-<td style="text-align:right;">
-1038 (3.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Left against medical advice
-</td>
-<td style="text-align:right;">
-801 (2.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Died
-</td>
-<td style="text-align:right;">
-137 (0.5%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="admitted" class="section level4" number="2.3.3.17">
-<h4><span class="header-section-number">2.3.3.17</span> Admitted</h4>
-<div class="variable-code">
-<code>admitted_flag</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:right;">
-24620 (82.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-5380 (17.9%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="left-without-being-seen" class="section level4" number="2.3.3.18">
-<h4><span class="header-section-number">2.3.3.18</span> Left without
-being seen</h4>
-<div class="variable-code">
-<code>lwbs_flag</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:right;">
-28962 (96.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-1038 (3.5%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="hour-revisit" class="section level4" number="2.3.3.19">
-<h4><span class="header-section-number">2.3.3.19</span> 72-hour
-revisit</h4>
-<div class="variable-code">
-<code>revisit_72h_flag</code>
-</div>
-<div class="category-table-card">
-<table class="summary-table categorical-summary-table">
-<thead>
-<tr>
-<th style="text-align:left;">
-Category
-</th>
-<th style="text-align:right;">
-Count n (%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:right;">
-27581 (91.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-2419 (8.1%)
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div id="data-quality" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Data quality</h2>
-<div class="table-scroll">
-<table class="summary-table categorical-summary-table">
-<caption>
-NACRS quality-status distribution
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-Variable
-</th>
 <th style="text-align:left;">
 Status
 </th>
+<th style="text-align:right;">
+Visits
+</th>
 <th style="text-align:left;">
-Count n (%)
+Share of hospitalized visits
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-Timing quality status
+Linked
+</td>
+<td style="text-align:right;">
+3672
 </td>
 <td style="text-align:left;">
-Pass
-</td>
-<td style="text-align:left;">
-22634 (75.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Timing quality status
-</td>
-<td style="text-align:left;">
-Triage wait &gt; physician wait
-</td>
-<td style="text-align:left;">
-4169 (13.9%)
+68.3%
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Timing quality status
+PHN match outside the 6-hour window
+</td>
+<td style="text-align:right;">
+149
 </td>
 <td style="text-align:left;">
-Physician wait &gt; ED LOS
+2.8%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+No PHN match in DAD
+</td>
+<td style="text-align:right;">
+1559
 </td>
 <td style="text-align:left;">
-3197 (10.7%)
+29.0%
 </td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>
+3,672 of 5,380 hospitalized visits (68.3%) link to exactly one DAD
+abstract. 149 visits share a personal health number with at least one
+abstract, but none of those admissions fall inside the six-hour window.
+1,559 visits have no DAD abstract with the same personal health number.
+Exact PHN matching cannot recover a blank or mistyped identifier. On the
+DAD file, 859 abstracts have a missing patient identifier and 838 are
+flagged as a one-digit identifier error.
+</p>
+</div>
+<div id="linked-pairs" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Linked pairs</h2>
 <div class="table-scroll">
 <table class="summary-table">
 <caption>
-NACRS timing consistency checks
+Description of the linked pairs
 </caption>
 <thead>
 <tr>
 <th style="text-align:left;">
-Check
-</th>
-<th style="text-align:right;">
-Evaluated
-</th>
-<th style="text-align:right;">
-Violations
+Measure
 </th>
 <th style="text-align:left;">
-Status
+Value
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-Arrival &lt;= decision &lt;= discharge
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
+Linked visits
 </td>
 <td style="text-align:left;">
-Pass
+3,672
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Pre-disposition LOS matches timestamps
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
+Distinct DAD abstracts
 </td>
 <td style="text-align:left;">
-Pass
+3,672
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Post-disposition LOS matches timestamps
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
+Same facility
 </td>
 <td style="text-align:left;">
-Pass
+3,656 of 3,672
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Pre + post LOS equals total LOS
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
+DAD admission source
 </td>
 <td style="text-align:left;">
-Pass
+Emergency Department 3672
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Timing durations are non-negative
-</td>
-<td style="text-align:right;">
-30000
-</td>
-<td style="text-align:right;">
-0
+Hours, admission minus discharge: minimum
 </td>
 <td style="text-align:left;">
-Pass
+0.17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hours, admission minus discharge: median
+</td>
+<td style="text-align:left;">
+0.82
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hours, admission minus discharge: maximum
+</td>
+<td style="text-align:left;">
+6.00
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="variable-handling" class="section level3" number="2.4.1">
-<h3><span class="header-section-number">2.4.1</span> Variable
-handling</h3>
-<p>Identifiers and internal provenance fields are registered for schema
-validation but are excluded from public summary tables. Missing values
-remain distinct from valid zero values.</p>
+<p>
+The hour column is DAD admission time minus NACRS discharge time. A
+positive value means the inpatient admission is after the emergency
+discharge. Among the linked pairs the median difference is 0.82 hours,
+and every difference is within 6.00 hours by construction. 3,656 of the
+linked pairs are at the same facility.
+</p>
 </div>
+<div id="personal-health-number-matches-outside-the-window" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Personal health
+number matches outside the window</h2>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Closest same-PHN admission among visits that failed the clock rule
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Measure
+</th>
+<th style="text-align:left;">
+Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Visits
+</td>
+<td style="text-align:left;">
+149
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Closest PHN match, absolute hours: minimum
+</td>
+<td style="text-align:left;">
+7.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Closest PHN match, absolute hours: median
+</td>
+<td style="text-align:left;">
+18.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Closest PHN match, absolute hours: maximum
+</td>
+<td style="text-align:left;">
+8304.27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+These 149 visits do have a DAD abstract with the same personal health
+number. The closest of those admissions is still more than 6 hours from
+the emergency discharge. The closest gaps range from 7.00 to 8304.27
+hours. They are not linked.
+</p>
+</div>
+<div id="linked-and-not-linked" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Linked and not
+linked</h2>
+<p>
+Memo A05 uses only the linked visits. Those visits are not all of the
+hospitalized visits. The comparison below is CTAS, total emergency stay,
+and pre-disposition stay. The hospitalization question uses
+pre-disposition stay. The length-of-stay question uses total emergency
+stay.
+</p>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+CTAS and emergency stay among hospitalized visits, by linkage
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Measure
+</th>
+<th style="text-align:left;">
+Linked
+</th>
+<th style="text-align:left;">
+Not linked
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Visits
+</td>
+<td style="text-align:left;">
+3,672
+</td>
+<td style="text-align:left;">
+1,708
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Median total emergency stay, minutes
+</td>
+<td style="text-align:left;">
+506
+</td>
+<td style="text-align:left;">
+502
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Median pre-disposition stay, minutes
+</td>
+<td style="text-align:left;">
+372
+</td>
+<td style="text-align:left;">
+398
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CTAS 1
+</td>
+<td style="text-align:left;">
+291 (7.9%)
+</td>
+<td style="text-align:left;">
+206 (12.1%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CTAS 2
+</td>
+<td style="text-align:left;">
+1,287 (35.0%)
+</td>
+<td style="text-align:left;">
+523 (30.6%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CTAS 3
+</td>
+<td style="text-align:left;">
+1,696 (46.2%)
+</td>
+<td style="text-align:left;">
+701 (41.0%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CTAS 4
+</td>
+<td style="text-align:left;">
+351 (9.6%)
+</td>
+<td style="text-align:left;">
+261 (15.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CTAS 5
+</td>
+<td style="text-align:left;">
+47 (1.3%)
+</td>
+<td style="text-align:left;">
+17 (1.0%)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+A difference in this table means the length-of-stay models do not
+automatically extend to the hospitalized visits that were not linked. No
+length of stay is imputed for them.
+</p>
 </div>
 </div>
 
