@@ -381,12 +381,13 @@
 
     /* ---------- Atlas ---------- */
     .atlas-card {
-      display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 0.92fr);
       overflow: hidden; border-radius: 28px; color: #eef9f6;
       background: linear-gradient(150deg, #063a37, #052a2b);
       border: 1px solid rgba(191, 224, 217, 0.2); box-shadow: var(--shadow);
     }
-    .atlas-content { display: flex; flex-direction: column; justify-content: center; padding: clamp(32px, 4.5vw, 60px); }
+    .atlas-banner { display: block; width: 100%; background: #072f2d; line-height: 0; }
+    .atlas-banner img { display: block; width: 100%; height: auto; }
+    .atlas-content { display: flex; flex-direction: column; justify-content: center; padding: clamp(32px, 4.5vw, 56px); }
     .atlas-content .eyebrow { color: #8fd2cb; }
     .atlas-content h2 {
       margin: 0 0 16px; font-family: var(--serif); font-weight: 500;
@@ -403,12 +404,6 @@
     .atlas-actions .btn-primary:hover { background: #fff; }
     .atlas-actions .btn-ghost { color: #eef9f6; border-color: rgba(238, 249, 246, 0.4); }
     .atlas-actions .btn-ghost:hover { background: rgba(238, 249, 246, 0.08); }
-    .atlas-visual { min-height: 380px; background: #04302f; }
-    .atlas-visual img { display: block; width: 100%; height: 100%; object-fit: cover; }
-    @media (max-width: 860px) {
-      .atlas-card { grid-template-columns: 1fr; }
-      .atlas-visual { min-height: 0; aspect-ratio: 1.91 / 1; order: -1; }
-    }
 
     /* ---------- Reproduce / dev ---------- */
     .repro-grid { display: grid; gap: 24px; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: start; }
@@ -686,10 +681,12 @@
         <p>Project 001 is the project. The Alberta Health Data Atlas is only the reference used to keep the synthetic records realistic — it holds no patient-level values and is not a second project.</p>
       </div>
       <article class="atlas-card">
+        <div class="atlas-banner">
+          <img src="ahs-datasets/atlas-preview.png" alt="Alberta Health Data Atlas cover — 9 datasets, guided learning, responsible access — with a connected map of dataset concepts" loading="lazy" width="1734" height="907">
+        </div>
         <div class="atlas-content">
-          <p class="eyebrow">Alberta Health Data Atlas</p>
           <h2>Structure, not records.</h2>
-          <p>A Chinese–English guide to nine Alberta administrative datasets and clinical information systems. Project 001 uses it to decide record grain, field families, and linkage before generating the synthetic NACRS and DAD examples.</p>
+          <p>A Chinese–English guide to nine Alberta administrative datasets and clinical information systems. Project 001 uses it to decide record grain, field families, and linkage before generating the synthetic NACRS and DAD examples — it holds no patient-level values.</p>
           <div class="atlas-stats">
             <span>9 dataset guides</span>
             <span>DAD · NACRS · PIN deep dives</span>
@@ -699,9 +696,6 @@
             <a class="btn btn-primary" href="ahs-datasets/">Open the reference</a>
             <a class="btn btn-ghost" href="https://alberta-health-data-atlas.tigerdogai.chatgpt.site">Interactive atlas</a>
           </div>
-        </div>
-        <div class="atlas-visual">
-          <img src="ahs-datasets/atlas-preview.png" alt="Alberta Health Data Atlas cover, a connected map of dataset concepts" loading="lazy">
         </div>
       </article>
     </section>
