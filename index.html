@@ -3,682 +3,800 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Project 001 generates synthetic Alberta NACRS and DAD records. Hospitalization is studied with CTAS and pre-disposition stay. Inpatient length of stay, in the linked subset, is studied with CTAS and emergency stay.">
+  <meta name="description" content="Project 001 is a synthetic-data consulting demonstration from The V Lab. It generates fictional Alberta NACRS and DAD records to study two questions: whether CTAS and pre-disposition stay predict hospitalization, and whether CTAS and emergency stay predict inpatient length of stay.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Project 001 | The V Lab">
-  <meta property="og:description" content="Synthetic Alberta NACRS and DAD records. CTAS and pre-disposition stay versus hospitalization, then CTAS and emergency stay versus inpatient length of stay.">
+  <meta property="og:description" content="Synthetic Alberta NACRS and DAD records. CTAS and pre-disposition stay versus hospitalization, then CTAS and emergency stay versus inpatient length of stay. Seven consulting memos, A00 through A06.">
   <meta property="og:url" content="https://laboratoirev.github.io/Project001_HealthData/">
   <meta property="og:image" content="https://laboratoirev.github.io/Project001_HealthData/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Project 001 | The V Lab">
-  <meta name="twitter:description" content="Synthetic Alberta NACRS and DAD records. CTAS and pre-disposition stay versus hospitalization, then CTAS and emergency stay versus inpatient length of stay.">
+  <meta name="twitter:description" content="Synthetic Alberta NACRS and DAD records. Seven consulting memos across two linked research questions.">
   <meta name="twitter:image" content="https://laboratoirev.github.io/Project001_HealthData/og.png">
   <title>Project 001 | The V Lab</title>
   <style>
     :root {
-      --ink: #132d33;
-      --ink-soft: #496267;
-      --paper: #f7f4ed;
+      color-scheme: light dark;
+      --ink: #10262b;
+      --ink-soft: #4a6167;
+      --ink-faint: #6d858a;
+      --paper: #f5f1e8;
+      --paper-2: #fbf8f1;
       --surface: #fffdf8;
-      --teal: #126d68;
-      --teal-dark: #0a4c49;
-      --aqua: #b9ded7;
-      --coral: #e56d55;
-      --line: rgba(19, 45, 51, 0.14);
-      --shadow: 0 20px 50px rgba(24, 57, 61, 0.12);
+      --surface-2: #f3efe6;
+      --teal: #0f6d67;
+      --teal-dark: #094c48;
+      --teal-ink: #063a37;
+      --aqua: #bfe0d9;
+      --aqua-soft: #dcefeb;
+      --coral: #e06a51;
+      --coral-soft: #f4d6cd;
+      --gold: #c9a24b;
+      --line: rgba(16, 38, 43, 0.13);
+      --line-strong: rgba(16, 38, 43, 0.22);
+      --shadow-sm: 0 6px 18px rgba(16, 45, 50, 0.08);
+      --shadow: 0 22px 55px rgba(16, 45, 50, 0.13);
+      --radius: 22px;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
     }
 
-    * {
-      box-sizing: border-box;
+    /* Explicit dark theme (data-theme toggle) */
+    :root[data-theme="dark"] {
+      --ink: #eaf3f1;
+      --ink-soft: #a9c1bd;
+      --ink-faint: #7e9995;
+      --paper: #08191b;
+      --paper-2: #0a1e20;
+      --surface: #0e2427;
+      --surface-2: #113034;
+      --teal: #3fb3aa;
+      --teal-dark: #7fd3cb;
+      --teal-ink: #cdeee9;
+      --aqua: #1c4c4c;
+      --aqua-soft: #16403f;
+      --coral: #f08a72;
+      --coral-soft: #43231d;
+      --gold: #d9b96a;
+      --line: rgba(206, 238, 233, 0.14);
+      --line-strong: rgba(206, 238, 233, 0.26);
+      --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.4);
+      --shadow: 0 22px 55px rgba(0, 0, 0, 0.5);
     }
 
-    html {
-      scroll-behavior: smooth;
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --ink: #eaf3f1;
+        --ink-soft: #a9c1bd;
+        --ink-faint: #7e9995;
+        --paper: #08191b;
+        --paper-2: #0a1e20;
+        --surface: #0e2427;
+        --surface-2: #113034;
+        --teal: #3fb3aa;
+        --teal-dark: #7fd3cb;
+        --teal-ink: #cdeee9;
+        --aqua: #1c4c4c;
+        --aqua-soft: #16403f;
+        --coral: #f08a72;
+        --coral-soft: #43231d;
+        --gold: #d9b96a;
+        --line: rgba(206, 238, 233, 0.14);
+        --line-strong: rgba(206, 238, 233, 0.26);
+        --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.4);
+        --shadow: 0 22px 55px rgba(0, 0, 0, 0.5);
+      }
     }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
     body {
       margin: 0;
       color: var(--ink);
       background:
-        radial-gradient(circle at 88% 9%, rgba(185, 222, 215, 0.52), transparent 24rem),
-        linear-gradient(180deg, #fbfaf6 0%, var(--paper) 100%);
-      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
+        radial-gradient(circle at 92% 4%, color-mix(in srgb, var(--aqua) 55%, transparent), transparent 26rem),
+        radial-gradient(circle at 2% 40%, color-mix(in srgb, var(--coral-soft) 40%, transparent), transparent 30rem),
+        linear-gradient(180deg, var(--paper-2) 0%, var(--paper) 100%);
+      background-attachment: fixed;
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.62;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: inherit;
-    }
-
-    a:focus-visible {
+    a { color: inherit; }
+    a:focus-visible,
+    button:focus-visible {
       outline: 3px solid var(--coral);
-      outline-offset: 4px;
+      outline-offset: 3px;
+      border-radius: 4px;
     }
+    img { max-width: 100%; }
 
     .skip-link {
-      position: fixed;
-      z-index: 10;
-      top: 12px;
-      left: 12px;
-      padding: 10px 15px;
-      border-radius: 8px;
-      color: white;
-      background: var(--ink);
-      font-weight: 800;
-      text-decoration: none;
+      position: fixed; z-index: 60; top: 12px; left: 12px;
+      padding: 10px 16px; border-radius: 8px;
+      color: #fff; background: var(--teal-ink);
+      font-weight: 800; text-decoration: none;
       transform: translateY(-160%);
     }
+    .skip-link:focus { transform: translateY(0); }
 
-    .skip-link:focus {
-      transform: translateY(0);
-    }
+    .shell { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
 
-    .shell {
-      width: min(1120px, calc(100% - 40px));
-      margin-inline: auto;
-    }
-
+    /* ---------- Header ---------- */
     .site-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding-block: 28px;
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: blur(12px);
+      background: color-mix(in srgb, var(--paper) 78%, transparent);
+      border-bottom: 1px solid var(--line);
     }
-
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; padding-block: 15px;
+    }
     .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.85rem;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-decoration: none;
-      text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 0.8rem; font-weight: 800; letter-spacing: 0.16em;
+      text-decoration: none; text-transform: uppercase; color: var(--ink);
     }
-
     .brand-mark {
-      display: grid;
-      width: 38px;
-      height: 38px;
-      place-items: center;
-      border-radius: 12px;
-      color: white;
-      background: var(--teal);
-      letter-spacing: 0;
+      display: grid; width: 40px; height: 40px; place-items: center;
+      border-radius: 12px; color: #fff; letter-spacing: 0;
+      font-family: var(--serif); font-size: 1.35rem; font-weight: 600;
+      background: linear-gradient(145deg, var(--teal), var(--teal-dark));
+      box-shadow: var(--shadow-sm);
+    }
+    .brand small {
+      display: block; font-size: 0.62rem; letter-spacing: 0.22em;
+      color: var(--ink-faint); font-weight: 700;
+    }
+    .nav { display: flex; align-items: center; gap: 6px; }
+    .nav a {
+      padding: 8px 13px; border-radius: 999px;
+      color: var(--ink-soft); font-size: 0.86rem; font-weight: 650;
+      text-decoration: none; transition: background 140ms ease, color 140ms ease;
+    }
+    .nav a:hover { background: var(--surface-2); color: var(--ink); }
+    .nav .nav-cta {
+      color: #fff; background: var(--teal);
+    }
+    .nav .nav-cta:hover { background: var(--teal-dark); color: #fff; }
+    .theme-toggle {
+      display: grid; place-items: center; width: 40px; height: 40px;
+      border: 1px solid var(--line-strong); border-radius: 12px;
+      background: var(--surface); color: var(--ink);
+      cursor: pointer; font-size: 1.05rem; line-height: 1;
+      transition: background 140ms ease, transform 140ms ease;
+    }
+    .theme-toggle:hover { background: var(--surface-2); transform: translateY(-1px); }
+    @media (max-width: 780px) {
+      .nav a:not(.nav-cta) { display: none; }
     }
 
-    .header-link {
-      color: var(--ink-soft);
-      font-size: 0.9rem;
-      font-weight: 700;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 5px;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
-      gap: clamp(40px, 8vw, 100px);
-      align-items: end;
-      min-height: 610px;
-      padding-block: 72px 94px;
-    }
-
+    h1, h2, h3, h4, p { margin-top: 0; }
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin: 0 0 24px;
-      color: var(--teal-dark);
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.14em;
+      display: inline-flex; align-items: center; gap: 10px;
+      margin: 0 0 20px; color: var(--teal-dark);
+      font-size: 0.75rem; font-weight: 800; letter-spacing: 0.16em;
       text-transform: uppercase;
     }
+    .eyebrow::before { width: 30px; height: 2px; content: ""; background: var(--coral); }
 
-    .eyebrow::before {
-      width: 34px;
-      height: 2px;
-      content: "";
-      background: var(--coral);
+    /* ---------- Hero ---------- */
+    .hero { padding-block: clamp(56px, 9vw, 104px) clamp(48px, 7vw, 84px); }
+    .hero-grid {
+      display: grid; gap: clamp(36px, 5vw, 68px);
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.75fr);
+      align-items: center;
     }
-
-    h1,
-    h2,
-    h3,
-    p {
-      margin-top: 0;
+    .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 6px 13px; border-radius: 999px;
+      border: 1px solid var(--line-strong); background: var(--surface);
+      font-size: 0.76rem; font-weight: 700; color: var(--ink-soft);
     }
-
+    .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); }
+    .badge.synthetic .dot { background: var(--teal); }
     h1 {
-      max-width: 780px;
-      margin-bottom: 28px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(3.2rem, 7.7vw, 7.1rem);
-      font-weight: 500;
-      letter-spacing: -0.055em;
-      line-height: 0.94;
+      max-width: 15ch; margin-bottom: 24px;
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(2.7rem, 6.4vw, 5.2rem);
+      letter-spacing: -0.032em; line-height: 0.98;
     }
-
-    .hero-copy {
-      max-width: 670px;
-      margin-bottom: 34px;
-      color: var(--ink-soft);
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    h1 .accent { color: var(--teal); font-style: italic; }
+    .lede {
+      max-width: 60ch; margin-bottom: 32px;
+      color: var(--ink-soft); font-size: clamp(1.05rem, 1.6vw, 1.22rem);
     }
-
-    .primary-link {
-      display: inline-flex;
-      align-items: center;
-      min-height: 50px;
-      padding: 13px 20px;
-      border-radius: 999px;
-      color: white;
-      background: var(--teal);
-      font-weight: 800;
-      text-decoration: none;
-      transition: transform 160ms ease, background 160ms ease;
+    .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      min-height: 52px; padding: 14px 24px; border-radius: 999px;
+      font-weight: 750; font-size: 0.98rem; text-decoration: none;
+      border: 1px solid transparent; cursor: pointer;
+      transition: transform 150ms ease, background 150ms ease, border-color 150ms ease;
     }
+    .btn-primary { color: #fff; background: var(--teal); }
+    .btn-primary:hover { background: var(--teal-dark); transform: translateY(-2px); }
+    .btn-ghost { color: var(--ink); background: transparent; border-color: var(--line-strong); }
+    .btn-ghost:hover { background: var(--surface); transform: translateY(-2px); }
+    .btn .arw { transition: transform 150ms ease; }
+    .btn:hover .arw { transform: translateX(3px); }
 
-    .primary-link:hover {
-      background: var(--teal-dark);
-      transform: translateY(-2px);
-    }
-
-    .project-card {
-      position: relative;
-      padding: 34px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      background: rgba(255, 253, 248, 0.82);
+    .hero-card {
+      position: relative; overflow: hidden;
+      padding: 30px; border: 1px solid var(--line);
+      border-radius: 26px; background: var(--surface);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
     }
-
-    .project-card::after {
-      position: absolute;
-      right: -62px;
-      bottom: -62px;
-      width: 165px;
-      height: 165px;
-      border: 28px solid var(--aqua);
-      border-radius: 50%;
-      content: "";
-      opacity: 0.7;
+    .hero-card::after {
+      position: absolute; right: -70px; bottom: -70px;
+      width: 170px; height: 170px; content: "";
+      border: 26px solid var(--aqua); border-radius: 50%;
+      opacity: 0.55; pointer-events: none;
     }
-
-    .project-card h2 {
-      margin-bottom: 24px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.8rem;
-      font-weight: 500;
+    .hero-card h2 {
+      position: relative; z-index: 1; margin-bottom: 20px;
+      font-family: var(--serif); font-size: 1.4rem; font-weight: 500;
     }
-
-    .facts {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      gap: 20px;
-      margin: 0;
-    }
-
-    .facts div {
-      display: grid;
-      gap: 3px;
-    }
-
+    .facts { position: relative; z-index: 1; display: grid; gap: 16px; margin: 0; }
+    .facts > div { display: grid; gap: 2px; padding-bottom: 14px; border-bottom: 1px dashed var(--line); }
+    .facts > div:last-child { border-bottom: 0; padding-bottom: 0; }
     .facts dt {
-      color: var(--ink-soft);
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      color: var(--ink-faint); font-size: 0.68rem; font-weight: 800;
+      letter-spacing: 0.13em; text-transform: uppercase;
     }
+    .facts dd { margin: 0; font-size: 1rem; font-weight: 700; }
 
-    .facts dd {
-      margin: 0;
-      font-size: 1rem;
-      font-weight: 750;
+    /* ---------- Stat strip ---------- */
+    .stat-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      margin-top: 8px; border: 1px solid var(--line);
+      border-radius: var(--radius); overflow: hidden; background: var(--line);
     }
-
-    .reports {
-      padding-block: 100px 112px;
-      border-top: 1px solid var(--line);
+    .stat {
+      padding: 26px 22px; background: var(--surface);
+      display: flex; flex-direction: column; gap: 4px;
     }
-
-    .featured-project {
-      padding-block: 100px;
-      border-top: 1px solid var(--line);
+    .stat b {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(1.8rem, 3.4vw, 2.7rem); line-height: 1; color: var(--teal);
+      letter-spacing: -0.02em;
     }
+    .stat span { font-size: 0.82rem; color: var(--ink-soft); font-weight: 600; }
+    @media (max-width: 720px) { .stat-strip { grid-template-columns: repeat(2, 1fr); } }
 
-    .atlas-card {
-      display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
-      overflow: hidden;
-      border: 1px solid rgba(184, 222, 217, 0.34);
-      border-radius: 30px;
-      color: #eff9f7;
-      background: #073b3f;
-      box-shadow: var(--shadow);
+    /* ---------- Section scaffolding ---------- */
+    section.block { padding-block: clamp(56px, 8vw, 96px); }
+    .section-head { max-width: 62ch; margin-bottom: 44px; }
+    .section-head h2 {
+      margin: 0 0 14px; font-family: var(--serif); font-weight: 500;
+      font-size: clamp(2rem, 4.3vw, 3.4rem); letter-spacing: -0.028em; line-height: 1.02;
     }
+    .section-head p { margin: 0; color: var(--ink-soft); font-size: 1.05rem; }
 
-    .atlas-visual {
-      min-height: 460px;
-      background: #04363a;
+    /* ---------- Research questions ---------- */
+    .rq-grid { display: grid; gap: 24px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .rq {
+      position: relative; display: flex; flex-direction: column;
+      padding: clamp(26px, 3vw, 38px); border: 1px solid var(--line);
+      border-radius: var(--radius); background: var(--surface);
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
     }
-
-    .atlas-visual img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
+    .rq:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--line-strong); }
+    .rq-tag {
+      display: inline-flex; align-items: center; gap: 8px; width: fit-content;
+      margin-bottom: 18px; padding: 6px 12px; border-radius: 999px;
+      background: var(--aqua-soft); color: var(--teal-ink);
+      font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
     }
-
-    .atlas-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: clamp(34px, 5vw, 64px);
+    .rq h3 {
+      margin: 0 0 12px; font-family: var(--serif); font-weight: 500;
+      font-size: clamp(1.4rem, 2.4vw, 1.95rem); line-height: 1.12;
     }
-
-    .atlas-content .eyebrow {
-      color: #9ad8d2;
+    .rq p.q { margin: 0 0 22px; color: var(--ink-soft); }
+    .rq dl { display: grid; gap: 12px; margin: 0 0 6px; }
+    .rq dl > div {
+      display: grid; grid-template-columns: 108px 1fr; gap: 12px; align-items: baseline;
     }
-
-    .atlas-content h2 {
-      margin-bottom: 20px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.4rem, 4.5vw, 4.5rem);
-      font-weight: 500;
-      letter-spacing: -0.04em;
-      line-height: 0.98;
+    .rq dt {
+      font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-faint);
     }
+    .rq dd { margin: 0; font-size: 0.92rem; }
+    .rq code, .var { font-family: var(--mono); font-size: 0.84em;
+      background: var(--surface-2); padding: 1px 6px; border-radius: 5px; color: var(--teal-dark); }
+    @media (max-width: 760px) { .rq-grid { grid-template-columns: 1fr; } .rq dl > div { grid-template-columns: 92px 1fr; } }
 
-    .atlas-content p {
-      color: #c5dbd8;
+    /* ---------- Data sources ---------- */
+    .data-grid { display: grid; gap: 24px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .data-card {
+      padding: clamp(26px, 3vw, 36px); border-radius: var(--radius);
+      border: 1px solid var(--line); background: var(--surface); position: relative; overflow: hidden;
     }
-
-    .atlas-stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin: 18px 0 30px;
+    .data-card .code {
+      font-family: var(--mono); font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.06em; color: var(--coral);
     }
-
-    .atlas-stats span {
-      padding-top: 12px;
-      border-top: 1px solid rgba(197, 219, 216, 0.25);
-      color: #dcebea;
-      font-size: 0.82rem;
-      font-weight: 700;
+    .data-card h3 {
+      margin: 6px 0 14px; font-family: var(--serif); font-weight: 500; font-size: 1.5rem;
     }
+    .data-card p { margin: 0 0 20px; color: var(--ink-soft); font-size: 0.96rem; }
+    .data-metrics { display: flex; gap: 26px; flex-wrap: wrap; }
+    .data-metrics div { display: grid; gap: 2px; }
+    .data-metrics b { font-family: var(--serif); font-size: 1.6rem; font-weight: 500; color: var(--teal); line-height: 1; }
+    .data-metrics span { font-size: 0.74rem; color: var(--ink-faint); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+    @media (max-width: 760px) { .data-grid { grid-template-columns: 1fr; } }
 
-    .atlas-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
+    /* ---------- Method flow ---------- */
+    .flow { display: grid; gap: 14px; grid-template-columns: repeat(6, 1fr); }
+    .flow-step {
+      padding: 20px 18px; border-radius: 16px; border: 1px solid var(--line);
+      background: var(--surface); display: flex; flex-direction: column; gap: 8px;
+      position: relative;
     }
-
-    .secondary-link {
-      display: inline-flex;
-      align-items: center;
-      min-height: 50px;
-      padding: 12px 18px;
-      border: 1px solid rgba(239, 249, 247, 0.42);
-      border-radius: 999px;
-      color: #eff9f7;
-      font-weight: 800;
-      text-decoration: none;
+    .flow-step .n {
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 800;
+      color: var(--coral); letter-spacing: 0.06em;
     }
+    .flow-step b { font-size: 0.9rem; font-weight: 750; line-height: 1.2; }
+    .flow-step span { font-size: 0.78rem; color: var(--ink-soft); }
+    @media (max-width: 900px) { .flow { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .flow { grid-template-columns: 1fr; } }
 
-    .secondary-link:hover {
-      border-color: #eff9f7;
-      background: rgba(239, 249, 247, 0.08);
-    }
-
-    .section-heading {
-      display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 40px;
-      align-items: end;
-      margin-bottom: 48px;
-    }
-
-    .section-heading h2 {
-      margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.35rem, 5vw, 4.5rem);
-      font-weight: 500;
-      letter-spacing: -0.035em;
-      line-height: 1;
-    }
-
-    .section-heading p {
-      max-width: 610px;
-      margin: 0;
-      color: var(--ink-soft);
-    }
-
-    .report-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
-    }
-
+    /* ---------- Reports ---------- */
+    .reports { border-top: 1px solid var(--line); }
+    .report-grid { display: grid; gap: 20px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .report-card {
-      display: flex;
-      min-height: 400px;
-      flex-direction: column;
-      padding: clamp(28px, 4vw, 44px);
-      border: 1px solid var(--line);
-      border-radius: 26px;
-      background: var(--surface);
-      transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+      display: flex; flex-direction: column; min-height: 260px;
+      padding: 28px; border: 1px solid var(--line); border-radius: 20px;
+      background: var(--surface); text-decoration: none; color: inherit;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
     }
-
-    .report-card:hover {
-      border-color: rgba(18, 109, 104, 0.45);
-      box-shadow: var(--shadow);
-      transform: translateY(-4px);
+    .report-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--teal); }
+    .report-card .rn {
+      display: inline-flex; align-items: center; width: fit-content;
+      padding: 6px 11px; border-radius: 8px; margin-bottom: auto;
+      background: var(--aqua-soft); color: var(--teal-ink);
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em;
     }
-
-    .report-number {
-      width: fit-content;
-      margin-bottom: auto;
-      padding: 7px 11px;
-      border-radius: 8px;
-      color: var(--teal-dark);
-      background: var(--aqua);
-      font-size: 0.78rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-    }
-
+    .report-card.key .rn { background: var(--coral); color: #fff; }
     .report-card h3 {
-      max-width: 500px;
-      margin: 54px 0 14px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
-      font-weight: 500;
-      line-height: 1.08;
+      margin: 34px 0 10px; font-family: var(--serif); font-weight: 500;
+      font-size: 1.35rem; line-height: 1.14;
+    }
+    .report-card p { margin: 0 0 20px; color: var(--ink-soft); font-size: 0.9rem; }
+    .report-card .go {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--teal-dark); font-weight: 800; font-size: 0.88rem;
+    }
+    .report-card .go .arw { transition: transform 150ms ease; }
+    .report-card:hover .go .arw { transform: translateX(4px); }
+    @media (max-width: 940px) { .report-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 600px) { .report-grid { grid-template-columns: 1fr; } }
+
+    /* ---------- Atlas ---------- */
+    .atlas-card {
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 0.92fr);
+      overflow: hidden; border-radius: 28px; color: #eef9f6;
+      background: linear-gradient(150deg, #063a37, #052a2b);
+      border: 1px solid rgba(191, 224, 217, 0.2); box-shadow: var(--shadow);
+    }
+    .atlas-content { display: flex; flex-direction: column; justify-content: center; padding: clamp(32px, 4.5vw, 60px); }
+    .atlas-content .eyebrow { color: #8fd2cb; }
+    .atlas-content h2 {
+      margin: 0 0 16px; font-family: var(--serif); font-weight: 500;
+      font-size: clamp(2rem, 3.6vw, 3.2rem); letter-spacing: -0.03em; line-height: 1;
+    }
+    .atlas-content p { color: #bcd6d2; margin: 0 0 22px; }
+    .atlas-stats { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-bottom: 28px; }
+    .atlas-stats span {
+      padding-top: 10px; border-top: 1px solid rgba(191, 224, 217, 0.28);
+      color: #d7ebe8; font-size: 0.8rem; font-weight: 700; flex: 1 1 120px;
+    }
+    .atlas-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .atlas-actions .btn-primary { background: #eef9f6; color: #063a37; }
+    .atlas-actions .btn-primary:hover { background: #fff; }
+    .atlas-actions .btn-ghost { color: #eef9f6; border-color: rgba(238, 249, 246, 0.4); }
+    .atlas-actions .btn-ghost:hover { background: rgba(238, 249, 246, 0.08); }
+    .atlas-visual { min-height: 380px; background: #04302f; }
+    .atlas-visual img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    @media (max-width: 860px) {
+      .atlas-card { grid-template-columns: 1fr; }
+      .atlas-visual { min-height: 0; aspect-ratio: 1.91 / 1; order: -1; }
     }
 
-    .report-card p {
-      margin-bottom: 28px;
-      color: var(--ink-soft);
+    /* ---------- Reproduce / dev ---------- */
+    .repro-grid { display: grid; gap: 24px; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: start; }
+    .repro-copy h2 { margin: 0 0 14px; font-family: var(--serif); font-weight: 500; font-size: clamp(1.8rem, 3.4vw, 2.6rem); letter-spacing: -0.02em; }
+    .repro-copy p { color: var(--ink-soft); }
+    .repro-copy ul { padding-left: 0; list-style: none; margin: 20px 0 0; display: grid; gap: 12px; }
+    .repro-copy li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 0.93rem; color: var(--ink-soft); }
+    .repro-copy li::before { content: "→"; color: var(--teal); font-weight: 800; }
+    .code-block {
+      border-radius: 16px; overflow: hidden; border: 1px solid var(--line-strong);
+      background: var(--teal-ink); box-shadow: var(--shadow-sm);
     }
-
-    .report-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      width: fit-content;
-      color: var(--teal-dark);
-      font-weight: 850;
-      text-decoration: none;
+    .code-block .cb-head {
+      display: flex; align-items: center; gap: 8px; padding: 12px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2);
     }
-
-    .report-link span {
-      font-size: 1.3em;
-      transition: transform 160ms ease;
+    .code-block .cb-head span { width: 11px; height: 11px; border-radius: 50%; background: rgba(255,255,255,0.28); }
+    .code-block .cb-head b { margin-left: 8px; color: #cdeee9; font-size: 0.76rem; font-weight: 700; font-family: var(--mono); letter-spacing: 0.04em; }
+    .code-block pre {
+      margin: 0; padding: 18px 16px; overflow-x: auto;
+      color: #dcf3ef; font-family: var(--mono); font-size: 0.82rem; line-height: 1.7;
     }
+    .code-block pre .cmt { color: #6fa8a1; }
+    .code-block pre .var2 { color: #f0a891; }
+    @media (max-width: 820px) { .repro-grid { grid-template-columns: 1fr; } }
 
-    .report-link:hover span {
-      transform: translateX(4px);
+    /* ---------- Team ---------- */
+    .team-grid { display: grid; gap: 18px; grid-template-columns: repeat(4, 1fr); }
+    .team-card { padding: 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+    .team-card dt { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
+    .team-card dd { margin: 0; font-family: var(--serif); font-size: 1.25rem; font-weight: 500; }
+    @media (max-width: 780px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 440px) { .team-grid { grid-template-columns: 1fr; } }
+
+    /* ---------- Responsible note ---------- */
+    .note {
+      display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 36px;
+      padding: clamp(32px, 5vw, 60px); border-radius: 26px;
+      color: #eaf5f2; background: linear-gradient(150deg, var(--teal-dark), var(--teal-ink));
+      box-shadow: var(--shadow);
     }
+    .note h2 { margin: 0; font-family: var(--serif); font-weight: 500; font-size: clamp(1.8rem, 3.6vw, 3rem); line-height: 1.02; }
+    .note .note-body p { margin: 0 0 14px; color: #c6ddd9; }
+    .note .note-body p:last-child { margin-bottom: 0; }
+    .note .fineprint { font-size: 0.82rem; color: #9dc3bd; }
+    @media (max-width: 760px) { .note { grid-template-columns: 1fr; } }
 
-    .data-note {
-      display: grid;
-      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-      gap: 40px;
-      padding: clamp(32px, 6vw, 64px);
-      border-radius: 28px;
-      color: #eaf5f2;
-      background: var(--ink);
+    /* ---------- Footer ---------- */
+    .site-footer { border-top: 1px solid var(--line); }
+    .footer-inner {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 18px; padding-block: 34px; color: var(--ink-soft); font-size: 0.86rem;
     }
-
-    .data-note h2 {
-      margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2rem, 4vw, 3.6rem);
-      font-weight: 500;
-      line-height: 1;
-    }
-
-    .data-note p {
-      margin: 0;
-      color: #bfd2cf;
-    }
-
-    .site-footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 24px;
-      padding-block: 42px;
-      color: var(--ink-soft);
-      font-size: 0.85rem;
-    }
-
-    @media (max-width: 800px) {
-      .hero,
-      .section-heading,
-      .data-note,
-      .atlas-card {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: auto;
-        padding-block: 52px 76px;
-      }
-
-      .project-card {
-        max-width: 520px;
-      }
-
-      .report-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .atlas-visual {
-        min-height: auto;
-        aspect-ratio: 1.91 / 1;
-      }
-
-      .report-card {
-        min-height: 350px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .shell {
-        width: min(100% - 28px, 1120px);
-      }
-
-      .site-header,
-      .site-footer {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .header-link {
-        display: none;
-      }
-
-      h1 {
-        font-size: clamp(3rem, 17vw, 4.7rem);
-      }
-    }
+    .footer-inner a { color: var(--ink-soft); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+    .footer-inner a:hover { color: var(--ink); }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
 
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        transition: none !important;
-      }
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <header class="site-header shell">
-    <a class="brand" href="./" aria-label="Project 001 home">
-      <span class="brand-mark" aria-hidden="true">V</span>
-      <span>The V Lab</span>
-    </a>
-    <a class="header-link" href="https://github.com/LaboratoireV/Project001_HealthData">View repository</a>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="./" aria-label="Project 001, The V Lab, home">
+        <span class="brand-mark" aria-hidden="true">V</span>
+        <span>Project 001<small>The V Lab</small></span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#questions">Questions</a>
+        <a href="#data">Data</a>
+        <a href="#reports">Reports</a>
+        <a href="#reference">Reference</a>
+        <a class="nav-cta" href="Project_001_Memo_A06.html">Read the summary</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+      </nav>
+    </div>
   </header>
 
-  <main id="main-content">
+  <main id="main">
+
+    <!-- HERO -->
     <section class="hero shell" aria-labelledby="page-title">
-      <div>
-        <p class="eyebrow">Project 001</p>
-        <h1 id="page-title">Synthetic Alberta emergency and inpatient data.</h1>
-        <p class="hero-copy">
-          Project 001 generates fictional NACRS and DAD records for two questions: whether CTAS and the time before the disposition decision are associated with hospitalization, and, among linked admissions, whether CTAS and emergency stay minutes are associated with inpatient length of stay in days.
-        </p>
-        <a class="primary-link" href="#reports">Read the reports</a>
-      </div>
-
-      <aside class="project-card" aria-labelledby="project-details-title">
-        <h2 id="project-details-title">Project at a glance</h2>
-        <dl class="facts">
-          <div>
-            <dt>Project lead</dt>
-            <dd>Miss V</dd>
+      <div class="hero-grid">
+        <div>
+          <div class="badge-row">
+            <span class="badge synthetic"><span class="dot"></span>100% synthetic data</span>
+            <span class="badge"><span class="dot"></span>Consulting demonstration</span>
           </div>
-          <div>
-            <dt>Consulting group</dt>
-            <dd>The V Lab</dd>
-          </div>
-          <div>
-            <dt>Client</dt>
-            <dd>Dr. ABC</dd>
-          </div>
-          <div>
-            <dt>Deliverables</dt>
-            <dd>2 synthetic-data reports</dd>
-          </div>
-        </dl>
-      </aside>
-    </section>
-
-    <section class="reports shell" id="reports" aria-labelledby="reports-title">
-      <div class="section-heading">
-        <h2 id="reports-title">Consulting reports</h2>
-        <p>
-          Memo A00 builds the research variables. A01 and A02 describe the analytic files. A03 estimates whether pre-disposition stay and CTAS are associated with hospitalization. A04 links hospitalized emergency visits to inpatient abstracts and compares linked with unlinked visits. A05 estimates whether emergency stay and CTAS are associated with inpatient length of stay in the linked subset. A06 summarizes the design, methods, findings, and limitations.
-        </p>
-      </div>
-
-      <div class="report-grid">
-        <article class="report-card">
-          <span class="report-number">REPORT A00</span>
-          <h3>Research variable construction</h3>
-          <p>Builds emergency stay, hospitalization, and inpatient length of stay from source fields</p>
-          <a class="report-link" href="Project_001_Memo_A00.html">
-            View memo <span aria-hidden="true">→</span>
-          </a>
-        </article>
-
-        <article class="report-card">
-          <span class="report-number">REPORT A01</span>
-          <h3>Emergency &amp; ambulatory care summary</h3>
-          <p>Analytic NACRS file from Memo A00 · 30,000 records · 34 variables</p>
-          <a class="report-link" href="Project_001_Memo_A01.html">
-            View report <span aria-hidden="true">→</span>
-          </a>
-        </article>
-
-        <article class="report-card">
-          <span class="report-number">REPORT A02</span>
-          <h3>Inpatient care summary</h3>
-          <p>Analytic DAD file from Memo A00 · 60,000 records · 51 variables</p>
-          <a class="report-link" href="Project_001_Memo_A02.html">
-            View report <span aria-hidden="true">→</span>
-          </a>
-        </article>
-
-        <article class="report-card">
-          <span class="report-number">REPORT A03</span>
-          <h3>Hospitalization models</h3>
-          <p>Logistic regression of hospitalization on pre-disposition stay and CTAS. Total stay is an appendix comparison</p>
-          <a class="report-link" href="Project_001_Memo_A03.html">
-            View memo <span aria-hidden="true">→</span>
-          </a>
-        </article>
-
-        <article class="report-card">
-          <span class="report-number">REPORT A04</span>
-          <h3>Emergency to inpatient linkage</h3>
-          <p>Links hospitalized NACRS visits to DAD abstracts by PHN and a six-hour window, then compares linked and unlinked visits</p>
-          <a class="report-link" href="Project_001_Memo_A04.html">
-            View memo <span aria-hidden="true">→</span>
-          </a>
-        </article>
-
-        <article class="report-card">
-          <span class="report-number">REPORT A05</span>
-          <h3>Inpatient length of stay</h3>
-          <p>Linear regression of DAD stay in days on emergency stay and CTAS, using the A04 linked visits. Acute stay is a sensitivity analysis</p>
-          <a class="report-link" href="Project_001_Memo_A05.html">
-            View memo <span aria-hidden="true">→</span>
-          </a>
-        </article>
-
-        <article class="report-card">
-          <span class="report-number">REPORT A06</span>
-          <h3>Research summary</h3>
-          <p>Study design, data, methods, key findings, and limitations for Memos A00 through A05</p>
-          <a class="report-link" href="Project_001_Memo_A06.html">
-            View memo <span aria-hidden="true">→</span>
-          </a>
-        </article>
-      </div>
-    </section>
-
-    <section class="featured-project shell" id="data-reference" aria-labelledby="atlas-title">
-      <article class="atlas-card">
-        <div class="atlas-visual">
-          <img src="ahs-datasets/atlas-preview.png" alt="Alberta Health Data Atlas cover showing a connected map of dataset concepts">
-        </div>
-        <div class="atlas-content">
-          <p class="eyebrow">Supporting reference</p>
-          <h2 id="atlas-title">Alberta Health Data Atlas</h2>
-          <p>
-            A Chinese–English guide to nine Alberta administrative datasets. Project 001 uses it to decide record grain, field families, and linkage before generating the synthetic NACRS and DAD examples. It holds no patient-level values.
+          <h1 id="page-title">Synthetic Alberta emergency &amp; <span class="accent">inpatient</span> data.</h1>
+          <p class="lede">
+            Project 001 generates fictional NACRS and DAD records so two linked questions can be studied without a single real patient: whether triage acuity and the time before a disposition decision predict <strong>hospitalization</strong>, and, among linked admissions, whether acuity and emergency stay predict <strong>inpatient length of stay</strong>. Seven consulting memos carry the work from raw fields to final findings.
           </p>
-          <div class="atlas-stats" aria-label="Reference highlights">
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#reports">Browse the reports <span class="arw" aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost" href="Project_001_Memo_A06.html">Read the summary (A06)</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-labelledby="glance-title">
+          <h2 id="glance-title">Project at a glance</h2>
+          <dl class="facts">
+            <div><dt>Consulting organization</dt><dd>The V Lab</dd></div>
+            <div><dt>Project lead</dt><dd>Miss V</dd></div>
+            <div><dt>Client</dt><dd>Dr. ABC · ABC Department</dd></div>
+            <div><dt>Deliverables</dt><dd>7 memos (A00–A06)</dd></div>
+            <div><dt>Tooling</dt><dd>R · R Markdown · renv</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <!-- STAT STRIP -->
+    <section class="shell" aria-label="Key figures" style="padding-bottom: clamp(20px,4vw,40px);">
+      <div class="stat-strip">
+        <div class="stat"><b>2</b><span>Synthetic data sources</span></div>
+        <div class="stat"><b>90k</b><span>Total records generated</span></div>
+        <div class="stat"><b>85</b><span>Documented variables</span></div>
+        <div class="stat"><b>7</b><span>Published memos</span></div>
+      </div>
+    </section>
+
+    <!-- RESEARCH QUESTIONS -->
+    <section class="block shell" id="questions" aria-labelledby="q-title">
+      <div class="section-head">
+        <p class="eyebrow">The research</p>
+        <h2 id="q-title">Two questions, studied in order</h2>
+        <p>Both questions use CTAS, the Canadian Triage and Acuity Scale (levels 1–5, where level 1 is most urgent). The first question decides who is hospitalized; the second follows those admissions into the inpatient record.</p>
+      </div>
+      <div class="rq-grid">
+        <article class="rq">
+          <span class="rq-tag">Question 1 · Memo A03</span>
+          <h3>Hospitalization — yes or no?</h3>
+          <p class="q">Among emergency visits, do CTAS and the time before the disposition decision affect whether the patient is hospitalized?</p>
+          <dl>
+            <div><dt>Population</dt><dd>Emergency (NACRS) visits</dd></div>
+            <div><dt>Exposure</dt><dd>Pre-disposition stay <span class="var">pre_disposition_los_min</span> and <span class="var">ctas_level</span></dd></div>
+            <div><dt>Outcome</dt><dd>Hospitalization <span class="var">admitted_flag</span> (1 = yes, 0 = no)</dd></div>
+            <div><dt>Model</dt><dd>Logistic regression</dd></div>
+            <div><dt>Appendix</dt><dd>Total emergency stay <span class="var">los_min</span> is a comparison, not the primary exposure</dd></div>
+          </dl>
+        </article>
+
+        <article class="rq">
+          <span class="rq-tag">Question 2 · Memo A05</span>
+          <h3>Inpatient length of stay — how long?</h3>
+          <p class="q">Among hospitalized visits that link to a DAD record, do CTAS and total emergency stay affect inpatient length of stay in days?</p>
+          <dl>
+            <div><dt>Population</dt><dd>Linked admissions (from A04)</dd></div>
+            <div><dt>Exposure</dt><dd>Total NACRS stay <span class="var">los_min</span> and <span class="var">ctas_level</span></dd></div>
+            <div><dt>Outcome</dt><dd>Inpatient stay in days <span class="var">los_days</span></dd></div>
+            <div><dt>Model</dt><dd>Linear regression</dd></div>
+            <div><dt>Sensitivity</dt><dd>Acute stay <span class="var">acute_los_days</span>, after alternate-level-of-care days are removed</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <!-- DATA SOURCES -->
+    <section class="block shell" id="data" aria-labelledby="data-title">
+      <div class="section-head">
+        <p class="eyebrow">The data</p>
+        <h2 id="data-title">Two synthetic Alberta sources</h2>
+        <p>Every value is randomly generated. The records imitate the structure — the record grain, field families, and linkage — of two real Alberta administrative sources, without using any real patient information.</p>
+      </div>
+      <div class="data-grid">
+        <article class="data-card">
+          <span class="code">NACRS</span>
+          <h3>Emergency &amp; ambulatory care</h3>
+          <p>National Ambulatory Care Reporting System. Here, one row is an emergency department visit — arrival, triage, disposition timing, and whether the patient was admitted.</p>
+          <div class="data-metrics">
+            <div><b>30,000</b><span>Records</span></div>
+            <div><b>34</b><span>Variables</span></div>
+            <div><b>1</b><span>Row = one ED visit</span></div>
+          </div>
+        </article>
+        <article class="data-card">
+          <span class="code">DAD</span>
+          <h3>Inpatient care</h3>
+          <p>Discharge Abstract Database. Here, one row is an inpatient stay, including the derived length of stay. Question 2 uses the subset linked from a hospitalized NACRS visit.</p>
+          <div class="data-metrics">
+            <div><b>60,000</b><span>Records</span></div>
+            <div><b>51</b><span>Variables</span></div>
+            <div><b>1</b><span>Row = one stay</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- METHOD FLOW -->
+    <section class="block shell" id="method" aria-labelledby="method-title">
+      <div class="section-head">
+        <p class="eyebrow">The method</p>
+        <h2 id="method-title">How the study is built</h2>
+        <p>Each memo hands off to the next — from constructing the derived variables, through describing the files, to the two models and the summary.</p>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><span class="n">A00</span><b>Build variables</b><span>Derive emergency stay, admission, and length of stay from source fields</span></div>
+        <div class="flow-step"><span class="n">A01 · A02</span><b>Describe files</b><span>Summarize the analytic NACRS and DAD files</span></div>
+        <div class="flow-step"><span class="n">A03</span><b>Model hospitalization</b><span>Logistic regression for Question 1</span></div>
+        <div class="flow-step"><span class="n">A04</span><b>Link records</b><span>Match admissions to DAD by PHN and a six-hour window</span></div>
+        <div class="flow-step"><span class="n">A05</span><b>Model length of stay</b><span>Linear regression for Question 2</span></div>
+        <div class="flow-step"><span class="n">A06</span><b>Summarize</b><span>Design, methods, findings, limitations</span></div>
+      </div>
+    </section>
+
+    <!-- REPORTS -->
+    <section class="block reports shell" id="reports" aria-labelledby="reports-title">
+      <div class="section-head">
+        <p class="eyebrow">The deliverables</p>
+        <h2 id="reports-title">Consulting memos A00–A06</h2>
+        <p>Seven published reports. Start with <strong>A06</strong> for the summary, <strong>A03</strong> for hospitalization, <strong>A04</strong> for the linkage, and <strong>A05</strong> for inpatient stay. Each opens the full rendered memo.</p>
+      </div>
+      <div class="report-grid">
+        <a class="report-card" href="Project_001_Memo_A00.html">
+          <span class="rn">A00</span>
+          <h3>Research variable construction</h3>
+          <p>Builds emergency stay, hospitalization, and inpatient length of stay from the source fields, and records each definition.</p>
+          <span class="go">Open memo <span class="arw" aria-hidden="true">→</span></span>
+        </a>
+        <a class="report-card" href="Project_001_Memo_A01.html">
+          <span class="rn">A01</span>
+          <h3>Emergency &amp; ambulatory summary</h3>
+          <p>Descriptive summary of the analytic NACRS file — 30,000 records, 34 variables.</p>
+          <span class="go">Open memo <span class="arw" aria-hidden="true">→</span></span>
+        </a>
+        <a class="report-card" href="Project_001_Memo_A02.html">
+          <span class="rn">A02</span>
+          <h3>Inpatient summary</h3>
+          <p>Descriptive summary of the analytic DAD file — 60,000 records, 51 variables.</p>
+          <span class="go">Open memo <span class="arw" aria-hidden="true">→</span></span>
+        </a>
+        <a class="report-card key" href="Project_001_Memo_A03.html">
+          <span class="rn">A03 · Q1</span>
+          <h3>Hospitalization models</h3>
+          <p>Logistic regression of hospitalization on pre-disposition stay and CTAS. Total stay and other covariates sit in the appendix.</p>
+          <span class="go">Open memo <span class="arw" aria-hidden="true">→</span></span>
+        </a>
+        <a class="report-card" href="Project_001_Memo_A04.html">
+          <span class="rn">A04</span>
+          <h3>Emergency-to-inpatient linkage</h3>
+          <p>Links hospitalized NACRS visits to DAD abstracts by PHN and a six-hour window, then compares linked with unlinked visits.</p>
+          <span class="go">Open memo <span class="arw" aria-hidden="true">→</span></span>
+        </a>
+        <a class="report-card key" href="Project_001_Memo_A05.html">
+          <span class="rn">A05 · Q2</span>
+          <h3>Inpatient length of stay</h3>
+          <p>Linear regression of inpatient days on emergency stay and CTAS in the linked cohort, with an acute-stay sensitivity analysis.</p>
+          <span class="go">Open memo <span class="arw" aria-hidden="true">→</span></span>
+        </a>
+        <a class="report-card key" href="Project_001_Memo_A06.html">
+          <span class="rn">A06 · Summary</span>
+          <h3>Research summary</h3>
+          <p>Study design, data, statistical methods, key findings, and limitations across Memos A00 through A05.</p>
+          <span class="go">Open memo <span class="arw" aria-hidden="true">→</span></span>
+        </a>
+        <a class="report-card" href="https://github.com/LaboratoireV/Project001_HealthData">
+          <span class="rn">Repo</span>
+          <h3>Source repository</h3>
+          <p>Public repository, variable dictionary, and the GitHub-safe reporting examples in <span class="var">code_examples/</span>.</p>
+          <span class="go">Open on GitHub <span class="arw" aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ATLAS REFERENCE -->
+    <section class="block shell" id="reference" aria-labelledby="atlas-title">
+      <div class="section-head">
+        <p class="eyebrow">Supporting reference</p>
+        <h2 id="atlas-title" style="font-size:clamp(1.6rem,3vw,2.2rem);">The reference behind the design</h2>
+        <p>Project 001 is the project. The Alberta Health Data Atlas is only the reference used to keep the synthetic records realistic — it holds no patient-level values and is not a second project.</p>
+      </div>
+      <article class="atlas-card">
+        <div class="atlas-content">
+          <p class="eyebrow">Alberta Health Data Atlas</p>
+          <h2>Structure, not records.</h2>
+          <p>A Chinese–English guide to nine Alberta administrative datasets and clinical information systems. Project 001 uses it to decide record grain, field families, and linkage before generating the synthetic NACRS and DAD examples.</p>
+          <div class="atlas-stats">
             <span>9 dataset guides</span>
-            <span>3 deep dives</span>
+            <span>DAD · NACRS · PIN deep dives</span>
             <span>中文 / English</span>
           </div>
           <div class="atlas-actions">
-            <a class="primary-link" href="ahs-datasets/">Open the data reference</a>
-            <a class="secondary-link" href="https://alberta-health-data-atlas.tigerdogai.chatgpt.site">Open interactive atlas</a>
+            <a class="btn btn-primary" href="ahs-datasets/">Open the reference</a>
+            <a class="btn btn-ghost" href="https://alberta-health-data-atlas.tigerdogai.chatgpt.site">Interactive atlas</a>
           </div>
+        </div>
+        <div class="atlas-visual">
+          <img src="ahs-datasets/atlas-preview.png" alt="Alberta Health Data Atlas cover, a connected map of dataset concepts" loading="lazy">
         </div>
       </article>
     </section>
 
-    <section class="data-note shell" aria-labelledby="responsible-data-title">
-      <h2 id="responsible-data-title">Responsible by design.</h2>
-      <p>
-        Project 001 uses entirely randomized synthetic records and fictional client labels. The atlas supplies structure and interpretation notes only. It does not host patient-level data or reproduce the official data workbooks.
-      </p>
+    <!-- REPRODUCE -->
+    <section class="block shell" id="reproduce" aria-labelledby="repro-title">
+      <div class="repro-grid">
+        <div class="repro-copy">
+          <p class="eyebrow">For developers</p>
+          <h2 id="repro-title">Run the public examples</h2>
+          <p>The working R Markdown and analytic data stay local, so the memos cannot be rebuilt from the GitHub copy alone. What is public are the sanitized, project-relative reporting examples in <span class="var">code_examples/</span> and the shared variable dictionary.</p>
+          <ul>
+            <li><span class="var">nacrs_summary_example.Rmd</span> and <span class="var">dad_summary_example.Rmd</span></li>
+            <li>Standalone import, schema-validation, and summary helpers</li>
+            <li>Shared definitions in <span class="var">config/variable_dictionary.csv</span></li>
+            <li>Reports stop on a missing, unregistered, or out-of-range flag variable</li>
+          </ul>
+        </div>
+        <div class="code-block" aria-label="Terminal example">
+          <div class="cb-head"><span></span><span></span><span></span><b>bash · repository root</b></div>
+<pre><span class="cmt"># install example dependencies</span>
+Rscript code_examples/setup_dependencies.R
+
+<span class="cmt"># render the public example reports</span>
+Rscript code_examples/render_all_rmd.R
+
+<span class="cmt"># place synthetic workbooks first:</span>
+<span class="cmt"># code_examples/example_data/synthetic_nacrs.xlsx</span>
+<span class="cmt"># code_examples/example_data/synthetic_dad.xlsx</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="block shell" id="team" aria-labelledby="team-title">
+      <div class="section-head" style="margin-bottom: 32px;">
+        <p class="eyebrow">Project &amp; client</p>
+        <h2 id="team-title" style="font-size:clamp(1.6rem,3vw,2.2rem);">Fictional public-facing labels</h2>
+        <p>All names and organizations below are fictional. They do not identify real people, clients, employers, or institutions.</p>
+      </div>
+      <dl class="team-grid">
+        <div class="team-card"><dt>Project lead</dt><dd>Miss V</dd></div>
+        <div class="team-card"><dt>Consulting org</dt><dd>The V Lab</dd></div>
+        <div class="team-card"><dt>Client</dt><dd>Dr. ABC</dd></div>
+        <div class="team-card"><dt>Client org</dt><dd>ABC Department</dd></div>
+      </dl>
+    </section>
+
+    <!-- RESPONSIBLE NOTE -->
+    <section class="block shell" aria-labelledby="note-title">
+      <div class="note">
+        <h2 id="note-title">Responsible by design.</h2>
+        <div class="note-body">
+          <p>All data are randomly generated and entirely synthetic. They contain no real patient records, personal health information, client data, or operational information. Any resemblance to real people, organizations, facilities, events, or results is coincidental.</p>
+          <p>The data are for software demonstration, education, and portfolio presentation only. They must not be used for clinical, policy, financial, or operational decision-making.</p>
+          <p class="fineprint">The Alberta Health Data Atlas is an independent educational resource and is not an official Alberta Health Services, University of Calgary, Government of Alberta, or CIHI publication. It contains no patient-level data and does not copy the official data-dictionary workbooks.</p>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer shell">
-    <span>Project 001 · The V Lab</span>
-    <span>Prepared by Miss V · The V Lab</span>
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <span>Project 001 · The V Lab · Prepared by Miss V</span>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="Project_001_Memo_A06.html">Summary</a>
+        <a href="#reports">Reports</a>
+        <a href="ahs-datasets/">Data reference</a>
+        <a href="https://github.com/LaboratoireV/Project001_HealthData">Repository</a>
+      </nav>
+    </div>
   </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById('themeToggle');
+      var KEY = 'v001-theme';
+      try {
+        var saved = localStorage.getItem(KEY);
+        if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+      } catch (e) {}
+      function current() {
+        var attr = root.getAttribute('data-theme');
+        if (attr) return attr;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      if (btn) {
+        btn.addEventListener('click', function () {
+          var next = current() === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', next);
+          try { localStorage.setItem(KEY, next); } catch (e) {}
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
