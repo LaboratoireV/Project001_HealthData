@@ -68,10 +68,10 @@ These consulting identities are fictional labels. They are distinct from the rea
 
 ## Supporting reference: Alberta Health Data Atlas
 
-The atlas is an independent Chinese–English guide to nine Alberta administrative health datasets and clinical information systems. In this repository it is supporting material for Project 001. It explains record grain, field families, linkage, cohort design, access, and responsible interpretation, so the NACRS-style and DAD-style examples can stay realistic without using real records.
+The atlas is an independent guide to nine Alberta administrative health datasets and clinical information systems. In this repository it is supporting material for Project 001. It explains record grain, field families, linkage, cohort design, access, and responsible interpretation, so the NACRS-style and DAD-style examples can stay realistic without using real records.
 
 - [Overview in this repository](ahs-datasets/README.md)
-- [Interactive bilingual atlas](https://alberta-health-data-atlas.tigerdogai.chatgpt.site)
+- [Alberta Health Data Atlas](https://vthelab.com/atlas.html)
 
 It contains original educational commentary and links to official public sources. It contains no patient-level data and does not copy the official UCalgary workbooks into this repository. It is not an official Alberta Health Services, University of Calgary, Government of Alberta, or CIHI publication.
 

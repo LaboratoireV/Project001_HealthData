@@ -1,12 +1,12 @@
 # Alberta Health Data Atlas
 
-Supporting reference for [Project 001](../README.md). Project 001 is the consulting demonstration; this atlas is the Chinese–English source used to design its synthetic NACRS-style and DAD-style records. It is not a second project and it does not contain the generated workbooks.
+Supporting reference for [Project 001](../README.md). Project 001 is the consulting demonstration; this atlas is the source used to design its synthetic NACRS-style and DAD-style records. It is not a second project and it does not contain the generated workbooks.
 
 The atlas covers nine commonly used Alberta administrative health datasets and clinical information systems.
 
-## Interactive site
+## Full atlas
 
-[Open the Alberta Health Data Atlas](https://alberta-health-data-atlas.tigerdogai.chatgpt.site)
+[Open the Alberta Health Data Atlas](https://vthelab.com/atlas.html)
 
 ## Coverage
 
@@ -20,7 +20,7 @@ The atlas covers nine commonly used Alberta administrative health datasets and c
 - Sunrise Clinical Manager
 - Connect Care / Epic
 
-The interactive project includes Chinese–English language switching, DAD/NACRS/PIN deep dives, field-family guidance, linkage notes, cohort-design examples, access guidance, source links, and interpretation caveats.
+The full atlas includes DAD/NACRS/PIN deep dives, field-family guidance, linkage notes, cohort-design examples, access guidance, source links, and interpretation caveats.
 
 ## Responsible use
 
