@@ -11,7 +11,7 @@
 
 <meta name="author" content="Prepared by Miss V · The V Lab" />
 
-<meta name="date" content="2026-09-19" />
+<meta name="date" content="2026-10-09" />
 
 <title>Project 001 Memo</title>
 
@@ -2740,8 +2740,10 @@ border-radius: 0px;
 
 
 <h1 class="title toc-ignore">Project 001 Memo</h1>
+<h3 class="subtitle">Design, methods, and results summary for the
+unified data project</h3>
 <h4 class="author">Prepared by Miss V · The V Lab</h4>
-<h4 class="date">September 19, 2026</h4>
+<h4 class="date">October 09, 2026</h4>
 
 </div>
 
@@ -2758,17 +2760,131 @@ margin: 1.25rem 0 1.5rem;
 padding-bottom: 0.25rem;
 overflow-x: auto;
 }
-.meta-item { min-width: 0; padding: 0.7rem 0.9rem; border-left: 4px solid #2c7fb8; background: #f5f8fa; border-radius: 3px; }
-.meta-label { display: block; color: #657786; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
-.meta-value { display: block; overflow-wrap: anywhere; font-weight: 600; }
-.report-note { margin: 1rem 0 1.5rem; padding: 0.8rem 1rem; border: 1px solid #f0c36d; border-radius: 4px; background: #fff8e5; }
-.table-scroll { width: 100%; overflow-x: auto; margin-bottom: 1.25rem; }
-.summary-table { width: 100%; margin: 0; border-collapse: separate; border-spacing: 0; font-size: 0.94rem; }
-.summary-table th, .summary-table td { padding: 0.55rem 0.75rem !important; border-bottom: 1px solid #e4e9ed; vertical-align: top; }
-.summary-table thead th { color: #29465b; background: #eef4f7; border-top: 1px solid #d6e0e5; border-bottom: 2px solid #9fb8c5; }
-.summary-table tbody tr:nth-child(even) { background: #f8fafb; }
-.summary-table caption { padding: 0 0 0.65rem; color: #71818d; text-align: left; caption-side: top; }
-.data-disclaimer { margin: 0.5rem 0 1.25rem; padding: 0.8rem 1rem; border-left: 4px solid #2c7fb8; border-radius: 4px; background: #eef6fa; color: #29465b; }
+.meta-item {
+min-width: 0;
+padding: 0.7rem 0.9rem;
+border-left: 4px solid #2c7fb8;
+background: #f5f8fa;
+border-radius: 3px;
+}
+.meta-label {
+display: block;
+color: #657786;
+font-size: 0.78rem;
+text-transform: uppercase;
+letter-spacing: 0.04em;
+}
+.meta-value {
+display: block;
+overflow-wrap: anywhere;
+font-weight: 600;
+}
+.report-note {
+margin: 1rem 0 1.5rem;
+padding: 0.8rem 1rem;
+border: 1px solid #f0c36d;
+border-radius: 4px;
+background: #fff8e5;
+}
+.placeholder {
+color: #6c757d;
+font-style: italic;
+}
+.table-scroll {
+width: 100%;
+overflow-x: auto;
+margin-bottom: 1.25rem;
+}
+.summary-table {
+width: 100%;
+margin: 0;
+border-collapse: separate;
+border-spacing: 0;
+font-size: 0.94rem;
+}
+.summary-table th,
+.summary-table td {
+padding: 0.55rem 0.75rem !important;
+border-bottom: 1px solid #e4e9ed;
+vertical-align: top;
+white-space: nowrap;
+}
+.summary-table thead th {
+position: sticky;
+top: 0;
+z-index: 1;
+color: #29465b;
+background: #eef4f7;
+border-top: 1px solid #d6e0e5;
+border-bottom: 2px solid #9fb8c5;
+}
+.summary-table tbody tr:nth-child(even) {
+background: #f8fafb;
+}
+.summary-table tbody tr:hover {
+background: #eef6fa;
+}
+.continuous-summary-table {
+width: max-content;
+min-width: 100%;
+}
+.variable-code {
+margin: -0.35rem 0 0.65rem;
+color: #71818d;
+font-size: 0.86rem;
+}
+.data-variable-heading {
+margin: 1.25rem 0 0.65rem;
+color: #29465b;
+}
+.data-disclaimer {
+margin: 0.5rem 0 1.25rem;
+padding: 0.8rem 1rem;
+border-left: 4px solid #2c7fb8;
+border-radius: 4px;
+background: #eef6fa;
+color: #29465b;
+}
+.data-variable-list {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+gap: 0.45rem 0.75rem;
+margin: 0 0 1.5rem;
+padding: 0;
+counter-reset: data-variable;
+list-style: none;
+}
+.data-variable-list li {
+display: flex;
+align-items: center;
+min-width: 0;
+padding: 0.45rem 0.6rem;
+counter-increment: data-variable;
+border: 1px solid #e0e7eb;
+border-radius: 5px;
+background: #f8fafb;
+}
+.data-variable-list li::before {
+content: counter(data-variable);
+flex: 0 0 1.8rem;
+color: #7b8b96;
+font-size: 0.78rem;
+}
+.data-variable-list code {
+overflow-wrap: anywhere;
+color: #29465b;
+background: transparent;
+}
+.summary-table caption {
+padding: 0 0 0.65rem;
+color: #71818d;
+text-align: left;
+}
+.definition-table td:last-child,
+.definition-table th:last-child {
+white-space: normal;
+min-width: 28rem;
+}
 </style>
 <div class="report-meta">
 <div class="meta-item">
@@ -2781,7 +2897,7 @@ overflow-x: auto;
 <span class="meta-label">Client Organization</span><span class="meta-value">ABC Department</span>
 </div>
 <div class="meta-item">
-<span class="meta-label">Version</span><span class="meta-value">1.0</span>
+<span class="meta-label">Version</span><span class="meta-value">2.0</span>
 </div>
 <div class="meta-item">
 <span class="meta-label">Status</span><span class="meta-value">Draft</span>
@@ -2791,370 +2907,447 @@ overflow-x: auto;
 </div>
 </div>
 <div class="report-note">
-<strong>Note:</strong> Figures are copied from the current rendered
-Memos A03, A04, and A05. This memo does not refit the models.
+<strong>Note:</strong> Shared synthetic release 2.0. Real hospital names
+are reference labels only; all patient records and outcomes are
+simulated.
 </div>
 <div id="overview" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Overview</h1>
-<p>This memo closes the Project 001 series. It states the study design,
-the data, the statistical methods, the key findings, and the
-limitations. The estimates themselves are in <a href="Project_001_Memo_A03.html">Memo A03</a>, <a href="Project_001_Memo_A04.html">Memo A04</a>, and <a href="Project_001_Memo_A05.html">Memo A05</a>. This memo does not refit
-those models. The numbers below are copied from those rendered memos. If
-A03, A04, or A05 is rendered again, this summary has to be updated by
-hand.</p>
+<p>This summary now reads the current unified data release
+<code>2.0-2026-10-09</code>. Counts and model summaries are computed
+during rendering, so results copied from a previous release cannot
+linger unnoticed after a data update. It uses the same primary formulas
+and linked cohort as A03 and A05.</p>
 <div class="data-disclaimer">
-<strong>Training data notice:</strong> Every record in this series is
-randomly generated and synthetic. The findings describe those records.
-They are not estimates for Alberta patients, and they are not a basis
-for clinical or operational decisions.
+<strong>Training data notice.</strong> Patient records, clinical
+measurements and outcomes are entirely simulated. Hospital names and
+official ED listings are public reference metadata. No result evaluates
+a real facility.
 </div>
+</div>
+<div id="one-source-for-the-project" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> One source for the
+project</h1>
 <div class="table-scroll">
 <table class="summary-table">
-<caption>
-What each memo does
-</caption>
 <thead>
 <tr>
-<th>
-Memo
+<th style="text-align:left;">
+Cohort
 </th>
-<th>
-Role
+<th style="text-align:right;">
+Records
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>
-<a href="Project_001_Memo_A00.html">A00</a>
+<td style="text-align:left;">
+NACRS ED visits
 </td>
-<td>
-Builds the research variables and writes the analytic files
-</td>
-</tr>
-<tr>
-<td>
-<a href="Project_001_Memo_A01.html">A01</a>
-</td>
-<td>
-Describes the analytic NACRS file
+<td style="text-align:right;">
+30000
 </td>
 </tr>
 <tr>
-<td>
-<a href="Project_001_Memo_A02.html">A02</a>
+<td style="text-align:left;">
+DAD inpatient abstracts
 </td>
-<td>
-Describes the analytic DAD file
-</td>
-</tr>
-<tr>
-<td>
-<a href="Project_001_Memo_A03.html">A03</a>
-</td>
-<td>
-Primary logistic model of hospitalization on pre-disposition stay and
-CTAS
+<td style="text-align:right;">
+60000
 </td>
 </tr>
 <tr>
-<td>
-<a href="Project_001_Memo_A04.html">A04</a>
+<td style="text-align:left;">
+Admitted ED visits
 </td>
-<td>
-Links hospitalized emergency visits to DAD abstracts and compares linked
-with unlinked visits
+<td style="text-align:right;">
+5810
 </td>
 </tr>
 <tr>
-<td>
-<a href="Project_001_Memo_A05.html">A05</a>
+<td style="text-align:left;">
+Linked ED admissions
 </td>
-<td>
-Primary linear model of calendar stay, plus an acute-stay sensitivity
-analysis
+<td style="text-align:right;">
+4633
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Adult ED visits
+</td>
+<td style="text-align:right;">
+24926
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Adult asthma visits
+</td>
+<td style="text-align:right;">
+8170
 </td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>The source workbooks are <code>pseudo_NACRS.xlsx</code> and
+<code>pseudo_DAD.xlsx</code>. A00 derives the RDS caches. All memos
+A00–A09 use these sources or explicitly defined subsets. The former
+resampled data and separate 12,000-visit asthma cohort have been
+archived. In the new release, each ED patient has one visit, and each
+hospital serves many patients.</p>
+<p>The two source workbooks share one public hospital reference table.
+Hospital IDs are study codes, names are selected from actual ED
+facilities, and case volumes are simulated. Calgary and Edmonton groups
+include surrounding towns using the referenced geographic convention;
+patient residence remains a separate field.</p>
 </div>
-<div id="study-design" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Study design</h1>
-<p>Project 001 asks two questions, in this order.</p>
-<ol style="list-style-type: decimal">
-<li>Among emergency visits, are triage acuity (CTAS) and the time before
-the disposition decision associated with hospitalization?</li>
-<li>Among the hospitalized visits that can be linked to an inpatient
-abstract, are CTAS and total emergency department length of stay
-associated with inpatient length of stay in days?</li>
-</ol>
-<p>The primary model for each question is those two measures together.
-Other usable NACRS covariates are in the appendix of Memo A03 and Memo
-A05. They are not a third research question.</p>
-<p>The stay measure is not the same in the two questions. For
-hospitalization, the primary stay is pre-disposition stay
-(<code>pre_disposition_los_min</code>). Total emergency stay
-(<code>los_min</code>) includes minutes after the disposition decision,
-and those minutes can follow from the decision to admit, so total stay
-is an appendix comparison in Memo A03. For inpatient length of stay, the
-patients are already hospitalized, so that circularity does not apply in
-the same way. Memo A05 keeps total emergency stay as the stay
-measure.</p>
-<p>The design is a cross-sectional analysis of encounter records. It is
-not a trial, and it does not follow people over time beyond the single
-emergency visit and its linked inpatient abstract. A person can
-contribute more than one visit. The models do not account for that
-clustering.</p>
-<p>Hospitalization is yes or no. A visit is hospitalized when
-<code>disposition</code> is <code>Admitted inpatient</code>. Memo A00
-stores that indicator as <code>admitted_flag</code>. The primary
-inpatient outcome is <code>los_days</code>, the calendar days from the
-admission date to the discharge date. <code>acute_los_days</code>
-removes alternate-level-of-care days from that stay. Memo A05 uses it
-only as a sensitivity outcome.</p>
-<p>The first question uses every emergency visit. The second question
-uses only the visits Memo A04 links to a DAD abstract. Visits that do
-not link are not given an imputed length of stay. Memo A04 compares the
-linked and unlinked hospitalized visits on CTAS and emergency stay.</p>
-</div>
-<div id="data-used" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Data used</h1>
-<p>The source files are synthetic NACRS and DAD workbooks. Memo A00
-reads them, constructs the research variables, and writes
-<code>analytic_nacrs.rds</code> and <code>analytic_dad.rds</code>. Later
-memos read those files. They do not rebuild the derived fields, and they
-do not put those fields back into the source workbooks.</p>
-<div class="table-scroll">
-<table class="summary-table">
-<caption>
-Files and cohorts
-</caption>
-<thead>
-<tr>
-<th>
-File or cohort
-</th>
-<th>
-What it contains
-</th>
-<th>
-Used in
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-Analytic NACRS
-</td>
-<td>
-30,000 emergency visits, 34 variables
-</td>
-<td>
-A01, A03, A04
-</td>
-</tr>
-<tr>
-<td>
-Analytic DAD
-</td>
-<td>
-60,000 inpatient abstracts, 51 variables
-</td>
-<td>
-A02, A04, A05
-</td>
-</tr>
-<tr>
-<td>
-Hospitalized visits
-</td>
-<td>
-5,380 of 30,000 visits (17.9%)
-</td>
-<td>
-A03 outcome, A04 cohort
-</td>
-</tr>
-<tr>
-<td>
-Linked analysis cohort
-</td>
-<td>
-3,672 hospitalized visits with one DAD abstract
-</td>
-<td>
-A05
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>In these files the personal health number is stored as
-<code>patient_id</code>. There is no separate PHN column. Memo A01 and
-Memo A02 describe the two analytic files. They are not estimation
-memos.</p>
-<p>The covariates in the appendix are age, sex, health zone, arrival
-mode, injury, mental health, pain score, triage wait, physician wait,
-and the stay measure that is not primary for that memo.
-<code>ambulance_flag</code> is not used, because it only recodes arrival
-mode. Consult service is not used, because every hospitalized visit has
-a consult and no visit coded <code>None</code> is hospitalized, so a
-logistic odds ratio for that variable is not estimable.</p>
-</div>
-<div id="statistical-methods" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Statistical
+<div id="research-questions-and-methods" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Research questions and
 methods</h1>
-<p><strong>Variable construction.</strong> Memo A00 applies fixed rules.
-Emergency stay in minutes is the rounded difference between discharge
-and arrival. Pre-disposition stay ends at the disposition decision.
-Hospitalization is the disposition recode above. Inpatient stay in days
-is the calendar difference between the admission date and the discharge
-date.</p>
-<p><strong>Hospitalization models.</strong> Memo A03 fits binomial
-logistic regression. The primary model enters pre-disposition stay and
-CTAS together. Each of those two covariates is also shown alone. Total
-emergency stay, the other covariates, and a larger model are in the
-appendix. CTAS uses level 1 as the reference. Sex uses <code>F</code>,
-health zone uses Edmonton, and arrival mode uses Walk-in. Binary
-indicators use 0. Confidence intervals are Wald intervals. A result is
-called significant when the Wald p value is below 0.05. The reported
-quantity is an odds ratio.</p>
-<p><strong>Linkage.</strong> Memo A04 keeps a hospitalized visit only
-when two conditions both hold. The personal health number equals the
-personal health number on a DAD abstract, and the emergency discharge
-time is within 6 hours before or after that abstract’s admission time. A
-difference of exactly 6 hours counts. If more than one abstract passes,
-the closest admission is kept. A tie at that closest time would be left
-unlinked. None occurred. Abstracts with a missing personal health number
-cannot pass the first condition. After the links are made, Memo A04
-compares linked and unlinked hospitalized visits on CTAS and on the two
-emergency-stay measures.</p>
-<p><strong>Length-of-stay models.</strong> Memo A05 uses ordinary least
-squares on the 3,672 linked visits. The primary model enters total
-emergency stay and CTAS together, with calendar <code>los_days</code> as
-the outcome. Each of those two covariates is also shown alone. The same
-specification is repeated with <code>acute_los_days</code> as a
-sensitivity analysis. Other covariates are in the appendix. The
-coefficient is a difference in days. Confidence intervals use the t
-distribution. Significance is a t-test p value below 0.05.</p>
-<p>Neither estimation memo adjusts for multiple comparisons. Neither
-treats the associations as causal. In Memos A03 and A05, significant
-rows are shown on a yellow background.</p>
+<ol style="list-style-type: decimal">
+<li>A03 uses logistic regression to describe how pre-disposition ED stay
+and CTAS are associated with admission. Total ED stay is an appendix
+comparison because it includes time after disposition.</li>
+<li>A04 links admitted ED visits to DAD using an exact patient-ID match
+and a six-hour window on the absolute time difference, keeping the
+closest unique match. It does not use the answer-key sheet.</li>
+<li>A05 models inpatient calendar length of stay on total ED stay and
+CTAS in the linked cohort, with acute stay as a sensitivity
+outcome.</li>
+<li>A07 compares adult asthma and other visits using within-hospital
+propensity-score matching with hospital-clustered uncertainty.</li>
+<li>A08 applies outcome regression and g-computation to A07’s fixed
+pairs, allowing the asthma effect to vary by region and including
+hospital fixed effects.</li>
+<li>A09 compares asthma admissions across hospital regions using
+logistic GLMMs, with an asthma-by-region secondary analysis.</li>
+</ol>
 </div>
-<div id="key-findings" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> Key findings</h1>
-<div id="hospitalization" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Hospitalization</h2>
-<p>Of 30,000 emergency visits, 5,380 (17.9%) are hospitalized.</p>
-<p>Entered alone, each additional minute before the disposition decision
-is associated with higher odds of hospitalization (odds ratio 1.014, 95%
-CI 1.013 to 1.014), or 2.258 per 60 minutes. Compared with CTAS 1, CTAS
-2 through 5 each have lower odds, and each of those four comparisons has
-p &lt; 0.001. The odds ratios versus CTAS 1 are 0.311, 0.101, 0.035, and
-0.017.</p>
-<p>In the primary model, pre-disposition stay and CTAS are entered
-together. Pre-disposition stay remains associated with hospitalization
-(odds ratio 2.159 per 60 minutes, 95% CI 2.111 to 2.208). Compared with
-CTAS 1, CTAS 2 through 5 all remain significant. The odds ratios are
-0.424, 0.188, 0.190, and 0.236, and each p value is below 0.001.</p>
-<p>The appendix is exploratory. It is not the answer to the question.
-See Memo A03 for total emergency stay and the other covariates.</p>
+<div id="current-descriptive-results" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Current descriptive
+results</h1>
+<div id="admission" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Admission</h2>
+<p>5,810 of 30,000 ED visits (19.4%) have an admitted disposition. The
+primary A03 logistic model is reproduced below; duration coefficients
+are per minute.</p>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Odds ratios: pre-disposition ED stay and CTAS
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Term
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Low
+</th>
+<th style="text-align:right;">
+High
+</th>
+<th style="text-align:right;">
+P
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+pre_disposition_los_min
+</td>
+<td style="text-align:right;">
+1.0004
+</td>
+<td style="text-align:right;">
+1.0000
+</td>
+<td style="text-align:right;">
+1.0007
+</td>
+<td style="text-align:right;">
+0.0269
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ctas_level2
+</td>
+<td style="text-align:right;">
+0.4413
+</td>
+<td style="text-align:right;">
+0.4060
+</td>
+<td style="text-align:right;">
+0.4797
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ctas_level3
+</td>
+<td style="text-align:right;">
+0.2309
+</td>
+<td style="text-align:right;">
+0.2115
+</td>
+<td style="text-align:right;">
+0.2521
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ctas_level4
+</td>
+<td style="text-align:right;">
+0.1092
+</td>
+<td style="text-align:right;">
+0.0978
+</td>
+<td style="text-align:right;">
+0.1219
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ctas_level5
+</td>
+<td style="text-align:right;">
+0.0564
+</td>
+<td style="text-align:right;">
+0.0475
+</td>
+<td style="text-align:right;">
+0.0670
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="linkage" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Linkage</h2>
-<p>Of the 5,380 hospitalized visits, 3,821 (71.0%) share a personal
-health number with at least one DAD abstract. Of those, 3,672 (68.3% of
-hospitalized visits) also fall inside the six-hour window. Each of the
-3,672 links to one distinct abstract. The inpatient admission is after
-the emergency discharge in every linked pair. The time gap ranges from
-0.17 to 6.00 hours, with a median of 0.82 hours. All 3,672 abstracts
-have admission source Emergency Department, and 3,656 of 3,672 are at
-the same facility as the emergency visit.</p>
-<p>The other 1,708 hospitalized visits are not linked. One hundred
-forty-nine have a matching personal health number, but the closest
-admission is more than 6 hours away (the nearest of those gaps is 7.00
-hours; the median gap is 18.00 hours). One thousand five hundred
-fifty-nine have no DAD abstract with the same personal health number. On
-the DAD file, 859 abstracts have a missing patient identifier and 838
-are flagged as a one-digit identifier error. Exact matching cannot
-recover those abstracts.</p>
-<p>Memo A05 uses the 3,672 linked visits, not all 5,380 hospitalized
-visits. Their median total emergency stay is 506 minutes, against 502
-minutes among the 1,708 unlinked visits. Median pre-disposition stay is
-372 minutes among linked visits and 398 minutes among unlinked visits.
-The CTAS mix is not identical. CTAS 1 is 291 of 3,672 linked visits
-(7.9%) and 206 of 1,708 unlinked visits (12.1%).</p>
 </div>
-<div id="inpatient-length-of-stay" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> Inpatient length of
+<div id="linkage" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Linkage</h2>
+<p>4,633 of 5,810 admitted visits (79.7%) are linked under the
+prespecified ID/time rule. The synthetic answer key contains every true
+continuation, including records with deliberately missing/mistyped IDs
+or an admission more than six hours from the ED discharge. Unlinked
+visits are not assigned an imputed inpatient stay.</p>
+<div class="table-scroll">
+<table class="summary-table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Status
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Linked
+</td>
+<td style="text-align:right;">
+4633
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+No PHN match in DAD
+</td>
+<td style="text-align:right;">
+888
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PHN match outside the 6-hour window
+</td>
+<td style="text-align:right;">
+289
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="inpatient-length-of-stay" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Inpatient length of
 stay</h2>
-<p>The length-of-stay models use the 3,672 linked visits. Calendar stay
-ranges from 1 to 18 days. The mean is 4.48 days and the median is 4.
-Acute stay, after alternate-level-of-care days are removed, has mean
-4.37 days and the same median of 4.</p>
-<p>Entered alone, each additional 60 minutes of emergency stay is
-associated with a calendar stay 0.158 days longer (95% CI 0.135 to
-0.180, p &lt; 0.001). Compared with CTAS 1, CTAS 3 is associated with a
-stay 2.170 days shorter and CTAS 4 with a stay 2.814 days shorter (both
-p &lt; 0.001). CTAS 2 (p 0.053) and CTAS 5 (p 0.069) are not significant
-alone.</p>
-<p>In the primary model, emergency stay and CTAS are entered together.
-Emergency stay remains (0.107 days per 60 minutes, 95% CI 0.086 to
-0.129, p &lt; 0.001), as do CTAS 3 (1.849 days shorter) and CTAS 4
-(2.324 days shorter), both p &lt; 0.001. CTAS 2 and CTAS 5 do not.</p>
-<p>The sensitivity analysis repeats that specification with acute length
-of stay. Emergency stay remains (0.112 days per 60 minutes, p &lt;
-0.001). CTAS 3 and CTAS 4 remain shorter. CTAS 2 (0.368 days longer, p
-0.016) and CTAS 5 (0.886 days shorter, p 0.017) are significant in this
-sensitivity model and were not in the primary model.</p>
-<p>The appendix is not the primary result. See Memo A05 for the other
-covariates.</p>
+<p>The linked cohort has a mean calendar stay of 4.79 days and a median
+of 4 days. The primary A05 specification is reproduced below, with ED
+duration measured per minute.</p>
+<div class="table-scroll">
+<table class="summary-table">
+<caption>
+Linear regression coefficients in inpatient days
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Term
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Low
+</th>
+<th style="text-align:right;">
+High
+</th>
+<th style="text-align:right;">
+P
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+los_min
+</td>
+<td style="text-align:right;">
+-0.0002
+</td>
+<td style="text-align:right;">
+-0.0009
+</td>
+<td style="text-align:right;">
+0.0006
+</td>
+<td style="text-align:right;">
+0.622
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ctas_level2
+</td>
+<td style="text-align:right;">
+-1.1411
+</td>
+<td style="text-align:right;">
+-1.3202
+</td>
+<td style="text-align:right;">
+-0.9620
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ctas_level3
+</td>
+<td style="text-align:right;">
+-1.6909
+</td>
+<td style="text-align:right;">
+-1.8883
+</td>
+<td style="text-align:right;">
+-1.4936
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ctas_level4
+</td>
+<td style="text-align:right;">
+-2.2640
+</td>
+<td style="text-align:right;">
+-2.5285
+</td>
+<td style="text-align:right;">
+-1.9995
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ctas_level5
+</td>
+<td style="text-align:right;">
+-2.7786
+</td>
+<td style="text-align:right;">
+-3.2143
+</td>
+<td style="text-align:right;">
+-2.3429
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-<div id="limitations" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> Limitations</h1>
-<p>The records are synthetic. Nothing in this series estimates a risk, a
-length of stay, or a linkage rate for a real emergency department or
-hospital. The Alberta Health Data Atlas was used only as a structural
-reference for the synthetic files. It does not supply these values.</p>
-<p>The models describe associations. They do not show that a longer
-pre-disposition stay causes hospitalization, or that CTAS causes a
-longer inpatient stay. Sicker patients can be both more likely to be
-hospitalized and more likely to remain in the emergency department.
-Waiting times have the same problem: a more urgent visit is often seen
-sooner and is also more likely to be admitted. A short wait can
-therefore be a marker of acuity rather than a cause of admission or of a
-long inpatient stay.</p>
-<p>The primary hospitalization model uses pre-disposition stay so that
-minutes after the admission decision are not treated as a predictor of
-that decision. That does not remove every circularity. The time of the
-disposition decision can itself depend on how likely admission already
-looks. Total emergency stay is reported only as an appendix comparison
-for that reason.</p>
-<p>The appendix models still contain many parameters, and no correction
-was made for the number of tests. In the linked cohort, sex
-<code>X</code> has only 2 visits, so that coefficient is unstable.</p>
-<p>Linkage is a deterministic rule, not a reviewed match and not a
-probabilistic match. It misses hospitalized visits whose inpatient
-abstract has a blank or mistyped personal health number, and it misses
-pairs outside the six-hour window. The 3,672 linked visits are not all
-of the 5,380 hospitalized visits. Median emergency stay is close in the
-two groups, but the CTAS mix is not the same, and no length of stay is
-observed for the unlinked visits. The length-of-stay results do not
-extend to them.</p>
-<p>Inpatient stay is modeled as calendar days with ordinary least
-squares. The distribution is skewed. Removing alternate-level-of-care
-days does not change the emergency-stay result or the CTAS 3 and CTAS 4
-results. CTAS 2 and CTAS 5 are significant only in that sensitivity
-model. No model adjusts for diagnosis, comorbidity, hospital, or
-repeated visits by the same person. Confidence intervals treat visits as
-independent.</p>
-<p>The published HTML cannot be regenerated from the GitHub repository.
-The R Markdown and the analytic files are local and excluded from Git.
-This summary copies figures from the rendered memos rather than fitting
-the models itself.</p>
+</div>
+<div id="interpretation-and-limitations" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Interpretation and
+limitations</h1>
+<p>A03 and A05 retain their original descriptive model specifications
+and conventional standard errors. They do not account for hospital
+clustering introduced in this release, so their significance tests are
+illustrative. A07–A09 explicitly model or account for hospital
+clustering for the asthma questions. None of the descriptive
+associations proves that waiting longer causes admission or a longer
+inpatient stay.</p>
+<p>The new release uses one patient per ED visit, but it still omits
+many features of real healthcare data, including realistic hospital
+volume weights, complex transfer pathways, diagnostic misclassification
+and follow-up reconstruction. The repeat-event flags remain generated
+labels. A09’s risk-adjusted admission rates should not be read as
+quality rankings.</p>
+</div>
+<div id="memos-and-reproducibility" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Memos and
+reproducibility</h1>
+<p><a href="Project_001_Memo_A00.html">A00</a> defines and builds
+variables; <a href="Project_001_Memo_A01.html">A01</a> and <a href="Project_001_Memo_A02.html">A02</a> profile the files. <a href="Project_001_Memo_A03.html">A03</a>, <a href="Project_001_Memo_A04.html">A04</a>, and <a href="Project_001_Memo_A05.html">A05</a> provide full descriptive
+analyses. <a href="Project_001_Memo_A07.html">A07</a>, <a href="Project_001_Memo_A08.html">A08</a>, and <a href="Project_001_Memo_A09.html">A09</a> cover the asthma analyses and
+validation.</p>
+<p>The local rebuild script is
+<code>code/rebuild_unified_project.R</code>. Working source code,
+synthetic patient files and analysis bundles remain excluded from Git;
+rendered HTML and the public hospital reference/dictionary can be
+shared. The GitHub copy alone does not contain the patient data needed
+to rerun the full project.</p>
+<p><a href="index.html">Back to project</a></p>
 </div>
 
 
@@ -3206,7 +3399,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3",
+      selectors: "h1,h2,h3,h4",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

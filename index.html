@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Project 001 is a synthetic-data consulting demonstration from The V Lab. It generates fictional Alberta NACRS and DAD records to study two questions: whether CTAS and pre-disposition stay predict hospitalization, and whether CTAS and emergency stay predict inpatient length of stay.">
+  <meta name="description" content="Project 001 is a synthetic-data consulting demonstration from The V Lab. Ten memos cover emergency admission, inpatient stay, and adult asthma using matching, outcome regression, and known simulated causal effects.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Project 001 | The V Lab">
-  <meta property="og:description" content="Synthetic Alberta NACRS and DAD records. CTAS and pre-disposition stay versus hospitalization, then CTAS and emergency stay versus inpatient length of stay. Seven consulting memos, A00 through A06.">
+  <meta property="og:description" content="Synthetic Alberta NACRS and DAD records, plus adult-asthma matching and outcome regression. Ten consulting memos, A00 through A09.">
   <meta property="og:url" content="https://laboratoirev.github.io/Project001_HealthData/">
   <meta property="og:image" content="https://laboratoirev.github.io/Project001_HealthData/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Project 001 | The V Lab">
-  <meta name="twitter:description" content="Synthetic Alberta NACRS and DAD records. Seven consulting memos across two linked research questions.">
+  <meta name="twitter:description" content="Ten consulting memos: synthetic emergency and inpatient analysis, plus adult asthma, matching, outcome regression, and simulated causal effects.">
   <meta name="twitter:image" content="https://laboratoirev.github.io/Project001_HealthData/og.png">
   <title>Project 001 | The V Lab</title>
   <style>
@@ -499,7 +499,7 @@
           </div>
           <h1 id="page-title">Synthetic Alberta emergency &amp; <span class="accent">inpatient</span> data.</h1>
           <p class="lede">
-            Project 001 generates fictional NACRS and DAD records so two linked questions can be studied without a single real patient: whether triage acuity and the time before a disposition decision predict <strong>hospitalization</strong>, and, among linked admissions, whether acuity and emergency stay predict <strong>inpatient length of stay</strong>. Seven consulting memos carry the work from raw fields to final findings.
+            Project 001 generates fictional NACRS and DAD records to study <strong>hospitalization</strong> and <strong>inpatient length of stay</strong>. The same NACRS cohort supports adult-asthma propensity-score matching, outcome regression, and hospital-level regional comparisons. Ten memos document the methods, findings, and limits.
           </p>
           <div class="cta-row">
             <a class="btn btn-primary" href="#reports">Browse the reports <span class="arw" aria-hidden="true">→</span></a>
@@ -513,7 +513,7 @@
             <div><dt>Consulting organization</dt><dd>The V Lab</dd></div>
             <div><dt>Project lead</dt><dd>Miss V</dd></div>
             <div><dt>Client</dt><dd>Dr. ABC · ABC Department</dd></div>
-            <div><dt>Deliverables</dt><dd>7 memos (A00–A06)</dd></div>
+            <div><dt>Deliverables</dt><dd>10 memos (A00–A09)</dd></div>
             <div><dt>Tooling</dt><dd>R · R Markdown · renv</dd></div>
           </dl>
         </aside>
@@ -524,9 +524,9 @@
     <section class="shell" aria-label="Key figures" style="padding-bottom: clamp(20px,4vw,40px);">
       <div class="stat-strip">
         <div class="stat"><b>2</b><span>Synthetic data sources</span></div>
-        <div class="stat"><b>90k</b><span>Total records generated</span></div>
-        <div class="stat"><b>85</b><span>Documented variables</span></div>
-        <div class="stat"><b>7</b><span>Published memos</span></div>
+        <div class="stat"><b>90k</b><span>Original NACRS + DAD records</span></div>
+        <div class="stat"><b>12k</b><span>Independent adult visits in A07</span></div>
+        <div class="stat"><b>9</b><span>Rendered memos</span></div>
       </div>
     </section>
 
@@ -534,8 +534,8 @@
     <section class="block shell" id="questions" aria-labelledby="q-title">
       <div class="section-head">
         <p class="eyebrow">The research</p>
-        <h2 id="q-title">Two questions, studied in order</h2>
-        <p>Both questions use CTAS, the Canadian Triage and Acuity Scale (levels 1–5, where level 1 is most urgent). The first question decides who is hospitalized; the second follows those admissions into the inpatient record.</p>
+        <h2 id="q-title">Two linked questions and an asthma extension</h2>
+        <p>The original questions use CTAS, the Canadian Triage and Acuity Scale (levels 1–5, where level 1 is most urgent). A07–A09 use adults from the same NACRS file to study asthma, admission, and hospital-region differences.</p>
       </div>
       <div class="rq-grid">
         <article class="rq">
@@ -566,6 +566,18 @@
       </div>
     </section>
 
+    <section class="block shell" aria-labelledby="asthma-title">
+      <article class="rq">
+        <span class="rq-tag">Asthma and regions · Memos A07–A09</span>
+        <h2 id="asthma-title">Adult asthma and admission risk</h2>
+        <p class="q">Among comparable adult ED visits, how does admission risk differ when asthma is the main diagnosis?</p>
+        <p>Adults aged ≥18 are selected from the shared 30,000-visit NACRS file. Matching is exact within hospitals, with baseline propensity scores. Outcome models reuse the fixed pairs, and A09 fits hospital random-intercept logistic models for Calgary, Edmonton, and other regions, including surrounding towns.</p>
+        <p>CTAS is downstream of the episode in this design. The causal interpretation applies to the stated simulation; the effect is not a clinical finding.</p>
+        <a class="btn btn-primary" href="Project_001_Memo_A07.html">Open asthma analysis (A07) <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="Project_001_Memo_A08.html">Outcome regression (A08) <span aria-hidden="true">→</span></a>
+      </article>
+    </section>
+
     <!-- DATA SOURCES -->
     <section class="block shell" id="data" aria-labelledby="data-title">
       <div class="section-head">
@@ -580,7 +592,7 @@
           <p>National Ambulatory Care Reporting System. Here, one row is an emergency department visit — arrival, triage, disposition timing, and whether the patient was admitted.</p>
           <div class="data-metrics">
             <div><b>30,000</b><span>Records</span></div>
-            <div><b>34</b><span>Variables</span></div>
+            <div><b>50</b><span>Variables</span></div>
             <div><b>1</b><span>Row = one ED visit</span></div>
           </div>
         </article>
@@ -590,7 +602,7 @@
           <p>Discharge Abstract Database. Here, one row is an inpatient stay, including the derived length of stay. Question 2 uses the subset linked from a hospitalized NACRS visit.</p>
           <div class="data-metrics">
             <div><b>60,000</b><span>Records</span></div>
-            <div><b>51</b><span>Variables</span></div>
+            <div><b>64</b><span>Variables</span></div>
             <div><b>1</b><span>Row = one stay</span></div>
           </div>
         </article>
@@ -618,8 +630,8 @@
     <section class="block reports shell" id="reports" aria-labelledby="reports-title">
       <div class="section-head">
         <p class="eyebrow">The deliverables</p>
-        <h2 id="reports-title">Consulting memos A00–A06</h2>
-        <p>Seven published reports. Start with <strong>A06</strong> for the summary, <strong>A03</strong> for hospitalization, <strong>A04</strong> for the linkage, and <strong>A05</strong> for inpatient stay. Each opens the full rendered memo.</p>
+        <h2 id="reports-title">Consulting memos A00–A09</h2>
+        <p>Start with <strong>A06</strong> for the original study summary, <strong>A07</strong> for the adult-asthma matching simulation, <strong>A08</strong> for post-matching outcome regression, and <strong>A09</strong> for regional GLMM comparisons. Each card opens a rendered report.</p>
       </div>
       <div class="report-grid">
         <a class="report-card" href="Project_001_Memo_A00.html">
@@ -631,13 +643,13 @@
         <a class="report-card" href="Project_001_Memo_A01.html">
           <span class="rn">A01</span>
           <h3>Emergency &amp; ambulatory summary</h3>
-          <p>Descriptive summary of the analytic NACRS file — 30,000 records, 34 variables.</p>
+          <p>Descriptive summary of the analytic NACRS file — 30,000 records, 50 variables.</p>
           <span class="go">Open memo <span class="arw" aria-hidden="true">→</span></span>
         </a>
         <a class="report-card" href="Project_001_Memo_A02.html">
           <span class="rn">A02</span>
           <h3>Inpatient summary</h3>
-          <p>Descriptive summary of the analytic DAD file — 60,000 records, 51 variables.</p>
+          <p>Descriptive summary of the analytic DAD file — 60,000 records, 64 variables.</p>
           <span class="go">Open memo <span class="arw" aria-hidden="true">→</span></span>
         </a>
         <a class="report-card key" href="Project_001_Memo_A03.html">
@@ -662,6 +674,24 @@
           <span class="rn">A06 · Summary</span>
           <h3>Research summary</h3>
           <p>Study design, data, statistical methods, key findings, and limitations across Memos A00 through A05.</p>
+          <span class="go">Open memo <span class="arw" aria-hidden="true">→</span></span>
+        </a>
+        <a class="report-card key" href="Project_001_Memo_A07.html">
+          <span class="rn">A07 · Asthma</span>
+          <h3>Adult asthma, matching &amp; causal simulation</h3>
+          <p>Adults from the shared NACRS cohort, within-hospital propensity-score matching, hospital-clustered admission risks, and known-effect validation.</p>
+          <span class="go">Open memo <span class="arw" aria-hidden="true">→</span></span>
+        </a>
+        <a class="report-card key" href="Project_001_Memo_A08.html">
+          <span class="rn">A08 · Outcome models</span>
+          <h3>Post-matching admission risks</h3>
+          <p>Logistic outcome models on A07's fixed pairs, standardized risks, hospital-clustered uncertainty, and repeated-simulation checks against known truth.</p>
+          <span class="go">Open memo <span class="arw" aria-hidden="true">→</span></span>
+        </a>
+        <a class="report-card key" href="Project_001_Memo_A09.html">
+          <span class="rn">A09 · Regional GLMM</span>
+          <h3>Asthma admission across hospital regions</h3>
+          <p>Thirty real ED hospital reference names; entirely synthetic patients and results. Hospital random intercepts, case-mix standardized risks, and an asthma-by-region interaction.</p>
           <span class="go">Open memo <span class="arw" aria-hidden="true">→</span></span>
         </a>
         <a class="report-card" href="https://github.com/LaboratoireV/Project001_HealthData">
@@ -749,7 +779,7 @@ Rscript code_examples/render_all_rmd.R
       <div class="note">
         <h2 id="note-title">Responsible by design.</h2>
         <div class="note-body">
-          <p>All data are randomly generated and entirely synthetic. They contain no real patient records, personal health information, client data, or operational information. Any resemblance to real people, organizations, facilities, events, or results is coincidental.</p>
+          <p>All data are randomly generated and entirely synthetic. They contain no real patient records, personal health information, client data, or operational information. Hospital names are real reference labels; patient records, activity levels, and results are simulated and do not describe those hospitals.</p>
           <p>The data are for software demonstration, education, and portfolio presentation only. They must not be used for clinical, policy, financial, or operational decision-making.</p>
           <p class="fineprint">The Alberta Health Data Atlas is an independent educational resource and is not an official Alberta Health Services, University of Calgary, Government of Alberta, or CIHI publication. It contains no patient-level data and does not copy the official data-dictionary workbooks.</p>
         </div>

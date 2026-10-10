@@ -2,7 +2,7 @@ dataset,source_name,canonical_name,display_label,domain,storage_type,analytic_ty
 NACRS,patient_id,patient_id,Patient ID,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,1,TRUE,,not_public,source
 NACRS,visit_id,visit_id,Visit ID,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,2,TRUE,,not_public,source
 NACRS,facility_id,facility_id,Facility ID,Identifiers,character,identifier,none,exclude,exclude,quasi_identifier,3,TRUE,,not_public,source
-NACRS,health_zone,health_zone,Health zone,Demographics and geography,character,nominal,none,categorical,main,public,4,TRUE,,,source
+NACRS,health_zone,health_zone,Hospital health zone (legacy labels),Demographics and geography,character,nominal,none,categorical,main,public,4,TRUE,,,source
 NACRS,sex,sex,Sex,Demographics and geography,character,nominal,none,categorical,main,public,5,TRUE,,,source
 NACRS,age,age,Age,Demographics and geography,numeric,numeric_measure,years,continuous,main,public,6,TRUE,,non_negative,source
 NACRS,postal_fsa,postal_fsa,Postal FSA,Demographics and geography,character,nominal,none,categorical,main,quasi_identifier,7,TRUE,,synthetic_only,source
@@ -37,7 +37,7 @@ DAD,dad_record_id,dad_record_id,DAD record ID,Identifiers,character,identifier,n
 DAD,patient_id,patient_id,Patient ID,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,2,TRUE,,not_public,source
 DAD,chart_number,chart_number,Chart number,Identifiers,character,identifier,none,exclude,exclude,direct_identifier,3,TRUE,,not_public,source
 DAD,facility_id,facility_id,Facility ID,Identifiers,character,identifier,none,exclude,exclude,quasi_identifier,4,TRUE,,not_public,source
-DAD,health_zone,health_zone,Health zone,Demographics and geography,character,nominal,none,categorical,main,public,5,TRUE,,,source
+DAD,health_zone,health_zone,Hospital health zone (legacy labels),Demographics and geography,character,nominal,none,categorical,main,public,5,TRUE,,,source
 DAD,sex,sex,Sex,Demographics and geography,character,nominal,none,categorical,main,public,6,TRUE,,,source
 DAD,age_at_admission,age_at_admission,Age at admission,Demographics and geography,numeric,numeric_measure,years,continuous,main,public,7,TRUE,,non_negative,source
 DAD,postal_fsa,postal_fsa,Postal FSA,Demographics and geography,character,nominal,none,categorical,main,quasi_identifier,8,TRUE,,synthetic_only,source
@@ -84,3 +84,32 @@ DAD,link_patient_id_quality,link_patient_id_quality,Patient linkage quality,Data
 DAD,admission_date_quality,admission_date_quality,Admission date quality,Data quality and provenance,character,quality_status,none,quality,quality,public,49,TRUE,,,source
 DAD,created_datetime,created_datetime,Record created datetime,Data quality and provenance,datetime,provenance,datetime,exclude,appendix,internal,50,TRUE,,not_public,source
 DAD,los_days,los_days,Length of stay,Flow and length of stay,numeric,duration,days,continuous,main,public,51,FALSE,,non_negative,derived
+NACRS,hospital_id,hospital_id,Hospital ID,Shared hospital and baseline variables,character,identifier,none,exclude,exclude,public,101,FALSE,,,source
+NACRS,hospital_region,hospital_region,Hospital region,Shared hospital and baseline variables,character,nominal,none,categorical,main,public,102,FALSE,,,source
+NACRS,patient_residence,patient_residence,Patient residence,Shared hospital and baseline variables,character,nominal,none,categorical,main,public,103,FALSE,,,source
+NACRS,smoking,smoking,Pre-episode smoking,Shared hospital and baseline variables,numeric,binary_flag,none,categorical,main,public,104,FALSE,0|1,,source
+NACRS,obesity,obesity,Pre-episode obesity,Shared hospital and baseline variables,numeric,binary_flag,none,categorical,main,public,105,FALSE,0|1,,source
+NACRS,cardiometabolic_history,cardiometabolic_history,Cardiometabolic history,Shared hospital and baseline variables,numeric,binary_flag,none,categorical,main,public,106,FALSE,0|1,,source
+NACRS,asthma_history,asthma_history,Prior asthma history,Shared hospital and baseline variables,numeric,binary_flag,none,categorical,main,public,107,FALSE,0|1,,source
+NACRS,prior_ed_visits,prior_ed_visits,Prior 12-month ED visits,Shared hospital and baseline variables,numeric,numeric_measure,visits,continuous,main,public,108,FALSE,,,source
+NACRS,ed_arrival_severity,ed_arrival_severity,Pre-care ED severity,Shared hospital and baseline variables,numeric,numeric_measure,arbitrary score,continuous,main,public,109,FALSE,,,source
+NACRS,dataset_version,dataset_version,Data release,Shared hospital and baseline variables,character,nominal,none,categorical,main,public,110,FALSE,,,source
+DAD,hospital_id,hospital_id,Hospital ID,Shared hospital and baseline variables,character,identifier,none,exclude,exclude,public,101,FALSE,,,source
+DAD,hospital_region,hospital_region,Hospital region,Shared hospital and baseline variables,character,nominal,none,categorical,main,public,102,FALSE,,,source
+DAD,patient_residence,patient_residence,Patient residence,Shared hospital and baseline variables,character,nominal,none,categorical,main,public,103,FALSE,,,source
+DAD,smoking,smoking,Pre-episode smoking,Shared hospital and baseline variables,numeric,binary_flag,none,categorical,main,public,104,FALSE,0|1,,source
+DAD,obesity,obesity,Pre-episode obesity,Shared hospital and baseline variables,numeric,binary_flag,none,categorical,main,public,105,FALSE,0|1,,source
+DAD,cardiometabolic_history,cardiometabolic_history,Cardiometabolic history,Shared hospital and baseline variables,numeric,binary_flag,none,categorical,main,public,106,FALSE,0|1,,source
+DAD,asthma_history,asthma_history,Prior asthma history,Shared hospital and baseline variables,numeric,binary_flag,none,categorical,main,public,107,FALSE,0|1,,source
+DAD,prior_ed_visits,prior_ed_visits,Prior 12-month ED visits,Shared hospital and baseline variables,numeric,numeric_measure,visits,continuous,main,public,108,FALSE,,,source
+DAD,ed_arrival_severity,ed_arrival_severity,Pre-care ED severity,Shared hospital and baseline variables,numeric,numeric_measure,arbitrary score,continuous,main,public,109,FALSE,,,source
+DAD,dataset_version,dataset_version,Data release,Shared hospital and baseline variables,character,nominal,none,categorical,main,public,110,FALSE,,,source
+NACRS,age10,age10,Age centered at 50 per 10 years,Asthma study,numeric,numeric_measure,decades,continuous,main,public,120,FALSE,,,derived
+NACRS,season,season,Season of ED arrival,Asthma study,character,nominal,none,categorical,main,public,121,FALSE,,,derived
+NACRS,asthma_visit,asthma_visit,Asthma as main ED diagnosis,Asthma study,numeric,binary_flag,none,categorical,main,public,122,FALSE,,,derived
+NACRS,hospital_name,hospital_name,Hospital Name,Public hospital reference,character,nominal,none,categorical,main,public,130,FALSE,,,source
+NACRS,hospital_city,hospital_city,Hospital City,Public hospital reference,character,nominal,none,categorical,main,public,131,FALSE,,,source
+NACRS,ed_service_listed,ed_service_listed,Ed Service Listed,Public hospital reference,numeric,binary_flag,none,categorical,main,public,132,FALSE,,,source
+DAD,hospital_name,hospital_name,Hospital Name,Public hospital reference,character,nominal,none,categorical,main,public,130,FALSE,,,source
+DAD,hospital_city,hospital_city,Hospital City,Public hospital reference,character,nominal,none,categorical,main,public,131,FALSE,,,source
+DAD,ed_service_listed,ed_service_listed,Ed Service Listed,Public hospital reference,numeric,binary_flag,none,categorical,main,public,132,FALSE,,,source

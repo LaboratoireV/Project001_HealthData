@@ -1,49 +1,59 @@
 # Project 001: Synthetic Health Data Consulting
 
-Project 001 generates **synthetic Alberta NACRS and DAD records** so two linked questions can be studied without real patients. It is a fictional consulting demonstration from The V Lab, not a real contract, hospital, or patient population.
+Project 001 uses **one shared synthetic release** of Alberta-style NACRS and DAD records for Memos A00–A09. All patient records, admission outcomes, hospital effects, and region effects are simulated. The 30 hospital names are real reference labels, selected from the official Alberta Health Services Emergency Departments directory; these analyses do not describe their actual performance.
 
-The local folder `V_Project_001` and the GitHub repository `Project001_HealthData` are this project. The [Alberta Health Data Atlas](#supporting-reference-alberta-health-data-atlas) is only the reference used to design those synthetic files. It is not a second project.
+The local folder `V_Project_001` and repository `Project001_HealthData` are this project. The [Alberta Health Data Atlas](ahs-datasets/README.md) is a supporting structural reference, not another project or a source of patient records.
 
-## Research questions
+## Shared data release 2.0
 
-The synthetic files imitate two Alberta sources:
+| Source | Records | Raw variables | Analytic variables after A00 |
+| --- | ---: | ---: | ---: |
+| `data/pseudo_NACRS.xlsx` | 30,000 ED visits | 39 | 50 |
+| `data/pseudo_DAD.xlsx` | 60,000 inpatient stays | 60 | 64 |
 
-- **NACRS** — National Ambulatory Care Reporting System. Here it is the emergency department visit: 30,000 records and 34 variables.
-- **DAD** — Discharge Abstract Database. Here it is the inpatient stay: 60,000 records and 51 variables, including the derived length of stay. Question 2 uses the subset linked from a hospitalized NACRS visit.
+Both workbooks contain the same `hospital_reference` sheet, with hospital ID, real name, municipality, study region, ED source URL, and verification date. Calgary and Edmonton are **regional groups including surrounding towns**, fixed using the referenced AHS zone geography. They are not city-limit groups or a claim about the current administrative organization. The 10 hospitals selected per region are an illustrative subset, not a census or real activity-weighted sample. `patient_residence` is separate from `hospital_region`.
 
-Two questions, in order:
+Primary asthma visits are identified from the main diagnosis (`J45` family). Baseline smoking, obesity, cardiometabolic history, asthma history, prior ED visits, residence, and a simulated arrival severity score support the new analyses. Season and the asthma indicator are derived by A00. Severity is downstream of asthma in this generator: A07/A08 exclude it when estimating the simulated total effect, while A09's asthma-only comparison conditions on it for case-mix adjustment.
 
-1. **Hospitalization, yes or no.** Among emergency visits, do CTAS and the time before the disposition decision affect whether the patient is hospitalized? CTAS is the Canadian Triage and Acuity Scale (`ctas_level`, levels 1–5, level 1 most urgent). The primary stay measure is pre-disposition stay in minutes (`pre_disposition_los_min`). Total emergency stay (`los_min`) includes time after that decision, so it is an appendix comparison, not the primary exposure. The outcome is hospitalization (`admitted_flag`: 1 = yes, 0 = no).
-2. **Inpatient length of stay, in days.** Among hospitalized visits that can be linked to a DAD record, do CTAS and total NACRS stay minutes (`los_min`) affect DAD length of stay in days (`los_days`)? `acute_los_days` is the same stay after alternate-level-of-care days are removed, and it is a sensitivity outcome, not the primary one.
+The unified generator creates each admitted ED visit's inpatient continuation consistently. DAD also contains inpatient stays outside the NACRS extract. Prespecified missing/incorrect identifiers and time gaps create a linkage exercise. The 90,000 rows are therefore **not 90,000 independent patients**. The earlier sources and separate adult-asthma files are archived locally in `outputs/unification/before_v2/`.
 
-[A00](Project_001_Memo_A00.html) builds the derived research variables. [A01](Project_001_Memo_A01.html) and [A02](Project_001_Memo_A02.html) describe each synthetic file. [A03](Project_001_Memo_A03.html) estimates question 1. [A04](Project_001_Memo_A04.html) links hospitalized visits to DAD abstracts and compares linked with unlinked visits. [A05](Project_001_Memo_A05.html) estimates question 2 on the linked subset. [A06](Project_001_Memo_A06.html) summarizes the design, methods, findings, and limitations. The working R Markdown and analytic files stay in local `code/` and `data/`, which are excluded from Git, so the published HTML cannot be regenerated from the GitHub copy alone.
+## Research and memos
 
-| If you want to… | Start here |
+| Memo | Question and method |
 | --- | --- |
-| Read the research | [A06](Project_001_Memo_A06.html) is the summary. [A03](Project_001_Memo_A03.html) is hospitalization. [A04](Project_001_Memo_A04.html) is linkage. [A05](Project_001_Memo_A05.html) is inpatient stay |
-| See how the files were built | [A00](Project_001_Memo_A00.html) builds the research variables. [A01](Project_001_Memo_A01.html) and [A02](Project_001_Memo_A02.html) describe the files |
-| Browse the published site | [Project 001 site](https://laboratoirev.github.io/Project001_HealthData/) |
-| Run the public R examples | [`code_examples/`](code_examples/README.md). These examples do not rerun A00–A06 |
-| See the reference used to design the synthetic data | [Atlas overview](ahs-datasets/README.md) or the [interactive atlas](https://alberta-health-data-atlas.tigerdogai.chatgpt.site) |
+| [A00](Project_001_Memo_A00.html) | Import the shared workbooks and derive the research variables |
+| [A01](Project_001_Memo_A01.html) | Describe the complete analytic NACRS cohort |
+| [A02](Project_001_Memo_A02.html) | Describe the complete analytic DAD cohort |
+| [A03](Project_001_Memo_A03.html) | Logistic regression of admission on pre-disposition ED stay and CTAS; conventional legacy model |
+| [A04](Project_001_Memo_A04.html) | Link admitted ED visits to DAD using identifiers and a six-hour window; compare linked/unlinked visits |
+| [A05](Project_001_Memo_A05.html) | Linear regression of inpatient stay on ED stay and CTAS in linked records; acute stay sensitivity |
+| [A06](Project_001_Memo_A06.html) | Updated summary of A00–A05 using release 2.0 results |
+| [A07](Project_001_Memo_A07.html) | Adults from the shared NACRS: baseline propensity scores, exact hospital matching, 1:1 caliper matching, and hospital-clustered RD/RR |
+| [A08](Project_001_Memo_A08.html) | The same fixed pairs: hospital fixed effects, asthma-by-region interaction, standardized risks, and hospital-clustered uncertainty |
+| [A09](Project_001_Memo_A09.html) | Hospital random-intercept logistic GLMMs: asthma-only regional comparison and secondary asthma-by-region interaction |
 
-## What's in this repository
+All ten reports use the original A00–A06 template: author/client metadata, version and status cards, numbered contents, and blue report tables. All ten reports are written in English. A03/A05 retain their original conventional uncertainty calculations and are labeled as legacy teaching models, not hospital-adjusted estimates.
 
-| Path | Role in Project 001 |
-| --- | --- |
-| [`index.html`](index.html) | Public project page |
-| [`Project_001_Memo_A00.html`](Project_001_Memo_A00.html) | Builds derived research variables from the source files |
-| [`Project_001_Memo_A01.html`](Project_001_Memo_A01.html) | Emergency/ambulatory summary (the A01 deliverable) |
-| [`Project_001_Memo_A02.html`](Project_001_Memo_A02.html) | Inpatient summary (the A02 deliverable) |
-| [`Project_001_Memo_A03.html`](Project_001_Memo_A03.html) | Logistic model of hospitalization on pre-disposition stay and CTAS. Total stay and other covariates are in the appendix |
-| [`Project_001_Memo_A04.html`](Project_001_Memo_A04.html) | Links hospitalized emergency visits to DAD abstracts by personal health number and a six-hour window, then compares linked and unlinked visits |
-| [`Project_001_Memo_A05.html`](Project_001_Memo_A05.html) | Linear model of inpatient stay in days on emergency stay and CTAS, using the A04 linked visits. Acute stay is a sensitivity analysis |
-| [`Project_001_Memo_A06.html`](Project_001_Memo_A06.html) | Summary of the study design, data, methods, findings, and limitations |
-| [`code_examples/`](code_examples/README.md) | Sanitized reporting workflow. Example workbooks are not committed |
-| [`config/variable_dictionary.csv`](config/variable_dictionary.csv) | Shared NACRS and DAD variable definitions used by the reports |
-| [`ahs-datasets/`](ahs-datasets/README.md) | Supporting reference for designing the synthetic data. The interactive app is hosted separately |
-| `code/`, `data/` | Original working code and local datasets. Local only; excluded from Git |
+A07/A08 target the successfully matched asthma visits; A09 standardizes to the shared cohort's adult asthma case mix and integrates hospital random effects. These are different estimands and should not be pooled. A07/A08 include 100 positive-effect and 100 null-effect simulation repetitions. A09 includes 200 parametric bootstrap refits per main model and a separate 100-positive/100-region-null calibration exercise. Validation repetitions are method checks generated by the same model; they are not additional primary project datasets or independent clinical evidence. A09's 200-refit percentile intervals have Monte Carlo uncertainty and are preliminary.
 
-Official data-dictionary workbooks and any real working datasets are not copied into this repository.
+## Local reproducibility
+
+From the project root, using the installed project library on this machine:
+
+```sh
+R_LIBS="renv/library/macos/R-4.6/aarch64-apple-darwin23" \
+  Rscript --vanilla code/rebuild_unified_project.R
+```
+
+The command analyzes the existing two workbooks, refreshes A00, runs A07–A09 and their validation, runs invariant/numerical checks, and renders all ten memos. It does not regenerate sources by default. Optional `--regenerate` first rebuilds the synthetic sources with the fixed seed, authors Excel files with Artifact Tool, verifies every source cell through an independent `readxl` round trip, and promotes both workbooks. Large DAD export is assembled from identically styled Artifact Tool-authored row blocks because the full-size exporter exceeds its string limit.
+
+`code/unified_data.R` defines the common generator; `code/build_unified_data.R` creates coherent NACRS/DAD records; `config/variable_dictionary.csv` defines variables; `config/hospital_reference.csv` records real hospital references. `data/simulation_truth.rds` isolates counterfactual truth, which never enters propensity scores or outcome fitting. `data/unified_manifest.rds` and result bundles record source hashes; stale inputs cause reports to stop. Analysis uses R, `lme4`, and the local R Markdown/Pandoc environment. Source code, raw workbooks, derived caches, and result bundles remain local under existing Git exclusions.
+
+## Synthetic data and reference provenance
+
+All patient-level values are synthetic. Hospital names and ED listings come from the [official AHS Emergency Departments directory](https://www.albertahealthservices.ca/findhealth/service.aspx?id=6915), checked October 9, 2026. Study geography follows the referenced Calgary/Edmonton zone maps; directory inclusion does not guarantee uninterrupted current opening hours. The hospital list is a selected teaching sample. No fitted coefficient, admission rate, or ranking represents actual care quality.
+
+The source update replaces the previous synthetic release rather than appending unrelated cohorts. Original files and old analysis results are retained in the local backup. The public HTML is shareable, but cloning GitHub does not supply the local working datasets or regenerate the memos. This task has not published or pushed an update.
 
 ## Project team and client
 
@@ -52,25 +62,7 @@ Official data-dictionary workbooks and any real working datasets are not copied 
 - **Client:** Dr. ABC
 - **Client organization:** ABC Department
 
-All names and organizations above are fictional public-facing labels. They do not identify real people, clients, employers, or institutions.
-
-## Published reports
-
-- **[Memo A00](Project_001_Memo_A00.html)** — constructs the derived research variables and records their definitions
-- **[Memo A01](Project_001_Memo_A01.html)** — descriptive summary of the analytic NACRS file written by Memo A00
-- **[Memo A02](Project_001_Memo_A02.html)** — descriptive summary of the analytic DAD file written by Memo A00
-- **[Memo A03](Project_001_Memo_A03.html)** — logistic regression of hospitalization on pre-disposition stay and CTAS. Total emergency stay and the other covariates are in the appendix
-- **[Memo A04](Project_001_Memo_A04.html)** — links hospitalized NACRS visits to DAD abstracts by personal health number, then a six-hour admission window, and compares linked with unlinked visits
-- **[Memo A05](Project_001_Memo_A05.html)** — linear regression of inpatient length of stay in days on emergency stay and CTAS, in the linked cohort, with an acute-stay sensitivity analysis
-- **[Memo A06](Project_001_Memo_A06.html)** — summary of the study design, data, statistical methods, key findings, and limitations
-
-## Synthetic data
-
-**All data are randomly generated and entirely synthetic.** They contain no real patient records, personal health information, client data, or operational information. Any resemblance to real people, organizations, facilities, events, or results is coincidental.
-
-The Alberta Health Data Atlas supplies the structural reference for those records: what one row represents, which field families exist, and how sources can be linked. It does not supply patient-level values, and it is not the generator that writes the workbooks.
-
-The data are for software demonstration, education, and portfolio presentation only. They must not be used for clinical, policy, financial, or operational decision-making.
+These consulting identities are fictional labels. They are distinct from the real hospital reference names. This project is for education, software demonstration, and portfolio presentation.
 
 ## Supporting reference: Alberta Health Data Atlas
 
@@ -105,7 +97,7 @@ For a full local demonstration, place only synthetic workbooks in `code_examples
 
 ## Repository privacy
 
-The original Project 001 working code and local datasets remain local and are excluded from Git (`code/`, `data/`). The published HTML for Memos A00–A06 is the rendered output of those local files. Cloning the repository does not include the R Markdown or the analytic data, so those memos cannot be regenerated from GitHub. The public examples in `code_examples/` read raw synthetic workbooks and do not rebuild derived variables such as `los_min`, `admitted_flag`, `pre_disposition_los_min`, or `los_days`.
+The original Project 001 working code and local datasets remain local and are excluded from Git (`code/`, `data/`, `outputs/`). The HTML for Memos A00–A09 is the rendered output of those local files. Cloning the repository does not include the R Markdown or the analytic data, so those memos cannot be regenerated from GitHub. The public examples in `code_examples/` read raw synthetic workbooks and do not rebuild derived variables such as `los_min`, `admitted_flag`, `pre_disposition_los_min`, or `los_days`, or run the A07–A09 analyses.
 
 On this machine, `renv` autoload hangs unless R is started without a site or user profile and with the project library set explicitly. From the repository root, one memo is rendered with:
 

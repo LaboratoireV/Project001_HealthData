@@ -11,7 +11,7 @@
 
 <meta name="author" content="Prepared by Miss V · The V Lab" />
 
-<meta name="date" content="2026-09-19" />
+<meta name="date" content="2026-10-09" />
 
 <title>Project 001 Memo</title>
 
@@ -2741,7 +2741,7 @@ border-radius: 0px;
 
 <h1 class="title toc-ignore">Project 001 Memo</h1>
 <h4 class="author">Prepared by Miss V · The V Lab</h4>
-<h4 class="date">September 19, 2026</h4>
+<h4 class="date">October 09, 2026</h4>
 
 </div>
 
@@ -2926,7 +2926,7 @@ text-align: left;
 <span class="meta-label">Client Organization</span><span class="meta-value">ABC Department</span>
 </div>
 <div class="meta-item">
-<span class="meta-label">Version</span><span class="meta-value">1.0</span>
+<span class="meta-label">Version</span><span class="meta-value">2.0</span>
 </div>
 <div class="meta-item">
 <span class="meta-label">Status</span><span class="meta-value">Draft</span>
@@ -2969,8 +2969,8 @@ variables, without displaying row-level records.
 </li>
 <li>
 <strong>Analysis</strong> reports date and fiscal-year coverage,
-summarizes registered measures using type-appropriate methods, and
-presents quality-status distributions and consistency checks.
+summarizes registered measures with methods suited to each variable
+type, and presents quality-status distributions and consistency checks.
 </li>
 </ul>
 </div>
@@ -3011,13 +3011,13 @@ that analytic file only.
 <td align="left">dad</td>
 <td align="left">analytic_dad.rds</td>
 <td align="right">60000</td>
-<td align="right">51</td>
+<td align="right">64</td>
 <td align="left">tbl_df, tbl, data.frame</td>
 </tr>
 </tbody>
 </table>
 <div class="data-variable-heading">
-<strong>Variables (51)</strong>
+<strong>Variables (64)</strong>
 </div>
 <ol class="data-variable-list">
 <li>
@@ -3162,6 +3162,45 @@ that analytic file only.
 <code>created_datetime</code>
 </li>
 <li>
+<code>hospital_id</code>
+</li>
+<li>
+<code>hospital_region</code>
+</li>
+<li>
+<code>patient_residence</code>
+</li>
+<li>
+<code>smoking</code>
+</li>
+<li>
+<code>obesity</code>
+</li>
+<li>
+<code>cardiometabolic_history</code>
+</li>
+<li>
+<code>asthma_history</code>
+</li>
+<li>
+<code>prior_ed_visits</code>
+</li>
+<li>
+<code>ed_arrival_severity</code>
+</li>
+<li>
+<code>dataset_version</code>
+</li>
+<li>
+<code>hospital_name</code>
+</li>
+<li>
+<code>hospital_city</code>
+</li>
+<li>
+<code>ed_service_listed</code>
+</li>
+<li>
 <code>los_days</code>
 </li>
 <li>
@@ -3181,7 +3220,7 @@ that analytic file only.
 <div id="dad-standardized-profile" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> DAD standardized
 profile</h2>
-<p>The variable registry maps <strong>51 of 51</strong> registered DAD
+<p>The variable registry maps <strong>64 of 64</strong> registered DAD
 variables. The loaded data contain <strong>60000</strong> records.</p>
 </div>
 <div id="coverage" class="section level2" number="2.2">
@@ -3223,10 +3262,10 @@ Admission datetime
 0
 </td>
 <td style="text-align:left;">
-2024-10-23 15:13
+2025-01-01 00:11
 </td>
 <td style="text-align:left;">
-2027-09-23 15:51
+2025-12-31 00:00
 </td>
 </tr>
 <tr>
@@ -3240,10 +3279,10 @@ Discharge datetime
 0
 </td>
 <td style="text-align:left;">
-2024-10-28 01:13
+2025-01-02 00:23
 </td>
 <td style="text-align:left;">
-2027-09-26 02:51
+2026-01-14 10:40
 </td>
 </tr>
 </tbody>
@@ -3270,7 +3309,7 @@ Coverage
 Fiscal year
 </td>
 <td style="text-align:left;">
-2024-25, 2025-26, 2026-27, 2027-28
+2024-25, 2025-26
 </td>
 </tr>
 </tbody>
@@ -3279,8 +3318,8 @@ Fiscal year
 </div>
 <div id="main-measures" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Main measures</h2>
-<p>The registry selects <strong>7</strong> continuous measures and
-<strong>28</strong> categorical measures for the main profile.</p>
+<p>The registry selects <strong>9</strong> continuous measures and
+<strong>38</strong> categorical measures for the main profile.</p>
 <div id="continuous-measures" class="section level3" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Continuous
 measures</h3>
@@ -3350,40 +3389,40 @@ Missing %
 Age at admission (years)
 </td>
 <td style="text-align:left;">
-51.36 (22.36)
+45.58 (21.59)
 </td>
 <td style="text-align:left;">
-51.00
+48.00
 </td>
 <td style="text-align:left;">
-0.00 - 100.00
+0.00 - 89.00
 </td>
 <td style="text-align:left;">
-0.00
+1.00
 </td>
 <td style="text-align:left;">
-15.00
+5.00
 </td>
 <td style="text-align:left;">
-22.00
+11.00
 </td>
 <td style="text-align:left;">
-36.00
+32.00
 </td>
 <td style="text-align:left;">
-51.00
+48.00
 </td>
 <td style="text-align:left;">
-68.00
+62.00
 </td>
 <td style="text-align:left;">
-81.00
+73.00
 </td>
 <td style="text-align:left;">
-89.00
+77.00
 </td>
 <td style="text-align:left;">
-99.00
+84.00
 </td>
 <td style="text-align:right;">
 0
@@ -3395,7 +3434,7 @@ Age at admission (years)
 60000
 </td>
 <td style="text-align:right;">
-0
+0.00000
 </td>
 </tr>
 <tr>
@@ -3403,13 +3442,19 @@ Age at admission (years)
 CCI score (points)
 </td>
 <td style="text-align:left;">
-3.79 (2.61)
+0.64 (1.02)
 </td>
 <td style="text-align:left;">
-4.00
+0.00
 </td>
 <td style="text-align:left;">
-0.00 - 8.00
+0.00 - 3.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+0.00
 </td>
 <td style="text-align:left;">
 0.00
@@ -3424,19 +3469,13 @@ CCI score (points)
 1.00
 </td>
 <td style="text-align:left;">
-4.00
+2.00
 </td>
 <td style="text-align:left;">
-6.00
+3.00
 </td>
 <td style="text-align:left;">
-7.00
-</td>
-<td style="text-align:left;">
-8.00
-</td>
-<td style="text-align:left;">
-8.00
+3.00
 </td>
 <td style="text-align:right;">
 0
@@ -3448,7 +3487,7 @@ CCI score (points)
 60000
 </td>
 <td style="text-align:right;">
-0
+0.00000
 </td>
 </tr>
 <tr>
@@ -3456,40 +3495,40 @@ CCI score (points)
 Resource intensity weight (dimensionless)
 </td>
 <td style="text-align:left;">
-2.30 (1.21)
+0.86 (0.34)
 </td>
 <td style="text-align:left;">
-2.23
+0.81
 </td>
 <td style="text-align:left;">
-0.30 - 5.65
+0.39 - 4.87
 </td>
 <td style="text-align:left;">
-0.35
+0.39
 </td>
 <td style="text-align:left;">
-0.52
+0.53
 </td>
 <td style="text-align:left;">
-0.71
+0.53
 </td>
 <td style="text-align:left;">
-1.25
+0.67
 </td>
 <td style="text-align:left;">
-2.23
+0.81
 </td>
 <td style="text-align:left;">
-3.34
+0.95
 </td>
 <td style="text-align:left;">
-4.07
+1.31
 </td>
 <td style="text-align:left;">
-4.28
+1.51
 </td>
 <td style="text-align:left;">
-4.47
+1.93
 </td>
 <td style="text-align:right;">
 0
@@ -3501,7 +3540,7 @@ Resource intensity weight (dimensionless)
 60000
 </td>
 <td style="text-align:right;">
-0
+0.00000
 </td>
 </tr>
 <tr>
@@ -3509,13 +3548,13 @@ Resource intensity weight (dimensionless)
 Acute length of stay (days)
 </td>
 <td style="text-align:left;">
-3.82 (2.90)
+3.95 (2.28)
 </td>
 <td style="text-align:left;">
 3.00
 </td>
 <td style="text-align:left;">
-1.00 - 34.00
+1.00 - 32.00
 </td>
 <td style="text-align:left;">
 1.00
@@ -3524,7 +3563,7 @@ Acute length of stay (days)
 1.00
 </td>
 <td style="text-align:left;">
-1.00
+2.00
 </td>
 <td style="text-align:left;">
 2.00
@@ -3539,10 +3578,10 @@ Acute length of stay (days)
 7.00
 </td>
 <td style="text-align:left;">
-9.00
+8.00
 </td>
 <td style="text-align:left;">
-15.00
+11.00
 </td>
 <td style="text-align:right;">
 0
@@ -3554,7 +3593,7 @@ Acute length of stay (days)
 60000
 </td>
 <td style="text-align:right;">
-0
+0.00000
 </td>
 </tr>
 <tr>
@@ -3562,7 +3601,166 @@ Acute length of stay (days)
 Alternate level of care days (days)
 </td>
 <td style="text-align:left;">
-0.10 (0.54)
+0.20 (0.62)
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+0.00 - 3.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+1.00
+</td>
+<td style="text-align:left;">
+2.00
+</td>
+<td style="text-align:left;">
+3.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+60000
+</td>
+<td style="text-align:right;">
+60000
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ICU hours (hours)
+</td>
+<td style="text-align:left;">
+2.07 (9.67)
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+0.00 - 72.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+0.00
+</td>
+<td style="text-align:left;">
+11.00
+</td>
+<td style="text-align:left;">
+58.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+60000
+</td>
+<td style="text-align:right;">
+60000
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Length of stay (days)
+</td>
+<td style="text-align:left;">
+4.15 (2.23)
+</td>
+<td style="text-align:left;">
+4.00
+</td>
+<td style="text-align:left;">
+1.00 - 33.00
+</td>
+<td style="text-align:left;">
+1.00
+</td>
+<td style="text-align:left;">
+2.00
+</td>
+<td style="text-align:left;">
+2.00
+</td>
+<td style="text-align:left;">
+3.00
+</td>
+<td style="text-align:left;">
+4.00
+</td>
+<td style="text-align:left;">
+5.00
+</td>
+<td style="text-align:left;">
+7.00
+</td>
+<td style="text-align:left;">
+8.00
+</td>
+<td style="text-align:left;">
+12.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+60000
+</td>
+<td style="text-align:right;">
+60000
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Prior 12-month ED visits (visits)
+</td>
+<td style="text-align:left;">
+0.62 (0.79)
 </td>
 <td style="text-align:left;">
 0.00
@@ -3586,104 +3784,10 @@ Alternate level of care days (days)
 0.00
 </td>
 <td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-3.00
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-60000
-</td>
-<td style="text-align:right;">
-60000
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ICU hours (hours)
-</td>
-<td style="text-align:left;">
-8.09 (28.45)
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00 - 168.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-80.00
-</td>
-<td style="text-align:left;">
-151.00
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-60000
-</td>
-<td style="text-align:right;">
-60000
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Length of stay (days)
-</td>
-<td style="text-align:left;">
-3.92 (2.94)
-</td>
-<td style="text-align:left;">
-3.00
-</td>
-<td style="text-align:left;">
-1.00 - 34.00
-</td>
-<td style="text-align:left;">
 1.00
 </td>
 <td style="text-align:left;">
-1.00
-</td>
-<td style="text-align:left;">
-1.00
+2.00
 </td>
 <td style="text-align:left;">
 2.00
@@ -3691,18 +3795,6 @@ Length of stay (days)
 <td style="text-align:left;">
 3.00
 </td>
-<td style="text-align:left;">
-5.00
-</td>
-<td style="text-align:left;">
-7.00
-</td>
-<td style="text-align:left;">
-9.00
-</td>
-<td style="text-align:left;">
-15.00
-</td>
 <td style="text-align:right;">
 0
 </td>
@@ -3713,7 +3805,60 @@ Length of stay (days)
 60000
 </td>
 <td style="text-align:right;">
-0
+0.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pre-care ED severity (arbitrary score)
+</td>
+<td style="text-align:left;">
+1.01 (1.07)
+</td>
+<td style="text-align:left;">
+1.02
+</td>
+<td style="text-align:left;">
+-3.09 - 4.32
+</td>
+<td style="text-align:left;">
+-1.56
+</td>
+<td style="text-align:left;">
+-0.80
+</td>
+<td style="text-align:left;">
+-0.36
+</td>
+<td style="text-align:left;">
+0.30
+</td>
+<td style="text-align:left;">
+1.02
+</td>
+<td style="text-align:left;">
+1.73
+</td>
+<td style="text-align:left;">
+2.37
+</td>
+<td style="text-align:left;">
+2.73
+</td>
+<td style="text-align:left;">
+3.48
+</td>
+<td style="text-align:right;">
+54190
+</td>
+<td style="text-align:right;">
+60000
+</td>
+<td style="text-align:right;">
+5810
+</td>
+<td style="text-align:right;">
+90.31667
 </td>
 </tr>
 </tbody>
@@ -3726,8 +3871,9 @@ measures</h3>
 <p>Each variable is displayed separately. Coded variables show up to the
 20 most frequent codes, followed by Other and Missing where
 applicable.</p>
-<div id="health-zone" class="section level4" number="2.3.2.1">
-<h4><span class="header-section-number">2.3.2.1</span> Health zone</h4>
+<div id="hospital-health-zone-legacy-labels" class="section level4" number="2.3.2.1">
+<h4><span class="header-section-number">2.3.2.1</span> Hospital health
+zone (legacy labels)</h4>
 <div class="variable-code">
 <code>health_zone</code>
 </div>
@@ -3746,18 +3892,18 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-Calgary
+Edmonton
 </td>
 <td style="text-align:right;">
-20476 (34.1%)
+20984 (35.0%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Edmonton
+Calgary
 </td>
 <td style="text-align:right;">
-19808 (33.0%)
+20536 (34.2%)
 </td>
 </tr>
 <tr>
@@ -3765,15 +3911,7 @@ Edmonton
 Central
 </td>
 <td style="text-align:right;">
-7698 (12.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-North
-</td>
-<td style="text-align:right;">
-6792 (11.3%)
+7323 (12.2%)
 </td>
 </tr>
 <tr>
@@ -3781,7 +3919,15 @@ North
 South
 </td>
 <td style="text-align:right;">
-5226 (8.7%)
+5661 (9.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+North
+</td>
+<td style="text-align:right;">
+5496 (9.2%)
 </td>
 </tr>
 </tbody>
@@ -3808,34 +3954,18 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-F
-</td>
-<td style="text-align:right;">
-30076 (50.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 M
 </td>
 <td style="text-align:right;">
-29656 (49.4%)
+30091 (50.2%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-U
+F
 </td>
 <td style="text-align:right;">
-219 (0.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-X
-</td>
-<td style="text-align:right;">
-49 (0.1%)
+29909 (49.8%)
 </td>
 </tr>
 </tbody>
@@ -3847,7 +3977,7 @@ X
 <div class="variable-code">
 <code>postal_fsa</code>
 </div>
-<div class="category-table-card long-table">
+<div class="category-table-card">
 <table class="summary-table categorical-summary-table">
 <thead>
 <tr>
@@ -3862,258 +3992,10 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-T4N
-</td>
-<td style="text-align:right;">
-2082 (3.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2G
-</td>
-<td style="text-align:right;">
-2041 (3.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T4R
-</td>
-<td style="text-align:right;">
-1989 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5K
-</td>
-<td style="text-align:right;">
-1940 (3.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5M
-</td>
-<td style="text-align:right;">
-1929 (3.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5H
-</td>
-<td style="text-align:right;">
-1912 (3.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2L
-</td>
-<td style="text-align:right;">
-1911 (3.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5G
-</td>
-<td style="text-align:right;">
-1887 (3.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T4P
-</td>
-<td style="text-align:right;">
-1853 (3.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5C
-</td>
-<td style="text-align:right;">
-1844 (3.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2C
-</td>
-<td style="text-align:right;">
-1828 (3.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5A
-</td>
-<td style="text-align:right;">
-1813 (3.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5N
-</td>
-<td style="text-align:right;">
-1811 (3.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2H
-</td>
-<td style="text-align:right;">
-1792 (3.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T9K
-</td>
-<td style="text-align:right;">
-1790 (3.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T4S
-</td>
-<td style="text-align:right;">
-1774 (3.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T8W
-</td>
-<td style="text-align:right;">
-1761 (2.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2N
-</td>
-<td style="text-align:right;">
-1744 (2.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2B
-</td>
-<td style="text-align:right;">
-1715 (2.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T9H
-</td>
-<td style="text-align:right;">
-1713 (2.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2E
-</td>
-<td style="text-align:right;">
-1704 (2.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5B
-</td>
-<td style="text-align:right;">
-1703 (2.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2K
-</td>
-<td style="text-align:right;">
-1681 (2.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2J
-</td>
-<td style="text-align:right;">
-1676 (2.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 T5J
 </td>
 <td style="text-align:right;">
-1668 (2.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5E
-</td>
-<td style="text-align:right;">
-1651 (2.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T5L
-</td>
-<td style="text-align:right;">
-1650 (2.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T1K
-</td>
-<td style="text-align:right;">
-1531 (2.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T8V
-</td>
-<td style="text-align:right;">
-1528 (2.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2M
-</td>
-<td style="text-align:right;">
-1510 (2.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T2A
-</td>
-<td style="text-align:right;">
-1477 (2.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T1G
-</td>
-<td style="text-align:right;">
-1473 (2.5%)
+21126 (35.2%)
 </td>
 </tr>
 <tr>
@@ -4121,23 +4003,15 @@ T1G
 T2P
 </td>
 <td style="text-align:right;">
-1397 (2.3%)
+20741 (34.6%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-T1J
+T8V
 </td>
 <td style="text-align:right;">
-1123 (1.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-T1H
-</td>
-<td style="text-align:right;">
-1099 (1.8%)
+18133 (30.2%)
 </td>
 </tr>
 </tbody>
@@ -4168,7 +4042,7 @@ Count n (%)
 Urgent
 </td>
 <td style="text-align:right;">
-40943 (68.2%)
+32869 (54.8%)
 </td>
 </tr>
 <tr>
@@ -4176,15 +4050,7 @@ Urgent
 Elective
 </td>
 <td style="text-align:right;">
-18454 (30.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Newborn
-</td>
-<td style="text-align:right;">
-603 (1.0%)
+27131 (45.2%)
 </td>
 </tr>
 </tbody>
@@ -4212,34 +4078,18 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
+Other / outside NACRS extract
+</td>
+<td style="text-align:right;">
+54190 (90.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 Emergency Department
 </td>
 <td style="text-align:right;">
-36693 (61.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Direct admission
-</td>
-<td style="text-align:right;">
-10683 (17.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Clinic
-</td>
-<td style="text-align:right;">
-7518 (12.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Transfer
-</td>
-<td style="text-align:right;">
-5106 (8.5%)
+5810 (9.7%)
 </td>
 </tr>
 </tbody>
@@ -4252,7 +4102,7 @@ diagnosis</h4>
 <div class="variable-code">
 <code>most_responsible_diagnosis</code>
 </div>
-<div class="category-table-card long-table">
+<div class="category-table-card">
 <table class="summary-table categorical-summary-table">
 <thead>
 <tr>
@@ -4267,18 +4117,10 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-R55
+J45.9
 </td>
 <td style="text-align:right;">
-3407 (5.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F41.9
-</td>
-<td style="text-align:right;">
-3300 (5.5%)
+19597 (32.7%)
 </td>
 </tr>
 <tr>
@@ -4286,7 +4128,39 @@ F41.9
 N39.0
 </td>
 <td style="text-align:right;">
-2933 (4.9%)
+2757 (4.6%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+M54.5
+</td>
+<td style="text-align:right;">
+2749 (4.6%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R42
+</td>
+<td style="text-align:right;">
+2730 (4.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S09.9
+</td>
+<td style="text-align:right;">
+2724 (4.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F41.9
+</td>
+<td style="text-align:right;">
+2723 (4.5%)
 </td>
 </tr>
 <tr>
@@ -4294,7 +4168,63 @@ N39.0
 R10.9
 </td>
 <td style="text-align:right;">
-2882 (4.8%)
+2722 (4.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R06.0
+</td>
+<td style="text-align:right;">
+2696 (4.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R51.9
+</td>
+<td style="text-align:right;">
+2682 (4.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R53
+</td>
+<td style="text-align:right;">
+2679 (4.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R11
+</td>
+<td style="text-align:right;">
+2676 (4.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R55
+</td>
+<td style="text-align:right;">
+2667 (4.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S01.9
+</td>
+<td style="text-align:right;">
+2667 (4.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T78.4
+</td>
+<td style="text-align:right;">
+2649 (4.4%)
 </td>
 </tr>
 <tr>
@@ -4302,135 +4232,15 @@ R10.9
 R07.4
 </td>
 <td style="text-align:right;">
-2809 (4.7%)
+2643 (4.4%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-K85.9
+R50.9
 </td>
 <td style="text-align:right;">
-2807 (4.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-C34.9
-</td>
-<td style="text-align:right;">
-2780 (4.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-E11.9
-</td>
-<td style="text-align:right;">
-2686 (4.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J44.1
-</td>
-<td style="text-align:right;">
-2681 (4.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K35.8
-</td>
-<td style="text-align:right;">
-2647 (4.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I50.9
-</td>
-<td style="text-align:right;">
-2644 (4.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J18.9
-</td>
-<td style="text-align:right;">
-2637 (4.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F32.9
-</td>
-<td style="text-align:right;">
-2612 (4.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K92.2
-</td>
-<td style="text-align:right;">
-2612 (4.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-S72.0
-</td>
-<td style="text-align:right;">
-2598 (4.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I63.9
-</td>
-<td style="text-align:right;">
-2517 (4.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-G45.9
-</td>
-<td style="text-align:right;">
-2494 (4.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N17.9
-</td>
-<td style="text-align:right;">
-2485 (4.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I10
-</td>
-<td style="text-align:right;">
-2432 (4.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-A41.9
-</td>
-<td style="text-align:right;">
-2316 (3.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Other
-</td>
-<td style="text-align:right;">
-5721 (9.5%)
+2639 (4.4%)
 </td>
 </tr>
 </tbody>
@@ -4443,7 +4253,7 @@ Other
 <div class="variable-code">
 <code>comorbidity_1</code>
 </div>
-<div class="category-table-card long-table">
+<div class="category-table-card">
 <table class="summary-table categorical-summary-table">
 <thead>
 <tr>
@@ -4458,170 +4268,18 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-I10
+J45.9
 </td>
 <td style="text-align:right;">
-3193 (5.3%)
+12463 (20.8%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-R10.9
+<span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
 </td>
 <td style="text-align:right;">
-3122 (5.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-E11.9
-</td>
-<td style="text-align:right;">
-3098 (5.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N39.0
-</td>
-<td style="text-align:right;">
-3004 (5.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I21.9
-</td>
-<td style="text-align:right;">
-2989 (5.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-G45.9
-</td>
-<td style="text-align:right;">
-2956 (4.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I63.9
-</td>
-<td style="text-align:right;">
-2921 (4.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R07.4
-</td>
-<td style="text-align:right;">
-2896 (4.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R55
-</td>
-<td style="text-align:right;">
-2875 (4.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J44.1
-</td>
-<td style="text-align:right;">
-2870 (4.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K92.2
-</td>
-<td style="text-align:right;">
-2850 (4.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-A41.9
-</td>
-<td style="text-align:right;">
-2846 (4.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K35.8
-</td>
-<td style="text-align:right;">
-2840 (4.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I50.9
-</td>
-<td style="text-align:right;">
-2839 (4.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-C34.9
-</td>
-<td style="text-align:right;">
-2790 (4.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K85.9
-</td>
-<td style="text-align:right;">
-2769 (4.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-S72.0
-</td>
-<td style="text-align:right;">
-2732 (4.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F32.9
-</td>
-<td style="text-align:right;">
-2676 (4.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J18.9
-</td>
-<td style="text-align:right;">
-2647 (4.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F41.9
-</td>
-<td style="text-align:right;">
-2585 (4.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Other
-</td>
-<td style="text-align:right;">
-2502 (4.2%)
+47537 (79.2%)
 </td>
 </tr>
 </tbody>
@@ -4634,7 +4292,7 @@ Other
 <div class="variable-code">
 <code>comorbidity_2</code>
 </div>
-<div class="category-table-card long-table">
+<div class="category-table-card">
 <table class="summary-table categorical-summary-table">
 <thead>
 <tr>
@@ -4649,170 +4307,18 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-K85.9
-</td>
-<td style="text-align:right;">
-3286 (5.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-G45.9
-</td>
-<td style="text-align:right;">
-3206 (5.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R55
-</td>
-<td style="text-align:right;">
-3119 (5.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-A41.9
-</td>
-<td style="text-align:right;">
-3084 (5.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I63.9
-</td>
-<td style="text-align:right;">
-3048 (5.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J18.9
-</td>
-<td style="text-align:right;">
-3003 (5.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F32.9
-</td>
-<td style="text-align:right;">
-2938 (4.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F41.9
-</td>
-<td style="text-align:right;">
-2920 (4.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J44.1
-</td>
-<td style="text-align:right;">
-2839 (4.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R07.4
-</td>
-<td style="text-align:right;">
-2830 (4.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I50.9
-</td>
-<td style="text-align:right;">
-2822 (4.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 E11.9
 </td>
 <td style="text-align:right;">
-2810 (4.7%)
+13279 (22.1%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-S72.0
+<span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
 </td>
 <td style="text-align:right;">
-2798 (4.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I10
-</td>
-<td style="text-align:right;">
-2789 (4.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N39.0
-</td>
-<td style="text-align:right;">
-2768 (4.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R10.9
-</td>
-<td style="text-align:right;">
-2737 (4.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I21.9
-</td>
-<td style="text-align:right;">
-2706 (4.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-C34.9
-</td>
-<td style="text-align:right;">
-2690 (4.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N17.9
-</td>
-<td style="text-align:right;">
-2636 (4.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K92.2
-</td>
-<td style="text-align:right;">
-2503 (4.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Other
-</td>
-<td style="text-align:right;">
-2468 (4.1%)
+46721 (77.9%)
 </td>
 </tr>
 </tbody>
@@ -4825,7 +4331,7 @@ Other
 <div class="variable-code">
 <code>comorbidity_3</code>
 </div>
-<div class="category-table-card long-table">
+<div class="category-table-card">
 <table class="summary-table categorical-summary-table">
 <thead>
 <tr>
@@ -4840,178 +4346,10 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-J18.9
-</td>
-<td style="text-align:right;">
-1525 (2.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-G45.9
-</td>
-<td style="text-align:right;">
-1517 (2.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K92.2
-</td>
-<td style="text-align:right;">
-1418 (2.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I50.9
-</td>
-<td style="text-align:right;">
-1373 (2.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F41.9
-</td>
-<td style="text-align:right;">
-1366 (2.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R10.9
-</td>
-<td style="text-align:right;">
-1298 (2.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I21.9
-</td>
-<td style="text-align:right;">
-1296 (2.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-C34.9
-</td>
-<td style="text-align:right;">
-1291 (2.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R07.4
-</td>
-<td style="text-align:right;">
-1250 (2.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-S72.0
-</td>
-<td style="text-align:right;">
-1243 (2.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F32.9
-</td>
-<td style="text-align:right;">
-1242 (2.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-A41.9
-</td>
-<td style="text-align:right;">
-1211 (2.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N17.9
-</td>
-<td style="text-align:right;">
-1202 (2.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K35.8
-</td>
-<td style="text-align:right;">
-1195 (2.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R55
-</td>
-<td style="text-align:right;">
-1195 (2.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N39.0
-</td>
-<td style="text-align:right;">
-1187 (2.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I63.9
-</td>
-<td style="text-align:right;">
-1175 (2.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J44.1
-</td>
-<td style="text-align:right;">
-1169 (1.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-E11.9
-</td>
-<td style="text-align:right;">
-1048 (1.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K85.9
-</td>
-<td style="text-align:right;">
-1045 (1.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Other
-</td>
-<td style="text-align:right;">
-1034 (1.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 <span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
 </td>
 <td style="text-align:right;">
-33720 (56.2%)
+60000 (100.0%)
 </td>
 </tr>
 </tbody>
@@ -5024,7 +4362,7 @@ Other
 <div class="variable-code">
 <code>comorbidity_4</code>
 </div>
-<div class="category-table-card long-table">
+<div class="category-table-card">
 <table class="summary-table categorical-summary-table">
 <thead>
 <tr>
@@ -5039,178 +4377,10 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-F41.9
-</td>
-<td style="text-align:right;">
-822 (1.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K35.8
-</td>
-<td style="text-align:right;">
-796 (1.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-C34.9
-</td>
-<td style="text-align:right;">
-793 (1.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K85.9
-</td>
-<td style="text-align:right;">
-793 (1.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I10
-</td>
-<td style="text-align:right;">
-755 (1.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-A41.9
-</td>
-<td style="text-align:right;">
-753 (1.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J18.9
-</td>
-<td style="text-align:right;">
-733 (1.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-S72.0
-</td>
-<td style="text-align:right;">
-728 (1.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R07.4
-</td>
-<td style="text-align:right;">
-720 (1.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I21.9
-</td>
-<td style="text-align:right;">
-713 (1.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J44.1
-</td>
-<td style="text-align:right;">
-701 (1.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N17.9
-</td>
-<td style="text-align:right;">
-701 (1.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K92.2
-</td>
-<td style="text-align:right;">
-696 (1.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I50.9
-</td>
-<td style="text-align:right;">
-693 (1.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-G45.9
-</td>
-<td style="text-align:right;">
-688 (1.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F32.9
-</td>
-<td style="text-align:right;">
-679 (1.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I63.9
-</td>
-<td style="text-align:right;">
-675 (1.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N39.0
-</td>
-<td style="text-align:right;">
-661 (1.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R10.9
-</td>
-<td style="text-align:right;">
-650 (1.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R55
-</td>
-<td style="text-align:right;">
-641 (1.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Other
-</td>
-<td style="text-align:right;">
-575 (1.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 <span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
 </td>
 <td style="text-align:right;">
-45034 (75.1%)
+60000 (100.0%)
 </td>
 </tr>
 </tbody>
@@ -5223,7 +4393,7 @@ Other
 <div class="variable-code">
 <code>comorbidity_5</code>
 </div>
-<div class="category-table-card long-table">
+<div class="category-table-card">
 <table class="summary-table categorical-summary-table">
 <thead>
 <tr>
@@ -5238,178 +4408,10 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-R55
-</td>
-<td style="text-align:right;">
-482 (0.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K85.9
-</td>
-<td style="text-align:right;">
-470 (0.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R07.4
-</td>
-<td style="text-align:right;">
-445 (0.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R10.9
-</td>
-<td style="text-align:right;">
-437 (0.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I63.9
-</td>
-<td style="text-align:right;">
-435 (0.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I10
-</td>
-<td style="text-align:right;">
-414 (0.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I21.9
-</td>
-<td style="text-align:right;">
-401 (0.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-C34.9
-</td>
-<td style="text-align:right;">
-388 (0.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-I50.9
-</td>
-<td style="text-align:right;">
-364 (0.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F32.9
-</td>
-<td style="text-align:right;">
-350 (0.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N39.0
-</td>
-<td style="text-align:right;">
-348 (0.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J18.9
-</td>
-<td style="text-align:right;">
-340 (0.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-E11.9
-</td>
-<td style="text-align:right;">
-326 (0.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-S72.0
-</td>
-<td style="text-align:right;">
-318 (0.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F41.9
-</td>
-<td style="text-align:right;">
-306 (0.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-K35.8
-</td>
-<td style="text-align:right;">
-296 (0.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-G45.9
-</td>
-<td style="text-align:right;">
-295 (0.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-N17.9
-</td>
-<td style="text-align:right;">
-286 (0.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-J44.1
-</td>
-<td style="text-align:right;">
-279 (0.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-A41.9
-</td>
-<td style="text-align:right;">
-237 (0.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Other
-</td>
-<td style="text-align:right;">
-232 (0.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 <span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
 </td>
 <td style="text-align:right;">
-52551 (87.6%)
+60000 (100.0%)
 </td>
 </tr>
 </tbody>
@@ -5437,114 +4439,18 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-Colonoscopy
+Other treatment
 </td>
 <td style="text-align:right;">
-4893 (8.2%)
+40403 (67.3%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-ECG
+Bronchodilator
 </td>
 <td style="text-align:right;">
-4797 (8.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Dialysis
-</td>
-<td style="text-align:right;">
-4602 (7.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-X-ray
-</td>
-<td style="text-align:right;">
-4383 (7.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-OR procedure
-</td>
-<td style="text-align:right;">
-4313 (7.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Endoscopy
-</td>
-<td style="text-align:right;">
-4282 (7.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Blood transfusion
-</td>
-<td style="text-align:right;">
-4213 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-None
-</td>
-<td style="text-align:right;">
-4196 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ultrasound
-</td>
-<td style="text-align:right;">
-4180 (7.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Physiotherapy
-</td>
-<td style="text-align:right;">
-4163 (6.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Echo
-</td>
-<td style="text-align:right;">
-4155 (6.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Cardiac cath
-</td>
-<td style="text-align:right;">
-4117 (6.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-MRI
-</td>
-<td style="text-align:right;">
-4086 (6.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CT
-</td>
-<td style="text-align:right;">
-3620 (6.0%)
+19597 (32.7%)
 </td>
 </tr>
 </tbody>
@@ -5572,114 +4478,10 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-Blood transfusion
-</td>
-<td style="text-align:right;">
-4819 (8.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-X-ray
-</td>
-<td style="text-align:right;">
-4672 (7.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Echo
-</td>
-<td style="text-align:right;">
-4667 (7.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ultrasound
-</td>
-<td style="text-align:right;">
-4515 (7.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 None
 </td>
 <td style="text-align:right;">
-4488 (7.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-MRI
-</td>
-<td style="text-align:right;">
-4308 (7.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Cardiac cath
-</td>
-<td style="text-align:right;">
-4284 (7.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Dialysis
-</td>
-<td style="text-align:right;">
-4268 (7.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-OR procedure
-</td>
-<td style="text-align:right;">
-4120 (6.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Physiotherapy
-</td>
-<td style="text-align:right;">
-4086 (6.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Colonoscopy
-</td>
-<td style="text-align:right;">
-4062 (6.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Endoscopy
-</td>
-<td style="text-align:right;">
-3996 (6.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ECG
-</td>
-<td style="text-align:right;">
-3881 (6.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CT
-</td>
-<td style="text-align:right;">
-3834 (6.4%)
+60000 (100.0%)
 </td>
 </tr>
 </tbody>
@@ -5707,122 +4509,10 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-Echo
-</td>
-<td style="text-align:right;">
-2296 (3.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Dialysis
-</td>
-<td style="text-align:right;">
-2186 (3.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-OR procedure
-</td>
-<td style="text-align:right;">
-2113 (3.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Cardiac cath
-</td>
-<td style="text-align:right;">
-2104 (3.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-None
-</td>
-<td style="text-align:right;">
-2007 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ultrasound
-</td>
-<td style="text-align:right;">
-1962 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Blood transfusion
-</td>
-<td style="text-align:right;">
-1930 (3.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CT
-</td>
-<td style="text-align:right;">
-1886 (3.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ECG
-</td>
-<td style="text-align:right;">
-1876 (3.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-MRI
-</td>
-<td style="text-align:right;">
-1789 (3.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-X-ray
-</td>
-<td style="text-align:right;">
-1787 (3.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Physiotherapy
-</td>
-<td style="text-align:right;">
-1638 (2.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Endoscopy
-</td>
-<td style="text-align:right;">
-1570 (2.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Colonoscopy
-</td>
-<td style="text-align:right;">
-1542 (2.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 <span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
 </td>
 <td style="text-align:right;">
-33314 (55.5%)
+60000 (100.0%)
 </td>
 </tr>
 </tbody>
@@ -5850,122 +4540,10 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-Dialysis
-</td>
-<td style="text-align:right;">
-1238 (2.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-OR procedure
-</td>
-<td style="text-align:right;">
-1204 (2.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Physiotherapy
-</td>
-<td style="text-align:right;">
-1158 (1.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CT
-</td>
-<td style="text-align:right;">
-1087 (1.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Echo
-</td>
-<td style="text-align:right;">
-1060 (1.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-MRI
-</td>
-<td style="text-align:right;">
-1041 (1.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-X-ray
-</td>
-<td style="text-align:right;">
-1032 (1.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Colonoscopy
-</td>
-<td style="text-align:right;">
-1013 (1.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ultrasound
-</td>
-<td style="text-align:right;">
-1004 (1.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Cardiac cath
-</td>
-<td style="text-align:right;">
-998 (1.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Blood transfusion
-</td>
-<td style="text-align:right;">
-992 (1.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Endoscopy
-</td>
-<td style="text-align:right;">
-991 (1.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-None
-</td>
-<td style="text-align:right;">
-984 (1.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ECG
-</td>
-<td style="text-align:right;">
-980 (1.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 <span class="missing-category">Missing</span><span class="missing-na-badge">NA</span>
 </td>
 <td style="text-align:right;">
-45218 (75.4%)
+60000 (100.0%)
 </td>
 </tr>
 </tbody>
@@ -5993,74 +4571,26 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-CMG056
+CMG028
 </td>
 <td style="text-align:right;">
-720 (1.2%)
+2109 (3.5%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-CMG118
+CMG005
 </td>
 <td style="text-align:right;">
-695 (1.2%)
+2082 (3.5%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-CMG014
+CMG012
 </td>
 <td style="text-align:right;">
-678 (1.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CMG048
-</td>
-<td style="text-align:right;">
-677 (1.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CMG113
-</td>
-<td style="text-align:right;">
-676 (1.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CMG008
-</td>
-<td style="text-align:right;">
-671 (1.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CMG029
-</td>
-<td style="text-align:right;">
-668 (1.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CMG052
-</td>
-<td style="text-align:right;">
-658 (1.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CMG016
-</td>
-<td style="text-align:right;">
-653 (1.1%)
+2072 (3.5%)
 </td>
 </tr>
 <tr>
@@ -6068,55 +4598,111 @@ CMG016
 CMG004
 </td>
 <td style="text-align:right;">
-645 (1.1%)
+2062 (3.4%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-CMG086
+CMG018
 </td>
 <td style="text-align:right;">
-640 (1.1%)
+2059 (3.4%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-CMG117
+CMG008
 </td>
 <td style="text-align:right;">
-634 (1.1%)
+2045 (3.4%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-CMG034
+CMG014
 </td>
 <td style="text-align:right;">
-622 (1.0%)
+2031 (3.4%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-CMG054
+CMG026
 </td>
 <td style="text-align:right;">
-615 (1.0%)
+2027 (3.4%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-CMG036
+CMG021
 </td>
 <td style="text-align:right;">
-614 (1.0%)
+2013 (3.4%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-CMG038
+CMG017
 </td>
 <td style="text-align:right;">
-608 (1.0%)
+2008 (3.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CMG011
+</td>
+<td style="text-align:right;">
+2004 (3.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CMG002
+</td>
+<td style="text-align:right;">
+2003 (3.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CMG030
+</td>
+<td style="text-align:right;">
+2001 (3.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CMG022
+</td>
+<td style="text-align:right;">
+1999 (3.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CMG013
+</td>
+<td style="text-align:right;">
+1996 (3.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CMG001
+</td>
+<td style="text-align:right;">
+1995 (3.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CMG027
+</td>
+<td style="text-align:right;">
+1992 (3.3%)
 </td>
 </tr>
 <tr>
@@ -6124,31 +4710,23 @@ CMG038
 CMG006
 </td>
 <td style="text-align:right;">
-600 (1.0%)
+1990 (3.3%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-CMG065
+CMG010
 </td>
 <td style="text-align:right;">
-599 (1.0%)
+1987 (3.3%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-CMG044
+CMG023
 </td>
 <td style="text-align:right;">
-596 (1.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CMG064
-</td>
-<td style="text-align:right;">
-596 (1.0%)
+1983 (3.3%)
 </td>
 </tr>
 <tr>
@@ -6156,7 +4734,7 @@ CMG064
 Other
 </td>
 <td style="text-align:right;">
-47135 (78.6%)
+19542 (32.6%)
 </td>
 </tr>
 </tbody>
@@ -6187,7 +4765,7 @@ Count n (%)
 No
 </td>
 <td style="text-align:right;">
-31736 (52.9%)
+54505 (90.8%)
 </td>
 </tr>
 <tr>
@@ -6195,7 +4773,7 @@ No
 Yes
 </td>
 <td style="text-align:right;">
-28264 (47.1%)
+5495 (9.2%)
 </td>
 </tr>
 </tbody>
@@ -6226,7 +4804,7 @@ Count n (%)
 No
 </td>
 <td style="text-align:right;">
-54045 (90.1%)
+56739 (94.6%)
 </td>
 </tr>
 <tr>
@@ -6234,7 +4812,7 @@ No
 Yes
 </td>
 <td style="text-align:right;">
-5955 (9.9%)
+3261 (5.4%)
 </td>
 </tr>
 </tbody>
@@ -6265,15 +4843,7 @@ Count n (%)
 No
 </td>
 <td style="text-align:right;">
-33081 (55.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-26919 (44.9%)
+60000 (100.0%)
 </td>
 </tr>
 </tbody>
@@ -6304,15 +4874,7 @@ Count n (%)
 No
 </td>
 <td style="text-align:right;">
-32091 (53.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-27909 (46.5%)
+60000 (100.0%)
 </td>
 </tr>
 </tbody>
@@ -6343,7 +4905,7 @@ Count n (%)
 No
 </td>
 <td style="text-align:right;">
-53793 (89.7%)
+55162 (91.9%)
 </td>
 </tr>
 <tr>
@@ -6351,7 +4913,7 @@ No
 Yes
 </td>
 <td style="text-align:right;">
-6207 (10.3%)
+4838 (8.1%)
 </td>
 </tr>
 </tbody>
@@ -6382,7 +4944,7 @@ Count n (%)
 Home
 </td>
 <td style="text-align:right;">
-14708 (24.5%)
+46795 (78.0%)
 </td>
 </tr>
 <tr>
@@ -6390,7 +4952,7 @@ Home
 Home with support
 </td>
 <td style="text-align:right;">
-11853 (19.8%)
+9637 (16.1%)
 </td>
 </tr>
 <tr>
@@ -6398,23 +4960,7 @@ Home with support
 Rehabilitation
 </td>
 <td style="text-align:right;">
-11349 (18.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Transferred acute
-</td>
-<td style="text-align:right;">
-10623 (17.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Long-term care
-</td>
-<td style="text-align:right;">
-10375 (17.3%)
+2685 (4.5%)
 </td>
 </tr>
 <tr>
@@ -6422,7 +4968,7 @@ Long-term care
 Died
 </td>
 <td style="text-align:right;">
-1092 (1.8%)
+883 (1.5%)
 </td>
 </tr>
 </tbody>
@@ -6453,47 +4999,7 @@ Count n (%)
 Home
 </td>
 <td style="text-align:right;">
-15537 (25.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Community
-</td>
-<td style="text-align:right;">
-10732 (17.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Rehabilitation
-</td>
-<td style="text-align:right;">
-10679 (17.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Acute facility
-</td>
-<td style="text-align:right;">
-10582 (17.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Long-term care
-</td>
-<td style="text-align:right;">
-10215 (17.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Died
-</td>
-<td style="text-align:right;">
-1092 (1.8%)
+46795 (78.0%)
 </td>
 </tr>
 <tr>
@@ -6501,15 +5007,23 @@ Died
 Home with support
 </td>
 <td style="text-align:right;">
-841 (1.4%)
+9637 (16.1%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Transferred acute
+Rehabilitation
 </td>
 <td style="text-align:right;">
-322 (0.5%)
+2685 (4.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Died
+</td>
+<td style="text-align:right;">
+883 (1.5%)
 </td>
 </tr>
 </tbody>
@@ -6537,82 +5051,10 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-Respiratory Medicine
-</td>
-<td style="text-align:right;">
-6328 (10.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 Internal Medicine
 </td>
 <td style="text-align:right;">
-6211 (10.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Cardiology
-</td>
-<td style="text-align:right;">
-6209 (10.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Family Medicine
-</td>
-<td style="text-align:right;">
-6180 (10.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Orthopedics
-</td>
-<td style="text-align:right;">
-5998 (10.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Psychiatry
-</td>
-<td style="text-align:right;">
-5983 (10.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Oncology
-</td>
-<td style="text-align:right;">
-5884 (9.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Neurology
-</td>
-<td style="text-align:right;">
-5844 (9.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Gastroenterology
-</td>
-<td style="text-align:right;">
-5702 (9.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-General Surgery
-</td>
-<td style="text-align:right;">
-5661 (9.4%)
+60000 (100.0%)
 </td>
 </tr>
 </tbody>
@@ -6639,26 +5081,18 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-E
-</td>
-<td style="text-align:right;">
-23058 (38.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 D
 </td>
 <td style="text-align:right;">
-19082 (31.8%)
+54190 (90.3%)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-T
+E
 </td>
 <td style="text-align:right;">
-17860 (29.8%)
+5810 (9.7%)
 </td>
 </tr>
 </tbody>
@@ -6689,15 +5123,7 @@ Count n (%)
 No
 </td>
 <td style="text-align:right;">
-59186 (98.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-814 (1.4%)
+60000 (100.0%)
 </td>
 </tr>
 </tbody>
@@ -6728,15 +5154,7 @@ Count n (%)
 No
 </td>
 <td style="text-align:right;">
-58899 (98.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Yes
-</td>
-<td style="text-align:right;">
-1101 (1.8%)
+60000 (100.0%)
 </td>
 </tr>
 </tbody>
@@ -6767,7 +5185,7 @@ Count n (%)
 No
 </td>
 <td style="text-align:right;">
-58908 (98.2%)
+59117 (98.5%)
 </td>
 </tr>
 <tr>
@@ -6775,7 +5193,797 @@ No
 Yes
 </td>
 <td style="text-align:right;">
-1092 (1.8%)
+883 (1.5%)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="hospital-region" class="section level4" number="2.3.2.29">
+<h4><span class="header-section-number">2.3.2.29</span> Hospital
+region</h4>
+<div class="variable-code">
+<code>hospital_region</code>
+</div>
+<div class="category-table-card">
+<table class="summary-table categorical-summary-table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Category
+</th>
+<th style="text-align:right;">
+Count n (%)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Edmonton
+</td>
+<td style="text-align:right;">
+20984 (35.0%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Calgary
+</td>
+<td style="text-align:right;">
+20536 (34.2%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Other
+</td>
+<td style="text-align:right;">
+18480 (30.8%)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="patient-residence" class="section level4" number="2.3.2.30">
+<h4><span class="header-section-number">2.3.2.30</span> Patient
+residence</h4>
+<div class="variable-code">
+<code>patient_residence</code>
+</div>
+<div class="category-table-card">
+<table class="summary-table categorical-summary-table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Category
+</th>
+<th style="text-align:right;">
+Count n (%)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Edmonton
+</td>
+<td style="text-align:right;">
+21126 (35.2%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Calgary
+</td>
+<td style="text-align:right;">
+20741 (34.6%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Other
+</td>
+<td style="text-align:right;">
+18133 (30.2%)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="pre-episode-smoking" class="section level4" number="2.3.2.31">
+<h4><span class="header-section-number">2.3.2.31</span> Pre-episode
+smoking</h4>
+<div class="variable-code">
+<code>smoking</code>
+</div>
+<div class="category-table-card">
+<table class="summary-table categorical-summary-table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Category
+</th>
+<th style="text-align:right;">
+Count n (%)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:right;">
+46010 (76.7%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:right;">
+13990 (23.3%)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="pre-episode-obesity" class="section level4" number="2.3.2.32">
+<h4><span class="header-section-number">2.3.2.32</span> Pre-episode
+obesity</h4>
+<div class="variable-code">
+<code>obesity</code>
+</div>
+<div class="category-table-card">
+<table class="summary-table categorical-summary-table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Category
+</th>
+<th style="text-align:right;">
+Count n (%)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:right;">
+44040 (73.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:right;">
+15960 (26.6%)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cardiometabolic-history" class="section level4" number="2.3.2.33">
+<h4><span class="header-section-number">2.3.2.33</span> Cardiometabolic
+history</h4>
+<div class="variable-code">
+<code>cardiometabolic_history</code>
+</div>
+<div class="category-table-card">
+<table class="summary-table categorical-summary-table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Category
+</th>
+<th style="text-align:right;">
+Count n (%)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:right;">
+46721 (77.9%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:right;">
+13279 (22.1%)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="prior-asthma-history" class="section level4" number="2.3.2.34">
+<h4><span class="header-section-number">2.3.2.34</span> Prior asthma
+history</h4>
+<div class="variable-code">
+<code>asthma_history</code>
+</div>
+<div class="category-table-card">
+<table class="summary-table categorical-summary-table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Category
+</th>
+<th style="text-align:right;">
+Count n (%)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:right;">
+47537 (79.2%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:right;">
+12463 (20.8%)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="data-release" class="section level4" number="2.3.2.35">
+<h4><span class="header-section-number">2.3.2.35</span> Data
+release</h4>
+<div class="variable-code">
+<code>dataset_version</code>
+</div>
+<div class="category-table-card">
+<table class="summary-table categorical-summary-table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Category
+</th>
+<th style="text-align:right;">
+Count n (%)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2.0-2026-10-09
+</td>
+<td style="text-align:right;">
+60000 (100.0%)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="hospital-name" class="section level4" number="2.3.2.36">
+<h4><span class="header-section-number">2.3.2.36</span> Hospital
+Name</h4>
+<div class="variable-code">
+<code>hospital_name</code>
+</div>
+<div class="category-table-card long-table">
+<table class="summary-table categorical-summary-table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Category
+</th>
+<th style="text-align:right;">
+Count n (%)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Sturgeon Community Hospital
+</td>
+<td style="text-align:right;">
+2254 (3.8%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Leduc Community Hospital
+</td>
+<td style="text-align:right;">
+2156 (3.6%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grey Nuns Community Hospital
+</td>
+<td style="text-align:right;">
+2155 (3.6%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Canmore General Hospital
+</td>
+<td style="text-align:right;">
+2140 (3.6%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WestView Hospital and Continuing Care Centre
+</td>
+<td style="text-align:right;">
+2118 (3.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Oilfields General Hospital
+</td>
+<td style="text-align:right;">
+2105 (3.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+High River General Hospital
+</td>
+<td style="text-align:right;">
+2093 (3.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Redwater Health Centre
+</td>
+<td style="text-align:right;">
+2073 (3.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Health Campus
+</td>
+<td style="text-align:right;">
+2073 (3.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Foothills Medical Centre
+</td>
+<td style="text-align:right;">
+2070 (3.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Misericordia Community Hospital
+</td>
+<td style="text-align:right;">
+2068 (3.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Peter Lougheed Centre
+</td>
+<td style="text-align:right;">
+2067 (3.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+University of Alberta Hospital
+</td>
+<td style="text-align:right;">
+2062 (3.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mineral Springs Hospital
+</td>
+<td style="text-align:right;">
+2061 (3.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fort Saskatchewan Community Hospital
+</td>
+<td style="text-align:right;">
+2055 (3.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Devon General Hospital
+</td>
+<td style="text-align:right;">
+2024 (3.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Rockyview General Hospital
+</td>
+<td style="text-align:right;">
+2019 (3.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Royal Alexandra Hospital
+</td>
+<td style="text-align:right;">
+2019 (3.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strathmore District Health Services
+</td>
+<td style="text-align:right;">
+1992 (3.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Medicine Hat Regional Hospital
+</td>
+<td style="text-align:right;">
+1925 (3.2%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Didsbury District Health Services
+</td>
+<td style="text-align:right;">
+1916 (3.2%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lacombe Hospital and Care Centre
+</td>
+<td style="text-align:right;">
+1911 (3.2%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chinook Regional Hospital
+</td>
+<td style="text-align:right;">
+1890 (3.1%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Drumheller Health Centre
+</td>
+<td style="text-align:right;">
+1866 (3.1%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grande Prairie Regional Hospital
+</td>
+<td style="text-align:right;">
+1864 (3.1%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Marshall Eliuk Peace River Community Health Centre
+</td>
+<td style="text-align:right;">
+1853 (3.1%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Brooks Health Centre
+</td>
+<td style="text-align:right;">
+1846 (3.1%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stettler Hospital and Care Centre
+</td>
+<td style="text-align:right;">
+1791 (3.0%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern Lights Regional Health Centre
+</td>
+<td style="text-align:right;">
+1779 (3.0%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Red Deer Regional Hospital Centre
+</td>
+<td style="text-align:right;">
+1755 (2.9%)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="hospital-city" class="section level4" number="2.3.2.37">
+<h4><span class="header-section-number">2.3.2.37</span> Hospital
+City</h4>
+<div class="variable-code">
+<code>hospital_city</code>
+</div>
+<div class="category-table-card long-table">
+<table class="summary-table categorical-summary-table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Category
+</th>
+<th style="text-align:right;">
+Count n (%)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Edmonton
+</td>
+<td style="text-align:right;">
+8304 (13.8%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Calgary
+</td>
+<td style="text-align:right;">
+8229 (13.7%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St. Albert
+</td>
+<td style="text-align:right;">
+2254 (3.8%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Leduc
+</td>
+<td style="text-align:right;">
+2156 (3.6%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Canmore
+</td>
+<td style="text-align:right;">
+2140 (3.6%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stony Plain
+</td>
+<td style="text-align:right;">
+2118 (3.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Diamond Valley
+</td>
+<td style="text-align:right;">
+2105 (3.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+High River
+</td>
+<td style="text-align:right;">
+2093 (3.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Redwater
+</td>
+<td style="text-align:right;">
+2073 (3.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Banff
+</td>
+<td style="text-align:right;">
+2061 (3.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fort Saskatchewan
+</td>
+<td style="text-align:right;">
+2055 (3.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Devon
+</td>
+<td style="text-align:right;">
+2024 (3.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strathmore
+</td>
+<td style="text-align:right;">
+1992 (3.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Medicine Hat
+</td>
+<td style="text-align:right;">
+1925 (3.2%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Didsbury
+</td>
+<td style="text-align:right;">
+1916 (3.2%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lacombe
+</td>
+<td style="text-align:right;">
+1911 (3.2%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lethbridge
+</td>
+<td style="text-align:right;">
+1890 (3.1%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Drumheller
+</td>
+<td style="text-align:right;">
+1866 (3.1%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grande Prairie
+</td>
+<td style="text-align:right;">
+1864 (3.1%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Peace River
+</td>
+<td style="text-align:right;">
+1853 (3.1%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Brooks
+</td>
+<td style="text-align:right;">
+1846 (3.1%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stettler
+</td>
+<td style="text-align:right;">
+1791 (3.0%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fort McMurray
+</td>
+<td style="text-align:right;">
+1779 (3.0%)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Red Deer
+</td>
+<td style="text-align:right;">
+1755 (2.9%)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="ed-service-listed" class="section level4" number="2.3.2.38">
+<h4><span class="header-section-number">2.3.2.38</span> Ed Service
+Listed</h4>
+<div class="variable-code">
+<code>ed_service_listed</code>
+</div>
+<div class="category-table-card">
+<table class="summary-table categorical-summary-table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Category
+</th>
+<th style="text-align:right;">
+Count n (%)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:right;">
+60000 (100.0%)
 </td>
 </tr>
 </tbody>
@@ -6821,21 +6029,10 @@ Complete
 Data quality status
 </td>
 <td style="text-align:left;">
-Pass
+Synthetic v2
 </td>
 <td style="text-align:left;">
-58367 (97.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Data quality status
-</td>
-<td style="text-align:left;">
-Review
-</td>
-<td style="text-align:left;">
-1633 (2.7%)
+60000 (100.0%)
 </td>
 </tr>
 <tr>
@@ -6846,7 +6043,7 @@ Patient linkage quality
 exact
 </td>
 <td style="text-align:left;">
-58303 (97.2%)
+59112 (98.5%)
 </td>
 </tr>
 <tr>
@@ -6857,7 +6054,7 @@ Patient linkage quality
 missing
 </td>
 <td style="text-align:left;">
-859 (1.4%)
+467 (0.8%)
 </td>
 </tr>
 <tr>
@@ -6865,10 +6062,10 @@ missing
 Patient linkage quality
 </td>
 <td style="text-align:left;">
-one_digit_error
+typo
 </td>
 <td style="text-align:left;">
-838 (1.4%)
+421 (0.7%)
 </td>
 </tr>
 <tr>
@@ -6879,7 +6076,7 @@ Admission date quality
 not_applicable
 </td>
 <td style="text-align:left;">
-53224 (88.7%)
+54190 (90.3%)
 </td>
 </tr>
 <tr>
@@ -6890,7 +6087,7 @@ Admission date quality
 same_day_close
 </td>
 <td style="text-align:left;">
-5093 (8.5%)
+5521 (9.2%)
 </td>
 </tr>
 <tr>
@@ -6898,21 +6095,10 @@ same_day_close
 Admission date quality
 </td>
 <td style="text-align:left;">
-far_from_nacrs_date
+outside_6h
 </td>
 <td style="text-align:left;">
-1396 (2.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Admission date quality
-</td>
-<td style="text-align:left;">
-same_or_next_day
-</td>
-<td style="text-align:left;">
-287 (0.5%)
+289 (0.5%)
 </td>
 </tr>
 </tbody>
@@ -6926,6 +6112,13 @@ validation but are excluded from public summary tables. Missing values
 remain distinct from valid zero values.</p>
 </div>
 </div>
+</div>
+<div id="shared-release" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Shared release</h1>
+<p>This memo uses unified synthetic release <code>2.0-2026-10-09</code>,
+built from the same NACRS/DAD source files as A07–A09. Hospital location
+and patient residence are separate variables. See <a href="Project_001_Memo_A00.html">A00</a> for definitions and
+provenance.</p>
 </div>
 
 

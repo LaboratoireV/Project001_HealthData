@@ -12,3 +12,6 @@ outputs/
 
 # Local secrets
 .Renviron
+
+# Local-only Chinese translation (not published)
+zh_CN/

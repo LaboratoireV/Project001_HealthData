@@ -11,7 +11,7 @@
 
 <meta name="author" content="Prepared by Miss V · The V Lab" />
 
-<meta name="date" content="2026-09-19" />
+<meta name="date" content="2026-10-09" />
 
 <title>Project 001 Memo</title>
 
@@ -2741,7 +2741,7 @@ border-radius: 0px;
 
 <h1 class="title toc-ignore">Project 001 Memo</h1>
 <h4 class="author">Prepared by Miss V · The V Lab</h4>
-<h4 class="date">September 19, 2026</h4>
+<h4 class="date">October 09, 2026</h4>
 
 </div>
 
@@ -2895,7 +2895,7 @@ min-width: 28rem;
 <span class="meta-label">Client Organization</span><span class="meta-value">ABC Department</span>
 </div>
 <div class="meta-item">
-<span class="meta-label">Version</span><span class="meta-value">1.0</span>
+<span class="meta-label">Version</span><span class="meta-value">2.0</span>
 </div>
 <div class="meta-item">
 <span class="meta-label">Status</span><span class="meta-value">Draft</span>
@@ -2916,7 +2916,7 @@ are not stored in the source workbooks.
 The purpose of this memo is to build the <strong>NACRS</strong> and
 <strong>DAD</strong> variables required for the Project 001 questions,
 and to record how each one is defined. These variables are calculated
-from source fields. They are not kept in the source workbooks.
+from source fields and are not kept in the source workbooks.
 </p>
 <p>
 The two questions use the constructed variables as follows:
@@ -2926,15 +2926,16 @@ The two questions use the constructed variables as follows:
 <strong>Hospitalization, yes or no.</strong> Among emergency visits,
 CTAS (<code>ctas_level</code>, kept in the NACRS source file) and
 pre-disposition stay in minutes (<code>pre_disposition_los_min</code>)
-are examined against hospitalization (<code>admitted_flag</code>). Total
-emergency stay (<code>los_min</code>) includes time after the
-disposition decision, so Memo A03 keeps it as an appendix comparison.
+are examined in relation to hospitalization
+(<code>admitted_flag</code>). Total emergency stay
+(<code>los_min</code>) includes time after the disposition decision, so
+Memo A03 reports it only as an appendix comparison.
 </li>
 <li>
 <strong>Inpatient length of stay, in days.</strong> Among hospitalized
 visits linked to a DAD record, CTAS and total NACRS stay
-(<code>los_min</code>) are examined against inpatient length of stay
-(<code>los_days</code>). <code>acute_los_days</code> removes
+(<code>los_min</code>) are examined in relation to inpatient length of
+stay (<code>los_days</code>). <code>acute_los_days</code> removes
 alternate-level-of-care days. Memo A05 uses it only as a sensitivity
 outcome.
 </li>
@@ -3003,10 +3004,10 @@ pseudo_NACRS.xlsx
 30000
 </td>
 <td style="text-align:right;">
-26
+39
 </td>
 <td style="text-align:right;">
-34
+50
 </td>
 </tr>
 <tr>
@@ -3020,10 +3021,10 @@ pseudo_DAD.xlsx
 60000
 </td>
 <td style="text-align:right;">
-47
+60
 </td>
 <td style="text-align:right;">
-51
+64
 </td>
 </tr>
 </tbody>
@@ -3033,7 +3034,7 @@ pseudo_DAD.xlsx
 <code>data/analytic_nacrs.rds</code> and
 <code>data/analytic_dad.rds</code>.</p>
 <div class="data-variable-heading">
-<strong>NACRS source variables (26)</strong>
+<strong>NACRS source variables (39)</strong>
 </div>
 <ol class="data-variable-list">
 <li>
@@ -3114,9 +3115,48 @@ pseudo_DAD.xlsx
 <li>
 <code>disposition_decision_datetime</code>
 </li>
+<li>
+<code>hospital_id</code>
+</li>
+<li>
+<code>hospital_region</code>
+</li>
+<li>
+<code>patient_residence</code>
+</li>
+<li>
+<code>smoking</code>
+</li>
+<li>
+<code>obesity</code>
+</li>
+<li>
+<code>cardiometabolic_history</code>
+</li>
+<li>
+<code>asthma_history</code>
+</li>
+<li>
+<code>prior_ed_visits</code>
+</li>
+<li>
+<code>ed_arrival_severity</code>
+</li>
+<li>
+<code>dataset_version</code>
+</li>
+<li>
+<code>hospital_name</code>
+</li>
+<li>
+<code>hospital_city</code>
+</li>
+<li>
+<code>ed_service_listed</code>
+</li>
 </ol>
 <div class="data-variable-heading">
-<strong>DAD source variables (47)</strong>
+<strong>DAD source variables (60)</strong>
 </div>
 <ol class="data-variable-list">
 <li>
@@ -3260,19 +3300,58 @@ pseudo_DAD.xlsx
 <li>
 <code>created_datetime</code>
 </li>
+<li>
+<code>hospital_id</code>
+</li>
+<li>
+<code>hospital_region</code>
+</li>
+<li>
+<code>patient_residence</code>
+</li>
+<li>
+<code>smoking</code>
+</li>
+<li>
+<code>obesity</code>
+</li>
+<li>
+<code>cardiometabolic_history</code>
+</li>
+<li>
+<code>asthma_history</code>
+</li>
+<li>
+<code>prior_ed_visits</code>
+</li>
+<li>
+<code>ed_arrival_severity</code>
+</li>
+<li>
+<code>dataset_version</code>
+</li>
+<li>
+<code>hospital_name</code>
+</li>
+<li>
+<code>hospital_city</code>
+</li>
+<li>
+<code>ed_service_listed</code>
+</li>
 </ol>
 <p>
-<code>revisit_72h_flag</code> and <code>readmission_30d_flag</code> stay
-in the source files. They cannot be rebuilt from the visits present in
-these two workbooks. <code>ctas_level</code> and <code>alc_days</code>
-also stay in the source files.
+<code>revisit_72h_flag</code> and <code>readmission_30d_flag</code>
+remain in the source files because they cannot be rebuilt from the
+visits in these two workbooks. <code>ctas_level</code> and
+<code>alc_days</code> also remain in the source files.
 </p>
 </div>
 </div>
 <div id="derived-variables" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Derived variables</h1>
-<p>A field is derived when its value is fixed by one or more source
-fields. Missing inputs stay missing. Binary indicators are
+<p>A field is derived when its value is determined by one or more source
+fields. Missing inputs produce missing values. Binary indicators are
 <code>1</code> or <code>0</code>, not character labels.</p>
 <div class="table-scroll">
 <table class="summary-table definition-table">
@@ -3435,7 +3514,7 @@ acute_los_days
 Sensitivity outcome: acute stay
 </td>
 <td style="text-align:left;">
-los_days minus alc_days, and not below 0. alc_days stays in the source
+los_days minus alc_days, floored at 0. alc_days stays in the source
 file.
 </td>
 </tr>
@@ -3467,6 +3546,50 @@ Reporting period
 Alberta fiscal year from admission_datetime. The year starts on April 1.
 </td>
 </tr>
+<tr>
+<td style="text-align:left;">
+NACRS
+</td>
+<td style="text-align:left;">
+age10
+</td>
+<td style="text-align:left;">
+Centered age for A07-A09
+</td>
+<td style="text-align:left;">
+(age - 50)/10; age in years.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NACRS
+</td>
+<td style="text-align:left;">
+season
+</td>
+<td style="text-align:left;">
+Calendar baseline covariate
+</td>
+<td style="text-align:left;">
+Season from arrival month: Dec-Feb Winter, Mar-May Spring, Jun-Aug
+Summer, Sep-Nov Autumn.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NACRS
+</td>
+<td style="text-align:left;">
+asthma_visit
+</td>
+<td style="text-align:left;">
+Adult-asthma exposure/cohort indicator
+</td>
+<td style="text-align:left;">
+1 if main_diagnosis_icd10 begins with J45; 0 otherwise; missing if the
+main diagnosis is missing. Adult restriction is applied separately.
+</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -3475,12 +3598,13 @@ Alberta fiscal year from admission_datetime. The year starts on April 1.
 stay</h2>
 <p><code>los_min</code> is total emergency stay, the rounded number of
 minutes from <code>arrival_datetime</code> to
-<code>discharge_datetime</code>. It is the stay measure for the
+<code>discharge_datetime</code>. It is the stay measure used for the
 inpatient length-of-stay question. The hospitalization question uses
 <code>pre_disposition_los_min</code> instead, because total stay
 includes minutes after the disposition decision. The pre-disposition and
-post-disposition pieces use <code>disposition_decision_datetime</code>
-as the split. Their sum is the total stay.</p>
+post-disposition segments are split at
+<code>disposition_decision_datetime</code>, and together they sum to the
+total stay.</p>
 <div class="table-scroll">
 <table class="summary-table continuous-summary-table">
 <caption>
@@ -3547,40 +3671,40 @@ Missing %
 los_min
 </td>
 <td style="text-align:left;">
-270.14 (180.40)
+213.87 (88.57)
 </td>
 <td style="text-align:left;">
-231.00
+196.00
 </td>
 <td style="text-align:left;">
-10.00 - 1121.00
+49.00 - 1054.00
 </td>
 <td style="text-align:left;">
-20.00
+83.00
 </td>
 <td style="text-align:left;">
-55.00
+105.00
 </td>
 <td style="text-align:left;">
-84.00
+120.00
 </td>
 <td style="text-align:left;">
-143.00
+152.00
 </td>
 <td style="text-align:left;">
-231.00
+196.00
 </td>
 <td style="text-align:left;">
-351.00
+257.00
 </td>
 <td style="text-align:left;">
-520.00
+329.00
 </td>
 <td style="text-align:left;">
-642.00
+380.00
 </td>
 <td style="text-align:left;">
-873.00
+503.00
 </td>
 <td style="text-align:right;">
 0
@@ -3600,40 +3724,40 @@ los_min
 pre_disposition_los_min
 </td>
 <td style="text-align:left;">
-217.27 (131.94)
+187.37 (86.05)
 </td>
 <td style="text-align:left;">
-190.00
+170.00
 </td>
 <td style="text-align:left;">
-10.00 - 835.00
+40.00 - 1014.00
 </td>
 <td style="text-align:left;">
-20.00
+63.00
 </td>
 <td style="text-align:left;">
-51.00
+84.00
 </td>
 <td style="text-align:left;">
-79.00
+97.00
 </td>
 <td style="text-align:left;">
-126.00
+127.00
 </td>
 <td style="text-align:left;">
-190.00
+170.00
 </td>
 <td style="text-align:left;">
-278.00
+228.00
 </td>
 <td style="text-align:left;">
-402.00
+299.00
 </td>
 <td style="text-align:left;">
-489.00
+350.00
 </td>
 <td style="text-align:left;">
-647.00
+471.00
 </td>
 <td style="text-align:right;">
 0
@@ -3653,40 +3777,40 @@ pre_disposition_los_min
 post_disposition_los_min
 </td>
 <td style="text-align:left;">
-52.87 (56.23)
+26.50 (15.19)
 </td>
 <td style="text-align:left;">
-37.00
+22.00
 </td>
 <td style="text-align:left;">
-0.00 - 380.00
+4.00 - 173.00
 </td>
 <td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
+8.00
 </td>
 <td style="text-align:left;">
 11.00
 </td>
 <td style="text-align:left;">
-37.00
+13.00
 </td>
 <td style="text-align:left;">
-75.00
+16.00
 </td>
 <td style="text-align:left;">
-129.00
+22.00
 </td>
 <td style="text-align:left;">
-164.00
+32.00
 </td>
 <td style="text-align:left;">
-255.00
+46.00
+</td>
+<td style="text-align:left;">
+57.00
+</td>
+<td style="text-align:left;">
+83.00
 </td>
 <td style="text-align:right;">
 0
@@ -3711,7 +3835,7 @@ and related indicators</h2>
 <p><code>admitted_flag</code> is the yes/no hospitalization outcome. It
 is <code>1</code> only when <code>disposition</code> is
 <code>Admitted inpatient</code>. <code>lwbs_flag</code> and
-<code>ambulance_flag</code> use the same kind of rule on
+<code>ambulance_flag</code> apply the same type of rule to
 <code>disposition</code> and <code>arrival_mode</code>. They are
 included because they are not independent source fields.</p>
 <div class="table-scroll">
@@ -3750,24 +3874,7 @@ Admitted inpatient
 0
 </td>
 <td style="text-align:right;">
-5380
-</td>
-<td style="text-align:left;">
-admitted_flag
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-disposition
-</td>
-<td style="text-align:left;">
-Died
-</td>
-<td style="text-align:right;">
-137
-</td>
-<td style="text-align:right;">
-0
+5810
 </td>
 <td style="text-align:left;">
 admitted_flag
@@ -3781,24 +3888,7 @@ disposition
 Discharged home
 </td>
 <td style="text-align:right;">
-21491
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-admitted_flag
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-disposition
-</td>
-<td style="text-align:left;">
-Left against medical advice
-</td>
-<td style="text-align:right;">
-801
+23585
 </td>
 <td style="text-align:right;">
 0
@@ -3815,24 +3905,7 @@ disposition
 Left without being seen
 </td>
 <td style="text-align:right;">
-1038
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-admitted_flag
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-disposition
-</td>
-<td style="text-align:left;">
-Transferred
-</td>
-<td style="text-align:right;">
-1153
+605
 </td>
 <td style="text-align:right;">
 0
@@ -3849,24 +3922,7 @@ disposition
 Admitted inpatient
 </td>
 <td style="text-align:right;">
-5380
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-lwbs_flag
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-disposition
-</td>
-<td style="text-align:left;">
-Died
-</td>
-<td style="text-align:right;">
-137
+5810
 </td>
 <td style="text-align:right;">
 0
@@ -3883,24 +3939,7 @@ disposition
 Discharged home
 </td>
 <td style="text-align:right;">
-21491
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-lwbs_flag
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-disposition
-</td>
-<td style="text-align:left;">
-Left against medical advice
-</td>
-<td style="text-align:right;">
-801
+23585
 </td>
 <td style="text-align:right;">
 0
@@ -3920,24 +3959,7 @@ Left without being seen
 0
 </td>
 <td style="text-align:right;">
-1038
-</td>
-<td style="text-align:left;">
-lwbs_flag
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-disposition
-</td>
-<td style="text-align:left;">
-Transferred
-</td>
-<td style="text-align:right;">
-1153
-</td>
-<td style="text-align:right;">
-0
+605
 </td>
 <td style="text-align:left;">
 lwbs_flag
@@ -3954,58 +3976,7 @@ Ground ambulance
 0
 </td>
 <td style="text-align:right;">
-7394
-</td>
-<td style="text-align:left;">
-ambulance_flag
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-arrival_mode
-</td>
-<td style="text-align:left;">
-Police
-</td>
-<td style="text-align:right;">
-525
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-ambulance_flag
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-arrival_mode
-</td>
-<td style="text-align:left;">
-Private vehicle
-</td>
-<td style="text-align:right;">
-6310
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-ambulance_flag
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-arrival_mode
-</td>
-<td style="text-align:left;">
-Transfer
-</td>
-<td style="text-align:right;">
-1356
-</td>
-<td style="text-align:right;">
-0
+4210
 </td>
 <td style="text-align:left;">
 ambulance_flag
@@ -4019,7 +3990,7 @@ arrival_mode
 Walk-in
 </td>
 <td style="text-align:right;">
-14415
+25790
 </td>
 <td style="text-align:right;">
 0
@@ -4035,13 +4006,13 @@ ambulance_flag
 <div id="nacrs-timing-quality-and-fiscal-year" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> NACRS timing quality
 and fiscal year</h2>
-<p><code>timing_quality_flag</code> classifies each visit from the
+<p><code>timing_quality_flag</code> classifies each visit using the
 source wait times and the constructed <code>los_min</code>. The first
 matching rule is used: triage wait greater than physician wait;
 otherwise physician wait greater than emergency stay; otherwise
 <code>Pass</code>. <code>fiscal_year</code> is the Alberta fiscal year
-of <code>arrival_datetime</code>. April through March belong to the year
-that starts in April, written as <code>2025-26</code>.</p>
+of <code>arrival_datetime</code>. Each fiscal year runs from April
+through March and is written as <code>2025-26</code>.</p>
 <div class="table-scroll">
 <table class="summary-table">
 <caption>
@@ -4063,23 +4034,15 @@ Visits
 Pass
 </td>
 <td style="text-align:right;">
-22634
+29395
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Physician wait &gt; ED LOS
+NA
 </td>
 <td style="text-align:right;">
-3197
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Triage wait &gt; physician wait
-</td>
-<td style="text-align:right;">
-4169
+605
 </td>
 </tr>
 </tbody>
@@ -4103,26 +4066,18 @@ Visits
 <tbody>
 <tr>
 <td style="text-align:left;">
+2024-25
+</td>
+<td style="text-align:right;">
+7580
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 2025-26
 </td>
 <td style="text-align:right;">
-2000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2026-27
-</td>
-<td style="text-align:right;">
-25356
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2027-28
-</td>
-<td style="text-align:right;">
-2644
+22420
 </td>
 </tr>
 </tbody>
@@ -4137,7 +4092,7 @@ second question. It is the number of calendar days from the UTC
 admission date to the UTC discharge date. <code>alc_days</code> is not
 recalculated; it remains in the DAD source file.
 <code>acute_los_days</code> is <code>los_days</code> minus
-<code>alc_days</code>, bounded at zero. Memo A05 uses that acute stay
+<code>alc_days</code>, floored at zero. Memo A05 uses that acute stay
 only as a sensitivity outcome. <code>death_flag</code> is <code>1</code>
 when <code>discharge_disposition</code> is <code>Died</code>.
 <code>fiscal_year</code> uses the admission datetime and the same
@@ -4208,19 +4163,13 @@ Missing %
 los_days
 </td>
 <td style="text-align:left;">
-3.92 (2.94)
+4.15 (2.23)
 </td>
 <td style="text-align:left;">
-3.00
+4.00
 </td>
 <td style="text-align:left;">
-1.00 - 34.00
-</td>
-<td style="text-align:left;">
-1.00
-</td>
-<td style="text-align:left;">
-1.00
+1.00 - 33.00
 </td>
 <td style="text-align:left;">
 1.00
@@ -4229,7 +4178,13 @@ los_days
 2.00
 </td>
 <td style="text-align:left;">
+2.00
+</td>
+<td style="text-align:left;">
 3.00
+</td>
+<td style="text-align:left;">
+4.00
 </td>
 <td style="text-align:left;">
 5.00
@@ -4238,10 +4193,10 @@ los_days
 7.00
 </td>
 <td style="text-align:left;">
-9.00
+8.00
 </td>
 <td style="text-align:left;">
-15.00
+12.00
 </td>
 <td style="text-align:right;">
 0
@@ -4261,13 +4216,13 @@ los_days
 acute_los_days
 </td>
 <td style="text-align:left;">
-3.82 (2.90)
+3.95 (2.28)
 </td>
 <td style="text-align:left;">
 3.00
 </td>
 <td style="text-align:left;">
-1.00 - 34.00
+1.00 - 32.00
 </td>
 <td style="text-align:left;">
 1.00
@@ -4276,7 +4231,7 @@ acute_los_days
 1.00
 </td>
 <td style="text-align:left;">
-1.00
+2.00
 </td>
 <td style="text-align:left;">
 2.00
@@ -4291,10 +4246,10 @@ acute_los_days
 7.00
 </td>
 <td style="text-align:left;">
-9.00
+8.00
 </td>
 <td style="text-align:left;">
-15.00
+11.00
 </td>
 <td style="text-align:right;">
 0
@@ -4314,19 +4269,13 @@ acute_los_days
 alc_days
 </td>
 <td style="text-align:left;">
-0.10 (0.54)
+0.20 (0.62)
 </td>
 <td style="text-align:left;">
 0.00
 </td>
 <td style="text-align:left;">
-0.00 - 6.00
-</td>
-<td style="text-align:left;">
-0.00
-</td>
-<td style="text-align:left;">
-0.00
+0.00 - 3.00
 </td>
 <td style="text-align:left;">
 0.00
@@ -4345,6 +4294,12 @@ alc_days
 </td>
 <td style="text-align:left;">
 0.00
+</td>
+<td style="text-align:left;">
+1.00
+</td>
+<td style="text-align:left;">
+2.00
 </td>
 <td style="text-align:left;">
 3.00
@@ -4392,7 +4347,7 @@ Died
 0
 </td>
 <td style="text-align:right;">
-1092
+883
 </td>
 </tr>
 <tr>
@@ -4400,7 +4355,7 @@ Died
 Home
 </td>
 <td style="text-align:right;">
-14708
+46795
 </td>
 <td style="text-align:right;">
 0
@@ -4411,18 +4366,7 @@ Home
 Home with support
 </td>
 <td style="text-align:right;">
-11853
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Long-term care
-</td>
-<td style="text-align:right;">
-10375
+9637
 </td>
 <td style="text-align:right;">
 0
@@ -4433,18 +4377,7 @@ Long-term care
 Rehabilitation
 </td>
 <td style="text-align:right;">
-11349
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Transferred acute
-</td>
-<td style="text-align:right;">
-10623
+2685
 </td>
 <td style="text-align:right;">
 0
@@ -4474,7 +4407,7 @@ Abstracts
 2024-25
 </td>
 <td style="text-align:right;">
-14
+14995
 </td>
 </tr>
 <tr>
@@ -4482,23 +4415,7 @@ Abstracts
 2025-26
 </td>
 <td style="text-align:right;">
-5020
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2026-27
-</td>
-<td style="text-align:right;">
-49573
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2027-28
-</td>
-<td style="text-align:right;">
-5393
+45005
 </td>
 </tr>
 </tbody>
@@ -4630,6 +4547,62 @@ Pass
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div id="shared-data-release-2.0" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Shared data release
+2.0</h1>
+<p>All ten memos A00–A09 use the same two source workbooks. Release
+<code>2.0-2026-10-09</code> replaces the former resampled records and
+the separate A07 cohort with a single hospital-based synthetic
+generation mechanism. Previous workbooks and reports are archived
+locally under <code>outputs/unification/before_v2/</code>.</p>
+<p>The 30 hospital IDs are study codes for selected real ED facility
+names, with 10 in each study region: Other, Calgary and Edmonton. The
+latter two include surrounding towns, based on the referenced historical
+AHS geography. This is a selected sample; it does not reflect the actual
+number of hospitals or current administrative governance.
+<code>facility_id</code> and <code>hospital_id</code> are identical.
+<code>health_zone</code> retains five referenced geographic labels;
+<code>patient_residence</code> separately records the patient’s region
+of residence.</p>
+<p>The new source variables are hospital ID, hospital region, patient
+residence, smoking, obesity, cardiometabolic history, asthma history,
+prior-year ED visits, pre-care ED severity, and data version. The
+pre-care severity score is synthetic, has arbitrary units, and is
+affected by the current episode. It is not a validated clinical
+score.</p>
+<p>Three additional NACRS analysis fields are built here:
+<code>age10 = (age - 50)/10</code>, calendar <code>season</code> from
+the arrival month, and <code>asthma_visit = 1</code> for a main
+diagnosis starting with J45. A secondary asthma diagnosis or a history
+of asthma does not define this exposure. The source workbooks
+deliberately contain only source fields; the derived RDS files are
+disposable caches, not independently generated datasets.</p>
+<p>Each NACRS patient has one ED visit. Every admitted visit continues
+as exactly one DAD record, some of which carry deliberate identifier or
+timing defects for linkage practice. DAD also includes other inpatients
+who are not in the NACRS extract. Transfers between hospitals are not
+simulated. Repeat-visit/readmission flags are generated labels rather
+than reconstructed follow-up. A small synthetic LWBS group keeps an
+assigned episode diagnosis for method testing; this should not be read
+as a completed clinical assessment.</p>
+<p>Counterfactual probabilities and the hospital effects used to
+generate the data are stored separately in
+<code>data/simulation_truth.rds</code> and are never used for fitting or
+matching.</p>
+<div id="public-hospital-reference-metadata" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Public hospital
+reference metadata</h2>
+<p>Both workbooks include the same <code>hospital_reference</code>
+sheet, with actual hospital names, municipalities, study regions, ED
+service listings, official source URLs, and a reference-check date of
+2026-10-09. <code>hospital_name</code>, <code>hospital_city</code> and
+<code>ed_service_listed</code> are also included on each source record.
+The hospital IDs, patients, volumes, case mix and all outcomes remain
+synthetic. Being listed with an ED does not guarantee uninterrupted
+service at any given time. See the <a href="https://www.albertahealthservices.ca/findhealth/service.aspx?id=6915">AHS
+Emergency Services directory</a>.</p>
 </div>
 </div>
 
