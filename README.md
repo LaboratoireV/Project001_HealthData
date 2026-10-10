@@ -1,4 +1,6 @@
-# Project 001: Synthetic Health Data Consulting
+# Project 001: ED-to-Inpatient Pathways
+
+*From Emergency Department to Inpatient Care: Admission, Length of Stay and Asthma-Related Risk in Simulated Alberta Administrative Data*
 
 Project 001 uses **one shared synthetic release** of Alberta-style NACRS and DAD records for Memos A00–A09. All patient records, admission outcomes, hospital effects, and region effects are simulated. The 30 hospital names are real reference labels, selected from the official Alberta Health Services Emergency Departments directory; these analyses do not describe their actual performance.
 
