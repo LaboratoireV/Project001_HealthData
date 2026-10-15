@@ -1,3 +1,8 @@
+round_half_up <- function(x, digits = 1) {
+  s <- 10^digits
+  sign(x) * floor(abs(x) * s + 0.5 + 1e-9) / s
+}
+
 # Standalone helpers used by the public R Markdown examples.
 
 clean_example_names <- function(names_vector) {
@@ -101,7 +106,7 @@ summarize_categorical <- function(
 
   total_count <- sum(counts)
   formatted <- if (total_count > 0L) {
-    sprintf("%d (%.1f%%)", as.integer(counts), 100 * counts / total_count)
+    sprintf("%d (%.1f%%)", as.integer(counts), round_half_up(100 * counts / total_count))
   } else {
     character()
   }
@@ -282,7 +287,7 @@ summarize_quality_status <- function(dataset, specification) {
       `Count n (%)` = sprintf(
         "%d (%.1f%%)",
         as.integer(counts),
-        if (total > 0L) 100 * counts / total else NA_real_
+        if (total > 0L) round_half_up(100 * counts / total) else NA_real_
       ),
       check.names = FALSE,
       stringsAsFactors = FALSE
@@ -406,7 +411,7 @@ summarize_categorical_long <- function(
     `Count n (%)` = sprintf(
       "%d (%.1f%%)",
       as.integer(counts),
-      if (total > 0L) 100 * counts / total else NA_real_
+      if (total > 0L) round_half_up(100 * counts / total) else NA_real_
     ),
     check.names = FALSE,
     stringsAsFactors = FALSE

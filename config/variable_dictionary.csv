@@ -93,7 +93,7 @@ NACRS,cardiometabolic_history,cardiometabolic_history,Cardiometabolic history,Sh
 NACRS,asthma_history,asthma_history,Prior asthma history,Shared hospital and baseline variables,numeric,binary_flag,none,categorical,main,public,107,FALSE,0|1,,source
 NACRS,prior_ed_visits,prior_ed_visits,Prior 12-month ED visits,Shared hospital and baseline variables,numeric,numeric_measure,visits,continuous,main,public,108,FALSE,,,source
 NACRS,ed_arrival_severity,ed_arrival_severity,Pre-care ED severity,Shared hospital and baseline variables,numeric,numeric_measure,arbitrary score,continuous,main,public,109,FALSE,,,source
-NACRS,dataset_version,dataset_version,Data release,Shared hospital and baseline variables,character,nominal,none,categorical,main,public,110,FALSE,,,source
+NACRS,dataset_version,dataset_version,Dataset identifier,Shared hospital and baseline variables,character,nominal,none,categorical,main,public,110,FALSE,,,source
 DAD,hospital_id,hospital_id,Hospital ID,Shared hospital and baseline variables,character,identifier,none,exclude,exclude,public,101,FALSE,,,source
 DAD,hospital_region,hospital_region,Hospital region,Shared hospital and baseline variables,character,nominal,none,categorical,main,public,102,FALSE,,,source
 DAD,patient_residence,patient_residence,Patient residence,Shared hospital and baseline variables,character,nominal,none,categorical,main,public,103,FALSE,,,source
@@ -103,7 +103,7 @@ DAD,cardiometabolic_history,cardiometabolic_history,Cardiometabolic history,Shar
 DAD,asthma_history,asthma_history,Prior asthma history,Shared hospital and baseline variables,numeric,binary_flag,none,categorical,main,public,107,FALSE,0|1,,source
 DAD,prior_ed_visits,prior_ed_visits,Prior 12-month ED visits,Shared hospital and baseline variables,numeric,numeric_measure,visits,continuous,main,public,108,FALSE,,,source
 DAD,ed_arrival_severity,ed_arrival_severity,Pre-care ED severity,Shared hospital and baseline variables,numeric,numeric_measure,arbitrary score,continuous,main,public,109,FALSE,,,source
-DAD,dataset_version,dataset_version,Data release,Shared hospital and baseline variables,character,nominal,none,categorical,main,public,110,FALSE,,,source
+DAD,dataset_version,dataset_version,Dataset identifier,Shared hospital and baseline variables,character,nominal,none,categorical,main,public,110,FALSE,,,source
 NACRS,age10,age10,Age centered at 50 per 10 years,Asthma study,numeric,numeric_measure,decades,continuous,main,public,120,FALSE,,,derived
 NACRS,season,season,Season of ED arrival,Asthma study,character,nominal,none,categorical,main,public,121,FALSE,,,derived
 NACRS,asthma_visit,asthma_visit,Asthma as main ED diagnosis,Asthma study,numeric,binary_flag,none,categorical,main,public,122,FALSE,,,derived

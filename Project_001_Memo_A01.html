@@ -2740,6 +2740,7 @@ border-radius: 0px;
 
 
 <h1 class="title toc-ignore">Project 001 Memo</h1>
+<h3 class="subtitle">Descriptive profile of the analytic NACRS emergency department cohort</h3>
 <h4 class="author">Prepared by Miss V · The V Lab</h4>
 <h4 class="date">October 09, 2026</h4>
 
@@ -2783,6 +2784,20 @@ padding: 0.8rem 1rem;
 border: 1px solid #f0c36d;
 border-radius: 4px;
 background: #fff8e5;
+}
+.loaded-data-table table {
+  border-collapse: collapse;
+  border: 1px solid #c9d5dc;
+  margin-bottom: 1.25rem;
+}
+.loaded-data-table th,
+.loaded-data-table td {
+  border: 1px solid #c9d5dc !important;
+  padding: 0.45rem 0.75rem !important;
+}
+.loaded-data-table thead th {
+  color: #29465b;
+  background: #eef4f7;
 }
 .placeholder {
 color: #6c757d;
@@ -2926,7 +2941,7 @@ text-align: left;
 <span class="meta-label">Client Organization</span><span class="meta-value">ABC Department</span>
 </div>
 <div class="meta-item">
-<span class="meta-label">Version</span><span class="meta-value">2.0</span>
+<span class="meta-label">Version</span><span class="meta-value">1.0</span>
 </div>
 <div class="meta-item">
 <span class="meta-label">Status</span><span class="meta-value">Draft</span>
@@ -2985,6 +3000,7 @@ derived research variables, is completed in Memo A00. This memo reads
 that analytic file only.
 </div>
 <p><strong>Data directory:</strong> <code>data</code></p>
+<div class="loaded-data-table">
 <table style="width:100%;">
 <caption>Loaded NACRS analytic data set</caption>
 <colgroup>
@@ -3016,6 +3032,7 @@ that analytic file only.
 </tr>
 </tbody>
 </table>
+</div>
 <div class="data-variable-heading">
 <strong>Variables (50)</strong>
 </div>
@@ -5267,9 +5284,8 @@ Yes
 </table>
 </div>
 </div>
-<div id="data-release" class="section level4" number="2.3.3.26">
-<h4><span class="header-section-number">2.3.3.26</span> Data
-release</h4>
+<div id="dataset-identifier" class="section level4" number="2.3.3.26">
+<h4><span class="header-section-number">2.3.3.26</span> Dataset identifier</h4>
 <div class="variable-code">
 <code>dataset_version</code>
 </div>
@@ -5288,7 +5304,7 @@ Count n (%)
 <tbody>
 <tr>
 <td style="text-align:left;">
-2.0-2026-10-09
+1.0-2026-10-09
 </td>
 <td style="text-align:right;">
 30000 (100.0%)
@@ -5608,7 +5624,7 @@ Brooks Health Centre
 Stettler Hospital and Care Centre
 </td>
 <td style="text-align:right;">
-915 (3.0%)
+915 (3.1%)
 </td>
 </tr>
 <tr>
@@ -5823,7 +5839,7 @@ Brooks
 Stettler
 </td>
 <td style="text-align:right;">
-915 (3.0%)
+915 (3.1%)
 </td>
 </tr>
 <tr>
@@ -6053,10 +6069,9 @@ remain distinct from valid zero values.</p>
 </div>
 </div>
 </div>
-<div id="shared-release" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Shared release</h1>
-<p>This memo uses unified synthetic release <code>2.0-2026-10-09</code>,
-built from the same NACRS/DAD source files as A07–A09. Hospital location
+<div id="shared-data" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Shared data</h1>
+<p>All memos in Project 001 (A00–A09) use the same two synthetic source workbooks, <code>pseudo_NACRS.xlsx</code> and <code>pseudo_DAD.xlsx</code>. Hospital location
 and patient residence are separate variables. See <a href="Project_001_Memo_A00.html">A00</a> for definitions and
 provenance.</p>
 </div>

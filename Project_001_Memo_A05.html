@@ -2740,6 +2740,7 @@ border-radius: 0px;
 
 
 <h1 class="title toc-ignore">Project 001 Memo</h1>
+<h3 class="subtitle">ED length of stay, CTAS, and inpatient length of stay in the linked cohort</h3>
 <h4 class="author">Prepared by Miss V · The V Lab</h4>
 <h4 class="date">October 09, 2026</h4>
 
@@ -2788,7 +2789,7 @@ overflow-x: auto;
 <span class="meta-label">Client Organization</span><span class="meta-value">ABC Department</span>
 </div>
 <div class="meta-item">
-<span class="meta-label">Version</span><span class="meta-value">2.0</span>
+<span class="meta-label">Version</span><span class="meta-value">1.0</span>
 </div>
 <div class="meta-item">
 <span class="meta-label">Status</span><span class="meta-value">Draft</span>
@@ -2839,8 +2840,7 @@ x_i + \varepsilon_i.\]</span></p>
 <code>los_days</code>. Reference levels match Memo A03: CTAS level 1,
 sex <code>F</code>, health zone <code>Edmonton</code>, and arrival mode
 <code>Walk-in</code>. Binary indicators use 0 as the reference. Duration
-terms are fitted per minute. The table also shows the coefficient
-rescaled to 60 minutes; the p value is unchanged because it comes from
+terms are fitted per minute. The table also shows the coefficient rescaled to 60 minutes (10 minutes for triage and physician waits, which are much shorter); the p value is unchanged because it comes from
 the same test.</p>
 </div>
 <div id="data" class="section level2" number="1.2">
@@ -2960,7 +2960,7 @@ Emergency department length of stay
 0.002
 </td>
 <td>
-0.002 to 0.003
+(0.002, 0.003)
 </td>
 <td>
 &lt;0.001
@@ -2974,7 +2974,7 @@ Emergency department length of stay, per 60 minutes
 0.147
 </td>
 <td>
-0.102 to 0.192
+(0.102, 0.192)
 </td>
 <td>
 &lt;0.001
@@ -2986,9 +2986,8 @@ Emergency department length of stay, per 60 minutes
 <p class="significant-text">
 In this single-covariate model, each additional minute of emergency
 department length of stay is associated with an inpatient stay 0.002
-days longer (coefficient 0.002, 95% CI 0.002 to 0.003, p &lt;0.001).
-Rescaled to 60 minutes, the coefficient is 0.147 days (95% CI 0.102 to
-0.192). This association is statistically significant.
+days longer (coefficient 0.002, 95% CI (0.002, 0.003), p &lt;0.001).
+Rescaled to 60 minutes, the coefficient is 0.147 days, 95% CI (0.102, 0.192). This association is statistically significant.
 </p>
 </div>
 <div id="ctas-level" class="section level2" number="2.2">
@@ -3034,7 +3033,7 @@ CTAS level: 2 vs 1
 -1.134
 </td>
 <td>
--1.310 to -0.957
+(-1.310, -0.957)
 </td>
 <td>
 &lt;0.001
@@ -3048,7 +3047,7 @@ CTAS level: 3 vs 1
 -1.678
 </td>
 <td>
--1.869 to -1.487
+(-1.869, -1.487)
 </td>
 <td>
 &lt;0.001
@@ -3062,7 +3061,7 @@ CTAS level: 4 vs 1
 -2.248
 </td>
 <td>
--2.505 to -1.991
+(-2.505, -1.991)
 </td>
 <td>
 &lt;0.001
@@ -3076,7 +3075,7 @@ CTAS level: 5 vs 1
 -2.759
 </td>
 <td>
--3.188 to -2.330
+(-3.188, -2.330)
 </td>
 <td>
 &lt;0.001
@@ -3088,25 +3087,25 @@ CTAS level: 5 vs 1
 <p class="significant-text">
 In this single-covariate model, compared with CTAS 1, CTAS 2 is
 associated with an inpatient stay 1.134 days shorter (coefficient
--1.134, 95% CI -1.310 to -0.957, p &lt;0.001). This association is
+-1.134, 95% CI (-1.310, -0.957), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 In this single-covariate model, compared with CTAS 1, CTAS 3 is
 associated with an inpatient stay 1.678 days shorter (coefficient
--1.678, 95% CI -1.869 to -1.487, p &lt;0.001). This association is
+-1.678, 95% CI (-1.869, -1.487), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 In this single-covariate model, compared with CTAS 1, CTAS 4 is
 associated with an inpatient stay 2.248 days shorter (coefficient
--2.248, 95% CI -2.505 to -1.991, p &lt;0.001). This association is
+-2.248, 95% CI (-2.505, -1.991), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 In this single-covariate model, compared with CTAS 1, CTAS 5 is
 associated with an inpatient stay 2.759 days shorter (coefficient
--2.759, 95% CI -3.188 to -2.330, p &lt;0.001). This association is
+-2.759, 95% CI (-3.188, -2.330), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p>
@@ -3157,7 +3156,7 @@ Emergency department length of stay
 -0.0002
 </td>
 <td>
--0.0009 to 0.0006
+(-0.0009, 0.0006)
 </td>
 <td>
 0.622
@@ -3171,7 +3170,7 @@ Emergency department length of stay, per 60 minutes
 -0.011
 </td>
 <td>
--0.056 to 0.034
+(-0.056, 0.034)
 </td>
 <td>
 0.622
@@ -3185,7 +3184,7 @@ CTAS level: 2 vs 1
 -1.141
 </td>
 <td>
--1.320 to -0.962
+(-1.320, -0.962)
 </td>
 <td>
 &lt;0.001
@@ -3199,7 +3198,7 @@ CTAS level: 3 vs 1
 -1.691
 </td>
 <td>
--1.888 to -1.494
+(-1.888, -1.494)
 </td>
 <td>
 &lt;0.001
@@ -3213,7 +3212,7 @@ CTAS level: 4 vs 1
 -2.264
 </td>
 <td>
--2.529 to -1.999
+(-2.529, -1.999)
 </td>
 <td>
 &lt;0.001
@@ -3227,7 +3226,7 @@ CTAS level: 5 vs 1
 -2.779
 </td>
 <td>
--3.214 to -2.343
+(-3.214, -2.343)
 </td>
 <td>
 &lt;0.001
@@ -3242,33 +3241,32 @@ Interpretation
 <p>
 After adjustment for the other covariates in this model, each additional
 minute of emergency department length of stay is associated with an
-inpatient stay 0.0002 days shorter (coefficient -0.0002, 95% CI -0.0009
-to 0.0006, p 0.622). Rescaled to 60 minutes, the coefficient is -0.011
-days (95% CI -0.056 to 0.034). This association is not statistically
+inpatient stay 0.0002 days shorter (coefficient -0.0002, 95% CI (-0.0009, 0.0006), p 0.622). Rescaled to 60 minutes, the coefficient is -0.011
+days, 95% CI (-0.056, 0.034). This association is not statistically
 significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 2 is associated with an inpatient stay 1.141 days shorter
-(coefficient -1.141, 95% CI -1.320 to -0.962, p &lt;0.001). This
+(coefficient -1.141, 95% CI (-1.320, -0.962), p &lt;0.001). This
 association is statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 3 is associated with an inpatient stay 1.691 days shorter
-(coefficient -1.691, 95% CI -1.888 to -1.494, p &lt;0.001). This
+(coefficient -1.691, 95% CI (-1.888, -1.494), p &lt;0.001). This
 association is statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 4 is associated with an inpatient stay 2.264 days shorter
-(coefficient -2.264, 95% CI -2.529 to -1.999, p &lt;0.001). This
+(coefficient -2.264, 95% CI (-2.529, -1.999), p &lt;0.001). This
 association is statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 5 is associated with an inpatient stay 2.779 days shorter
-(coefficient -2.779, 95% CI -3.214 to -2.343, p &lt;0.001). This
+(coefficient -2.779, 95% CI (-3.214, -2.343), p &lt;0.001). This
 association is statistically significant.
 </p>
 </div>
@@ -3325,7 +3323,7 @@ Emergency department length of stay
 -0.0001
 </td>
 <td>
--0.0009 to 0.0006
+(-0.0009, 0.0006)
 </td>
 <td>
 0.733
@@ -3339,7 +3337,7 @@ Emergency department length of stay, per 60 minutes
 -0.008
 </td>
 <td>
--0.054 to 0.038
+(-0.054, 0.038)
 </td>
 <td>
 0.733
@@ -3353,7 +3351,7 @@ CTAS level: 2 vs 1
 -1.143
 </td>
 <td>
--1.325 to -0.962
+(-1.325, -0.962)
 </td>
 <td>
 &lt;0.001
@@ -3367,7 +3365,7 @@ CTAS level: 3 vs 1
 -1.699
 </td>
 <td>
--1.899 to -1.498
+(-1.899, -1.498)
 </td>
 <td>
 &lt;0.001
@@ -3381,7 +3379,7 @@ CTAS level: 4 vs 1
 -2.181
 </td>
 <td>
--2.450 to -1.912
+(-2.450, -1.912)
 </td>
 <td>
 &lt;0.001
@@ -3395,7 +3393,7 @@ CTAS level: 5 vs 1
 -2.695
 </td>
 <td>
--3.137 to -2.252
+(-3.137, -2.252)
 </td>
 <td>
 &lt;0.001
@@ -3410,33 +3408,31 @@ Interpretation
 <p>
 After adjustment for the other covariates in this model, each additional
 minute of emergency department length of stay is associated with an
-acute stay 0.0001 days shorter (coefficient -0.0001, 95% CI -0.0009 to
-0.0006, p 0.733). Rescaled to 60 minutes, the coefficient is -0.008 days
-(95% CI -0.054 to 0.038). This association is not statistically
+acute stay 0.0001 days shorter (coefficient -0.0001, 95% CI (-0.0009, 0.0006), p 0.733). Rescaled to 60 minutes, the coefficient is -0.008 days, 95% CI (-0.054, 0.038). This association is not statistically
 significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 2 is associated with an acute stay 1.143 days shorter
-(coefficient -1.143, 95% CI -1.325 to -0.962, p &lt;0.001). This
+(coefficient -1.143, 95% CI (-1.325, -0.962), p &lt;0.001). This
 association is statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 3 is associated with an acute stay 1.699 days shorter
-(coefficient -1.699, 95% CI -1.899 to -1.498, p &lt;0.001). This
+(coefficient -1.699, 95% CI (-1.899, -1.498), p &lt;0.001). This
 association is statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 4 is associated with an acute stay 2.181 days shorter
-(coefficient -2.181, 95% CI -2.450 to -1.912, p &lt;0.001). This
+(coefficient -2.181, 95% CI (-2.450, -1.912), p &lt;0.001). This
 association is statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 5 is associated with an acute stay 2.695 days shorter
-(coefficient -2.695, 95% CI -3.137 to -2.252, p &lt;0.001). This
+(coefficient -2.695, 95% CI (-3.137, -2.252), p &lt;0.001). This
 association is statistically significant.
 </p>
 </div>
@@ -3484,7 +3480,7 @@ Age
 0.022
 </td>
 <td>
-0.018 to 0.026
+(0.018, 0.026)
 </td>
 <td>
 &lt;0.001
@@ -3496,7 +3492,7 @@ Age
 <p class="significant-text">
 In this single-covariate model, each additional year of age is
 associated with an inpatient stay 0.022 days longer (coefficient 0.022,
-95% CI 0.018 to 0.026, p &lt;0.001). This association is statistically
+95% CI (0.018, 0.026), p &lt;0.001). This association is statistically
 significant.
 </p>
 </div>
@@ -3538,7 +3534,7 @@ Sex: M vs F
 -0.121
 </td>
 <td>
--0.270 to 0.027
+(-0.270, 0.027)
 </td>
 <td>
 0.109
@@ -3549,8 +3545,7 @@ Sex: M vs F
 </div>
 <p>
 In this single-covariate model, compared with F, M is associated with an
-inpatient stay 0.121 days shorter (coefficient -0.121, 95% CI -0.270 to
-0.027, p 0.109). This association is not statistically significant.
+inpatient stay 0.121 days shorter (coefficient -0.121, 95% CI (-0.270, 0.027), p 0.109). This association is not statistically significant.
 </p>
 </div>
 <div id="health-zone" class="section level2" number="4.3">
@@ -3597,7 +3592,7 @@ Health zone: Calgary vs Edmonton
 -0.064
 </td>
 <td>
--0.243 to 0.116
+(-0.243, 0.116)
 </td>
 <td>
 0.487
@@ -3611,7 +3606,7 @@ Health zone: Central vs Edmonton
 -0.046
 </td>
 <td>
--0.296 to 0.203
+(-0.296, 0.203)
 </td>
 <td>
 0.715
@@ -3625,7 +3620,7 @@ Health zone: North vs Edmonton
 0.013
 </td>
 <td>
--0.275 to 0.301
+(-0.275, 0.301)
 </td>
 <td>
 0.928
@@ -3639,7 +3634,7 @@ Health zone: South vs Edmonton
 -0.177
 </td>
 <td>
--0.423 to 0.070
+(-0.423, 0.070)
 </td>
 <td>
 0.161
@@ -3651,25 +3646,25 @@ Health zone: South vs Edmonton
 <p>
 In this single-covariate model, compared with Edmonton, Calgary is
 associated with an inpatient stay 0.064 days shorter (coefficient
--0.064, 95% CI -0.243 to 0.116, p 0.487). This association is not
+-0.064, 95% CI (-0.243, 0.116), p 0.487). This association is not
 statistically significant.
 </p>
 <p>
 In this single-covariate model, compared with Edmonton, Central is
 associated with an inpatient stay 0.046 days shorter (coefficient
--0.046, 95% CI -0.296 to 0.203, p 0.715). This association is not
+-0.046, 95% CI (-0.296, 0.203), p 0.715). This association is not
 statistically significant.
 </p>
 <p>
 In this single-covariate model, compared with Edmonton, North is
 associated with an inpatient stay 0.013 days longer (coefficient 0.013,
-95% CI -0.275 to 0.301, p 0.928). This association is not statistically
+95% CI (-0.275, 0.301), p 0.928). This association is not statistically
 significant.
 </p>
 <p>
 In this single-covariate model, compared with Edmonton, South is
 associated with an inpatient stay 0.177 days shorter (coefficient
--0.177, 95% CI -0.423 to 0.070, p 0.161). This association is not
+-0.177, 95% CI (-0.423, 0.070), p 0.161). This association is not
 statistically significant.
 </p>
 </div>
@@ -3712,7 +3707,7 @@ Arrival mode: Ground ambulance vs Walk-in
 0.358
 </td>
 <td>
-0.159 to 0.557
+(0.159, 0.557)
 </td>
 <td>
 &lt;0.001
@@ -3724,7 +3719,7 @@ Arrival mode: Ground ambulance vs Walk-in
 <p class="significant-text">
 In this single-covariate model, compared with Walk-in, Ground ambulance
 is associated with an inpatient stay 0.358 days longer (coefficient
-0.358, 95% CI 0.159 to 0.557, p &lt;0.001). This association is
+0.358, 95% CI (0.159, 0.557), p &lt;0.001). This association is
 statistically significant.
 </p>
 </div>
@@ -3766,7 +3761,7 @@ Injury indicator
 -0.216
 </td>
 <td>
--0.499 to 0.067
+(-0.499, 0.067)
 </td>
 <td>
 0.135
@@ -3778,7 +3773,7 @@ Injury indicator
 <p>
 In this single-covariate model, a value of 1 on the injury indicator,
 compared with 0, is associated with an inpatient stay 0.216 days shorter
-(coefficient -0.216, 95% CI -0.499 to 0.067, p 0.135). This association
+(coefficient -0.216, 95% CI (-0.499, 0.067), p 0.135). This association
 is not statistically significant.
 </p>
 </div>
@@ -3821,7 +3816,7 @@ Mental health indicator
 -0.277
 </td>
 <td>
--0.711 to 0.157
+(-0.711, 0.157)
 </td>
 <td>
 0.211
@@ -3833,7 +3828,7 @@ Mental health indicator
 <p>
 In this single-covariate model, a value of 1 on the mental health
 indicator, compared with 0, is associated with an inpatient stay 0.277
-days shorter (coefficient -0.277, 95% CI -0.711 to 0.157, p 0.211). This
+days shorter (coefficient -0.277, 95% CI (-0.711, 0.157), p 0.211). This
 association is not statistically significant.
 </p>
 </div>
@@ -3875,7 +3870,7 @@ Pain score
 0.014
 </td>
 <td>
--0.009 to 0.038
+(-0.009, 0.038)
 </td>
 <td>
 0.228
@@ -3887,7 +3882,7 @@ Pain score
 <p>
 In this single-covariate model, each additional point on the pain score
 is associated with an inpatient stay 0.014 days longer (coefficient
-0.014, 95% CI -0.009 to 0.038, p 0.228). This association is not
+0.014, 95% CI (-0.009, 0.038), p 0.228). This association is not
 statistically significant.
 </p>
 </div>
@@ -3929,7 +3924,7 @@ Triage wait
 -0.120
 </td>
 <td>
--0.139 to -0.100
+(-0.139, -0.100)
 </td>
 <td>
 &lt;0.001
@@ -3937,13 +3932,13 @@ Triage wait
 </tr>
 <tr class="significant-row">
 <td>
-Triage wait, per 60 minutes
+Triage wait, per 10 minutes
 </td>
 <td>
--7.174
+-1.196
 </td>
 <td>
--8.363 to -5.985
+(-1.394, -0.998)
 </td>
 <td>
 &lt;0.001
@@ -3955,8 +3950,7 @@ Triage wait, per 60 minutes
 <p class="significant-text">
 In this single-covariate model, each additional minute of triage wait is
 associated with an inpatient stay 0.120 days shorter (coefficient
--0.120, 95% CI -0.139 to -0.100, p &lt;0.001). Rescaled to 60 minutes,
-the coefficient is -7.174 days (95% CI -8.363 to -5.985). This
+-0.120, 95% CI (-0.139, -0.100), p &lt;0.001). Rescaled to 10 minutes, the coefficient is -1.196 days, 95% CI (-1.394, -0.998). This
 association is statistically significant.
 </p>
 </div>
@@ -3998,7 +3992,7 @@ Physician wait
 -0.055
 </td>
 <td>
--0.063 to -0.048
+(-0.063, -0.048)
 </td>
 <td>
 &lt;0.001
@@ -4006,13 +4000,13 @@ Physician wait
 </tr>
 <tr class="significant-row">
 <td>
-Physician wait, per 60 minutes
+Physician wait, per 10 minutes
 </td>
 <td>
--3.329
+-0.555
 </td>
 <td>
--3.785 to -2.873
+(-0.631, -0.479)
 </td>
 <td>
 &lt;0.001
@@ -4024,8 +4018,7 @@ Physician wait, per 60 minutes
 <p class="significant-text">
 In this single-covariate model, each additional minute of physician wait
 is associated with an inpatient stay 0.055 days shorter (coefficient
--0.055, 95% CI -0.063 to -0.048, p &lt;0.001). Rescaled to 60 minutes,
-the coefficient is -3.329 days (95% CI -3.785 to -2.873). This
+-0.055, 95% CI (-0.063, -0.048), p &lt;0.001). Rescaled to 10 minutes, the coefficient is -0.555 days, 95% CI (-0.631, -0.479). This
 association is statistically significant.
 </p>
 </div>
@@ -4073,7 +4066,7 @@ Pre-disposition stay
 0.003
 </td>
 <td>
-0.002 to 0.003
+(0.002, 0.003)
 </td>
 <td>
 &lt;0.001
@@ -4087,7 +4080,7 @@ Pre-disposition stay, per 60 minutes
 0.158
 </td>
 <td>
-0.112 to 0.204
+(0.112, 0.204)
 </td>
 <td>
 &lt;0.001
@@ -4099,8 +4092,8 @@ Pre-disposition stay, per 60 minutes
 <p class="significant-text">
 In this single-covariate model, each additional minute before the
 disposition decision is associated with an inpatient stay 0.003 days
-longer (coefficient 0.003, 95% CI 0.002 to 0.003, p &lt;0.001). Rescaled
-to 60 minutes, the coefficient is 0.158 days (95% CI 0.112 to 0.204).
+longer (coefficient 0.003, 95% CI (0.002, 0.003), p &lt;0.001). Rescaled
+to 60 minutes, the coefficient is 0.158 days, 95% CI (0.112, 0.204).
 This association is statistically significant.
 </p>
 </div>
@@ -4171,7 +4164,7 @@ Emergency department length of stay
 -0.0002
 </td>
 <td>
--0.0010 to 0.0005
+(-0.0010, 0.0005)
 </td>
 <td>
 0.563
@@ -4185,7 +4178,7 @@ CTAS level: 2 vs 1
 -1.112
 </td>
 <td>
--1.301 to -0.923
+(-1.301, -0.923)
 </td>
 <td>
 &lt;0.001
@@ -4199,7 +4192,7 @@ CTAS level: 3 vs 1
 -1.647
 </td>
 <td>
--1.882 to -1.412
+(-1.882, -1.412)
 </td>
 <td>
 &lt;0.001
@@ -4213,7 +4206,7 @@ CTAS level: 4 vs 1
 -2.177
 </td>
 <td>
--2.510 to -1.844
+(-2.510, -1.844)
 </td>
 <td>
 &lt;0.001
@@ -4227,7 +4220,7 @@ CTAS level: 5 vs 1
 -2.613
 </td>
 <td>
--3.130 to -2.097
+(-3.130, -2.097)
 </td>
 <td>
 &lt;0.001
@@ -4241,7 +4234,7 @@ Age
 0.012
 </td>
 <td>
-0.008 to 0.016
+(0.008, 0.016)
 </td>
 <td>
 &lt;0.001
@@ -4255,7 +4248,7 @@ Sex: M vs F
 -0.098
 </td>
 <td>
--0.239 to 0.042
+(-0.239, 0.042)
 </td>
 <td>
 0.171
@@ -4269,7 +4262,7 @@ Health zone: Calgary vs Edmonton
 -0.009
 </td>
 <td>
--0.179 to 0.161
+(-0.179, 0.161)
 </td>
 <td>
 0.917
@@ -4283,7 +4276,7 @@ Health zone: Central vs Edmonton
 -0.036
 </td>
 <td>
--0.272 to 0.201
+(-0.272, 0.201)
 </td>
 <td>
 0.767
@@ -4297,7 +4290,7 @@ Health zone: North vs Edmonton
 -0.034
 </td>
 <td>
--0.307 to 0.239
+(-0.307, 0.239)
 </td>
 <td>
 0.807
@@ -4311,7 +4304,7 @@ Health zone: South vs Edmonton
 -0.102
 </td>
 <td>
--0.335 to 0.132
+(-0.335, 0.132)
 </td>
 <td>
 0.393
@@ -4325,7 +4318,7 @@ Arrival mode: Ground ambulance vs Walk-in
 0.039
 </td>
 <td>
--0.151 to 0.230
+(-0.151, 0.230)
 </td>
 <td>
 0.685
@@ -4339,7 +4332,7 @@ Injury indicator
 0.029
 </td>
 <td>
--0.241 to 0.300
+(-0.241, 0.300)
 </td>
 <td>
 0.831
@@ -4353,7 +4346,7 @@ Mental health indicator
 -0.093
 </td>
 <td>
--0.505 to 0.319
+(-0.505, 0.319)
 </td>
 <td>
 0.659
@@ -4367,7 +4360,7 @@ Pain score
 0.014
 </td>
 <td>
--0.008 to 0.036
+(-0.008, 0.036)
 </td>
 <td>
 0.209
@@ -4381,7 +4374,7 @@ Triage wait
 0.005
 </td>
 <td>
--0.021 to 0.030
+(-0.021, 0.030)
 </td>
 <td>
 0.717
@@ -4395,7 +4388,7 @@ Physician wait
 0.001
 </td>
 <td>
--0.010 to 0.013
+(-0.010, 0.013)
 </td>
 <td>
 0.807
@@ -4414,121 +4407,114 @@ others are not.
 <p>
 After adjustment for the other covariates in this model, each additional
 minute of emergency department length of stay is associated with an
-inpatient stay 0.0002 days shorter (coefficient -0.0002, 95% CI -0.0010
-to 0.0005, p 0.563). Rescaled to 60 minutes, the coefficient is -0.013
-days (95% CI -0.058 to 0.032). This association is not statistically
+inpatient stay 0.0002 days shorter (coefficient -0.0002, 95% CI (-0.0010, 0.0005), p 0.563). Rescaled to 60 minutes, the coefficient is -0.013
+days, 95% CI (-0.058, 0.032). This association is not statistically
 significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 2 is associated with an inpatient stay 1.112 days shorter
-(coefficient -1.112, 95% CI -1.301 to -0.923, p &lt;0.001). This
+(coefficient -1.112, 95% CI (-1.301, -0.923), p &lt;0.001). This
 association is statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 3 is associated with an inpatient stay 1.647 days shorter
-(coefficient -1.647, 95% CI -1.882 to -1.412, p &lt;0.001). This
+(coefficient -1.647, 95% CI (-1.882, -1.412), p &lt;0.001). This
 association is statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 4 is associated with an inpatient stay 2.177 days shorter
-(coefficient -2.177, 95% CI -2.510 to -1.844, p &lt;0.001). This
+(coefficient -2.177, 95% CI (-2.510, -1.844), p &lt;0.001). This
 association is statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 5 is associated with an inpatient stay 2.613 days shorter
-(coefficient -2.613, 95% CI -3.130 to -2.097, p &lt;0.001). This
+(coefficient -2.613, 95% CI (-3.130, -2.097), p &lt;0.001). This
 association is statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, each additional
 year of age is associated with an inpatient stay 0.012 days longer
-(coefficient 0.012, 95% CI 0.008 to 0.016, p &lt;0.001). This
+(coefficient 0.012, 95% CI (0.008, 0.016), p &lt;0.001). This
 association is statistically significant.
 </p>
 <p>
 After adjustment for the other covariates in this model, compared with
 F, M is associated with an inpatient stay 0.098 days shorter
-(coefficient -0.098, 95% CI -0.239 to 0.042, p 0.171). This association
+(coefficient -0.098, 95% CI (-0.239, 0.042), p 0.171). This association
 is not statistically significant.
 </p>
 <p>
 After adjustment for the other covariates in this model, compared with
 Edmonton, Calgary is associated with an inpatient stay 0.009 days
-shorter (coefficient -0.009, 95% CI -0.179 to 0.161, p 0.917). This
+shorter (coefficient -0.009, 95% CI (-0.179, 0.161), p 0.917). This
 association is not statistically significant.
 </p>
 <p>
 After adjustment for the other covariates in this model, compared with
 Edmonton, Central is associated with an inpatient stay 0.036 days
-shorter (coefficient -0.036, 95% CI -0.272 to 0.201, p 0.767). This
+shorter (coefficient -0.036, 95% CI (-0.272, 0.201), p 0.767). This
 association is not statistically significant.
 </p>
 <p>
 After adjustment for the other covariates in this model, compared with
 Edmonton, North is associated with an inpatient stay 0.034 days shorter
-(coefficient -0.034, 95% CI -0.307 to 0.239, p 0.807). This association
+(coefficient -0.034, 95% CI (-0.307, 0.239), p 0.807). This association
 is not statistically significant.
 </p>
 <p>
 After adjustment for the other covariates in this model, compared with
 Edmonton, South is associated with an inpatient stay 0.102 days shorter
-(coefficient -0.102, 95% CI -0.335 to 0.132, p 0.393). This association
+(coefficient -0.102, 95% CI (-0.335, 0.132), p 0.393). This association
 is not statistically significant.
 </p>
 <p>
 After adjustment for the other covariates in this model, compared with
 Walk-in, Ground ambulance is associated with an inpatient stay 0.039
-days longer (coefficient 0.039, 95% CI -0.151 to 0.230, p 0.685). This
+days longer (coefficient 0.039, 95% CI (-0.151, 0.230), p 0.685). This
 association is not statistically significant.
 </p>
 <p>
 After adjustment for the other covariates in this model, a value of 1 on
 the injury indicator, compared with 0, is associated with an inpatient
-stay 0.029 days longer (coefficient 0.029, 95% CI -0.241 to 0.300, p
+stay 0.029 days longer (coefficient 0.029, 95% CI (-0.241, 0.300), p
 0.831). This association is not statistically significant.
 </p>
 <p>
 After adjustment for the other covariates in this model, a value of 1 on
 the mental health indicator, compared with 0, is associated with an
-inpatient stay 0.093 days shorter (coefficient -0.093, 95% CI -0.505 to
-0.319, p 0.659). This association is not statistically significant.
+inpatient stay 0.093 days shorter (coefficient -0.093, 95% CI (-0.505, 0.319), p 0.659). This association is not statistically significant.
 </p>
 <p>
 After adjustment for the other covariates in this model, each additional
 point on the pain score is associated with an inpatient stay 0.014 days
-longer (coefficient 0.014, 95% CI -0.008 to 0.036, p 0.209). This
+longer (coefficient 0.014, 95% CI (-0.008, 0.036), p 0.209). This
 association is not statistically significant.
 </p>
 <p>
 After adjustment for the other covariates in this model, each additional
 minute of triage wait is associated with an inpatient stay 0.005 days
-longer (coefficient 0.005, 95% CI -0.021 to 0.030, p 0.717). Rescaled to
-60 minutes, the coefficient is 0.285 days (95% CI -1.256 to 1.825). This
+longer (coefficient 0.005, 95% CI (-0.021, 0.030), p 0.717). Rescaled to 10 minutes, the coefficient is 0.047 days, 95% CI (-0.209, 0.304). This
 association is not statistically significant.
 </p>
 <p>
 After adjustment for the other covariates in this model, each additional
 minute of physician wait is associated with an inpatient stay 0.001 days
-longer (coefficient 0.001, 95% CI -0.010 to 0.013, p 0.807). Rescaled to
-60 minutes, the coefficient is 0.084 days (95% CI -0.587 to 0.755). This
+longer (coefficient 0.001, 95% CI (-0.010, 0.013), p 0.807). Rescaled to 10 minutes, the coefficient is 0.014 days, 95% CI (-0.098, 0.126). This
 association is not statistically significant.
 </p>
 </div>
 </div>
-<div id="shared-release" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> Shared release</h1>
-<p>This memo uses unified synthetic release <code>2.0-2026-10-09</code>,
-built from the same NACRS/DAD source files as A07–A09. Hospital location
+<div id="shared-data" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Shared data</h1>
+<p>All memos in Project 001 (A00–A09) use the same two synthetic source workbooks, <code>pseudo_NACRS.xlsx</code> and <code>pseudo_DAD.xlsx</code>. Hospital location
 and patient residence are separate variables. See <a href="Project_001_Memo_A00.html">A00</a> for definitions and
 provenance.</p>
-<p>These legacy descriptive regression specifications use conventional
-model-based standard errors. They do not account for the hospital
-clustering introduced in release 2.0, so their significance tests are
-for illustration only. A07–A09 explicitly handle the hospital structure
+<p>These descriptive regression specifications use conventional model-based standard errors. They do not account for clustering of visits within hospitals, so their significance tests are
+for illustration only. A06–A08 explicitly handle the hospital structure
 for the asthma questions.</p>
 </div>
 

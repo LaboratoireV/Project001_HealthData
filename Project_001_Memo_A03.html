@@ -2740,6 +2740,7 @@ border-radius: 0px;
 
 
 <h1 class="title toc-ignore">Project 001 Memo</h1>
+<h3 class="subtitle">Pre-disposition ED stay, CTAS, and the odds of hospital admission</h3>
 <h4 class="author">Prepared by Miss V · The V Lab</h4>
 <h4 class="date">October 09, 2026</h4>
 
@@ -2856,7 +2857,7 @@ text-align: left;
 <span class="meta-label">Client Organization</span><span class="meta-value">ABC Department</span>
 </div>
 <div class="meta-item">
-<span class="meta-label">Version</span><span class="meta-value">2.0</span>
+<span class="meta-label">Version</span><span class="meta-value">1.0</span>
 </div>
 <div class="meta-item">
 <span class="meta-label">Status</span><span class="meta-value">Draft</span>
@@ -2960,8 +2961,7 @@ analytic_nacrs.rds
 <h1><span class="header-section-number">2</span> Primary model</h1>
 <p>The primary model enters pre-disposition stay and CTAS together. CTAS
 uses level 1, the most urgent level, as the reference. Duration terms
-are fitted per minute. The table also shows the coefficient rescaled to
-60 minutes; the p value is unchanged because it comes from the same
+are fitted per minute. The table also shows the coefficient rescaled to 60 minutes (10 minutes for triage and physician waits, which are much shorter); the p value is unchanged because it comes from the same
 test.</p>
 <p>Let <span class="math inline">\(Y_i = 1\)</span> if visit <span class="math inline">\(i\)</span> is hospitalized and <span class="math inline">\(Y_i = 0\)</span> otherwise. Then</p>
 <p><span class="math display">\[\operatorname{logit}\bigl(\Pr(Y_i =
@@ -3009,7 +3009,7 @@ Pre-disposition stay
 1.003
 </td>
 <td>
-1.003 to 1.004
+(1.003, 1.004)
 </td>
 <td>
 &lt;0.001
@@ -3023,7 +3023,7 @@ Pre-disposition stay, per 60 minutes
 1.226
 </td>
 <td>
-1.204 to 1.249
+(1.204, 1.249)
 </td>
 <td>
 &lt;0.001
@@ -3035,8 +3035,8 @@ Pre-disposition stay, per 60 minutes
 <p class="significant-text">
 In this single-covariate model, each additional minute before the
 disposition decision is associated with higher odds of hospitalization
-(OR 1.003, 95% CI 1.003 to 1.004, p &lt;0.001). Rescaled to 60 minutes,
-the OR is 1.226 (95% CI 1.204 to 1.249). This association is
+(OR 1.003, 95% CI (1.003, 1.004), p &lt;0.001). Rescaled to 60 minutes,
+the OR is 1.226, 95% CI (1.204, 1.249). This association is
 statistically significant.
 </p>
 </div>
@@ -3083,7 +3083,7 @@ CTAS level: 2 vs 1
 0.435
 </td>
 <td>
-0.401 to 0.473
+(0.401, 0.473)
 </td>
 <td>
 &lt;0.001
@@ -3097,7 +3097,7 @@ CTAS level: 3 vs 1
 0.226
 </td>
 <td>
-0.207 to 0.246
+(0.207, 0.246)
 </td>
 <td>
 &lt;0.001
@@ -3111,7 +3111,7 @@ CTAS level: 4 vs 1
 0.106
 </td>
 <td>
-0.095 to 0.118
+(0.095, 0.118)
 </td>
 <td>
 &lt;0.001
@@ -3125,7 +3125,7 @@ CTAS level: 5 vs 1
 0.054
 </td>
 <td>
-0.046 to 0.064
+(0.046, 0.064)
 </td>
 <td>
 &lt;0.001
@@ -3136,23 +3136,19 @@ CTAS level: 5 vs 1
 </div>
 <p class="significant-text">
 In this single-covariate model, compared with CTAS 1, CTAS 2 is
-associated with lower odds of hospitalization (OR 0.435, 95% CI 0.401 to
-0.473, p &lt;0.001). This association is statistically significant.
+associated with lower odds of hospitalization (OR 0.435, 95% CI (0.401, 0.473), p &lt;0.001). This association is statistically significant.
 </p>
 <p class="significant-text">
 In this single-covariate model, compared with CTAS 1, CTAS 3 is
-associated with lower odds of hospitalization (OR 0.226, 95% CI 0.207 to
-0.246, p &lt;0.001). This association is statistically significant.
+associated with lower odds of hospitalization (OR 0.226, 95% CI (0.207, 0.246), p &lt;0.001). This association is statistically significant.
 </p>
 <p class="significant-text">
 In this single-covariate model, compared with CTAS 1, CTAS 4 is
-associated with lower odds of hospitalization (OR 0.106, 95% CI 0.095 to
-0.118, p &lt;0.001). This association is statistically significant.
+associated with lower odds of hospitalization (OR 0.106, 95% CI (0.095, 0.118), p &lt;0.001). This association is statistically significant.
 </p>
 <p class="significant-text">
 In this single-covariate model, compared with CTAS 1, CTAS 5 is
-associated with lower odds of hospitalization (OR 0.054, 95% CI 0.046 to
-0.064, p &lt;0.001). This association is statistically significant.
+associated with lower odds of hospitalization (OR 0.054, 95% CI (0.046, 0.064), p &lt;0.001). This association is statistically significant.
 </p>
 <p>
 This is the primary model. It enters pre-disposition stay and CTAS
@@ -3201,7 +3197,7 @@ Pre-disposition stay
 1.000
 </td>
 <td>
-1.000 to 1.001
+(1.000, 1.001)
 </td>
 <td>
 0.027
@@ -3215,7 +3211,7 @@ Pre-disposition stay, per 60 minutes
 1.024
 </td>
 <td>
-1.003 to 1.045
+(1.003, 1.045)
 </td>
 <td>
 0.027
@@ -3229,7 +3225,7 @@ CTAS level: 2 vs 1
 0.441
 </td>
 <td>
-0.406 to 0.480
+(0.406, 0.480)
 </td>
 <td>
 &lt;0.001
@@ -3243,7 +3239,7 @@ CTAS level: 3 vs 1
 0.231
 </td>
 <td>
-0.212 to 0.252
+(0.212, 0.252)
 </td>
 <td>
 &lt;0.001
@@ -3257,7 +3253,7 @@ CTAS level: 4 vs 1
 0.109
 </td>
 <td>
-0.098 to 0.122
+(0.098, 0.122)
 </td>
 <td>
 &lt;0.001
@@ -3271,7 +3267,7 @@ CTAS level: 5 vs 1
 0.056
 </td>
 <td>
-0.048 to 0.067
+(0.048, 0.067)
 </td>
 <td>
 &lt;0.001
@@ -3286,32 +3282,32 @@ Interpretation
 <p class="significant-text">
 After adjustment for the other covariates in this model, each additional
 minute before the disposition decision is associated with higher odds of
-hospitalization (OR 1.000, 95% CI 1.000 to 1.001, p 0.027). Rescaled to
-60 minutes, the OR is 1.024 (95% CI 1.003 to 1.045). This association is
+hospitalization (OR 1.000, 95% CI (1.000, 1.001), p 0.027). Rescaled to
+60 minutes, the OR is 1.024, 95% CI (1.003, 1.045). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 2 is associated with lower odds of hospitalization (OR
-0.441, 95% CI 0.406 to 0.480, p &lt;0.001). This association is
+0.441, 95% CI (0.406, 0.480), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 3 is associated with lower odds of hospitalization (OR
-0.231, 95% CI 0.212 to 0.252, p &lt;0.001). This association is
+0.231, 95% CI (0.212, 0.252), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 4 is associated with lower odds of hospitalization (OR
-0.109, 95% CI 0.098 to 0.122, p &lt;0.001). This association is
+0.109, 95% CI (0.098, 0.122), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 5 is associated with lower odds of hospitalization (OR
-0.056, 95% CI 0.048 to 0.067, p &lt;0.001). This association is
+0.056, 95% CI (0.048, 0.067), p &lt;0.001). This association is
 statistically significant.
 </p>
 </div>
@@ -3368,7 +3364,7 @@ Emergency department length of stay
 1.006
 </td>
 <td>
-1.006 to 1.006
+(1.006, 1.006)
 </td>
 <td>
 &lt;0.001
@@ -3382,7 +3378,7 @@ Emergency department length of stay, per 60 minutes
 1.430
 </td>
 <td>
-1.404 to 1.457
+(1.404, 1.457)
 </td>
 <td>
 &lt;0.001
@@ -3394,8 +3390,8 @@ Emergency department length of stay, per 60 minutes
 <p class="significant-text">
 In this single-covariate model, each additional minute of emergency
 department length of stay is associated with higher odds of
-hospitalization (OR 1.006, 95% CI 1.006 to 1.006, p &lt;0.001). Rescaled
-to 60 minutes, the OR is 1.430 (95% CI 1.404 to 1.457). This association
+hospitalization (OR 1.006, 95% CI (1.006, 1.006), p &lt;0.001). Rescaled
+to 60 minutes, the OR is 1.430, 95% CI (1.404, 1.457). This association
 is statistically significant.
 </p>
 </div>
@@ -3437,7 +3433,7 @@ Age
 1.044
 </td>
 <td>
-1.042 to 1.046
+(1.042, 1.046)
 </td>
 <td>
 &lt;0.001
@@ -3448,8 +3444,7 @@ Age
 </div>
 <p class="significant-text">
 In this single-covariate model, each additional year of age is
-associated with higher odds of hospitalization (OR 1.044, 95% CI 1.042
-to 1.046, p &lt;0.001). This association is statistically significant.
+associated with higher odds of hospitalization (OR 1.044, 95% CI (1.042, 1.046), p &lt;0.001). This association is statistically significant.
 </p>
 </div>
 <div id="sex" class="section level2" number="3.3">
@@ -3490,7 +3485,7 @@ Sex: M vs F
 1.125
 </td>
 <td>
-1.062 to 1.191
+(1.062, 1.191)
 </td>
 <td>
 &lt;0.001
@@ -3501,7 +3496,7 @@ Sex: M vs F
 </div>
 <p class="significant-text">
 In this single-covariate model, compared with F, M is associated with
-higher odds of hospitalization (OR 1.125, 95% CI 1.062 to 1.191, p
+higher odds of hospitalization (OR 1.125, 95% CI (1.062, 1.191), p
 &lt;0.001). This association is statistically significant.
 </p>
 </div>
@@ -3549,7 +3544,7 @@ Health zone: Calgary vs Edmonton
 0.822
 </td>
 <td>
-0.767 to 0.881
+(0.767, 0.881)
 </td>
 <td>
 &lt;0.001
@@ -3563,7 +3558,7 @@ Health zone: Central vs Edmonton
 0.866
 </td>
 <td>
-0.787 to 0.953
+(0.787, 0.953)
 </td>
 <td>
 0.003
@@ -3577,7 +3572,7 @@ Health zone: North vs Edmonton
 0.889
 </td>
 <td>
-0.797 to 0.991
+(0.797, 0.991)
 </td>
 <td>
 0.034
@@ -3591,7 +3586,7 @@ Health zone: South vs Edmonton
 1.322
 </td>
 <td>
-1.199 to 1.459
+(1.199, 1.459)
 </td>
 <td>
 &lt;0.001
@@ -3602,23 +3597,19 @@ Health zone: South vs Edmonton
 </div>
 <p class="significant-text">
 In this single-covariate model, compared with Edmonton, Calgary is
-associated with lower odds of hospitalization (OR 0.822, 95% CI 0.767 to
-0.881, p &lt;0.001). This association is statistically significant.
+associated with lower odds of hospitalization (OR 0.822, 95% CI (0.767, 0.881), p &lt;0.001). This association is statistically significant.
 </p>
 <p class="significant-text">
 In this single-covariate model, compared with Edmonton, Central is
-associated with lower odds of hospitalization (OR 0.866, 95% CI 0.787 to
-0.953, p 0.003). This association is statistically significant.
+associated with lower odds of hospitalization (OR 0.866, 95% CI (0.787, 0.953), p 0.003). This association is statistically significant.
 </p>
 <p class="significant-text">
 In this single-covariate model, compared with Edmonton, North is
-associated with lower odds of hospitalization (OR 0.889, 95% CI 0.797 to
-0.991, p 0.034). This association is statistically significant.
+associated with lower odds of hospitalization (OR 0.889, 95% CI (0.797, 0.991), p 0.034). This association is statistically significant.
 </p>
 <p class="significant-text">
 In this single-covariate model, compared with Edmonton, South is
-associated with higher odds of hospitalization (OR 1.322, 95% CI 1.199
-to 1.459, p &lt;0.001). This association is statistically significant.
+associated with higher odds of hospitalization (OR 1.322, 95% CI (1.199, 1.459), p &lt;0.001). This association is statistically significant.
 </p>
 </div>
 <div id="arrival-mode" class="section level2" number="3.5">
@@ -3660,7 +3651,7 @@ Arrival mode: Ground ambulance vs Walk-in
 1.352
 </td>
 <td>
-1.251 to 1.462
+(1.251, 1.462)
 </td>
 <td>
 &lt;0.001
@@ -3671,8 +3662,7 @@ Arrival mode: Ground ambulance vs Walk-in
 </div>
 <p class="significant-text">
 In this single-covariate model, compared with Walk-in, Ground ambulance
-is associated with higher odds of hospitalization (OR 1.352, 95% CI
-1.251 to 1.462, p &lt;0.001). This association is statistically
+is associated with higher odds of hospitalization (OR 1.352, 95% CI (1.251, 1.462), p &lt;0.001). This association is statistically
 significant.
 </p>
 </div>
@@ -3714,7 +3704,7 @@ Injury indicator
 0.709
 </td>
 <td>
-0.637 to 0.789
+(0.637, 0.789)
 </td>
 <td>
 &lt;0.001
@@ -3726,7 +3716,7 @@ Injury indicator
 <p class="significant-text">
 In this single-covariate model, a value of 1 on the injury indicator,
 compared with 0, is associated with lower odds of hospitalization (OR
-0.709, 95% CI 0.637 to 0.789, p &lt;0.001). This association is
+0.709, 95% CI (0.637, 0.789), p &lt;0.001). This association is
 statistically significant.
 </p>
 </div>
@@ -3769,7 +3759,7 @@ Mental health indicator
 0.603
 </td>
 <td>
-0.515 to 0.707
+(0.515, 0.707)
 </td>
 <td>
 &lt;0.001
@@ -3781,7 +3771,7 @@ Mental health indicator
 <p class="significant-text">
 In this single-covariate model, a value of 1 on the mental health
 indicator, compared with 0, is associated with lower odds of
-hospitalization (OR 0.603, 95% CI 0.515 to 0.707, p &lt;0.001). This
+hospitalization (OR 0.603, 95% CI (0.515, 0.707), p &lt;0.001). This
 association is statistically significant.
 </p>
 </div>
@@ -3823,7 +3813,7 @@ Pain score
 1.003
 </td>
 <td>
-0.994 to 1.012
+(0.994, 1.012)
 </td>
 <td>
 0.577
@@ -3834,8 +3824,7 @@ Pain score
 </div>
 <p>
 In this single-covariate model, each additional point on the pain score
-is associated with higher odds of hospitalization (OR 1.003, 95% CI
-0.994 to 1.012, p 0.577). This association is not statistically
+is associated with higher odds of hospitalization (OR 1.003, 95% CI (0.994, 1.012), p 0.577). This association is not statistically
 significant.
 </p>
 </div>
@@ -3877,7 +3866,7 @@ Triage wait
 0.878
 </td>
 <td>
-0.871 to 0.885
+(0.871, 0.885)
 </td>
 <td>
 &lt;0.001
@@ -3885,13 +3874,13 @@ Triage wait
 </tr>
 <tr class="significant-row">
 <td>
-Triage wait, per 60 minutes
+Triage wait, per 10 minutes
 </td>
 <td>
-0.000
+0.272
 </td>
 <td>
-0.000 to 0.001
+(0.251, 0.294)
 </td>
 <td>
 &lt;0.001
@@ -3902,9 +3891,7 @@ Triage wait, per 60 minutes
 </div>
 <p class="significant-text">
 In this single-covariate model, each additional minute of triage wait is
-associated with lower odds of hospitalization (OR 0.878, 95% CI 0.871 to
-0.885, p &lt;0.001). Rescaled to 60 minutes, the OR is 0.000 (95% CI
-0.000 to 0.001). This association is statistically significant.
+associated with lower odds of hospitalization (OR 0.878, 95% CI (0.871, 0.885), p &lt;0.001). Rescaled to 10 minutes, the OR is 0.272, 95% CI (0.251, 0.294). This association is statistically significant.
 </p>
 </div>
 <div id="physician-wait" class="section level2" number="3.10">
@@ -3945,7 +3932,7 @@ Physician wait
 0.942
 </td>
 <td>
-0.939 to 0.945
+(0.939, 0.945)
 </td>
 <td>
 &lt;0.001
@@ -3953,13 +3940,13 @@ Physician wait
 </tr>
 <tr class="significant-row">
 <td>
-Physician wait, per 60 minutes
+Physician wait, per 10 minutes
 </td>
 <td>
-0.028
+0.550
 </td>
 <td>
-0.023 to 0.034
+(0.533, 0.568)
 </td>
 <td>
 &lt;0.001
@@ -3970,9 +3957,7 @@ Physician wait, per 60 minutes
 </div>
 <p class="significant-text">
 In this single-covariate model, each additional minute of physician wait
-is associated with lower odds of hospitalization (OR 0.942, 95% CI 0.939
-to 0.945, p &lt;0.001). Rescaled to 60 minutes, the OR is 0.028 (95% CI
-0.023 to 0.034). This association is statistically significant.
+is associated with lower odds of hospitalization (OR 0.942, 95% CI (0.939, 0.945), p &lt;0.001). Rescaled to 10 minutes, the OR is 0.550, 95% CI (0.533, 0.568). This association is statistically significant.
 </p>
 </div>
 <div id="total-emergency-stay-and-ctas" class="section level2" number="3.11">
@@ -4025,7 +4010,7 @@ Emergency department length of stay
 1.003
 </td>
 <td>
-1.003 to 1.004
+(1.003, 1.004)
 </td>
 <td>
 &lt;0.001
@@ -4039,7 +4024,7 @@ Emergency department length of stay, per 60 minutes
 1.224
 </td>
 <td>
-1.200 to 1.250
+(1.200, 1.250)
 </td>
 <td>
 &lt;0.001
@@ -4053,7 +4038,7 @@ CTAS level: 2 vs 1
 0.489
 </td>
 <td>
-0.449 to 0.531
+(0.449, 0.531)
 </td>
 <td>
 &lt;0.001
@@ -4067,7 +4052,7 @@ CTAS level: 3 vs 1
 0.277
 </td>
 <td>
-0.253 to 0.302
+(0.253, 0.302)
 </td>
 <td>
 &lt;0.001
@@ -4081,7 +4066,7 @@ CTAS level: 4 vs 1
 0.141
 </td>
 <td>
-0.126 to 0.158
+(0.126, 0.158)
 </td>
 <td>
 &lt;0.001
@@ -4095,7 +4080,7 @@ CTAS level: 5 vs 1
 0.078
 </td>
 <td>
-0.066 to 0.093
+(0.066, 0.093)
 </td>
 <td>
 &lt;0.001
@@ -4107,32 +4092,32 @@ CTAS level: 5 vs 1
 <p class="significant-text">
 After adjustment for the other covariates in this model, each additional
 minute of emergency department length of stay is associated with higher
-odds of hospitalization (OR 1.003, 95% CI 1.003 to 1.004, p &lt;0.001).
-Rescaled to 60 minutes, the OR is 1.224 (95% CI 1.200 to 1.250). This
+odds of hospitalization (OR 1.003, 95% CI (1.003, 1.004), p &lt;0.001).
+Rescaled to 60 minutes, the OR is 1.224, 95% CI (1.200, 1.250). This
 association is statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 2 is associated with lower odds of hospitalization (OR
-0.489, 95% CI 0.449 to 0.531, p &lt;0.001). This association is
+0.489, 95% CI (0.449, 0.531), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 3 is associated with lower odds of hospitalization (OR
-0.277, 95% CI 0.253 to 0.302, p &lt;0.001). This association is
+0.277, 95% CI (0.253, 0.302), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 4 is associated with lower odds of hospitalization (OR
-0.141, 95% CI 0.126 to 0.158, p &lt;0.001). This association is
+0.141, 95% CI (0.126, 0.158), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 5 is associated with lower odds of hospitalization (OR
-0.078, 95% CI 0.066 to 0.093, p &lt;0.001). This association is
+0.078, 95% CI (0.066, 0.093), p &lt;0.001). This association is
 statistically significant.
 </p>
 </div>
@@ -4203,7 +4188,7 @@ CTAS level: 2 vs 1
 0.512
 </td>
 <td>
-0.467 to 0.561
+(0.467, 0.561)
 </td>
 <td>
 &lt;0.001
@@ -4217,7 +4202,7 @@ CTAS level: 3 vs 1
 0.310
 </td>
 <td>
-0.279 to 0.345
+(0.279, 0.345)
 </td>
 <td>
 &lt;0.001
@@ -4231,7 +4216,7 @@ CTAS level: 4 vs 1
 0.175
 </td>
 <td>
-0.152 to 0.203
+(0.152, 0.203)
 </td>
 <td>
 &lt;0.001
@@ -4245,7 +4230,7 @@ CTAS level: 5 vs 1
 0.118
 </td>
 <td>
-0.095 to 0.146
+(0.095, 0.146)
 </td>
 <td>
 &lt;0.001
@@ -4259,7 +4244,7 @@ Age
 1.034
 </td>
 <td>
-1.032 to 1.036
+(1.032, 1.036)
 </td>
 <td>
 &lt;0.001
@@ -4273,7 +4258,7 @@ Sex: M vs F
 1.144
 </td>
 <td>
-1.074 to 1.218
+(1.074, 1.218)
 </td>
 <td>
 &lt;0.001
@@ -4287,7 +4272,7 @@ Health zone: Calgary vs Edmonton
 0.812
 </td>
 <td>
-0.752 to 0.876
+(0.752, 0.876)
 </td>
 <td>
 &lt;0.001
@@ -4301,7 +4286,7 @@ Health zone: Central vs Edmonton
 0.823
 </td>
 <td>
-0.741 to 0.913
+(0.741, 0.913)
 </td>
 <td>
 &lt;0.001
@@ -4315,7 +4300,7 @@ Health zone: North vs Edmonton
 0.860
 </td>
 <td>
-0.764 to 0.969
+(0.764, 0.969)
 </td>
 <td>
 0.013
@@ -4329,7 +4314,7 @@ Health zone: South vs Edmonton
 1.429
 </td>
 <td>
-1.281 to 1.594
+(1.281, 1.594)
 </td>
 <td>
 &lt;0.001
@@ -4343,7 +4328,7 @@ Arrival mode: Ground ambulance vs Walk-in
 0.966
 </td>
 <td>
-0.886 to 1.053
+(0.886, 1.053)
 </td>
 <td>
 0.430
@@ -4357,7 +4342,7 @@ Injury indicator
 0.853
 </td>
 <td>
-0.759 to 0.959
+(0.759, 0.959)
 </td>
 <td>
 0.008
@@ -4371,7 +4356,7 @@ Mental health indicator
 0.671
 </td>
 <td>
-0.566 to 0.796
+(0.566, 0.796)
 </td>
 <td>
 &lt;0.001
@@ -4385,7 +4370,7 @@ Pain score
 1.003
 </td>
 <td>
-0.993 to 1.013
+(0.993, 1.013)
 </td>
 <td>
 0.585
@@ -4399,7 +4384,7 @@ Triage wait
 1.012
 </td>
 <td>
-1.000 to 1.024
+(1.000, 1.024)
 </td>
 <td>
 0.045
@@ -4413,7 +4398,7 @@ Physician wait
 0.994
 </td>
 <td>
-0.989 to 0.999
+(0.989, 0.999)
 </td>
 <td>
 0.016
@@ -4427,7 +4412,7 @@ Pre-disposition stay
 1.000
 </td>
 <td>
-1.000 to 1.001
+(1.000, 1.001)
 </td>
 <td>
 0.097
@@ -4446,120 +4431,114 @@ highlighted in yellow are statistically significant; the others are not.
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 2 is associated with lower odds of hospitalization (OR
-0.512, 95% CI 0.467 to 0.561, p &lt;0.001). This association is
+0.512, 95% CI (0.467, 0.561), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 3 is associated with lower odds of hospitalization (OR
-0.310, 95% CI 0.279 to 0.345, p &lt;0.001). This association is
+0.310, 95% CI (0.279, 0.345), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 4 is associated with lower odds of hospitalization (OR
-0.175, 95% CI 0.152 to 0.203, p &lt;0.001). This association is
+0.175, 95% CI (0.152, 0.203), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 CTAS 1, CTAS 5 is associated with lower odds of hospitalization (OR
-0.118, 95% CI 0.095 to 0.146, p &lt;0.001). This association is
+0.118, 95% CI (0.095, 0.146), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, each additional
 year of age is associated with higher odds of hospitalization (OR 1.034,
-95% CI 1.032 to 1.036, p &lt;0.001). This association is statistically
+95% CI (1.032, 1.036), p &lt;0.001). This association is statistically
 significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
-F, M is associated with higher odds of hospitalization (OR 1.144, 95% CI
-1.074 to 1.218, p &lt;0.001). This association is statistically
+F, M is associated with higher odds of hospitalization (OR 1.144, 95% CI (1.074, 1.218), p &lt;0.001). This association is statistically
 significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 Edmonton, Calgary is associated with lower odds of hospitalization (OR
-0.812, 95% CI 0.752 to 0.876, p &lt;0.001). This association is
+0.812, 95% CI (0.752, 0.876), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 Edmonton, Central is associated with lower odds of hospitalization (OR
-0.823, 95% CI 0.741 to 0.913, p &lt;0.001). This association is
+0.823, 95% CI (0.741, 0.913), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 Edmonton, North is associated with lower odds of hospitalization (OR
-0.860, 95% CI 0.764 to 0.969, p 0.013). This association is
+0.860, 95% CI (0.764, 0.969), p 0.013). This association is
 statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, compared with
 Edmonton, South is associated with higher odds of hospitalization (OR
-1.429, 95% CI 1.281 to 1.594, p &lt;0.001). This association is
+1.429, 95% CI (1.281, 1.594), p &lt;0.001). This association is
 statistically significant.
 </p>
 <p>
 After adjustment for the other covariates in this model, compared with
 Walk-in, Ground ambulance is associated with lower odds of
-hospitalization (OR 0.966, 95% CI 0.886 to 1.053, p 0.430). This
+hospitalization (OR 0.966, 95% CI (0.886, 1.053), p 0.430). This
 association is not statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, a value of 1 on
 the injury indicator, compared with 0, is associated with lower odds of
-hospitalization (OR 0.853, 95% CI 0.759 to 0.959, p 0.008). This
+hospitalization (OR 0.853, 95% CI (0.759, 0.959), p 0.008). This
 association is statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, a value of 1 on
 the mental health indicator, compared with 0, is associated with lower
-odds of hospitalization (OR 0.671, 95% CI 0.566 to 0.796, p &lt;0.001).
+odds of hospitalization (OR 0.671, 95% CI (0.566, 0.796), p &lt;0.001).
 This association is statistically significant.
 </p>
 <p>
 After adjustment for the other covariates in this model, each additional
 point on the pain score is associated with higher odds of
-hospitalization (OR 1.003, 95% CI 0.993 to 1.013, p 0.585). This
+hospitalization (OR 1.003, 95% CI (0.993, 1.013), p 0.585). This
 association is not statistically significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, each additional
 minute of triage wait is associated with higher odds of hospitalization
-(OR 1.012, 95% CI 1.000 to 1.024, p 0.045). Rescaled to 60 minutes, the
-OR is 2.030 (95% CI 1.017 to 4.052). This association is statistically
+(OR 1.012, 95% CI (1.000, 1.024), p 0.045). Rescaled to 10 minutes, the OR is 1.125, 95% CI (1.003, 1.263). This association is statistically
 significant.
 </p>
 <p class="significant-text">
 After adjustment for the other covariates in this model, each additional
 minute of physician wait is associated with lower odds of
-hospitalization (OR 0.994, 95% CI 0.989 to 0.999, p 0.016). Rescaled to
-60 minutes, the OR is 0.706 (95% CI 0.531 to 0.938). This association is
+hospitalization (OR 0.994, 95% CI (0.989, 0.999), p 0.016). Rescaled to 10 minutes, the OR is 0.944, 95% CI (0.900, 0.989). This association is
 statistically significant.
 </p>
 <p>
 After adjustment for the other covariates in this model, each additional
 minute before the disposition decision is associated with higher odds of
-hospitalization (OR 1.000, 95% CI 1.000 to 1.001, p 0.097). Rescaled to
-60 minutes, the OR is 1.019 (95% CI 0.997 to 1.041). This association is
+hospitalization (OR 1.000, 95% CI (1.000, 1.001), p 0.097). Rescaled to
+60 minutes, the OR is 1.019, 95% CI (0.997, 1.041). This association is
 not statistically significant.
 </p>
 </div>
 </div>
-<div id="shared-release" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Shared release</h1>
-<p>This memo uses unified synthetic release <code>2.0-2026-10-09</code>,
-built from the same NACRS/DAD source files as A07–A09. Hospital location
+<div id="shared-data" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Shared data</h1>
+<p>All memos in Project 001 (A00–A09) use the same two synthetic source workbooks, <code>pseudo_NACRS.xlsx</code> and <code>pseudo_DAD.xlsx</code>. Hospital location
 and patient residence are separate variables. See <a href="Project_001_Memo_A00.html">A00</a> for definitions and
 provenance.</p>
-<p>These legacy descriptive regression specifications use conventional
-model-based standard errors. They do not account for the hospital
-clustering introduced in release 2.0, so their significance tests are
-for illustration only. A07–A09 explicitly handle the hospital structure
+<p>These descriptive regression specifications use conventional model-based standard errors. They do not account for clustering of visits within hospitals, so their significance tests are
+for illustration only. A06–A08 explicitly handle the hospital structure
 for the asthma questions.</p>
 </div>
 
